@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+        <title>Loto Foot 2.0 - Mailing List</title>
+    </head>
+
+    <body>
+		<div id="body2">
+        <header>
+				<img src="head.jpg" alt="Header" width="100%">
+        </header>
+        
+        <nav>
+            <ul>
+                <li><a href="#"><img src="acceuil.jpg" alt="acceuil"></a></li> 
+				<li><a href="#"><img src="loto_foot.jpg" alt="loto_foot"></a></li> 
+				<li><a href="#"><img src="stats_ml.jpg" alt="stats_ml"></a></li> 
+            </ul>
+        </nav>
+        
+        <section>
+            <article>                
+                <p>
+					<table>
+						<caption><h2>Tableau des paris</h2></caption>
+					   <tr>
+						   <th>Participants</th>
+						   <th>OM</th>
+						   <th>OL</th>
+					   </tr>
+					   <tr>
+						   <td>Benoit Philippe</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+					   <tr>
+						   <td>Courtet Vincent</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Comperat Matthieu</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+					   <tr>
+						   <td>Lavigne Yoann</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Kerguelen Clement</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr><tr>
+						   <td>Dupraz Benoit</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Rambaud Edgar</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr><tr>
+						   <td>Codjo Benoit</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Burhin Bryan</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr><tr>
+						   <td>Pastichon Remy</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Prudhomme Emmanuelle</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr><tr>
+						   <td>Chomarat Benjamin</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+						<tr>
+						   <td>Di Franco Thomas</td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO1 VALUE=""></td>
+						   <td><INPUT TYPE=TEXT NAME=PRONO2 VALUE=""></td>
+					   </tr>
+					</table>
+				</p>
+				<canvas id="moncanevas" width="400" height="150">
+					Canvas requiert un navigateur moderne: Chrome, Firefox, IE9, Safari.
+				</canvas>  
+				<script>
+				canvas = document.getElementById("moncanevas"); 
+				if (canvas.getContext)
+				{    
+					context = canvas.getContext('2d'); 
+				}
+				function drawLine()
+				{
+				 context.beginPath();
+				 context.moveTo(20,100);
+				 context.lineTo(200,10);
+				 context.stroke(); 
+				}  
+				</script>
+            </article>
+        </section>
+        
+        <footer>
+            <div id="bas_de_page">Copyright Pipo - Tous droits reserves  <a href="#">Me contacter</a></div>
+        </footer>
+		</div>
+    </body>
+</html>
