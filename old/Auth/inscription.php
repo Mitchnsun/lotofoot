@@ -26,7 +26,7 @@
 			session_start();
 			$result = $req -> fetch();
 			$_SESSION['userid'] = $bdd -> lastInsertId();
-			header('Location:'.$_SERVER['HTTP_ORIGIN'].'/LotoFoot/');
+			header('Location:../');
 	}
 ?>
 

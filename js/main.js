@@ -6,7 +6,8 @@ require.config({
 		'jquery' : 'libs/jquery', /* v2.0.0 exclude IE 6,7,8 */
 		'underscore' : 'libs/underscore', /* v1.4.4 */
 		'backbone' : 'libs/backbone', /* v1.0.0 */
-		'bootstrap' : 'libs/bootstrap.min' /* v2.3.1 */
+		'bootstrap' : 'libs/bootstrap.min', /* v2.3.1 */
+		'text' : 'libs/text'
 	}
 
 });

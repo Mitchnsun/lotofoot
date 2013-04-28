@@ -1,6 +1,6 @@
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
-	
+define(['jquery', 'underscore', 'backbone', 'homepageview'], function($, _, Backbone, HomepageView) {
+
 	var AppRouter = Backbone.Router.extend({
 		routes : {
 			'' : 'homepage',
@@ -11,10 +11,10 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 
 	var initialize = function() {
 		var app_router = new AppRouter;
-		
+
 		app_router.on('route:homepage', function() {
-			// We have no matching route, lets just log what the URL was
-			console.log('homepage');
+			var homepageView = new HomepageView();
+			homepageView.render();
 		});
 		app_router.on('route:defaultAction', function(actions) {
 			// We have no matching route, lets just log what the URL was
