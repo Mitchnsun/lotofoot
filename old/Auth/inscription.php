@@ -11,17 +11,17 @@
 		$userPwd = crypt($_POST['userPwd'],$userEmail);
 		$firstname = $_POST['firstName'];
 		$lastname = $_POST['lastName'];
-		$droit = "Joueur";
+		$accreditation = "Joueur";
 		unset($_POST); // The password no exists in clear anymore
 		
-		$query = "INSERT INTO users(email,pwd,firstname,lastname, droit) VALUES(:email,:pwd,:firstname,:lastname,:droit)";
+		$query = "INSERT INTO users(email,pwd,firstname,lastname, accreditation) VALUES(:email,:pwd,:firstname,:lastname,:accreditation)";
 		$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
 		$req -> execute(array(
 				'email' => $userEmail,
 				'pwd' => $userPwd,
 				'firstname' => $firstname,
 				'lastname' => $lastname,
-				'droit' => $droit
+				'accreditation' => $accreditation
 		));
 			session_start();
 			$result = $req -> fetch();

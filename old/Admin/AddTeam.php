@@ -13,11 +13,11 @@
 	}
 	else{
 		$userid = $_SESSION['userid'];
-		$query = "SELECT droit FROM users WHERE userid = :userid";
+		$query = "SELECT accreditation FROM users WHERE userid = :userid";
 		$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
 		$req -> execute(array('userid' => $userid));
 		$result = $req -> fetch();
-		if($result['droit'] == 'Joueur'){
+		if($result['accreditation'] == 'Joueur'){
 			header('Location:../');
 		}
 	}
