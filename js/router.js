@@ -10,6 +10,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView) {
 	});
 
 	var initialize = function() {
+	    var self = this;
 		var app_router = new AppRouter;
 		
 		// Global event bus

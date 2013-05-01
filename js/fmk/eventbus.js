@@ -5,3 +5,7 @@ define([], function() {
         }
     }
 })
+/*
+ * How to use it after it was passed to the view
+ * this.eventBus.trigger('url:change',{url:'#'+url});
+ */
