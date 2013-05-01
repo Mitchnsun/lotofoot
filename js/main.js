@@ -8,9 +8,16 @@ require.config({
         'backbone' : 'libs/backbone', /* v1.0.0 */
         'bootstrap' : 'libs/bootstrap.min', /* v2.3.1 */
         'text' : 'libs/text',
-        'dust' : 'libs/dust-full' /* v1.2.3 */
+        'dust' : 'libs/dust-full', /* v1.2.3 */
+        'templateengine' : 'fmk/templateengine'
     },
     shim : {
+        'jquery' : {
+            exports : '$'
+        },
+        'underscore' : {
+            exports : '_'
+        },
         'backbone' : {
             //These script dependencies should be loaded before loading
             //backbone.js
