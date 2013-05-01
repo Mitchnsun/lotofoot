@@ -1,5 +1,5 @@
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'homepageview'], function($, _, Backbone, HomepageView) {
+define(['jquery', 'underscore', 'backbone', 'views/homepageview'], function($, _, Backbone, HomepageView) {
 
 	var AppRouter = Backbone.Router.extend({
 		routes : {
@@ -20,6 +20,7 @@ define(['jquery', 'underscore', 'backbone', 'homepageview'], function($, _, Back
 			// We have no matching route, lets just log what the URL was
 			console.log('No route:', actions);
 		});
+		
 		Backbone.history.start();
 	};
 	return {
