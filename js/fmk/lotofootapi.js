@@ -50,7 +50,7 @@ define(['jquery'], function($) {
     };
 
     /*
-     * Handler based on the http status pr 'fallback' key if nothing is registered for the status
+     * Handler based on the http status or 'fallback' key if nothing is registered for the status
      */
     function errorHandler(error) {
         return function(xhr, ajaxOptions, thrownError) {
