@@ -17,7 +17,7 @@ define(['jquery'], function($) {
      */
     function getUrl(apiUrl) {
         return urls + apiUrl;
-    };
+    }
 
     function performGet(endpoint, data, success, error) {
         var url = getUrl(endpoint);
@@ -37,7 +37,7 @@ define(['jquery'], function($) {
             },
             error : errorHandler(error)
         });
-    };
+    }
 
     function performPost(endpoint, data, success, error) {
         var url = getUrl(endpoint);
@@ -57,7 +57,7 @@ define(['jquery'], function($) {
             },
             error : errorHandler(error)
         });
-    };
+    }
 
     /*
      * Handler based on the http status or 'fallback' key if nothing is registered for the status
@@ -65,7 +65,7 @@ define(['jquery'], function($) {
     function errorHandler(error) {
         return function(xhr, ajaxOptions, thrownError) {
             statusCallback = errorCallbacks[xhr.status];
-            fallbackCallback = errorCallbacks['fallback'];
+            fallbackCallback = errorCallbacks.fallback;
 
             if (statusCallback) {
                 statusCallback(xhr, ajaxOptions, thrownError);
@@ -77,7 +77,7 @@ define(['jquery'], function($) {
                 }
             }
         };
-    };
+    }
 
     // Exported publics
     return {
