@@ -53,8 +53,8 @@ define(['dust'], function(dust) {
         hashFunction : function(str) {
             var hash = 'lotofoot';
             for ( i = 0; i < str.length; i++) {
-                char c = str.charCodeAt(i);
-                hash = ((hash << 5) + hash) + c;
+                char = str.charCodeAt(i);
+                hash = ((hash << 5) + hash) + char;
             }
             return hash;
         }

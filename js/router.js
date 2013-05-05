@@ -1,14 +1,20 @@
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'views/headerview', 'views/footerview', 'views/homepageview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView) {
+define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
+        'views/headerview', 'views/footerview', 'views/homepageview', 'views/loginview'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView) {
 
     var AppRouter = Backbone.Router.extend({
-        routes : _.object([[urls.HOME, 'homepage'], ['*action', 'defaultAction']])
+        routes : _.object([
+            [urls.HOME, 'homepage'], 
+            ['*action', 'defaultAction']
+        ])
     });
 
-    var initialize = function() {
+    var initialize = function(options) {
         var self = this;
         var app_router = new AppRouter();
+        
+        this.user = options.user;
 
         // Global event bus
         this.eventBus = EventBus.create();
@@ -23,11 +29,18 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView) {
         var footerView = new FooterView();
         headerView.render();
         footerView.render();
+        
+        // Login view, if the user is not connected
+        this.loginView = new LoginView;
 
         /* Set view for the routes */
         app_router.on('route:homepage', function() {
             var homepageView = new HomepageView();
-            homepageView.render();
+            if(self.user.checkAuth()){
+                homepageView.render();
+            }else{
+                self.loginView.render();
+            }
         });
         app_router.on('route:defaultAction', function(actions) {
             // We have no matching route, lets just log what the URL was
