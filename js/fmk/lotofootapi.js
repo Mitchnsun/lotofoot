@@ -1,7 +1,7 @@
 define(['jquery'], function($) {
 
     // Application context (root)
-    var urls = null;
+    var urls = "";
 
     // Callback methods to catch errors
     var errorCallbacks = {};
@@ -9,7 +9,8 @@ define(['jquery'], function($) {
     /*
     * Endpoint location
     */
-    // ex var URL = "server/file.php"
+    // ex var URL = "../server/file.php"
+    var URL_TEST = "server/test.php";
 
     /*
      * Create the full url
@@ -18,15 +19,20 @@ define(['jquery'], function($) {
         return urls + apiUrl;
     };
 
-    function performGet(endpoint, success, error) {
+    function performGet(endpoint, data, success, error) {
         var url = getUrl(endpoint);
         return $.ajax({
             url : url,
             type : 'GET',
-            dataType : 'json',
+            data : data,
             success : function(data) {
                 if (success) {
-                    success(data);
+                    try{
+                        var jsondata = $.parseJSON(data);
+                        success(jsondata);
+                    }catch(err){
+                        error({status : 422, errorCode : 'JSON', error : err, data : data});
+                    }
                 }
             },
             error : errorHandler(error)
@@ -38,11 +44,15 @@ define(['jquery'], function($) {
         return $.ajax({
             url : url,
             type : 'POST',
-            dataType : 'json',
-            data : JSON.stringify(data),
+            data : data,
             success : function(data) {
                 if (success) {
-                    success(data);
+                    try{
+                        var jsondata = $.parseJSON(data);
+                        success(jsondata);
+                    }catch(err){
+                        error({status : 422, errorCode : 'JSON', error : err, data : data});
+                    }
                 }
             },
             error : errorHandler(error)
@@ -71,12 +81,9 @@ define(['jquery'], function($) {
 
     // Exported publics
     return {
-        setUrls : function(context) {
-            urls = context;
-        },
-        getUrls : function() {
-
-        },
         /* web service call */
+       test : function(data, success, error){
+           return performGet(URL_TEST, data, success, error);
+       }
     };
 });

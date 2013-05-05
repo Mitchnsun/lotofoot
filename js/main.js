@@ -8,6 +8,7 @@ require.config({
         'backbone' : '../libs/backbone', /* v1.0.0 */
         'bootstrap' : '../libs/bootstrap.min', /* v2.3.1 */
         'text' : '../libs/text',
+        'i18n' : '../libs/i18n',
         'dust' : '../libs/dust-full', /* v1.2.3 */
         'templateengine' : 'fmk/templateengine'
     },
@@ -28,6 +29,9 @@ require.config({
         },
         'dust' : {
             exports : 'dust'
+        },
+        'templateengine' : {
+            deps : ['jquery, underscore, dust']
         }
     }
 
