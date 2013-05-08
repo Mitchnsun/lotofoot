@@ -2,7 +2,7 @@
 	$response = array();
 	
 	try{
-		require_once('connect_DB.php');
+		require_once('../connect_DB.php');
 	}
 	catch (Exception $e){
 		$response = array(

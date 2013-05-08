@@ -7,7 +7,7 @@ define(['jquery'], function($) {
     * Endpoint location
     */
     // ex var URL = "../server/file.php"
-    var URL_LOGIN = "server/login.php";
+    var URL_LOGIN = "server/authentication/login.php";
 
     function performGet(endpoint, data, success, error) {
         return $.ajax({

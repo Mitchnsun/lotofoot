@@ -50,7 +50,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         app_router.on('route:login', function() {
         	var loginView = new LoginView({user : self.user, eventBus : self.eventBus});
         	if(self.user.checkAuth()){
-                self.eventBus.trigger('url:change',{url:'#'+self.user.set('urlFrom')});
+                self.eventBus.trigger('url:change',{url:'#'+self.user.get('urlFrom')});
             }else{
             	loginView.render();
             }
