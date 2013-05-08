@@ -1,8 +1,5 @@
 define(['jquery'], function($) {
-
-    // Application context (root)
-    var urls = "";
-
+	
     // Callback methods to catch errors
     var errorCallbacks = {};
 
@@ -10,26 +7,22 @@ define(['jquery'], function($) {
     * Endpoint location
     */
     // ex var URL = "../server/file.php"
-    var URL_TEST = "server/test.php";
-
-    /*
-     * Create the full url
-     */
-    function getUrl(apiUrl) {
-        return urls + apiUrl;
-    }
+    var URL_LOGIN = "server/login.php";
 
     function performGet(endpoint, data, success, error) {
-        var url = getUrl(endpoint);
         return $.ajax({
-            url : url,
+            url : endpoint,
             type : 'GET',
             data : data,
             success : function(data) {
                 if (success) {
                     try{
                         var jsondata = $.parseJSON(data);
-                        success(jsondata);
+                        if(jsondata.status == 200){
+                        	success(jsondata);	
+                        }else{
+                        	error(jsondata);
+                        }
                     }catch(err){
                         error({status : 422, errorCode : 'JSON', error : err, data : data});
                     }
@@ -40,16 +33,19 @@ define(['jquery'], function($) {
     }
 
     function performPost(endpoint, data, success, error) {
-        var url = getUrl(endpoint);
         return $.ajax({
-            url : url,
+            url : endpoint,
             type : 'POST',
             data : data,
             success : function(data) {
                 if (success) {
                     try{
                         var jsondata = $.parseJSON(data);
-                        success(jsondata);
+                        if(jsondata.status == 200){
+                        	success(jsondata);	
+                        }else{
+                        	error(jsondata);
+                        }
                     }catch(err){
                         error({status : 422, errorCode : 'JSON', error : err, data : data});
                     }
@@ -82,8 +78,8 @@ define(['jquery'], function($) {
     // Exported publics
     return {
         /* web service call */
-       test : function(data, success, error){
-           return performGet(URL_TEST, data, success, error);
+       login : function(params, success, error){
+       		return performPost(URL_LOGIN, params, success, error);
        }
     };
 });

@@ -1,5 +1,6 @@
 define([], function() {
     return {
-        HOME : ""
+        HOME : "",
+        LOGIN : "login"
     };
 });

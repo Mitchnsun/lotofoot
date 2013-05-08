@@ -8,6 +8,12 @@
 		$bdd = new PDO('mysql:host='.$host.';dbname='.$db_name,$db_login,$db_pwd);
 	}
 	catch(Exception $e){
-		die('Error in connect_DB.php : '.$e->getMessage());
+		$response = array(
+			"status" => 500,
+			"errorCode" => "BD",
+			"message" => $e->getMessage()
+		);
+		echo json_encode($response);
+		die();
 	}
 ?>

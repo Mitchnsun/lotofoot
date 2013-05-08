@@ -1,20 +1,19 @@
 define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
-    var Model = Backbone.Model.extend({
-        defaults : {
-            userid : null,
-            sessionid : null,
-            email : null,
-            firstname : null,
-            lastname : null,
-            right : null,
-            isConnected : false,
-            urlFrom : ""
-        },
-        /* Authentication */
-       checkAuth : function(){
-           return false;
-       }
-    });
-    // Return the model for the module
-    return Model;
+	var Model = Backbone.Model.extend({
+		defaults : {
+			isConnected : false,
+			urlFrom : ""
+		},
+		/* Authentication */
+		connect : function(user, sessionid) {
+			this.set(user);
+			this.set({sessionid : sessionid});
+			this.set({isConnected : true});
+		},
+		checkAuth : function() {
+			return this.get('isConnected');
+		}
+	});
+	// Return the model for the module
+	return Model;
 }); 

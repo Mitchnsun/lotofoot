@@ -1,25 +1,17 @@
 // Filename: homepageview.js
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/errorsview', 'text!tmpl/homepage.html'],
-function($, _, Backbone, te, LotofootApi, ErrorsView, tmpl) {
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'text!tmpl/homepage.html'],
+function($, _, Backbone, te, LotofootApi, AlertView, tmpl) {
 
     var ClassView = Backbone.View.extend({
         el : $('#container'),
         initialize : function() {
-            this.errorsView = new ErrorsView();
+            this.alertView = new AlertView();
         },
         render : function() {
             var self = this;
             $(this.el).html(te.renderTemplate(tmpl, {
                 title : "Lotofoot"
             }));
-
-            LotofootApi.test({
-                title : 'lotofoot'
-            }, function(msg) {
-                //success
-            }, function(msg) {
-                self.errorsView.displayError(msg.status, msg.errorCode);
-            });
         }
     });
 
