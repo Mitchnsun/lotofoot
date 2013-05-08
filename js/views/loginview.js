@@ -1,5 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls', 'text!tmpl/login.html'],
-function($, _, Backbone, te, LotofootApi, AlertView, urls, tmpl) {
+define(['jquery', 'underscore', 'backbone',
+		'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
+		'i18n!tmpl/nls/login',
+		'text!tmpl/login.html'],
+function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
 		initialize : function() {
@@ -10,7 +13,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, tmpl) {
 		},
 		el : $('#container'),
 		render : function() {
-			$(this.el).html(te.renderTemplate(tmpl, {}));
+			$(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
 		},
 		/*
 		 * Events of the view
