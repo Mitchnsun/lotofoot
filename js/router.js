@@ -12,8 +12,6 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
     });
 
     var initialize = function(options) {
-    	//Loading bar
-    	$('.bar').css("width","90%");
     	
         var self = this;
         var app_router = new AppRouter();
@@ -33,9 +31,6 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         var footerView = new FooterView();
         headerView.render();
         footerView.render();
-		
-		// Loading bar 100%
-        $('.bar').css("width","100%");
 
         /* Set view for the routes */
         app_router.on('route:homepage', function() {
