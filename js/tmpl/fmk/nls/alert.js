@@ -1,9 +1,9 @@
 define({
     "root" : {
-		"default_Title" : "Attention",
+		"default_Title" : "Attention!",
+		"info_Title" : "Information,",
 		
 		/* Alert Error */
-		
 		"401" : "401 : Une authentification est nécessaire pour accéder à la ressource.",
 		"404" : "404 : Ressource non trouvée.",
 		"422" : "422 : L’entité fournie avec la requête est incompréhensible ou incomplète.",
@@ -16,9 +16,10 @@ define({
 		
 		/* Alert Warning */
 		"EmptyLogIn" : "L'email et le mot de passe ne peuvent être vides, veuillez les compléter.",
-		"IncorrectLogin" : "Vos identifiants sont incorrects, veuillez les corriger."
+		"IncorrectLogin" : "Vos identifiants sont incorrects, veuillez les corriger.",
 		
 		/* Alert Success */
 		/* Alert Info */
+		"WebStorageLogin" : "Votre navigateur est obsolète et ne supporte par certaines fontionnalités pour vous connecter. Votre expérience utilisateur risque d'être altérée.<br/>Vous pouvez tout de même vous connecter mais votre session ne pourra être enregistrée. Pour une meilleure expérience, mettez à jour votre navigateur."
     }
 }); 

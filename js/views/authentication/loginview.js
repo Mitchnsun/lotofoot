@@ -7,6 +7,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 	var ClassView = Backbone.View.extend({
 		initialize : function() {
 			this.user = this.options.user;
+			this.browserStorage = this.options.browserStorage;
 			this.eventBus = this.options.eventBus;
 			
 			this.alertView = new AlertView();
@@ -14,10 +15,14 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 		el : $('#container'),
 		render : function() {
 			$(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
+			
+			if(this.browserStorage.get('hasLocalStorage') === true){
+				this.browserStorage.noSupport(this.alertView, 'WebStorageLogin');
+			}
 		},
 		/*
 		 * Events of the view
-		 * submitLogIn : submit the form to log in, check if the input are filled
+		 * submitLogIn : submit the form to log in, check if the input are filled, call WS and make the redirection
 		 */
 		events : {
 			"submit" : "submitLogIn"

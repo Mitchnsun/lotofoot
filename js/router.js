@@ -17,6 +17,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         var app_router = new AppRouter();
         
         this.user = options.user;
+        this.browserStorage = options.browserStorage;
 
         // Global event bus
         this.eventBus = EventBus.create();
@@ -43,7 +44,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
             }
         });
         app_router.on('route:login', function() {
-        	var loginView = new LoginView({user : self.user, eventBus : self.eventBus});
+        	var loginView = new LoginView({user : self.user, browserStorage : self.browserStorage, eventBus : self.eventBus});
         	if(self.user.checkAuth()){
                 self.eventBus.trigger('url:change',{url:'#'+self.user.get('urlFrom')});
             }else{

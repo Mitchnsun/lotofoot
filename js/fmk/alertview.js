@@ -28,12 +28,13 @@ function($, _, Backbone, te, i18n, tmpl) {
         },
         /*
          * Three type of alert : success, info and warning (default).
+         * code is for the message to display.
          */
         displayAlert : function(type, title, code){
-        	if(title == "default"){
+        	if(i18n[title+"_Title"] === undefined){
         		this.msg = {"Title" : i18n.default_Title};
         	}else{
-        		this.msg = {"Title" : i18n[title]};
+        		this.msg = {"Title" : i18n[title+"_Title"]};
         	}
 
             if(code){
