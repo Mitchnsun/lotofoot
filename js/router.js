@@ -1,6 +1,6 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
-        'views/headerview', 'views/footerview', 'views/homepageview', 'views/loginview'],
+        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview'],
 function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView) {
 
     var AppRouter = Backbone.Router.extend({
@@ -13,7 +13,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 
     var initialize = function(options) {
     	//Loading bar
-    	$('.bar').css("width","75%");
+    	$('.bar').css("width","90%");
     	
         var self = this;
         var app_router = new AppRouter();

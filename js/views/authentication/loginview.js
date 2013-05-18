@@ -1,7 +1,7 @@
 define(['jquery', 'underscore', 'backbone',
 		'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
-		'i18n!tmpl/nls/login',
-		'text!tmpl/login.html'],
+		'i18n!tmpl/authentication/nls/login',
+		'text!tmpl/authentication/login.html'],
 function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({

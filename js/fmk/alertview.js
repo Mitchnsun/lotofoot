@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/nls/alert', 'text!tmpl/alert.html'],
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk/nls/alert', 'text!tmpl/fmk/alert.html'],
 function($, _, Backbone, te, i18n, tmpl) {
     
     var ClassView = Backbone.View.extend({
