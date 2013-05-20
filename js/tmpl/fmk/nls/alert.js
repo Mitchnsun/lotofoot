@@ -12,6 +12,7 @@ define({
 		"message_500" : "Si cette erreur persiste, n'hésitez pas à contacter le webmaster",
 		
 		"BD" : "La base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
+		"BDLogin" : "Une erreur s'est produite lors de votre identification, la base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		"JSON" : "Une erreur est survenue dans la lecture des données reçues depuis le serveur. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		
 		/* Alert Warning */
