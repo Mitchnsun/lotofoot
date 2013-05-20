@@ -107,7 +107,7 @@
 			  <!--<label class="checkbox">
 				<input type="checkbox"> Remember me
 			  </label>-->
-			  <button type="submit" class="btn">S'inscrire</button>
+			  <p>Nous sommes désolé mais il n'est plus possible de s'incrire sur cette version du site</p>
 			</div>
 		  </div>
 		</form>
