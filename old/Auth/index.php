@@ -7,12 +7,7 @@
 	}
 	
 	if(isset($_POST['userEmail']) && isset($_POST['userPwd'])){
-		$userEmail = $_POST['userEmail'];
-		if($userEmail != 'Bryan.burhin@gmail.com'){
-			$userEmail = strtolower($userEmail);	
-		}else{
-			$clearPWD = $_POST['userPwd'];
-		}
+		$userEmail = strtolower($_POST['userEmail']);
 		$userPwd = crypt($_POST['userPwd'],$userEmail);
 		unset($_POST); // The password no exists in clear anymore
 		
@@ -23,13 +18,6 @@
 		
 		$wrong_pwd = true;
 		if($count == 1){
-			if($userEmail == 'Bryan.burhin@gmail.com'){
-				$newEmail = strtolower($userEmail);
-				$newPWD = crypt($clearPWD,$newEmail);
-				$query = "UPDATE users SET email='$newEmail', pwd='$newPWD' WHERE email = '$userEmail'";
-				$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
-				$req -> execute();
-			}
 			session_start();
 			$result = $req -> fetch();
 			$_SESSION['userid'] = $result['userid'];
