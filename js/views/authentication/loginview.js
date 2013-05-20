@@ -16,8 +16,9 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 		render : function() {
 			$(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
 			
-			if(this.browserStorage.get('hasLocalStorage') === true){
+			if(this.browserStorage.get('hasLocalStorage') === false){ // Display a message if the browser can't use localStorage
 				this.browserStorage.noSupport(this.alertView, 'WebStorageLogin');
+				this.$('label.checkbox').remove();
 			}
 		},
 		/*
@@ -28,7 +29,9 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 			"submit" : "submitLogIn"
 		},
 		submitLogIn : function(e) {
-			e.preventDefault();// cancel all events linked to this click
+			e.preventDefault();// cancel all actions linked to this click
+			this.$('input[type="submit"]').attr('disabled',true);
+			
 			var self = this;
 			var params = {};
 			var errors = false;
@@ -47,6 +50,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 
 			if (errors) {// Display errors if they exist
 				this.alertView.displayAlert('warning', 'default', 'EmptyLogIn');
+				this.$('input[type="submit"]').attr('disabled',false);
 				return;
 			}
 
@@ -55,16 +59,19 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 				userPwd : inputPwd.val()
 			}, function(msg) { // success
 				self.alertView.dismissAlert();
-				
+				this.$('input[type="submit"]').attr('disabled',false);
+				console.log(msg);
 				if(msg.errors){
 					self.alertView.displayAlert('warning', msg.errors.title, msg.errors.errorCode);
 				}else{ // Everything is good
-					self.user.connect(msg.user, msg.sessionid);
+					self.user.connect(msg.user);
+					return;
 					self.eventBus.trigger('url:change',{url:'#'+urls.HOME});
 				}
 				
 			}, function(msg) { // error
 				self.alertView.displayError(msg.status, msg.errorCode);
+				this.$('input[type="submit"]').attr('disabled',false);
 			});
 		}
 	});

@@ -34,7 +34,6 @@ require.config({
             deps : ['jquery, underscore, dust']
         }
     }
-
 });
 require(['app'], // Load our app module and pass it to our definition function
 function(App) {

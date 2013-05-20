@@ -5,9 +5,8 @@ define(['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
 			urlFrom : ""
 		},
 		/* Authentication */
-		connect : function(user, sessionid) {
+		connect : function(user) {
 			this.set(user);
-			this.set({sessionid : sessionid});
 			this.set({isConnected : true});
 		},
 		checkAuth : function() {

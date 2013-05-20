@@ -22,7 +22,7 @@
 		$userPwd = crypt($_POST['userPwd'],$userEmail);
 		unset($_POST); // The password no exists in the session anymore
 		
-		$query = "SELECT userid, email, firstname, lastname, droit FROM users WHERE email = '$userEmail' AND pwd = '$userPwd'";
+		$query = "SELECT userid, email, firstname, lastname, accreditation FROM users WHERE email = '$userEmail' AND pwd = '$userPwd'";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 		$req -> execute(array($userEmail,$userPwd));
 		$count = $req -> rowCount();
@@ -37,7 +37,7 @@
 				"email" => $result['email'],
 				"firstname" => $result['firstname'],
 				"lastname" => $result['lastname'],
-				"droit" => $result['droit'],
+				"accreditation" => $result['accreditation'],
 			);
 			$response['user'] = $user;
 		}else{// No match found
