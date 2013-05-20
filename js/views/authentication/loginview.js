@@ -60,12 +60,14 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 			}, function(msg) { // success
 				self.alertView.dismissAlert();
 				this.$('input[type="submit"]').attr('disabled',false);
-				console.log(msg);
+
 				if(msg.errors){
 					self.alertView.displayAlert('warning', msg.errors.title, msg.errors.errorCode);
 				}else{ // Everything is good
 					self.user.connect(msg.user);
-					return;
+					if(self.$('input[type="checkbox"]').is(':checked')){
+						self.saveSession();
+					}
 					self.eventBus.trigger('url:change',{url:'#'+urls.HOME});
 				}
 				
@@ -73,6 +75,17 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 				self.alertView.displayError(msg.status, msg.errorCode);
 				this.$('input[type="submit"]').attr('disabled',false);
 			});
+		},
+		/*
+		 * Save session id, userid and date of connexion in the local Storage
+		 * Permits to retrieve the session later
+		 */
+		saveSession : function(){
+			if(this.browserStorage.get('hasLocalStorage')){
+				localStorage.setItem("userid",this.user.get('userid'));
+				localStorage.setItem("sessionid",this.user.get('sessionid'));
+				localStorage.setItem("lastLogedIn",this.user.get('lastLogedIn'));
+			}	
 		}
 	});
 
