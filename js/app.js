@@ -4,10 +4,14 @@ function(Router, User, BrowserStorage) {
 
 	var initialize = function() {
 
+		var browserStorage = new BrowserStorage();
 	    var user = new User();
-	    var browserStorage = new BrowserStorage();
-		// Pass in our Router module and call it's initialize function
-		Router.initialize({user : user, browserStorage : browserStorage});
+	    
+	    user.retrieveSession();
+	    $.when(user.promise).done(function(){ // Wait if we can found a session for the user
+			// Pass in our Router module and call it's initialize function
+			Router.initialize({user : user, browserStorage : browserStorage});
+		});
 	};
 
 	return {

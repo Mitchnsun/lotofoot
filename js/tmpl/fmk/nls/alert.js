@@ -18,6 +18,7 @@ define({
 		/* Alert Warning */
 		"EmptyLogIn" : "L'email et le mot de passe ne peuvent être vides, veuillez les compléter.",
 		"IncorrectLogin" : "Vos identifiants sont incorrects, veuillez les corriger.",
+		"NoSessionFound" : "Aucune session n'a été trouvée, veuillez vous connecter.",
 		
 		/* Alert Success */
 		/* Alert Info */

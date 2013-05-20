@@ -8,6 +8,7 @@ define(['jquery'], function($) {
     */
     // ex var URL = "../server/file.php"
     var URL_LOGIN = "server/authentication/login.php";
+    var URL_CHECK_SESSION = "server/authentication/checkSession.php";
 
     function performGet(endpoint, data, success, error) {
         return $.ajax({
@@ -80,6 +81,9 @@ define(['jquery'], function($) {
         /* web service call */
        login : function(params, success, error){
        		return performPost(URL_LOGIN, params, success, error);
+       },
+       checkSession : function(params, success, error){
+       		return performPost(URL_CHECK_SESSION, params, success, error);
        }
     };
 });
