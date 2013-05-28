@@ -1,4 +1,5 @@
 define({
+	/* Please sort alphabetically */
     "root" : {
 		"email" : "Email",
 		"login" : "Se connecter",

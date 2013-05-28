@@ -1,4 +1,5 @@
 define({
+	/* Please sort alphabetically by section */
     "root" : {
 		"default_Title" : "Attention!",
 		"info_Title" : "Information,",
