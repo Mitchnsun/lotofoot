@@ -28,14 +28,14 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         });
 
         // Set header and footer
-        var headerView = new HeaderView();
+        var headerView = new HeaderView({user : this.user});
         var footerView = new FooterView();
         headerView.render();
         footerView.render();
 
         /* Set view for the routes */
         app_router.on('route:homepage', function() {
-            var homepageView = new HomepageView();
+            var homepageView = new HomepageView({user : self.user});
             if(self.user.checkAuth()){
                 homepageView.render();
             }else{

@@ -1,4 +1,5 @@
 <?php
+	/* Production */
 	$host = 'localhost';
 	$db_name = 'LotoFoot';
 	$db_login = 'LotoFoot';

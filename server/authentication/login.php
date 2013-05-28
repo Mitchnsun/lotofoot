@@ -1,5 +1,5 @@
 <?php
-	$response = array();
+	$response = array(); // initialize JSON (array php)
 	
 	try{
 		require_once('../connect_DB.php');
@@ -23,6 +23,7 @@
 		$userPwd = crypt($_POST['userPwd'],$userEmail);
 		unset($_POST); // The password no exists in the session anymore
 		
+		/* Check user and password in the databse and retrieve the user information */
 		$query = "SELECT userid, email, firstname, lastname, accreditation, connectedAt FROM users WHERE email = :userEmail AND pwd = :userPwd";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BDLogin", "message" => $bdd->errorInfo())));
 		$req -> execute(array("userEmail" => $userEmail,"userPwd" => $userPwd));

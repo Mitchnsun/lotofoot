@@ -1,5 +1,5 @@
 <?php
-	$response = array();
+	$response = array(); // initialize JSON (array php)
 	
 	try{
 		require_once('../connect_DB.php');
@@ -20,6 +20,7 @@
 	$userid = $_POST['userid'];
 	$sessionid = $_POST['sessionid'];
 	
+	/* Retrieve user information and check if the session id matches */
 	$query = "SELECT userid, email, firstname, lastname, accreditation, connectedAt FROM users WHERE userid = :userid AND sessionid = :sessionid";
 	$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 	$req -> execute(array("userid" => $userid,"sessionid" => $sessionid));
