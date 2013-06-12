@@ -15,6 +15,7 @@ define({
 		"BD" : "La base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		"BDLogin" : "Une erreur s'est produite lors de votre identification, la base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		"JSON" : "Une erreur est survenue dans la lecture des données reçues depuis le serveur. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
+		"Wrong_User" : "Il semblerait que vous tenteriez d'accéder à des informations qui ne sont liés à votre compte, connectez vous correctement pour accéder à ces informations.",
 		
 		/* Alert Warning */
 		"EmptyLogIn" : "L'email et le mot de passe ne peuvent être vides, veuillez les compléter.",
