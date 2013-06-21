@@ -16,7 +16,6 @@ function($, _, Backbone, te, i18n, tmpl) {
             }
         },
         manageNavBar : function(){
-        	console.log('manageBar');
         	var menuItems = this.$('div.nav-collapse, a.btn-navbar');
         	if(this.user.get('isConnected')){
             	menuItems.show();

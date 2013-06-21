@@ -33,15 +33,36 @@
         
         foreach ($bdd -> query($query) as $row) {
             $querygame = "SELECT count(*) FROM pronos WHERE userid = :userid AND id_game = :id_game"; // Find if the user already bet on this game
-            $reqgame = $bdd -> prepare($querygame) or die(print_r($bdd->errorInfo()));
+            $reqgame = $bdd -> prepare($querygame) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
             $reqgame -> execute(array(
                         'userid' => $userid,
                         'id_game' => $row['id_game']
             ));
             $result = $reqgame -> fetch();
             
-            $response['result'] = $result;
-            
+			if($result['count(*)'] == 0){ // no bet on this game
+				$game = array();
+
+				// retrieve team information
+				$queryTeam = "SELECT name FROM teams WHERE id_team = :teamA OR id_team = :teamB";
+				$reqTeam = $bdd -> prepare($queryTeam) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+				$reqTeam -> execute(array(
+							'teamA' => $row['id_teamA'],
+							'teamB' => $row['id_teamB']
+				));
+				// team information id / name
+				$team = $reqTeam -> fetch();
+				$game['teamA'] = array('id' => $row['id_teamA'], 'name' => $team['name']);
+				$team = $reqTeam -> fetch();
+				$game['teamB'] = array('id' => $row['id_teamB'], 'name' => $team['name']);
+				
+				// Game information, id / date / schedule
+				$game['id'] = $row['id_game'];
+				$game['date'] = date('d/m/Y',$row['schedule']);
+				$game['schedule'] = date('G',$row['schedule']).'h'.date('i',$row['schedule']);
+				
+				array_push($response['pronos'],$game);
+			}
         }
         
     }else{ // Different user, not authorized
