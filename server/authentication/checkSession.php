@@ -28,10 +28,9 @@
 	
 	if($count == 1){ // the session is retrieved
 		$result = $req -> fetch();
-		session_start();
-		session_id($sessionid); // Set the same session id that before
+		session_start(); // The session is retrieved but a new session id was created
 		$_SESSION['userid'] = $userid;
-		
+
 		$user = array(
 			"userid" => $result['userid'],
 			"email" => $result['email'],
@@ -47,10 +46,11 @@
 		$response['sessionRetrieve'] = true;
 			
 		/* Update user information : the date of connexion */
-		$query = "UPDATE users SET connectedAt = :time WHERE userid = :userid";
+		$query = "UPDATE users SET connectedAt = :time, sessionid = :sessionid WHERE userid = :userid";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 		$req -> execute(array(
 				"time" => $user['connectedAt'],
+				"sessionid" => session_id(),
 				"userid" => $user['userid']
 		));
 	}else{ // No Session found

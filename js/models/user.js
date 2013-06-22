@@ -5,7 +5,9 @@ define(['jquery', 'underscore', 'backbone', 'fmk/lotofootapi'], function($, _, B
 			isConnected : false,
 			urlFrom : ""
 		},
-		/* Authentication */
+		/*
+		 * Authentication
+		 */
 		connect : function(user) {
 			this.set(user);
 			this.set({isConnected : true});
@@ -38,6 +40,11 @@ define(['jquery', 'underscore', 'backbone', 'fmk/lotofootapi'], function($, _, B
 				if(msg.sessionRetrieve === true){
 					self.set({sessionRetrieve : true});
 					self.connect(msg.user);
+					if(typeof localStorage != undefined) { // Set the local storage with the new information
+                        localStorage.userid = self.get('userid');
+                        localStorage.sessionid = self.get('sessionid');
+                        localStorage.lastLogedIn = self.get('lastLogedIn');
+                    }
 				}
 			},function(){ // error
 				/* If they are an error, no need to handle it */
