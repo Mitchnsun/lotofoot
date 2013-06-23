@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">69.84</p>
+      <p class="stat">69.55</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">89</p>
+      <p class="stat">111</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">23.89</p>
+      <p class="stat">25.05</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.43</p>
+      <p class="stat">0.50</p>
     </div>
   </div>
 </div>
@@ -92,9 +92,6 @@
   <div class="row">
     <textarea id="file-source" class="span12">define(['jquery'], function($) {
 
-    // Application context (root)
-    var urls = "";
-
     // Callback methods to catch errors
     var errorCallbacks = {};
 
@@ -102,28 +99,37 @@
     * Endpoint location
     */
     // ex var URL = "../server/file.php"
-    var URL_TEST = "server/test.php";
 
-    /*
-     * Create the full url
-     */
-    function getUrl(apiUrl) {
-        return urls + apiUrl;
-    }
+    /* Authentication */
+    var URL_LOGIN = "server/authentication/login.php";
+    var URL_CHECK_SESSION = "server/authentication/checkSession.php";
+
+    /* Pronos */
+    var URL_GET_NEW_PRONOS = "server/pronos/getNewPronos.php";
+
+    /* Common ajax functions */
 
     function performGet(endpoint, data, success, error) {
-        var url = getUrl(endpoint);
         return $.ajax({
-            url : url,
+            url : endpoint,
             type : 'GET',
             data : data,
             success : function(data) {
                 if (success) {
-                    try{
+                    try {// Parse JSON
                         var jsondata = $.parseJSON(data);
-                        success(jsondata);
-                    }catch(err){
-                        error({status : 422, errorCode : 'JSON', error : err, data : data});
+                        if (jsondata.status == 200) {
+                            success(jsondata);
+                        } else {
+                            error(jsondata);
+                        }
+                    } catch(err) {
+                        error({
+                            status : 422,
+                            errorCode : 'JSON',
+                            error : err,
+                            data : data
+                        });
                     }
                 }
             },
@@ -132,18 +138,26 @@
     }
 
     function performPost(endpoint, data, success, error) {
-        var url = getUrl(endpoint);
         return $.ajax({
-            url : url,
+            url : endpoint,
             type : 'POST',
             data : data,
             success : function(data) {
                 if (success) {
-                    try{
+                    try {// Parse JSON
                         var jsondata = $.parseJSON(data);
-                        success(jsondata);
-                    }catch(err){
-                        error({status : 422, errorCode : 'JSON', error : err, data : data});
+                        if (jsondata.status == 200) {
+                            success(jsondata);
+                        } else {
+                            error(jsondata);
+                        }
+                    } catch(err) {
+                        error({
+                            status : 422,
+                            errorCode : 'JSON',
+                            error : err,
+                            data : data
+                        });
                     }
                 }
             },
@@ -172,10 +186,18 @@
     }
 
     // Exported publics
+    /* web service call */
     return {
-        /* web service call */
-       test : function(data, success, error){
-           return performGet(URL_TEST, data, success, error);
+        /* Authentication */
+        login : function(params, success, error) {
+            return performPost(URL_LOGIN, params, success, error);
+        },
+        checkSession : function(params, success, error) {
+            return performPost(URL_CHECK_SESSION, params, success, error);
+        },
+        /* Pronos */
+       getNewPronos : function(params, success, error){
+           return performGet(URL_GET_NEW_PRONOS, params, success, error);
        }
     };
 });</textarea>

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">73.45</p>
+      <p class="stat">67.16</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">41</p>
+      <p class="stat">63</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">8.49</p>
+      <p class="stat">15.81</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.31</p>
+      <p class="stat">0.61</p>
     </div>
   </div>
 </div>
@@ -91,16 +91,25 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="span12">// Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'views/headerview', 'views/footerview', 'views/homepageview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView) {
+define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
+        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView) {
 
     var AppRouter = Backbone.Router.extend({
-        routes : _.object([[urls.HOME, 'homepage'], ['*action', 'defaultAction']])
+        routes : _.object([
+            [urls.HOME, 'homepage'],
+            [urls.LOGIN, 'login'],
+            ['*action', 'defaultAction']
+        ])
     });
 
-    var initialize = function() {
+    var initialize = function(options) {
+    	
         var self = this;
         var app_router = new AppRouter();
+        
+        this.user = options.user;
+        this.browserStorage = options.browserStorage;
 
         // Global event bus
         this.eventBus = EventBus.create();
@@ -111,15 +120,28 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView) {
         });
 
         // Set header and footer
-        var headerView = new HeaderView();
+        var headerView = new HeaderView({user : this.user});
         var footerView = new FooterView();
         headerView.render();
         footerView.render();
 
         /* Set view for the routes */
         app_router.on('route:homepage', function() {
-            var homepageView = new HomepageView();
-            homepageView.render();
+            var homepageView = new HomepageView({user : self.user});
+            if(self.user.checkAuth()){
+                homepageView.render();
+            }else{
+            	self.user.set('urlFrom', urls.HOME);
+                self.eventBus.trigger('url:change',{url:'#'+urls.LOGIN});
+            }
+        });
+        app_router.on('route:login', function() {
+        	var loginView = new LoginView({user : self.user, browserStorage : self.browserStorage, eventBus : self.eventBus});
+        	if(self.user.checkAuth()){
+                self.eventBus.trigger('url:change',{url:'#'+self.user.get('urlFrom')});
+            }else{
+            	loginView.render();
+            }
         });
         app_router.on('route:defaultAction', function(actions) {
             // We have no matching route, lets just log what the URL was
