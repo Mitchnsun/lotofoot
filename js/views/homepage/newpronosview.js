@@ -14,10 +14,10 @@ function($, _, Backbone, te, LotofootApi, AlertView, i18n, tmpl) {
             LotofootApi.getNewPronos({
                 userid : this.user.get('userid')
             }, function(msg) {// success
-            	console.log(msg);
                 if(msg.pronos.length > 0){
                     $(self.el).html(te.renderTemplate(tmpl, {
-                        i18n : i18n
+                        i18n : i18n,
+                        pronos : msg.pronos
                     }));  
                 }
             }, function(msg) {// error
