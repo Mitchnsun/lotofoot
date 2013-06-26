@@ -3,6 +3,7 @@ define({
     "root" : {
 		"default_Title" : "Attention!",
 		"info_Title" : "Information,",
+		"success_Title" : "Succès,",
 		
 		/* Alert Error */
 		"401" : "401 : Une authentification est nécessaire pour accéder à la ressource.",
@@ -15,7 +16,7 @@ define({
 		"BD" : "La base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		"BDLogin" : "Une erreur s'est produite lors de votre identification, la base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
 		"JSON" : "Une erreur est survenue dans la lecture des données reçues depuis le serveur. Réessayez ultérieurement, si l'erreur persiste n'hésitez pas à contacter le webmaster.",
-		"Wrong_User" : "Il semblerait que vous tenteriez d'accéder à des informations qui ne sont liés à votre compte, connectez vous correctement pour accéder à ces informations.",
+		"Wrong_User" : "Il semblerait que vous tenteriez d'accéder à des informations qui ne sont pas liées à votre compte, connectez vous correctement pour accéder à ces informations.",
 		
 		/* Alert Warning */
 		"EmptyLogIn" : "L'email et le mot de passe ne peuvent être vides, veuillez les compléter.",
@@ -23,6 +24,7 @@ define({
 		"NoSessionFound" : "Aucune session n'a été trouvée, veuillez vous connecter.",
 		
 		/* Alert Success */
+		"AddProno" : "Votre pronostic a été enregistré",
 		/* Alert Info */
 		"WebStorageLogin" : "Votre navigateur est obsolète et ne supporte par certaines fontionnalités pour vous connecter. Votre expérience utilisateur risque d'être altérée.<br/>Vous pouvez tout de même vous connecter mais votre session ne pourra être enregistrée. Pour une meilleure expérience, mettez à jour votre navigateur."
     }

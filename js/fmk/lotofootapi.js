@@ -14,6 +14,7 @@ define(['jquery'], function($) {
 
     /* Pronos */
     var URL_GET_NEW_PRONOS = "server/pronos/getNewPronos.php";
+    var URL_ADD_PRONO = "server/pronos/addProno.php";
 
     /* Common ajax functions */
 
@@ -78,6 +79,9 @@ define(['jquery'], function($) {
         /* Pronos */
         getNewPronos : function(params, success, error) {
             return performWS('GET', URL_GET_NEW_PRONOS, params, success, error);
+        },
+        addProno : function(params, success, error){
+            return performWS('POST', URL_ADD_PRONO, params, success, error);
         }
     };
 });

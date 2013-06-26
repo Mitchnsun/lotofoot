@@ -38,6 +38,11 @@
             </select>
         </td>
         <td class="teamB"><label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label></td>
+        <td class="buttons">
+            <button class="btn btn-success btn-mini" type="button" data-role="bet" data-ref="{id}"><i class="icon-ok"></i></button>
+            &nbsp;
+            <button class="btn btn-danger btn-mini" type="button" data-role="nobet" data-ref="{id}"><i class="icon-remove"></i></button>
+        </td>
     </tr>
 {/pronos}
 </tbody>

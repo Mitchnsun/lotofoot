@@ -44,7 +44,7 @@
 				$game = array();
 
 				// retrieve team information
-				$queryTeam = "SELECT name FROM teams WHERE id_team = :teamA OR id_team = :teamB";
+				$queryTeam = "SELECT id_team, name FROM teams WHERE id_team = :teamA OR id_team = :teamB";
 				$reqTeam = $bdd -> prepare($queryTeam) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 				$reqTeam -> execute(array(
 							'teamA' => $row['id_teamA'],
@@ -52,9 +52,13 @@
 				));
 				// team information id / name
 				$team = $reqTeam -> fetch();
-				$game['teamA'] = array('id' => $row['id_teamA'], 'name' => $team['name']);
+				if($team['id_team'] == $row['id_teamA']){$game['teamA'] = array('id' => $team['id_team'], 'name' => $team['name']);}
+                else{$game['teamB'] = array('id' => $team['id_team'], 'name' => $team['name']);}
+				
 				$team = $reqTeam -> fetch();
-				$game['teamB'] = array('id' => $row['id_teamB'], 'name' => $team['name']);
+                if($team['id_team'] == $row['id_teamB']){$game['teamB'] = array('id' => $team['id_team'], 'name' => $team['name']);}
+                else{$game['teamA'] = array('id' => $team['id_team'], 'name' => $team['name']);}
+				
 				
 				// Game information, id / date / schedule
 				$game['id'] = $row['id_game'];
