@@ -17,38 +17,10 @@ define(['jquery'], function($) {
 
     /* Common ajax functions */
 
-    function performGet(endpoint, data, success, error) {
+    function performWS(type, endpoint, data, success, error) {
         return $.ajax({
             url : endpoint,
-            type : 'GET',
-            data : data,
-            success : function(data) {
-                if (success) {
-                    try {// Parse JSON
-                        var jsondata = $.parseJSON(data);
-                        if (jsondata.status == 200) {
-                            success(jsondata);
-                        } else {
-                            error(jsondata);
-                        }
-                    } catch(err) {
-                        error({
-                            status : 422,
-                            errorCode : 'JSON',
-                            error : err,
-                            data : data
-                        });
-                    }
-                }
-            },
-            error : errorHandler(error)
-        });
-    }
-
-    function performPost(endpoint, data, success, error) {
-        return $.ajax({
-            url : endpoint,
-            type : 'POST',
+            type : type,
             data : data,
             success : function(data) {
                 if (success) {
@@ -98,14 +70,14 @@ define(['jquery'], function($) {
     return {
         /* Authentication */
         login : function(params, success, error) {
-            return performPost(URL_LOGIN, params, success, error);
+            return performWS('POST', URL_LOGIN, params, success, error);
         },
         checkSession : function(params, success, error) {
-            return performPost(URL_CHECK_SESSION, params, success, error);
+            return performWS('POST', URL_CHECK_SESSION, params, success, error);
         },
         /* Pronos */
-       getNewPronos : function(params, success, error){
-           return performGet(URL_GET_NEW_PRONOS, params, success, error);
-       }
+        getNewPronos : function(params, success, error) {
+            return performWS('GET', URL_GET_NEW_PRONOS, params, success, error);
+        }
     };
 });
