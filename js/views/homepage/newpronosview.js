@@ -8,7 +8,7 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofoota
         },
         render : function() {
             var self = this;
-
+            
             LotofootApi.getNewPronos({
                 userid : this.user.get('userid')
             }, function(msg) {// success
@@ -17,6 +17,8 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofoota
                         i18n : i18n,
                         pronos : msg.pronos
                     }));
+                }else{
+                    $(self.el).remove(); // the div "new pronos" is removed
                 }
             }, function(msg) {// error
                 self.alertView.displayError(msg.status, msg.errorCode);
