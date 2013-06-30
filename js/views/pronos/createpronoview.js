@@ -10,6 +10,12 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
         },
         render : function() {
             var self = this;
+            LotofootApi.getTeams({}, function(msg){// success
+                console.log(msg);
+            }, function(msg){// error
+                console.log(msg);
+                $(self.el).append(msg.data);
+            });
             $(this.el).html(te.renderTemplate(tmpl, {
                 i18n : i18n,
                 urls : urls

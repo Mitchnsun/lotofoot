@@ -1,6 +1,5 @@
 <?php
-    $response = array();
-    // initialize JSON (array php)
+    $response = array(); // initialize JSON (array php)
     
     try {
         require_once ('../connect_DB.php');
