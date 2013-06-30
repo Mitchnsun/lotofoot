@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview',
-        'fmk/urls', 'i18n!tmpl/pronos/nls/addprono', 'text!tmpl/pronos/addprono.html'],
+        'fmk/urls', 'i18n!tmpl/pronos/nls/createprono', 'text!tmpl/pronos/createprono.html'],
 function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 
     var ClassView = Backbone.View.extend({

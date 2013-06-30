@@ -2,6 +2,6 @@ define([], function() {
     return {
         HOME : "",
         LOGIN : "login",
-        ADD_PRONO : "add-prono"
+        CREATE_PRONO : "create-prono"
     };
 });

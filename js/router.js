@@ -1,14 +1,14 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
         'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/addpronoview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, AddPronoView) {
+        'views/pronos/createpronoview'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView) {
 
     var AppRouter = Backbone.Router.extend({
         routes : _.object([
             [urls.HOME, 'homepage'],
             [urls.LOGIN, 'login'],
-            [urls.ADD_PRONO, 'addprono'],
+            [urls.CREATE_PRONO, 'createprono'],
             ['*action', 'defaultAction']
         ])
     });
@@ -53,10 +53,10 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
             	loginView.render();
             }
         });
-        app_router.on('route:addprono', function(){
-            var addpronoview = new AddPronoView({user : self.user});
+        app_router.on('route:createprono', function(){
+            var createpronoview = new CreatePronoView({user : self.user});
             if(self.user.checkAuth()){
-                addpronoview.render();
+                createpronoview.render();
             }else{
                 self.user.set('urlFrom', urls.HOME);
                 self.eventBus.trigger('url:change',{url:'#'+urls.LOGIN});
