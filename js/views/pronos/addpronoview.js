@@ -1,8 +1,6 @@
-// Filename: homepageview.js
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview',
-        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html',
-        'views/homepage/newpronosview'],
-function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl, NewPronosView) {
+        'fmk/urls', 'i18n!tmpl/pronos/nls/addprono', 'text!tmpl/pronos/addprono.html'],
+function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 
     var ClassView = Backbone.View.extend({
         el : $('#container'),
@@ -16,15 +14,6 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl, NewPronos
                 i18n : i18n,
                 urls : urls
             }));
-            
-            // Initialize children view
-            this.newPronoView = new NewPronosView({
-                el : '#newpronos',
-                user : this.user
-            });
-            
-            //Render children view
-            this.newPronoView.render();
         },
         /*
          * Events of the view
