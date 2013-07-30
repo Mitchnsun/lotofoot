@@ -28,20 +28,22 @@ define(['jquery'], function($) {
             data : data,
             success : function(data) {
                 if (success) {
+                    var jsondata;
                     try {// Parse JSON
-                        var jsondata = $.parseJSON(data);
-                        if (jsondata.status == 200) {
-                            success(jsondata);
-                        } else {
-                            error(jsondata);
-                        }
+                        jsondata = $.parseJSON(data);
                     } catch(err) {
-                        error({
+                        jsondata = {
                             status : 422,
                             errorCode : 'JSON',
                             error : err,
                             data : data
-                        });
+                        };
+                    }
+                    
+                    if (jsondata.status == 200) {
+                        success(jsondata);
+                    } else {
+                        error(jsondata);
                     }
                 }
             },
