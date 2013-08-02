@@ -1,3 +1,62 @@
 <div class="container">
-    <h1>{i18n.title}</h1>
+    <div class="row games">
+        <h2>{i18n.title}</h2>
+        <form class="form-inline">
+            <input type="text" id="schedule" class="input-small" placeholder="Date">
+            <select id="hourSchedule" class="input-mini">
+                <option>Heure</option>
+            </select>
+            h
+            <select id="minuteSchedule" class="input-mini">
+                <option>minute</option>
+            </select>
+            <select id="teamA" class="input-small">
+                <option>TeamA</option>
+            </select>
+            <select id="teamB" class="input-small">
+                <option>TeamB</option>
+            </select>
+        </form>
+    </div>
+    <div id="SelectGame" class="row">
+        <h3>{i18n.select_game}</h3>
+        <hr>
+        <div class="span3">
+            <a href="#"  ref="{i18n.ref_league_game}">{i18n.league_game}</a>
+        </div>
+        <div class="span3">
+            <a href="#"  ref="{i18n.ref_cup_game}">{i18n.cup_game}</a>
+        </div>
+        <div class="span3">
+            <a href="#"  ref="{i18n.ref_europa_game}">{i18n.europa_game}</a>
+        </div>
+        <div class="span3">
+            <a href="#"  ref="{i18n.ref_international_game}">{i18n.international_game}</a>
+        </div>
+    </div>
+    <div id="Clubs" class="row hide">
+        <h3>{i18n.clubs}</h3>
+        <hr>
+        {#clubs}
+        <div class="span3">
+            <a href="#" class="country" ref="{id}">{name}</a>
+            <div class="row hide">
+                {#recs}
+                <div class="span3">
+                    <a href="#" class="club"  ref="{id}">{name}</a>
+                </div>
+                {/recs}
+            </div>
+        </div>
+        {/clubs}
+    </div>
+    <div id="International" class="row hide">
+        <h3>{i18n.international}</h3>
+        <hr>
+        {#international}
+        <div class="span3">
+            <a href="#" class="international" ref="{id}">{name}</a>
+        </div>
+        {/international}
+    </div>
 </div>
