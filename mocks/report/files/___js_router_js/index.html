@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.16</p>
+      <p class="stat">66.53</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">63</p>
+      <p class="stat">76</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">15.81</p>
+      <p class="stat">17.72</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.61</p>
+      <p class="stat">0.76</p>
     </div>
   </div>
 </div>
@@ -92,13 +92,15 @@
   <div class="row">
     <textarea id="file-source" class="span12">// Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
-        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView) {
+        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
+        'views/pronos/createpronoview'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView) {
 
     var AppRouter = Backbone.Router.extend({
         routes : _.object([
             [urls.HOME, 'homepage'],
             [urls.LOGIN, 'login'],
+            [urls.CREATE_PRONO, 'createprono'],
             ['*action', 'defaultAction']
         ])
     });
@@ -143,6 +145,17 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
             	loginView.render();
             }
         });
+        app_router.on('route:createprono', function(){
+            var createpronoview = new CreatePronoView({user : self.user});
+            if(self.user.checkAuth()){
+                createpronoview.render();
+            }else{
+                self.user.set('urlFrom', urls.HOME);
+                self.eventBus.trigger('url:change',{url:'#'+urls.LOGIN});
+            }
+        });
+        
+        /* Route by default */
         app_router.on('route:defaultAction', function(actions) {
             // We have no matching route, lets just log what the URL was
             console.log('No route:', actions);

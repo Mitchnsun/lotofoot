@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">69.55</p>
+      <p class="stat">72.36</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">111</p>
+      <p class="stat">96</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">25.05</p>
+      <p class="stat">20.63</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.50</p>
+      <p class="stat">0.45</p>
     </div>
   </div>
 </div>
@@ -106,58 +106,36 @@
 
     /* Pronos */
     var URL_GET_NEW_PRONOS = "server/pronos/getNewPronos.php";
+    var URL_ADD_PRONO = "server/pronos/addProno.php";
+    
+    /* Get Common datas */
+   var URL_GET_TEAMS = "server/common/getTeams.php";
 
     /* Common ajax functions */
 
-    function performGet(endpoint, data, success, error) {
+    function performWS(type, endpoint, data, success, error) {
         return $.ajax({
             url : endpoint,
-            type : 'GET',
+            type : type,
             data : data,
             success : function(data) {
                 if (success) {
+                    var jsondata;
                     try {// Parse JSON
-                        var jsondata = $.parseJSON(data);
-                        if (jsondata.status == 200) {
-                            success(jsondata);
-                        } else {
-                            error(jsondata);
-                        }
+                        jsondata = $.parseJSON(data);
                     } catch(err) {
-                        error({
+                        jsondata = {
                             status : 422,
                             errorCode : 'JSON',
                             error : err,
                             data : data
-                        });
+                        };
                     }
-                }
-            },
-            error : errorHandler(error)
-        });
-    }
-
-    function performPost(endpoint, data, success, error) {
-        return $.ajax({
-            url : endpoint,
-            type : 'POST',
-            data : data,
-            success : function(data) {
-                if (success) {
-                    try {// Parse JSON
-                        var jsondata = $.parseJSON(data);
-                        if (jsondata.status == 200) {
-                            success(jsondata);
-                        } else {
-                            error(jsondata);
-                        }
-                    } catch(err) {
-                        error({
-                            status : 422,
-                            errorCode : 'JSON',
-                            error : err,
-                            data : data
-                        });
+                    
+                    if (jsondata.status == 200) {
+                        success(jsondata);
+                    } else {
+                        error(jsondata);
                     }
                 }
             },
@@ -190,14 +168,21 @@
     return {
         /* Authentication */
         login : function(params, success, error) {
-            return performPost(URL_LOGIN, params, success, error);
+            return performWS('POST', URL_LOGIN, params, success, error);
         },
         checkSession : function(params, success, error) {
-            return performPost(URL_CHECK_SESSION, params, success, error);
+            return performWS('POST', URL_CHECK_SESSION, params, success, error);
         },
         /* Pronos */
-       getNewPronos : function(params, success, error){
-           return performGet(URL_GET_NEW_PRONOS, params, success, error);
+        getNewPronos : function(params, success, error) {
+            return performWS('GET', URL_GET_NEW_PRONOS, params, success, error);
+        },
+        addProno : function(params, success, error){
+            return performWS('POST', URL_ADD_PRONO, params, success, error);
+        },
+        /* Common */
+       getTeams : function(params, success, error){
+           return performWS('GET', URL_GET_TEAMS, params, success, error);
        }
     };
 });</textarea>
