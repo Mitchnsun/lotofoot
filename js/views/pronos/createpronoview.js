@@ -10,6 +10,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             
             this.gameType = null; // variable for the type of the game : league, cup, international, etc.
             this.teams = []; // Array with the two teams for the game
+            this.clubs = {}; // List of all the clubs
+            this.international = {}; // list of international teams
             
             // Bind functions to the view
             // By default, they bind to the window because they are function callbacks 
@@ -26,6 +28,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
          * Success of getTeams WS
          */
         successGetTeams : function(msg){
+            this.clubs = msg.clubs;
+            this.international = msg.international;
             var clubsList = [];
 
             _.each(msg.clubs, function(item){ // fetch the right name of the country
@@ -42,7 +46,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
                 i18n : i18n,
                 urls : urls,
                 clubs : clubsList,
-                international : msg.international
+                international : this.international
             }));
         },
         /*
@@ -84,15 +88,19 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
                 return false;
             }
             
-            var ref = this.$(e.currentTarget).attr('ref');
-            var $selectedCountry = this.$(e.currentTarget).parents('div.span12');
+            /* Initialize variables */
+            var $element = this.$(e.currentTarget);
+            var ref = $element.attr('ref');
+            var country = $element.attr('data-country');
+            var $selectedCountry = $element.parents('div.span12');
             var $listCountry = this.$("#Clubs > div.span3");
+            var team = this.getTeamInfos(ref,country);
             
             if(this.gameType == i18n.ref_league_game || this.gameType == i18n.ref_cup_game){
-                this.teams.push(ref);
+                this.teams.push(team);
             }
             else if(this.gameType == i18n.ref_europa_game){
-                this.teams.push(ref);
+                this.teams.push(team);
                 $selectedCountry.find('div.row').addClass('hide');
                 $selectedCountry.removeClass('span12').addClass('span3');
                 $listCountry.removeClass('hide');
@@ -110,14 +118,40 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             }
             
             var ref = this.$(e.currentTarget).attr('ref');
+            var nation = {};
+            
+            _.every(this.international,function(item){
+                if(item.id == ref){
+                    nation = item;
+                    return false;
+                }
+                return true;
+            });
             
             if(this.gameType == i18n.ref_international_game){
-                this.teams.push(ref);
+                this.teams.push(nation);
             }else{
                 // TODO : Display errors
             }
             
             console.log(this.teams);
+        },
+        /*
+         * Tools functions
+         */
+        getTeamInfos : function(id,country){ // return the all the infos of the team in an object
+            var team = {};
+            var array = this.clubs[country].recs;
+            
+            _.every(array,function(club){
+                if(club.id == id){
+                    team = club;
+                    return false;
+                }
+                return true;
+            });
+            
+            return team;
         }
     });
 

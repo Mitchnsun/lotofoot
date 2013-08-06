@@ -1,23 +1,4 @@
 <div class="container">
-    <div class="row games">
-        <h2>{i18n.title}</h2>
-        <form class="form-inline">
-            <input type="text" id="schedule" class="input-small" placeholder="Date">
-            <select id="hourSchedule" class="input-mini">
-                <option>Heure</option>
-            </select>
-            h
-            <select id="minuteSchedule" class="input-mini">
-                <option>minute</option>
-            </select>
-            <select id="teamA" class="input-small">
-                <option>TeamA</option>
-            </select>
-            <select id="teamB" class="input-small">
-                <option>TeamB</option>
-            </select>
-        </form>
-    </div>
     <div id="SelectGame" class="row">
         <h3>{i18n.select_game}</h3>
         <hr>
@@ -43,7 +24,7 @@
             <div class="row hide">
                 {#recs}
                 <div class="span3">
-                    <a href="#" class="club"  ref="{id}">{name}</a>
+                    <a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
                 </div>
                 {/recs}
             </div>
@@ -58,5 +39,18 @@
             <a href="#" class="international" ref="{id}">{name}</a>
         </div>
         {/international}
+    </div>
+    <br/>
+    <div class="hero-unit">
+        <form class="form-inline">
+            <input type="text" class="input-small" placeholder="Email">
+            <input type="password" class="input-small" placeholder="Password">
+            <label class="checkbox">
+                <input type="checkbox">
+                Remember me </label>
+            <button type="submit" class="btn">
+                Sign in
+            </button>
+        </form>
     </div>
 </div>
