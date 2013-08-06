@@ -41,16 +41,25 @@
         {/international}
     </div>
     <br/>
-    <div class="hero-unit">
+    <div class="games hero-unit hide">
         <form class="form-inline">
-            <input type="text" class="input-small" placeholder="Email">
-            <input type="password" class="input-small" placeholder="Password">
-            <label class="checkbox">
-                <input type="checkbox">
-                Remember me </label>
-            <button type="submit" class="btn">
-                Sign in
-            </button>
+            <table>
+                <tr class="hide">
+                    <td>
+                        <input type="date" id="schedule" class="input-medium" placeholder="JJ/MM/YYYY" />
+                    </td>
+                    <td>
+                        <select id="hourSchedule" class="input-mini">
+                        </select>
+                        h
+                        <select id="minuteSchedule" class="input-mini">
+                        </select>
+                    </td>
+                    <td>
+                        Team A - Team B
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>

@@ -48,6 +48,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
                 clubs : clubsList,
                 international : this.international
             }));
+            
+            this.fillSelectElements();
         },
         /*
          * Events of the view
@@ -108,7 +110,9 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             else{
                 // TODO : Display errors
             }
-            console.log(this.teams);
+            
+            $element.parent().addClass('hide');
+            this.addAGame();
         },
         pickANationalTeam : function(e){
             e.preventDefault();
@@ -134,7 +138,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
                 // TODO : Display errors
             }
             
-            console.log(this.teams);
+            this.$(e.currentTarget).parent().addClass('hide');
+            this.addAGame();
         },
         /*
          * Tools functions
@@ -152,6 +157,44 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             });
             
             return team;
+        },
+        fillSelectElements : function(){ // fill the two select elements to pick the schedule of the game
+            var hoursOptions = "";
+            var minutesOptions = "";
+            
+            for(var i = 0; i < 24; i++){
+                hoursOptions += '<option value="' + i + '">' + i + '</option>';
+            }
+            this.$('#hourSchedule').html(hoursOptions);
+            
+            for(var i = 0; i < 60; i = i+5){
+                minutesOptions += '<option value="' + i + '">' + i + '</option>';
+            }
+            this.$('#minuteSchedule').html(minutesOptions);
+        },
+        addAGame : function(){ // Append the game to the table
+            if(this.teams.length == 0){ // Cannot create a game without team
+                return false;
+            }
+            
+            var game = this.teams[0].name;
+            var element = this.$('div.games tr').first();
+            console.log(element);
+            
+            if(this.teams.length == 2){
+                game += ' - ' + this.teams[1].name;
+                this.teams = []; // Empty array, the game was added
+                
+            }else if(this.teams.length == 1){
+                this.$('div.games table').append(element);
+            }
+            
+            this.$('div.games').removeClass('hide');
+            // Update the game with the team (1 or 2)
+            // Select the last td in the last tr (game created)
+            var $tr = this.$('div.games tr').last();
+            $tr.find('td').last().html(game);
+            $tr.removeClass('hide');
         }
     });
 
