@@ -5,10 +5,10 @@
 	$db_pwd = 'mySQLdikwLotoFoot';
     
     /* Development */
-    /*$host = 'localhost';
+    $host = 'localhost';
     $db_name = 'LotoFoot';
     $db_login = 'root';
-    $db_pwd = '';*/
+    $db_pwd = '';
     
 	
 	try{
