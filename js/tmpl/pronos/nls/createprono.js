@@ -2,6 +2,8 @@ define({
     /* Please sort alphabetically */
     "root" : {
         title : "Ajouter un match",
+        Add : "Ajouter",
+        placeholderSchedule : "JJ/MM/AAAA",
         
         clubs : "Clubs",
         international : "Equipes nationales",

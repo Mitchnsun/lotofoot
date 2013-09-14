@@ -1,6 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview',
-        'fmk/urls', 'i18n!tmpl/pronos/nls/createprono', 'i18n!nls/country', 'text!tmpl/pronos/createprono.html'],
-function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) {
+define(['jquery', 'jqueryUI', 'underscore', 'backbone',
+        'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
+        'views/teams/pickTeamView',
+        'i18n!tmpl/pronos/nls/createprono', 'i18n!nls/country', 'text!tmpl/pronos/createprono.html'],
+function($, $UI, _, Backbone, te, LotofootApi, AlertView, urls, PickTeamView, i18n, country, tmpl) {
 
     var ClassView = Backbone.View.extend({
         el : $('#container'),
@@ -10,6 +12,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             
             this.gameType = null; // variable for the type of the game : league, cup, international, etc.
             this.teams = []; // Array with the two teams for the game
+            this.games = []; // Array with the created games
             this.clubs = {}; // List of all the clubs
             this.international = {}; // list of international teams
             
@@ -44,10 +47,16 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             // Rendering the view
             $(this.el).html(te.renderTemplate(tmpl, {
                 i18n : i18n,
-                urls : urls,
+                urls : urls
+            }));
+            
+            this.pickTeamView = new PickTeamView({
+                el : this.$('#pickTeam'),
                 clubs : clubsList,
                 international : this.international
-            }));
+            });
+
+            this.pickTeamView.render();
             
             this.fillSelectElements();
         },
@@ -58,7 +67,9 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             "click #SelectGame a" : "kindOfGame",
             "click #Clubs a.country" : "selectCountry",
             "click a.club" : "pickATeam",
-            "click a.international" : "pickANationalTeam"
+            "click a.international" : "pickANationalTeam",
+            "click button.remove-prono" : "removeProno",
+            "click button.addPronos" : "addPronos"
         },
         kindOfGame : function(e){ // Pick the type of the game to bet
             e.preventDefault();
@@ -141,6 +152,17 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             this.$(e.currentTarget).parent().addClass('hide');
             this.addAGame();
         },
+        removeProno : function(e){
+            var role = $(e.currentTarget).attr('data-role');
+            
+            if(role == 'remove'){ // remove tr element linked to this
+                $(e.currentTarget).parent().parent().remove();
+            }  
+        },
+        addPronos : function(e){
+            var trArray = this.$('.games tr');
+            console.log(this.$('.games tr'));
+        },
         /*
          * Tools functions
          */
@@ -167,26 +189,31 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             }
             this.$('#hourSchedule').html(hoursOptions);
             
-            for(var i = 0; i < 60; i = i+5){
+            for(i = 0; i < 60; i = i+15){
                 minutesOptions += '<option value="' + i + '">' + i + '</option>';
             }
             this.$('#minuteSchedule').html(minutesOptions);
         },
         addAGame : function(){ // Append the game to the table
-            if(this.teams.length == 0){ // Cannot create a game without team
+            if(this.teams.length === 0){ // Cannot create a game without team
                 return false;
             }
             
             var game = this.teams[0].name;
             var element = this.$('div.games tr').first();
-            console.log(element);
-            
+            var index = -1;
+
             if(this.teams.length == 2){
                 game += ' - ' + this.teams[1].name;
+                this.games.push(this.teams);
+                index = this.games.length - 1;
                 this.teams = []; // Empty array, the game was added
+                if(this.pickTeamView){
+                    this.pickTeamView.render();
+                }
                 
             }else if(this.teams.length == 1){
-                this.$('div.games table').append(element);
+                this.$('div.games tbody').append(element[0].outerHTML);
             }
             
             this.$('div.games').removeClass('hide');
@@ -195,6 +222,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl) 
             var $tr = this.$('div.games tr').last();
             $tr.find('td').last().html(game);
             $tr.removeClass('hide');
+            $tr.attr('ref',index);
+            $tr.find('.schedule').datepicker({ dateFormat: "dd-mm-yy" });
         }
     });
 
