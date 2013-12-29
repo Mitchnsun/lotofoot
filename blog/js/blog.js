@@ -17,6 +17,7 @@ $(document).ready(function(){
 // Handle click callback
 var events = {
 	versionButton : function(e){
+		e.preventDefault();
 		var url = 'version/blogv' + $(e.currentTarget).attr('ref') + '.html';
 		$.ajax(url).done(function(data){
 			$('div.content').html(data);
