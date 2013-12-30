@@ -1,4 +1,4 @@
-var urlHTMLDefault = 'version/blogv0.1.html';
+var urlHTMLDefault = 'version/blogv0.2.html';
 
 /* DOM Ready and events function */
 $(document).ready(function(){
