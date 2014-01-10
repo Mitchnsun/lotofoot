@@ -1,4 +1,4 @@
-var version = '0.2'; // Default version
+var version = '0.2'; // version in production
 var urlHTMLDefault = 'version/blogv' + version + '.html';
 
 /* DOM Ready and events function */
@@ -31,12 +31,20 @@ function customDisplayForVersion() {
       $("#pollResults").show();
       $("#pollResults .alert").html(text.alert_localStorage);
       webService.loadPollResult('versionName');
-    }/*else if (localStorage["versionName" + version] !== undefined){
+    }else if (localStorage["versionName" + version] !== undefined){
       $("#formVersionName").remove();
       $("#pollResults").show();
+      $('#pollResults .alert-success').remove();
       webService.loadPollResult('versionName');
-    }*/
+    }
   }
+}
+
+// Build poll results graph
+function buildGraph(results){
+  _.each(results, function(item){
+    $('#pollResults .results-wrapper').append(item.label + " : " + item.recs.length + "<br/>");
+  });
 }
 
 // Handle events callback
@@ -58,7 +66,6 @@ var events = {
       localStorage["versionName" + version] = choice;
       webService.loadPollResult('versionName',choice);
     }
-    // put the choice in local storage to choice once
   }
 };
 
@@ -72,12 +79,33 @@ var webService = {
     });
   },
   loadPollResult : function(type,choice){
-    console.log(type,version,choice);
+    var data = {
+      type : type,
+      version : version,
+      choice : choice
+    };
+    $.ajax({
+      url : 'server/polls/getSetPollVersionName.php',
+      type : 'POST',
+      data : data,
+      success : function(data) {
+        var jsondata;
+        try {// Parse JSON
+            jsondata = $.parseJSON(data);
+        } catch(err) {
+            console.log('Error parse JSON');
+        }
+        buildGraph(jsondata.results);
+      },
+      error : function(xhr, ajaxOptions, thrownError){
+        console.log(xhr, ajaxOptions, thrownError);
+      },
+    });
   }
 };
 
 /*
- * 
+ * Labels bundle
  */
 var text = {
   alert_localStorage : "Vous ne pouvez accédez au sondage, votre navigateur ne supporte pas une fonctionnalité nécessaire pour le bon fonctionnement du vote. Veuillez mettre à jour votre navigateur."
