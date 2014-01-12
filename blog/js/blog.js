@@ -1,4 +1,4 @@
-var version = '0.2'; // version in production
+var version = '0.1'; // version in production
 var urlHTMLDefault = 'version/blogv' + version + '.html';
 
 /* DOM Ready and events function */
@@ -12,7 +12,9 @@ $(document).ready(function() {
 
 });
 
-// Events for each version page
+/*
+ * Events binding by version
+ */
 function bindVersionEvents() {
   if (version == "0.1") {
 
@@ -37,6 +39,7 @@ function customDisplayForVersion() {
       $('#pollResults .alert-success').remove();
       webService.loadPollResult('versionName');
     }
+    buildProgress($('.percentage'));
   }
 }
 
@@ -47,13 +50,31 @@ function buildGraph(results){
   });
 }
 
-// Handle events callback
+// Build progress bar for blog
+function buildProgress(percentages){
+  if(percentages.length > 0){
+    _.each(percentages, function(item){
+      var $item = $(item);
+      var percentage = parseInt($item.html().replace('%',''),10);
+      var width = $item.width();
+      var color = $item.css('color');
+      $item.css('background-color',color);
+      $item.width(width*percentage/100);
+    });
+  }
+}
+
+/*
+ * Events Callback
+ */
 var events = {
   versionButton : function(e) {
     e.preventDefault();
-    version = $(e.currentTarget).attr('ref');
-    var url = 'version/blogv' + version + '.html';
-    webService.loadBlog(url);
+    if (version != $(e.currentTarget).attr('ref')){
+      version = $(e.currentTarget).attr('ref');
+      var url = 'version/blogv' + version + '.html';
+      webService.loadBlog(url);
+    }
   },
   pollForNameVersion : function(e) {
     e.preventDefault();
@@ -69,13 +90,16 @@ var events = {
   }
 };
 
-// All ajax call
+/*
+ * Webservice calls (Ajax)
+ */
 var webService = {
   loadBlog : function(url){
     $.ajax(url).done(function(data) {
       $('div.content').html(data);
       bindVersionEvents();
       customDisplayForVersion();
+      $(window).scrollTop();
     });
   },
   loadPollResult : function(type,choice){
