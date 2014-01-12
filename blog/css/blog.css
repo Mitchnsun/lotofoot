@@ -98,6 +98,9 @@ a:hover, a:focus {
   color: #444;
   line-height: 1.8em;
 }
+.post p.details {
+  display: none;
+}
 .post-meta {
   color: #999;
   font-size: 90%;
@@ -124,6 +127,20 @@ a:hover, a:focus {
   background: #df2d4f;
 }
 
+/* Text Color */
+.green {
+  color: #5aba59;
+}
+.yellow {
+  color: #E7DF12;
+}
+.orange {
+  color: orange;
+}
+.red {
+  color : #F01711;
+}
+
 .post-images {
   margin: 1em 0;
 }
@@ -132,6 +149,10 @@ a:hover, a:focus {
   margin-left: 1em;
   color: #fff;
   text-shadow: 0 1px 1px #333;
+}
+
+.pure-table td, .pure-table th{
+  vertical-align: middle;
 }
 
 .footer {
@@ -146,7 +167,7 @@ a:hover, a:focus {
   background: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 850px) {
   .sidebar {
     width: 100%;
     position: relative;
@@ -164,8 +185,7 @@ a:hover, a:focus {
     padding: 0;
   }
 }
-
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .content {
     padding: 2em 1em 0;
   }
@@ -234,4 +254,54 @@ a:hover, a:focus {
 }
 #pollResults .alert {
   display: block;
+}
+
+/* Progress */
+.progress {
+  padding-left: 130px;
+}
+.progress li {
+  margin: 5px;
+}
+.percentage {
+  display: inline;
+  position: absolute;
+  left: 28%;
+  font-weight: bold;
+  padding-left: 2px;
+  width: 100px;
+  text-shadow: 1px 1px 2px #000000, 0 0 1em #888888, 0 0 0.2em #888888;
+}
+@media (max-width: 1268px) {
+  .percentage {
+    left: 30%;
+  }
+}
+@media (max-width: 850px) {
+  .percentage {
+    left: 50px;
+  }
+  table.standing {
+    font-size: 0.7em;
+  }
+}
+@media (max-width: 600px) {
+  .percentage {
+    left: 15px;
+  }
+}
+@media (max-width: 550px) {
+  .smallDevice {
+    display:none;
+  }
+}
+@media (max-width: 480px) {
+  .xsmallDevice {
+    display:none;
+  }
+}
+@media (max-width: 400px) {
+  .xxsmallDevice {
+    display:none;
+  }
 }
