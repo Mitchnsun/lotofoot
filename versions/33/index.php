@@ -63,6 +63,9 @@ try {
 							<li>
 								<a href="pronos.php">Pronostics</a>
 							</li>
+							<li>
+                <a href="/lotofoot/blog">Blog</a>
+              </li>
 							<!--<li><a href="#">Stats ML</a></li>
 							<li><a href="#">Profil</a></li>-->
 							<!--<li class="dropdown">

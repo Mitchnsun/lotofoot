@@ -65,6 +65,9 @@
             <ul class="nav">
               <li><a href="./">Home</a></li>
               <li class="active"><a href="pronos.php">Pronostics</a></li>
+              <li>
+                <a href="/lotofoot/blog">Blog</a>
+              </li>
             </ul>
             <!--<div class="nav-collapse pull-right">
               Logout
