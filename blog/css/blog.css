@@ -126,6 +126,9 @@ a:hover, a:focus {
 .post-category-red {
   background: #df2d4f;
 }
+.post-category-yellow {
+  background: #DBCC1C;
+}
 
 /* Text Color */
 .green {
