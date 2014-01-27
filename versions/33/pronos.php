@@ -78,7 +78,17 @@
     </div>
 
     <div class="container">
-
+      <div class="ad" style="text-align: center">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Blog Lotofoot -->
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-4388532262126714"
+             data-ad-slot="2568308015"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
 		<h2>Derniers pronostics</h2>
