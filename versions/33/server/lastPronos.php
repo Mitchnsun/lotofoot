@@ -12,7 +12,7 @@
 
 	$today = time();
 	
-	$query = sprintf("SELECT * FROM pronos WHERE userid = '%d' ORDER BY prono_date DESC, id_prono DESC",$userid);
+	$query = sprintf("SELECT * FROM pronos WHERE userid = '%d' ORDER BY prono_date DESC, id_prono DESC LIMIT 25",$userid);
 	foreach ($bdd -> query($query) as $row) {
 		echo '<tr>';
 		echo '<td class="schedule">'.date('d/m/Y',$row['prono_date']).'</td>';

@@ -110,7 +110,7 @@ try {
 					Parier
 				</button>
 				<hr/>
-				<h2>Mes derniers pronostics</h2>
+				<h2>Mes 25 derniers pronostics</h2>
 				<hr/>
 				<table id="lastPronos" class="table">
 					<?php

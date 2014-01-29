@@ -97,14 +97,14 @@
 			<?php
 				//$games tableau à 2 dimensions contenant les matchs pronostiqués
 							
-				$query = "SELECT * FROM games g INNER JOIN teams t ON g.id_teamA = t.id_team ORDER BY g.schedule DESC";
+				$query = "SELECT * FROM games g INNER JOIN teams t ON g.id_teamA = t.id_team ORDER BY g.schedule DESC LIMIT 25";
 				foreach ($bdd -> query($query) as $row) {
 					$games[$row['id_game']]['id_game'] = $row['id_game'];
 					$games[$row['id_game']]['schedule'] = $row['schedule'];
 					$games[$row['id_game']]['scoreA'] = $row['scoreA'];
 					$games[$row['id_game']]['teamA'] = $row['name'];
 				}
-				$query = "SELECT * FROM games g INNER JOIN teams t ON g.id_teamB = t.id_team ORDER BY g.schedule DESC";
+				$query = "SELECT * FROM games g INNER JOIN teams t ON g.id_teamB = t.id_team ORDER BY g.schedule DESC LIMIT 25";
 				foreach ($bdd -> query($query) as $row) {
 					$games[$row['id_game']]['teamB'] = $row['name'];
 					$games[$row['id_game']]['scoreB'] = $row['scoreB'];
