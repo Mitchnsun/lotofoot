@@ -189,7 +189,7 @@ try {
 						<li><span class="badge badge-warning">2</span> Vincent</li>
 						<li><span class="badge badge-warning">3</span> Philippe</li>
 						</ul>-->
-						Ce module n'est pas encore fonctionnel, veuillez patienter.
+						Ce module n'est pas encore fonctionnel, veuillez patienter. Pour plus d'informations sur l'avancement, consulter le <a href="/lotofoot/blog">blog</a>
 					</p>
 					<p>
 						<a class="btn" href="#">Détails &raquo;</a>
