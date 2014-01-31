@@ -11,6 +11,8 @@ $(document).ready(function() {
   //General events
   $('.version-button').on("click", events.versionButton);
   $('#logElement').on("click", events.loginLogout);
+  $('#logForm').on('submit', events.login);
+  $('#logout button').on('click', webService.logout);
   $(document).on('click', events.hidePopUp);
 
 });
@@ -81,14 +83,14 @@ var events = {
   },
   loginLogout : function(e){
     $('#logContainer').show();
-    var logBox = $(e.currentTarget).parent();
-    if(logBox.hasClass('off')){
-      logBox.removeClass('off').addClass('on');
-      $(e.currentTarget).html('On');
-    }else{
-      logBox.removeClass('on').addClass('off');
-      $(e.currentTarget).html('Off');
-    }
+  },
+  login : function(e){
+    e.preventDefault();
+    var param = {
+      userEmail :$('#loginUser').val(),
+      userPwd : $('#loginPwd').val()
+    };
+    webService.login(param);
   },
   pollForNameVersion : function(e) {
     e.preventDefault();
@@ -161,7 +163,55 @@ var webService = {
             return false;
         }
         if(jsondata.logged){
-          $('#logElement').removeClass('off').addClass('on').html('On');
+          $('#logBox').removeClass('off').addClass('on');
+          $('#logElement').html('On');
+        }
+      },
+      error : function(xhr, ajaxOptions, thrownError){
+        console.log(xhr, ajaxOptions, thrownError);
+      },
+    });
+  },
+  login : function(param){
+    $.ajax({
+      url : 'server/authentication/login.php',
+      type : 'POST',
+      data : param,
+      success : function(data) {
+        var jsondata;
+        try {// Parse JSON
+            jsondata = $.parseJSON(data);
+        } catch(err) {
+            console.log('Error parse JSON');
+            return false;
+        }
+        if(jsondata.user !== undefined){
+          $('#logBox').removeClass('off').addClass('on');
+          $('#logElement').html('On');
+          $('#logContainer').hide();
+        }
+      },
+      error : function(xhr, ajaxOptions, thrownError){
+        console.log(xhr, ajaxOptions, thrownError);
+      },
+    });
+  },
+  logout : function(e){
+    $.ajax({
+      url : 'server/authentication/logout.php',
+      type : 'POST',
+      success : function(data) {
+        var jsondata;
+        try {// Parse JSON
+            jsondata = $.parseJSON(data);
+        } catch(err) {
+            console.log('Error parse JSON');
+            return false;
+        }
+        if(jsondata.status == 200){
+          $('#logBox').removeClass('on').addClass('off');
+          $('#logElement').html('Off');
+          $('#logContainer').hide();
         }
       },
       error : function(xhr, ajaxOptions, thrownError){
