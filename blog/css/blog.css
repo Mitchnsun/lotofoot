@@ -36,8 +36,10 @@ a:hover, a:focus {
 .brand-title, .brand-tagline {
   margin: 0;
 }
-.brand-title {
+.brand-title a{
   text-transform: uppercase;
+  color:inherit;
+  text-decoration: none;
 }
 .brand-tagline {
   font-weight: 300;
