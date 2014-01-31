@@ -76,7 +76,7 @@ a:hover, a:focus {
   letter-spacing: 0.1em;
 }
 
-.content {
+#content {
   padding: 2em 3em 0;
 }
 
@@ -189,7 +189,7 @@ a:hover, a:focus {
   }
 }
 @media (max-width: 600px) {
-  .content {
+  #content {
     padding: 2em 1em 0;
   }
 }
@@ -275,6 +275,30 @@ a:hover, a:focus {
   width: 100px;
   text-shadow: 1px 1px 2px #000000, 0 0 1em #888888, 0 0 0.2em #888888;
 }
+
+/* Login Element */
+#logElement{
+  cursor:pointer;
+  font-size:0.7em;
+  position:absolute;
+  top:5px;
+  left:5px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+#logElement.off{
+  color:#dd514c;
+  border: 2px solid #dd514c;
+  padding: 2px 5px 2px 20px;
+}
+#logElement.on{
+  color:#5aba59;
+  border: 2px solid #5aba59;
+  padding: 2px 20px 2px 5px;
+}
+
+/* Responsive */
 @media (max-width: 1268px) {
   .percentage {
     left: 30%;

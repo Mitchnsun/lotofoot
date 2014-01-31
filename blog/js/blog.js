@@ -9,6 +9,7 @@ $(document).ready(function() {
 
   //General events
   $('.version-button').on("click", events.versionButton);
+  $('#logElement').on("click", events.loginLogout);
 
 });
 
@@ -76,6 +77,16 @@ var events = {
       webService.loadBlog(url);
     }
   },
+  loginLogout : function(e){
+    var element = $(e.currentTarget);
+    if(element.hasClass('off')){
+      element.removeClass('off').addClass('on');
+      element.html('On');
+    }else{
+      element.removeClass('on').addClass('off');
+      element.html('Off');
+    }
+  },
   pollForNameVersion : function(e) {
     e.preventDefault();
     var choice = $("#formVersionName input:checked").val();
@@ -96,7 +107,7 @@ var events = {
 var webService = {
   loadBlog : function(url){
     $.ajax(url).done(function(data) {
-      $('div.content').html(data);
+      $('#content').html(data);
       bindVersionEvents();
       customDisplayForVersion();
       $(window).scrollTop();
