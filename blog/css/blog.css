@@ -280,22 +280,49 @@ a:hover, a:focus {
 #logElement{
   cursor:pointer;
   font-size:0.7em;
-  position:absolute;
+  position:fixed;
   top:5px;
   left:5px;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
 }
-#logElement.off{
+.off #logElement{
   color:#dd514c;
   border: 2px solid #dd514c;
   padding: 2px 5px 2px 20px;
 }
-#logElement.on{
+.on #logElement{
   color:#5aba59;
   border: 2px solid #5aba59;
   padding: 2px 20px 2px 5px;
+}
+#logContainer{
+  display:none;
+}
+
+.on #logForm{
+  display:none;
+}
+.off #logout{
+  display:none;
+}
+.logBox{
+  background-color:rgba(42, 58, 109, 0.8);
+  position:fixed;
+  top:15px;
+  left:20px;
+  padding:10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 3px 3px 10px #000000;
+  -moz-box-shadow: 3px 3px 10px #000000;
+  box-shadow: 3px 3px 10px #000000;
+}
+.logBox button{
+  font-size: 85%;
+  background-color:rgb(103, 103, 180);
 }
 
 /* Responsive */

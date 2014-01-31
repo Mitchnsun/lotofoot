@@ -5,11 +5,13 @@ var urlHTMLDefault = 'version/blogv' + version + '.html';
 $(document).ready(function() {
 
   // Initialize
+  webService.checkLogin();
   webService.loadBlog(urlHTMLDefault);
 
   //General events
   $('.version-button').on("click", events.versionButton);
   $('#logElement').on("click", events.loginLogout);
+  $(document).on('click', events.hidePopUp);
 
 });
 
@@ -78,13 +80,14 @@ var events = {
     }
   },
   loginLogout : function(e){
-    var element = $(e.currentTarget);
-    if(element.hasClass('off')){
-      element.removeClass('off').addClass('on');
-      element.html('On');
+    $('#logContainer').show();
+    var logBox = $(e.currentTarget).parent();
+    if(logBox.hasClass('off')){
+      logBox.removeClass('off').addClass('on');
+      $(e.currentTarget).html('On');
     }else{
-      element.removeClass('on').addClass('off');
-      element.html('Off');
+      logBox.removeClass('on').addClass('off');
+      $(e.currentTarget).html('Off');
     }
   },
   pollForNameVersion : function(e) {
@@ -97,6 +100,13 @@ var events = {
       $("#pollResults").show();
       localStorage["versionName" + version] = choice;
       webService.loadPollResult('versionName',choice);
+    }
+  },
+  hidePopUp : function(e){
+    var logBox = $('#logBox');
+    
+    if(!logBox.is(e.target) && logBox.has(e.target).length === 0){
+      $('#logContainer').hide();
     }
   }
 };
@@ -129,8 +139,30 @@ var webService = {
             jsondata = $.parseJSON(data);
         } catch(err) {
             console.log('Error parse JSON');
+            return false;
         }
         buildGraph(jsondata.results);
+      },
+      error : function(xhr, ajaxOptions, thrownError){
+        console.log(xhr, ajaxOptions, thrownError);
+      },
+    });
+  },
+  checkLogin : function(){
+    $.ajax({
+      url : 'server/authentication/checkLogin.php',
+      type : 'POST',
+      success : function(data) {
+        var jsondata;
+        try {// Parse JSON
+            jsondata = $.parseJSON(data);
+        } catch(err) {
+            console.log('Error parse JSON');
+            return false;
+        }
+        if(jsondata.logged){
+          $('#logElement').removeClass('off').addClass('on').html('On');
+        }
       },
       error : function(xhr, ajaxOptions, thrownError){
         console.log(xhr, ajaxOptions, thrownError);

@@ -44,10 +44,27 @@
 			</div>
 		</div>
 		
-		<div id="logElement" class="off">
-		  Off
+		<div id="logBox" class="off">
+		  <div id="logElement">
+        Off
+      </div>
+      <div id="logContainer">
+        <form id="logForm" class="pure-form pure-form-aligned logBox">
+          <div class="pure-control-group">
+            <input type="email" name="email" placeholder="Email"/>
+          </div>
+          <div class="pure-control-group">
+            <input type="password" name="password" placeholder="Mot de passe"/>
+          </div>
+          <div class="pure-control-group">
+            <button type="submit" class="pure-button pure-button-primary">Connexion</button>
+          </div>
+        </form>
+        <div id="logout" class="logBox">
+          <button type="button" class="pure-button pure-button-primary">Déconnexion</button>
+        </div>
+      </div>
 		</div>
-		
 		<!-- Javascript -->
 		<script src="js/jquery-1.10.2.min.js"></script>
 		<script src="js/underscore.js"></script>
