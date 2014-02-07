@@ -30,15 +30,13 @@ function bindVersionEvents() {
 
 // Manage HTML DOM for each version page
 function customDisplayForVersion() {
+  var oneDayToSeconds = 24*60*60;
   if (version == "0.1") {
 
   } else if (version == "0.2") {
-    if ( typeof localStorage == undefined) {
-      $("#formVersionName").remove();
-      $("#pollResults").show();
-      $("#pollResults .alert").html(text.alert_localStorage);
-      webService.loadPollResult('versionName');
-    }else if (localStorage["versionName" + version] !== undefined){
+    var showPollResults = localStorage["versionName" + version] !== undefined
+        && parseInt(localStorage["voteTime"],10) + oneDayToSeconds > Date.now();
+    if (showPollResults){
       $("#formVersionName").remove();
       $("#pollResults").show();
       $('#pollResults .alert-success').remove();
@@ -49,10 +47,16 @@ function customDisplayForVersion() {
 }
 
 // Build poll results graph
-function buildGraph(results){
+function buildGraph(status,results){
   _.each(results, function(item){
     $('#pollResults .results-wrapper').append(item.label + " : " + item.recs.length + "<br/>");
   });
+  if(status != 200){
+    $('#pollResults p.alert-success').removeClass('alert-success')
+                                     .addClass('alert-error')
+                                     .html(text[status] + '<br/>' + text["alert_pollsErrors" + status]);
+    localStorage["voteTime"] = status == 401 ? 0 : Date.now();
+  }
 }
 
 // Build progress bar for blog
@@ -101,6 +105,7 @@ var events = {
       $("#formVersionName").remove();
       $("#pollResults").show();
       localStorage["versionName" + version] = choice;
+      localStorage["voteTime"] = Date.now();
       webService.loadPollResult('versionName',choice);
     }
   },
@@ -117,5 +122,9 @@ var events = {
  * Labels bundle
  */
 var text = {
-  alert_localStorage : "Vous ne pouvez accédez au sondage, votre navigateur ne supporte pas une fonctionnalité nécessaire pour le bon fonctionnement du vote. Veuillez mettre à jour votre navigateur."
+  alert_localStorage : "Vous ne pouvez accédez au sondage, votre navigateur ne supporte pas une fonctionnalité nécessaire pour le bon fonctionnement du vote. Veuillez mettre à jour votre navigateur.",
+  alert_pollsErrors401 : "Votre vote n'a pu être pris en compte, Veuillez réessayer.",
+  alert_pollsErrors403 : "Votre vote n'a pu être pris en compte car vous avez déjà voté dans les dernières 24h.",
+  "401" : "Vous devez être authentifié pour accéder à cette ressource.",
+  "403" : "Vous n'avez pas accès à cette ressource"
 };

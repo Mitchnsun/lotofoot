@@ -45,7 +45,7 @@ var webService = {
       choice : choice
     };
     performWS('POST','server/polls/getSetPollVersionName.php',data,function(jsondata){
-      buildGraph(jsondata.results);
+      buildGraph(jsondata.status,jsondata.results);
     });
   },
   checkLogin : function(){

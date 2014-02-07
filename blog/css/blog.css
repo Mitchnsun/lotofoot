@@ -227,30 +227,16 @@ a:hover, a:focus {
      -moz-border-radius: 4px;
           border-radius: 4px;
 }
-.alert,
-.alert h4 {
-  color: #c09853;
-}
-.alert h4 {
-  margin: 0;
-}
 .alert-success {
   color: #468847;
   background-color: #dff0d8;
   border-color: #d6e9c6;
-}
-.alert-success h4 {
-  color: #468847;
 }
 .alert-danger,
 .alert-error {
   color: #b94a48;
   background-color: #f2dede;
   border-color: #eed3d7;
-}
-.alert-danger h4,
-.alert-error h4 {
-  color: #b94a48;
 }
 
 /* Poll form */
