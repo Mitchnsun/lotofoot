@@ -55,7 +55,9 @@ function buildGraph(status,results){
     $('#pollResults p.alert-success').removeClass('alert-success')
                                      .addClass('alert-error')
                                      .html(text[status] + '<br/>' + text["alert_pollsErrors" + status]);
-    localStorage["voteTime"] = status == 401 ? 0 : Date.now();
+  }
+  if (status != 401) {
+    localStorage["voteTime"] = Date.now();
   }
 }
 
@@ -105,7 +107,6 @@ var events = {
       $("#formVersionName").remove();
       $("#pollResults").show();
       localStorage["versionName" + version] = choice;
-      localStorage["voteTime"] = Date.now();
       webService.loadPollResult('versionName',choice);
     }
   },
