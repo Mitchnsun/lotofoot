@@ -1,0 +1,37 @@
+define({
+    /* Please sort alphabetically */
+    "root" : {
+       AL : "ALbanie",
+       AR : "Argentine",
+       AU : "Autriche",
+       BE : "Belgique",
+       BG : "Bulgarie",
+       BR : "Brésil",
+       BY : "Biélorussie",
+       CH : "Suisse",
+       CY : "Chypre",
+       DE : "Allemagne",
+       DK : "Danemark",
+       EN : "Angleterre",
+       ES : "Espagne",
+       FI : "Finlande",
+       FR : "France",
+       GE : "Georgie",
+       GR : "Grèce",
+       HR : "Croatie",
+       IT : "Italie",
+       NL : "Pays-Bas",
+       NO : "Norvège",
+       OZ : "Australie",
+       PO : "Portugal",
+       RO : "Roumanie",
+       RT : "République Tchèque",
+       RU : "Russie",
+       SC : "Ecosse",
+       SI : "Slovénie",
+       SW : "Suède",
+       TU : "Turquie",
+       UK : "Ukraine",
+       UR : "Uruguay"
+    }
+});

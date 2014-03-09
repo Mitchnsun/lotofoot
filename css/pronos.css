@@ -1,0 +1,28 @@
+.teamA{
+	text-align:right !important;
+	vertical-align:middle !important;
+}
+.teamB{
+	vertical-align:middle !important;
+}
+.scoreA{
+	text-align:center !important;
+}
+.scoreB{
+	text-align:center !important;
+}
+.separation{
+	text-align:center !important;
+	line-height:30px !important;
+}
+.schedule{
+	vertical-align:middle !important;
+	font-size: 15px;
+}
+.scheduleTime{
+	vertical-align:middle !important;
+	font-size: 15px;
+}
+.buttons{
+    vertical-align:middle !important;
+}

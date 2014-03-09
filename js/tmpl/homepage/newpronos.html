@@ -1,0 +1,49 @@
+<h2>{i18n.title}</h2>
+<table id="pronosToDo" class="table">
+<tbody>
+{#pronos}
+    <tr class="rowGame" ref="{id}">
+        <td class="schedule">{date}</td>
+        <td class="scheduleTime">{schedule}</td>
+        <td class="teamA"><label class="control-label" for="prono{teamA.id}{id}">{teamA.name}</label></td>
+        <td class="scoreA">
+            <select class="input-mini selectScore" id="prono{teamA.id}{id}">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </td>
+        <td class="separation"> <strong> - </strong> </td>
+        <td class="scoreB">
+            <select class="input-mini selectScore" id="prono{teamB.id}{id}">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </td>
+        <td class="teamB"><label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label></td>
+        <td class="buttons">
+            <button class="btn btn-success btn-mini" type="button" data-role="bet" data-ref="{id}"><i class="icon-ok"></i></button>
+            &nbsp;
+            <button class="btn btn-danger btn-mini" type="button" data-role="nobet" data-ref="{id}"><i class="icon-remove"></i></button>
+        </td>
+    </tr>
+{/pronos}
+</tbody>
+</table>

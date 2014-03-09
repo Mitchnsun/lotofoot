@@ -5,6 +5,7 @@
 	<projects>
 	</projects>
 	<buildSpec>
+<<<<<<< HEAD
 		<buildCommand>
 			<name>com.aptana.ide.core.unifiedBuilder</name>
 			<arguments>
@@ -13,5 +14,9 @@
 	</buildSpec>
 	<natures>
 		<nature>com.aptana.projects.webnature</nature>
+=======
+	</buildSpec>
+	<natures>
+>>>>>>> 6a6cca882099c981c0f64ffe3fcc5d4c32c631fe
 	</natures>
 </projectDescription>

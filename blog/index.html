@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Matthieu Compérat">
+		<title>Lotofoot Blog</title>
+		
+		<link rel="icon" type="image/gif" href="img/ico_FootballLarge.gif" />
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="css/pure-min.css">
+		<link rel="stylesheet" href="css/blog.css">
+		
+	</head>
+
+	<body>
+		<div class="pure-g-r" id="layout">
+			<div class="sidebar pure-u">
+				<header class="header">
+					<hgroup>
+						<h1 class="brand-title"><a href="/lotofoot">Lotofoot</a></h1>
+						<h2 class="brand-tagline">Son avancement</h2>
+					</hgroup>
+
+					<nav class="nav">
+						<ul class="nav-list">
+							<li class="nav-item">
+								<a class="pure-button version-button" ref="0.2" href="#">v0.2</a>
+							</li>
+							<li class="nav-item">
+								<a class="pure-button version-button" ref="0.1" href="#">v0.1</a>
+							</li>
+						</ul>
+					</nav>
+				</header>
+			</div>
+
+			<div class="pure-u-1">
+				<div id="content">
+					<!-- A wrapper for all the blog posts -->
+				</div>
+			</div>
+		</div>
+		
+		<div id="logBox" class="off">
+		  <div id="logElement">
+        Off
+      </div>
+      <div id="logContainer">
+        <form id="logForm" class="pure-form pure-form-aligned logBox">
+          <div class="pure-control-group">
+            <input type="email" name="email" id="loginUser" placeholder="Email"/>
+          </div>
+          <div class="pure-control-group">
+            <input type="password" name="password" id="loginPwd" placeholder="Mot de passe"/>
+          </div>
+          <div class="pure-control-group">
+            <button type="submit" class="pure-button pure-button-primary">Connexion</button>
+          </div>
+        </form>
+        <div id="logout" class="logBox">
+          <button type="button" class="pure-button pure-button-primary">Déconnexion</button>
+        </div>
+      </div>
+		</div>
+		<!-- Javascript -->
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/underscore.js"></script>
+		<script src="js/blogApi.js"></script>
+		<script src="js/blog.js"></script>
+		
+		<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36979515-1']);
+      _gaq.push(['_setDomainName', 'mcomper.at']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+		
+	</body>
+</html>
