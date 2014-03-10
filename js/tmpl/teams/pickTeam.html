@@ -1,41 +1,41 @@
 <div id="SelectGame" class="row">
-    <h3>{i18n.select_game}</h3>
-    <hr>
-    <div class="span3">
-        <a href="#"  ref="{i18n.ref_league_game}">{i18n.league_game}</a>
-    </div>
-    <div class="span3">
-        <a href="#"  ref="{i18n.ref_cup_game}">{i18n.cup_game}</a>
-    </div>
-    <div class="span3">
-        <a href="#"  ref="{i18n.ref_europa_game}">{i18n.europa_game}</a>
-    </div>
-    <div class="span3">
-        <a href="#"  ref="{i18n.ref_international_game}">{i18n.international_game}</a>
-    </div>
+	<h3>{i18n.select_game}</h3>
+	<hr>
+	<div class="span3">
+		<a href="#"  ref="{i18n.ref_league_game}">{i18n.league_game}</a>
+	</div>
+	<div class="span3">
+		<a href="#"  ref="{i18n.ref_cup_game}">{i18n.cup_game}</a>
+	</div>
+	<div class="span3">
+		<a href="#"  ref="{i18n.ref_europa_game}">{i18n.europa_game}</a>
+	</div>
+	<div class="span3">
+		<a href="#"  ref="{i18n.ref_international_game}">{i18n.international_game}</a>
+	</div>
 </div>
 <div id="Clubs" class="row hide">
-    <h3>{i18n.clubs}</h3>
-    <hr>
-    {#clubs}
-    <div class="span3">
-        <a href="#" class="country" ref="{id}">{name}</a>
-        <div class="row hide">
-            {#recs}
-            <div class="span3">
-                <a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
-            </div>
-            {/recs}
-        </div>
-    </div>
-    {/clubs}
+	<h3>{i18n.clubs}</h3>
+	<hr>
+	{#clubs}
+	<div class="span3">
+		<a href="#" class="country" ref="{id}">{name}</a>
+		<div class="row hide">
+			{#recs}
+			<div class="span3">
+				<a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
+			</div>
+			{/recs}
+		</div>
+	</div>
+	{/clubs}
 </div>
 <div id="International" class="row hide">
-    <h3>{i18n.international}</h3>
-    <hr>
-    {#international}
-    <div class="span3">
-        <a href="#" class="international" ref="{id}">{name}</a>
-    </div>
-    {/international}
+	<h3>{i18n.international}</h3>
+	<hr>
+	{#international}
+	<div class="span3">
+		<a href="#" class="international" ref="{id}">{name}</a>
+	</div>
+	{/international}
 </div>
