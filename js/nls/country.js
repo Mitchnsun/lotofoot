@@ -1,7 +1,7 @@
 define({
     /* Please sort alphabetically */
     "root" : {
-       AL : "ALbanie",
+       AL : "Albanie",
        AR : "Argentine",
        AU : "Autriche",
        BE : "Belgique",
@@ -12,6 +12,7 @@ define({
        CY : "Chypre",
        DE : "Allemagne",
        DK : "Danemark",
+       EC : "Equateur",
        EN : "Angleterre",
        ES : "Espagne",
        FI : "Finlande",
