@@ -1,20 +1,25 @@
 // Filename: app.js
-define(['router', 'models/user', 'models/browserStorage'],
-function(Router, User, BrowserStorage) {
+define(['router', 'models/user', 'models/browserStorage', 'models/teams'],
+function(Router, User, BrowserStorage, Teams) {
 
-	var initialize = function() {
+  var initialize = function() {
 
-		var browserStorage = new BrowserStorage();
-	    var user = new User();
-	    
-	    user.retrieveSession();
-	    $.when(user.promise).done(function(){ // Wait if we can found a session for the user
-			// Pass in our Router module and call it's initialize function
-			Router.initialize({user : user, browserStorage : browserStorage});
-		});
-	};
+    var browserStorage = new BrowserStorage();
+    var user = new User();
+    var teams = new Teams();
 
-	return {
-		initialize : initialize
-	};
-});
+    user.retrieveSession();
+    $.when(user.promise, teams.promise).done(function() {// Wait if we can found a session for the user
+     // Pass in our Router module and call it's initialize function
+      Router.start({
+        user : user,
+        browserStorage : browserStorage,
+        teams : teams
+      });
+    });
+  };
+
+  return {
+    initialize : initialize
+  };
+}); 
