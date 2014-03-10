@@ -1,0 +1,32 @@
+<form class="form-inline">
+  <table>
+    <tbody>
+      {#games}
+      <tr>
+        <td>
+          <button class="btn btn-danger btn-mini remove-prono" type="button" data-role="remove">
+            <i class="icon-remove"></i>
+          </button>
+        </td>
+        <td>
+          <input type="text" name="schedule" class="input-medium schedule" placeholder="{i18n.placeholderSchedule}" />
+        </td>
+        <td>
+          <select name="hours" class="input-mini hourSchedule">
+            {#hours}
+              <option value="{.}">{.}</option>
+            {/hours}
+          </select> h
+          <select name="minutes" class="input-mini minuteSchedule">
+            {#minutes}
+              <option value="{.}">{.}</option>
+            {/minutes}
+          </select>
+        </td>
+        <td> {teamA.name} - {teamB.name} </td>
+      </tr>
+      {/games}
+    </tbody>
+  </table>
+  <input type="submit" class="btn btn-success addPronos" value="{i18n.Add}" />
+</form>
