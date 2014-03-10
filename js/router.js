@@ -14,15 +14,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
     });
     
     /* Initialize */
-    var app_router = new AppRouter();
-    
-    // Global event bus
-    this.eventBus = EventBus.create();
-    app_router.listenTo(this.eventBus, 'url:change', function(e) {
-      app_router.navigate(e.url, {
-        trigger : true
-      });
-    }); 
+    var app_router = new AppRouter(); 
 
     var start = function(options) {
   
@@ -32,6 +24,14 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
       this.user = options.user;
       this.browserStorage = options.browserStorage;
       this.teams = options.teams;
+      
+      // Global event bus
+	    this.eventBus = EventBus.create();
+	    app_router.listenTo(this.eventBus, 'url:change', function(e) {
+	      app_router.navigate(e.url, {
+	        trigger : true
+	      });
+	    });
   
       // Set header and footer
       var headerView = new HeaderView({user : this.user});
