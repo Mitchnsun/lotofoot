@@ -1,13 +1,14 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
         'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/createpronoview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView) {
+        'views/pronos/createpronoview', 'views/pronos/pronos'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView, PronosView) {
 
     var AppRouter = Backbone.Router.extend({
       routes : _.object([
         [urls.HOME, 'homepage'],
         [urls.LOGIN, 'login'],
+        [urls.PRONOS, 'pronos'],
         [urls.CREATE_PRONO, 'createprono'],
         ['*action', 'defaultAction']
       ])
@@ -71,7 +72,20 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         if (self.user.checkAuth()) {
           createpronoview.render();
         } else {
-          self.user.set('urlFrom', urls.HOME);
+          self.user.set('urlFrom', urls.CREATE_PRONO);
+          self.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+        }
+      });
+      
+      app_router.on('route:pronos', function() {
+        var pronosview = new PronosView({
+          user : self.user,
+          teams : self.teams
+        });
+        if (self.user.checkAuth()) {
+          pronosview.render();
+        } else {
+          self.user.set('urlFrom', urls.PRONOS);
           self.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
         }
       });
