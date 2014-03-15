@@ -23,32 +23,42 @@ function($, $UI, _, Backbone, te, i18n, tmpl) {
         dateFormat : "dd/mm/yy"
       }); 
     },
+    setData : function(params){
+      this.games = params.games;
+      this.selectedTeam = params.team;
+    },
     /*
      * Events of the view
      */
     events : {
-      "change input.schedule" : "updateSchedule",
+      "change input.schedule, select" : "updateSchedule",
       "click button.remove-prono" : "removeProno",
       "submit form" : "addPronos"
     },
     updateSchedule : function(e){
-      console.log(_.indexOf(this.$('input.schedule'),this.$(e.currentTarget)),this.$('input.schedule'),this.$(e.currentTarget));
+    	var id = this.$(e.currentTarget).attr('data-ref');
+    	var game = this.games.get(id);
+    	
+    	var inputDate = this.$('#'+id).find('input.schedule');
+    	game.set('date', $(inputDate).val());
+    	
+    	var inputTime = this.$('#'+id).find('select');
+    	game.set('hour', $(inputTime[0]).val());
+    	game.set('minute', $(inputTime[1]).val());
     },
     removeProno : function(e) {
       var role = $(e.currentTarget).attr('data-role');
-
+			var id = $(e.currentTarget).attr('data-ref');
+			var game = this.games.get(id);
+			
       if (role == 'remove') {// remove tr element linked to this
-        $(e.currentTarget).parent().parent().remove();
+        $('#'+id).remove();
+        this.games.remove(game);
       }
     },
     addPronos : function(e){
       e.preventDefault();
-      console.log(this.$('form').serializeArray());
-    },
-    setData : function(params){
-      this.games = params.games;
-      this.selectedTeam = params.team;
-      console.log(this.games.toJSON(),this.selectedTeam);
+      console.log(this.games.toJSON());
     }
   });
   

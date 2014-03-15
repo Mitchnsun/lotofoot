@@ -3,14 +3,19 @@ function($, _, Backbone) {
     
     var Model = Backbone.Model.extend({
     defaults : {
+    	id : null,
       teamA : null,
       teamB : null,
-      schedule : 0,
+      date : '',
+      hour : '',
+      minute : '',
       addBy : 0,
+      addedAt : 0,
       type : null /* variable for the type of the game : league, cup, international, etc. */
     },
     initialize : function(){
-      this.set('schedule', Date.now());
+      this.set('addedAt', Date.now());
+      this.set('id', this.cid);
     },
     ready : function(){ // Check if the two teams
       if ((this.get('teamA') && this.get('teamB')) != null) {

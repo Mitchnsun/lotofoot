@@ -1,25 +1,29 @@
 <form class="form-inline">
   <table>
     <tbody>
-      {#games}
-      <tr>
+      {#games:i18n}
+      <tr id='{id}'>
         <td>
-          <button class="btn btn-danger btn-mini remove-prono" type="button" data-role="remove">
+          <button class="btn btn-danger btn-mini remove-prono" type="button" data-role="remove" data-ref='{id}'>
             <i class="icon-remove"></i>
           </button>
         </td>
         <td>
-          <input type="text" name="schedule" class="input-medium schedule" placeholder="{i18n.placeholderSchedule}" />
+          <input type="text" name="schedule" 
+          		class="input-medium schedule" data-ref='{id}' 
+          		placeholder="{placeholderSchedule}" value="{date}" />
         </td>
         <td>
-          <select name="hours" class="input-mini hourSchedule">
+          <select name="hours" class="input-mini hourSchedule" data-ref='{id}'>
+          	{?hour}<option value="{hour}">{hour}</option>{/hour}
             {#hours}
               <option value="{.}">{.}</option>
             {/hours}
           </select> h
-          <select name="minutes" class="input-mini minuteSchedule">
+          <select name="minutes" class="input-mini minuteSchedule" data-ref='{id}'>
+          	{?minute}<option value="{minute}">{minute}</option>{/minute}
             {#minutes}
-              <option value="{.}">{.}</option>
+              <option value="{.}" {@if cond="{.} == {minute}"}selected{/if}>{.}</option>
             {/minutes}
           </select>
         </td>

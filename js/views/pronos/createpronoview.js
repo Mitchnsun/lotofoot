@@ -48,28 +48,15 @@ function($, $UI, _, Backbone,
 				this.games.add(game);
 				this.pickTeamView.newGame();
 				this.pickTeamView.render();
+				this.tablePronos.setData({
+					games : this.games,
+					team : selectedTeam
+				});
+				this.$('div.games').removeClass('hide');
+				this.tablePronos.render();
 			} else {
 				selectedTeam.push(game.getFirstSelectedTeam());
 			}
-
-			this.tablePronos.setData({
-				games : this.games,
-				team : selectedTeam
-			});
-			this.$('div.games').removeClass('hide');
-			this.tablePronos.render();
-
-			return;
-			// Update the game with the team (1 or 2)
-			// Select the last td in the last tr (game created)
-			var $tr = this.$('div.games tr').last();
-			$tr.find('td').last().html(game);
-			$tr.removeClass('hide');
-			$tr.attr('ref', index);
-			$tr.find('.schedule').datepicker({
-				dateFormat : "dd-mm-yy"
-			});
-
 		}
 	});
 
