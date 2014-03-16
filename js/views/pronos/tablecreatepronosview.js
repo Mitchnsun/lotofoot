@@ -1,15 +1,16 @@
 /**
  * @author Matthieu Compérat
  */
-define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine',
+define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/alertview',
         'i18n!tmpl/pronos/nls/createprono', 'text!tmpl/pronos/tablecreatepronos.html'],
-function($, $UI, _, Backbone, te, i18n, tmpl) {
+function($, $UI, _, Backbone, te, AlertView, i18n, tmpl) {
     
   var ClassView = Backbone.View.extend({
     initialize : function(){
       this.el = this.options.el;
       this.games = [];
       this.selectedTeam = [];
+      this.alertView = new AlertView();
     },
     render : function() {
       $(this.el).html(te.renderTemplate(tmpl, {
@@ -58,7 +59,20 @@ function($, $UI, _, Backbone, te, i18n, tmpl) {
     },
     addPronos : function(e){
       e.preventDefault();
-      console.log(this.games.toJSON());
+      var ready = true;
+      this.$('input.schedule').each(function(index){
+      	if($(this).val() == ''){
+      		ready = false;
+      	}
+      });
+      
+      if(ready){
+      	// ready to post games
+      	console.log(this.games.toJSON());
+      }else {
+      	this.alertView.displayAlert('warning','default', i18n.wrong_schedule);
+      }
+      
     }
   });
   

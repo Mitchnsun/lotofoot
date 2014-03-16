@@ -1,4 +1,7 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'i18n!tmpl/homepage/nls/newpronos', 'text!tmpl/homepage/newpronos.html'], function($, _, Backbone, te, LotofootApi, AlertView, i18n, tmpl) {
+define(['jquery', 'underscore', 'backbone', 
+				'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 
+				'i18n!tmpl/homepage/nls/newpronos', 'text!tmpl/homepage/newpronos.html'],
+function($, _, Backbone, te, LotofootApi, AlertView, i18n, tmpl) {
 
     var ClassView = Backbone.View.extend({
         initialize : function() {
@@ -57,7 +60,7 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofoota
                 scoreA : scoreA,
                 scoreB : scoreB
             }, function(msg) {// success
-                self.alertView.displayAlert('success', 'success', 'AddProno');
+                self.alertView.displayAlert('success', 'success', i18n.AddProno);
                 $rowGame.remove();// Remove the row
                 $rowGame.find('.buttons button').attr('disabled',false);
             }, function(msg) {// error

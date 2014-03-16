@@ -17,7 +17,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 			$(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
 			
 			if(this.browserStorage.get('hasLocalStorage') === false){ // Display a message if the browser can't use localStorage
-				this.browserStorage.noSupport(this.alertView, 'WebStorageLogin');
+				this.browserStorage.noSupport(this.alertView, i18n.WebStorageLogin);
 				this.$('label.checkbox').remove();
 			}
 		},
@@ -49,7 +49,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 			}
 
 			if (errors) {// Display errors if they exist
-				this.alertView.displayAlert('warning', 'default', 'EmptyLogIn');
+				this.alertView.displayAlert('warning', 'default', i18n.EmptyLogIn);
 				this.$('input[type="submit"]').attr('disabled',false);
 				return;
 			}
@@ -62,7 +62,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 				this.$('input[type="submit"]').attr('disabled',false);
 
 				if(msg.errors){
-					self.alertView.displayAlert('warning', msg.errors.title, msg.errors.errorCode);
+					self.alertView.displayAlert('warning', msg.errors.title, i18n[msg.errors.errorCode]);
 				}else{ // Everything is good
 					self.user.connect(msg.user);
 					if(self.$('input[type="checkbox"]').is(':checked')){

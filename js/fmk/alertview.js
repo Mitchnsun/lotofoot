@@ -34,7 +34,7 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk
          * Three type of alert : success, info and warning (default).
          * code is for the message to display.
          */
-        displayAlert : function(type, title, code) {
+        displayAlert : function(type, title, msg) {
             if (i18n[title + "_Title"] === undefined) {
                 this.msg = {
                     "Title" : i18n.default_Title
@@ -45,8 +45,8 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk
                 };
             }
 
-            if (code) {
-                this.msg.message = i18n[code];
+            if (msg) {
+                this.msg.message = msg;
             }
 
             type = this.setType(type);
