@@ -78,7 +78,6 @@ function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
       }else {
       	this.alertView.displayAlert('warning','default', i18n.wrong_schedule);
       }
-      
     }
   });
   
