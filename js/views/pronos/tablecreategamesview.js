@@ -1,9 +1,9 @@
 /**
  * @author Matthieu Compérat
  */
-define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/alertview',
-        'i18n!tmpl/pronos/nls/createprono', 'text!tmpl/pronos/tablecreatepronos.html'],
-function($, $UI, _, Backbone, te, AlertView, i18n, tmpl) {
+define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/alertview', 'fmk/lotofootapi',
+        'i18n!tmpl/pronos/nls/creategames', 'text!tmpl/pronos/tablecreategames.html'],
+function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
     
   var ClassView = Backbone.View.extend({
     initialize : function(){
@@ -34,7 +34,7 @@ function($, $UI, _, Backbone, te, AlertView, i18n, tmpl) {
     events : {
       "change input.schedule, select" : "updateSchedule",
       "click button.remove-prono" : "removeProno",
-      "submit form" : "addPronos"
+      "submit form" : "addGames"
     },
     updateSchedule : function(e){
     	var id = this.$(e.currentTarget).attr('data-ref');
@@ -57,9 +57,16 @@ function($, $UI, _, Backbone, te, AlertView, i18n, tmpl) {
         this.games.remove(game);
       }
     },
-    addPronos : function(e){
+    addGames : function(e){
       e.preventDefault();
       var ready = true;
+      
+      if(this.$('form tr').length == 0){
+      	ready = false;
+      	this.alertView.displayAlert('warning','default', i18n.empty_games);
+      	return false;
+      }
+      
       this.$('input.schedule').each(function(index){
       	if($(this).val() == ''){
       		ready = false;
@@ -67,8 +74,7 @@ function($, $UI, _, Backbone, te, AlertView, i18n, tmpl) {
       });
       
       if(ready){
-      	// ready to post games
-      	console.log(this.games.toJSON());
+      	LotofootApi.createGames({games : this.games.toJSON()}, function(){}, function(){});
       }else {
       	this.alertView.displayAlert('warning','default', i18n.wrong_schedule);
       }

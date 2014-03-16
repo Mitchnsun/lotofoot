@@ -3,6 +3,6 @@ define([], function() {
         HOME : "",
         LOGIN : "login",
         PRONOS : "pronos",
-        CREATE_PRONO : "create-prono"
+        CREATE_GAMES : "create-games"
     };
 });

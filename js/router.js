@@ -1,15 +1,15 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
         'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/createpronoview', 'views/pronos/pronosview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView, PronosView) {
+        'views/pronos/creategamesview', 'views/pronos/pronosview'],
+function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreateGamesView, PronosView) {
 
     var AppRouter = Backbone.Router.extend({
       routes : _.object([
         [urls.HOME, 'homepage'],
         [urls.LOGIN, 'login'],
         [urls.PRONOS, 'pronos'],
-        [urls.CREATE_PRONO, 'createprono'],
+        [urls.CREATE_GAMES, 'creategames'],
         ['*action', 'defaultAction']
       ])
     });
@@ -64,15 +64,15 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
         }
       });
       
-      app_router.on('route:createprono', function() {
-        var createpronoview = new CreatePronoView({
+      app_router.on('route:creategames', function() {
+        var creategamesview = new CreateGamesView({
           user : self.user,
           teams : self.teams
         });
         if (self.user.checkAuth()) {
-          createpronoview.render();
+          creategamesview.render();
         } else {
-          self.user.set('urlFrom', urls.CREATE_PRONO);
+          self.user.set('urlFrom', urls.CREATE_GAMES);
           self.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
         }
       });

@@ -22,6 +22,7 @@ define({
 		minutes : ['00', '05', 15, 30, 45],
 		
 		/* Alert message */
+		empty_games : "Vous devez créer des matchs avant de pouvoir les ajouter.",
 		wrong_schedule : "La date d'un match ne peut être nulle, merci de bien vouloir remplir une date correcte."
 	}
 });

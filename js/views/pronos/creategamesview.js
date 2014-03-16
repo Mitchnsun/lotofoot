@@ -1,10 +1,10 @@
 define(['jquery', 'jqueryUI', 'underscore', 'backbone',
 				'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
-				'collections/games', 'views/teams/pickTeamView', 'views/pronos/tablecreatepronosview',
-				'i18n!tmpl/pronos/nls/createprono', 'i18n!nls/country', 'text!tmpl/pronos/createprono.html'],
+				'collections/games', 'views/teams/pickTeamView', 'views/pronos/tablecreategamesview',
+				'i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country', 'text!tmpl/pronos/creategames.html'],
 function($, $UI, _, Backbone,
 				te, LotofootApi, AlertView, urls,
-				Games, PickTeamView, TablePronosView,
+				Games, PickTeamView, TableGamesView,
 				i18n, country, tmpl)
 {
 	var ClassView = Backbone.View.extend({
@@ -25,8 +25,8 @@ function($, $UI, _, Backbone,
 				urls : urls
 			}));
 
-			this.tablePronos = new TablePronosView({
-				el : this.$('#newPronosContainer')
+			this.tableGames = new TableGamesView({
+				el : this.$('#newGamesContainer')
 			});
 			this.pickTeamView = new PickTeamView({
 				el : this.$('#pickTeam'),
@@ -48,12 +48,12 @@ function($, $UI, _, Backbone,
 				this.games.add(game);
 				this.pickTeamView.newGame();
 				this.pickTeamView.render();
-				this.tablePronos.setData({
+				this.tableGames.setData({
 					games : this.games,
 					team : selectedTeam
 				});
 				this.$('div.games').removeClass('hide');
-				this.tablePronos.render();
+				this.tableGames.render();
 			} else {
 				selectedTeam.push(game.getFirstSelectedTeam());
 			}
