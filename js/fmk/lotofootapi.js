@@ -15,6 +15,7 @@ define(['jquery'], function($) {
     /* Pronos */
     var URL_GET_NEW_PRONOS = "server/pronos/getNewPronos.php";
     var URL_ADD_PRONO = "server/pronos/addProno.php";
+    var URL_CREATE_GAMES = "server/pronos/creategames.php";
     
     /* Get Common datas */
    var URL_GET_TEAMS = "server/common/getTeams.php";
@@ -87,6 +88,9 @@ define(['jquery'], function($) {
         },
         addProno : function(params, success, error){
             return performWS('POST', URL_ADD_PRONO, params, success, error);
+        },
+        createGames : function(params, success, error){
+            return performWS('POST', URL_CREATE_GAMES, params, success, error);
         },
         /* Common */
        getTeams : function(params, success, error){
