@@ -35,13 +35,13 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk
          * code is for the message to display.
          */
         displayAlert : function(type, title, msg) {
-            if (i18n[title + "_Title"] === undefined) {
+            if (i18n[title + "_Title"] !== undefined) {
                 this.msg = {
-                    "Title" : i18n.default_Title
+                    "Title" : i18n[title + "_Title"]
                 };
             } else {
                 this.msg = {
-                    "Title" : i18n[title + "_Title"]
+                    "Title" : title
                 };
             }
 
