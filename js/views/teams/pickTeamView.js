@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'models/game',
-        'text!tmpl/teams/pickTeam.html','i18n!tmpl/pronos/nls/createprono', 'i18n!nls/country',],
+        'text!tmpl/teams/pickTeam.html','i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country',],
 function($, _, Backbone, te, Game, tmpl, i18n, country) {
     
   var ClassView = Backbone.View.extend({
