@@ -1,7 +1,7 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
         'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/createpronoview', 'views/pronos/pronos'],
+        'views/pronos/createpronoview', 'views/pronos/pronosview'],
 function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView, PronosView) {
 
     var AppRouter = Backbone.Router.extend({
