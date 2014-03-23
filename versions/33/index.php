@@ -110,6 +110,18 @@ try {
 					Parier
 				</button>
 				<hr/>
+				<div class="ad" style="text-align: center">
+	        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	        <!-- Blog Lotofoot -->
+	        <ins class="adsbygoogle"
+	             style="display:inline-block;width:728px;height:90px"
+	             data-ad-client="ca-pub-4388532262126714"
+	             data-ad-slot="2568308015"></ins>
+	        <script>
+	        (adsbygoogle = window.adsbygoogle || []).push({});
+	        </script>
+	      </div>
+				<hr/>
 				<h2>Mes 25 derniers pronostics</h2>
 				<hr/>
 				<table id="lastPronos" class="table">
