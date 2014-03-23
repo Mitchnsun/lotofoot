@@ -59,6 +59,7 @@ function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
     },
     addGames : function(e){
       e.preventDefault();
+      var self = this;
       var ready = true;
       
       if(this.$('form tr').length == 0){
@@ -74,7 +75,15 @@ function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
       });
       
       if(ready){
-      	LotofootApi.createGames({games : this.games.toJSON()}, function(){}, function(){});
+      	this.$('input:submit').attr('disabled',true);
+      	LotofootApi.createGames({games : this.games.toJSON()}, function(){ /* Success */
+      		self.$('input:submit').removeAttr("disabled");
+      		self.games.reset();
+      		$('#newGamesContainer').addClass('hide');
+      		self.alertView.displayAlert('success', 'success', i18n.add_success);
+      	}, function(){ /* Error */
+      		self.$('input:submit').removeAttr("disabled");
+      	});
       }else {
       	this.alertView.displayAlert('warning','default', i18n.wrong_schedule);
       }
