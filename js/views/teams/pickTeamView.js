@@ -71,6 +71,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
 
       if (gameType == i18n.ref_league_game || gameType == i18n.ref_cup_game) {
         this.game.addTeam(team);
+        this.game.set('country', country);
       } else if (gameType == i18n.ref_europa_game) {
         this.game.addTeam(team);
         $selectedCountry.find('div.row').addClass('hide');

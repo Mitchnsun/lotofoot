@@ -17,7 +17,26 @@
     exit();
   }else {
   	$response['status'] = 200;
-  	$games = $_POST['games'];	
+		$today = time();
+  	$userid = $_SESSION['userid'];
+  	$query = "INSERT INTO games(type,country,id_teamA,id_teamB,schedule,addBy) 
+  						VALUES(:type,:country,:teamA,:teamB,:schedule,:userid)";
+		
+  	$games = $_POST['games'];
+		foreach($games as $game){
+			$strDate = $game['date'].' '.$game['hour'].':'.$game['minute'];
+			$date = DateTime::createFromFormat('d/m/Y H:i', $strDate);
+			$timeStamp = date_format($date, 'U');
+			$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
+			$req -> execute(array(
+					'type' => $game['type'],
+					'country' => $game['country'],
+					'teamA' => $game['teamA']['id'],
+					'teamB' => $game['teamB']['id'],
+					'schedule' => $timeStamp,
+					'userid' => $userid
+			));
+		}
   }
 	
 	// return the JSON

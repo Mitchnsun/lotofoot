@@ -11,7 +11,8 @@ function($, _, Backbone) {
       minute : '',
       addBy : 0,
       addedAt : 0,
-      type : null /* variable for the type of the game : league, cup, international, etc. */
+      type : null, /* variable for the type of the game : league, cup, international, etc. */
+     country : '' /* empty if an international game */
     },
     initialize : function(){
       this.set('addedAt', Date.now());
