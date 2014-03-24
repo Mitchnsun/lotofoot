@@ -58,7 +58,9 @@ function($, _, Backbone, Pronos, Prono) {
    	this.set({
    		id : data.id_game,
       teamA : data.teamA,
+      scoreA : data.scoreA,
       teamB : data.teamB,
+      scoreB : data.scoreB,
       date : data.schedule,
       time : data.scheduleTime,
       type : data.type,
@@ -69,6 +71,7 @@ function($, _, Backbone, Pronos, Prono) {
    		prono.setData(item);
    		self.pronos.add(prono);
    	});
+   	this.set('pronos', this.pronos.toJSON());
    }
   });
   // Return the model for the module
