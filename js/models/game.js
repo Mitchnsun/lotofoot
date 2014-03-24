@@ -1,5 +1,5 @@
-define(['jquery', 'underscore', 'backbone'],
-function($, _, Backbone) {
+define(['jquery', 'underscore', 'backbone', 'collections/pronos', 'models/prono'],
+function($, _, Backbone, Pronos, Prono) {
     
     var Model = Backbone.Model.extend({
     defaults : {
@@ -19,6 +19,8 @@ function($, _, Backbone) {
     initialize : function(){
       this.set('addedAt', Date.now());
       this.set('id', this.cid);
+      this.pronos = new Pronos();
+      this.set('pronos', this.pronos);
     },
     ready : function(){ // Check if the two teams
       if ((this.get('teamA') && this.get('teamB')) != null) {
@@ -51,6 +53,23 @@ function($, _, Backbone) {
       return null;
     },
     /* Functions for pronos display */
+   setData : function(data){
+   	var self = this;
+   	this.set({
+   		id : data.id_game,
+      teamA : data.teamA,
+      teamB : data.teamB,
+      date : data.schedule,
+      time : data.scheduleTime,
+      type : data.type,
+    	country : data.country
+   	});
+   	_.each(data.pronos, function(item){
+   		var prono = new Prono();
+   		prono.setData(item);
+   		self.pronos.add(prono);
+   	});
+   }
   });
   // Return the model for the module
   return Model;

@@ -72,6 +72,25 @@ function($, _, Backbone, LotofootApi, country) {
       });
       
       return nation;
+    },
+    getTeams : function(id,country){
+    	var self = this;
+    	var team = this.getNationInfos(id);
+    	if(!$.isEmptyObject(team)){
+    		/* Do Nothing the team is a country */
+    	}else if(country == ''){
+    		_.every(this.get('clubs'), function(object){
+    			team = self.getClubInfos(id,object.id);
+    			if(!$.isEmptyObject(team)){
+    				return false;
+    			}
+    			return true;
+    		});
+    	}else{
+    		team = this.getClubInfos(id,country);
+    	}
+    	
+    	return team;
     }
 	});
 	
