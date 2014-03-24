@@ -12,8 +12,10 @@ function($, _, Backbone) {
       addBy : 0,
       addedAt : 0,
       type : null, /* variable for the type of the game : league, cup, international, etc. */
-     country : '' /* empty if an international game */
+    	country : '', /* empty if an international game */
+    	pronos : {}, /* collection */
     },
+    /* Functions to create a game */
     initialize : function(){
       this.set('addedAt', Date.now());
       this.set('id', this.cid);
@@ -47,7 +49,8 @@ function($, _, Backbone) {
       }
       
       return null;
-    }
+    },
+    /* Functions for pronos display */
   });
   // Return the model for the module
   return Model;
