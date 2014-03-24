@@ -14,8 +14,7 @@ function($, $UI, _, Backbone,
 			this.teams = this.options.teams;
 			this.alertView = new AlertView();
 
-			this.games = new Games();
-			// Collection with the created games
+			this.games = new Games(); // Collection with the created games
 		},
 		render : function() {
 			var self = this;
