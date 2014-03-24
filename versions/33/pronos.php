@@ -102,7 +102,7 @@
 				foreach($games as $game){
 					echo '<tr style="border-top:solid 5px grey;font-weight:bold;">';
 					echo '<td class="schedule">'.date('d/m/Y',$game['schedule']).'</td>';
-					echo '<td class="scheduleTime">'.date('G',$game['schedule']).'h'.date('i',$row['schedule']).'</td>';
+					echo '<td class="scheduleTime">'.date('G',$game['schedule']).'h'.date('i',$game['schedule']).'</td>';
 					echo '<td class="teamA"> '.$game['teamA'].' </td>';
 					echo '<td class="separation"> <strong> '.$game['scoreA'].' - '.$game['scoreB'].' </strong> </td>';
 					echo '<td class="teamB"> '.$game['teamB'].' </td>';
