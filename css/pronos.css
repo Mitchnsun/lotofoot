@@ -1,28 +1,7 @@
-.teamA{
-	text-align:right !important;
-	vertical-align:middle !important;
-}
-.teamB{
-	vertical-align:middle !important;
-}
-.scoreA{
-	text-align:center !important;
-}
-.scoreB{
-	text-align:center !important;
-}
-.separation{
-	text-align:center !important;
-	line-height:30px !important;
-}
-.schedule{
-	vertical-align:middle !important;
-	font-size: 15px;
-}
-.scheduleTime{
-	vertical-align:middle !important;
-	font-size: 15px;
-}
-.buttons{
-    vertical-align:middle !important;
-}
+/* Pronos view */
+#pronos .wrapper{border-bottom:1px solid #eeeeee;margin:5px 0px}
+#pronos .gameWrapper{font-size: 18px;font-weight: bold;color: #333;padding:5px 0px;line-height:45px;}
+#pronos .pronosWrapper{display:none;}
+#pronos .schedule, #pronos .prono{display:inline;}
+#pronos .prono, #pronos .scores{margin-left:25px;}
+#pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}

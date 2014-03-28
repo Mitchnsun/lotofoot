@@ -40,6 +40,18 @@ function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, i18
 				urls : urls,
 				games : this.games.toJSON()
 			}));
+		},
+		/*
+		 * Events
+		 */
+		events : {
+			"click .gameWrapper" : "togglePronos"
+		},
+		togglePronos : function(e){
+			if($(e.currentTarget).find('i').length == 0){ // No pronos to display
+				return false;
+			}
+			$(e.currentTarget).next().slideToggle();
 		}
 	});
 

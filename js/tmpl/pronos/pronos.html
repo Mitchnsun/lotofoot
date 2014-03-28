@@ -1,7 +1,31 @@
-{#games}
-	{date} - {time} -> {teamA.name} {scoreA} - {scoreB} {teamB.name} <br/>
-	{#pronos}
-		{date} - {time} -> {player} {scoreA} - {scoreB}<br/>
-	{/pronos}
+<div id="pronos" class="container">
+	<h2>{i18n.title}</h2>
 	<hr/>
-{/games}
+	<div class='row-fluid'>
+		{#games}
+			<div class="wrapper">
+				<div class="gameWrapper">
+					<div class="schedule">
+						{date} {time}
+					</div>
+					<div class="prono">
+						{teamA.name} {scoreA} - {scoreB} {teamB.name}
+					</div>
+					{?pronos}<i class="icon-chevron-down"></i>{/pronos}
+				</div>
+				<div class="pronosWrapper">
+					{#pronos}
+						<div class="pronoWrapper">
+							<div class="schedule">
+								{date} {time}
+							</div>
+							<div class="prono">
+								{player} <span class="scores">{scoreA} - {scoreB}</span>
+							</div>
+						</div>
+					{/pronos}
+				</div>
+			</div>
+		{/games}
+	</div>
+</div>
