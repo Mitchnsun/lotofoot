@@ -4,6 +4,14 @@ define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/ale
 function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
+		initialize : function(){
+			// Global event bus & alert view
+			this.alertview = new AlertView();
+			this.eventBus = EventBus.create();
+			this.listenTo(this.eventBus, 'url:change', function(e) {
+				self.navigate(e.url, {trigger : true});
+			});
+		},
 		routes : _.object([
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN, 'login'],
@@ -18,13 +26,6 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			this.user = options.user;
 			this.browserStorage = options.browserStorage;
 			this.teams = options.teams;
-
-			// Global event bus & alert view
-			this.alertview = new AlertView();
-			this.eventBus = EventBus.create();
-			this.listenTo(this.eventBus, 'url:change', function(e) {
-				self.navigate(e.url, {trigger : true});
-			});
 
 			// Set header and footer
 			var headerView = new HeaderView({user : this.user});
