@@ -23,9 +23,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			this.alertview = new AlertView();
 			this.eventBus = EventBus.create();
 			this.listenTo(this.eventBus, 'url:change', function(e) {
-				self.navigate(e.url, {
-					trigger : true
-				});
+				self.navigate(e.url, {trigger : true});
 			});
 
 			// Set header and footer
@@ -55,17 +53,13 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				});
 			} else {
 				this.user.set('urlFrom', urls.HOME);
-				this.eventBus.trigger('url:change', {
-					url : '#' + urls.LOGIN
-				});
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
 		login : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
-				this.eventBus.trigger('url:change', {
-					url : '#' + this.user.get('urlFrom')
-				});
+				this.eventBus.trigger('url:change', {url : '#' + this.user.get('urlFrom')});
 			} else {
 				require(['views/authentication/loginview'], function(LoginView) {
 					self.loadView(new LoginView({
@@ -91,9 +85,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				});
 			} else {
 				this.user.set('urlFrom', urls.CREATE_GAMES);
-				this.eventBus.trigger('url:change', {
-					url : '#' + urls.LOGIN
-				});
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
 		pronos : function() {
@@ -109,9 +101,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				});
 			} else {
 				this.user.set('urlFrom', urls.PRONOS);
-				this.eventBus.trigger('url:change', {
-					url : '#' + urls.LOGIN
-				});
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
 		/* Route by default */
