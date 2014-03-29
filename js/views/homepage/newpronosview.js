@@ -4,10 +4,10 @@ define(['jquery', 'underscore', 'backbone',
 function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
-		initialize : function() {
-			this.user = this.options.user;
-			this.el = this.options.el;
-			this.alertview = this.options.alertview;
+		initialize : function(options) {
+			this.user = options.user;
+			this.el = options.el;
+			this.alertview = options.alertview;
 		},
 		render : function() {
 			var self = this;

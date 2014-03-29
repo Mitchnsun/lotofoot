@@ -3,10 +3,10 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'models/game',
 function($, _, Backbone, te, Game, tmpl, i18n, country) {
     
   var ClassView = Backbone.View.extend({
-    initialize : function(){
-      this.user = this.options.user;
-      this.el = this.options.el;
-      this.teams = this.options.teams;
+    initialize : function(options){
+      this.user = options.user;
+      this.el = options.el;
+      this.teams = options.teams;
       
       this.newGame();
     },

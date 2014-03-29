@@ -9,10 +9,10 @@ function($, $UI, _, Backbone,
 {
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
-		initialize : function() {
-			this.user = this.options.user;
-			this.teams = this.options.teams;
-			this.alertview = this.options.alertview;
+		initialize : function(options) {
+			this.user = options.user;
+			this.teams = options.teams;
+			this.alertview = options.alertview;
 
 			this.games = new Games(); // Collection with the created games
 		},

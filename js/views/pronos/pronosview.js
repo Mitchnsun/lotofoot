@@ -6,9 +6,9 @@ function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, i18
 {
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
-		initialize : function() {
-			this.user = this.options.user;
-			this.teams = this.options.teams;
+		initialize : function(options) {
+			this.user = options.user;
+			this.teams = options.teams;
 			this.alertView = new AlertView();
 			
 			this.games = new Games(); // Collection with the games

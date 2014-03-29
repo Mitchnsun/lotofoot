@@ -6,10 +6,9 @@ define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'f
 function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
     
   var ClassView = Backbone.View.extend({
-    initialize : function(){
-      this.el = this.options.el;
-      this.alertview = this.options.alertview;
-      this.games = [];
+    initialize : function(options){
+      this.el = options.el;
+      this.alertview = options.alertview;
       this.selectedTeam = [];
     },
     render : function() {

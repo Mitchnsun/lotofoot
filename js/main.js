@@ -6,7 +6,7 @@ require.config({
         'jquery' : '../libs/jquery', /* v1.9.1 */
         'jqueryUI' : '../libs/jquery-ui.min', /* v1.10.3 */
         'underscore' : '../libs/underscore', /* v1.4.4 */
-        'backbone' : '../libs/backbone', /* v1.0.0 */
+        'backbone' : '../libs/backbone', /* v1.1.2 */
         'bootstrap' : '../libs/bootstrap.min', /* v2.3.1 */
         'text' : '../libs/text',
         'i18n' : '../libs/i18n',

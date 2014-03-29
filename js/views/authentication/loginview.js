@@ -5,11 +5,11 @@ define(['jquery', 'underscore', 'backbone',
 function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
-		initialize : function() {
-			this.user = this.options.user;
-			this.alertview = this.options.alertview;
-			this.browserStorage = this.options.browserStorage;
-			this.eventBus = this.options.eventBus;
+		initialize : function(options) {
+			this.user = options.user;
+			this.alertview = options.alertview;
+			this.browserStorage = options.browserStorage;
+			this.eventBus = options.eventBus;
 		},
 		el : $('#container'),
 		render : function() {

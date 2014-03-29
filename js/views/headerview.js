@@ -4,8 +4,8 @@ function($, _, Backbone, te, i18n, tmpl) {
     
     var ClassView = Backbone.View.extend({
         el : $('header'),
-        initialize : function(){
-        	this.user = this.options.user;
+        initialize : function(options){
+        	this.user = options.user;
         	this.user.on('change', this.manageNavBar, this); // listen to any change of the model user
         },
         render : function() {

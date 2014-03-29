@@ -6,9 +6,9 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, NewPronosView) {
   
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
-		initialize : function() {
-			this.user = this.options.user;
-			this.alertview = this.options.alertview;
+		initialize : function(options) {
+			this.user = options.user;
+			this.alertview = options.alertview;
 		},
 		render : function() {
 			var self = this;
