@@ -1,23 +1,22 @@
 define(['jquery', 'underscore', 'backbone',
-		'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
+		'fmk/templateengine', 'fmk/lotofootapi', 'fmk/urls',
 		'i18n!tmpl/authentication/nls/login',
 		'text!tmpl/authentication/login.html'],
-function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
 		initialize : function() {
 			this.user = this.options.user;
+			this.alertview = this.options.alertview;
 			this.browserStorage = this.options.browserStorage;
 			this.eventBus = this.options.eventBus;
-			
-			this.alertView = new AlertView();
 		},
 		el : $('#container'),
 		render : function() {
 			$(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
 			
 			if(this.browserStorage.get('hasLocalStorage') === false){ // Display a message if the browser can't use localStorage
-				this.browserStorage.noSupport(this.alertView, i18n.WebStorageLogin);
+				this.browserStorage.noSupport(this.alertview, i18n.WebStorageLogin);
 				this.$('label.checkbox').remove();
 			}
 		},
@@ -49,7 +48,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 			}
 
 			if (errors) {// Display errors if they exist
-				this.alertView.displayAlert('warning', 'default', i18n.EmptyLogIn);
+				this.alertview.displayAlert('warning', 'default', i18n.EmptyLogIn);
 				this.$('input[type="submit"]').attr('disabled',false);
 				return;
 			}
@@ -58,11 +57,11 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 				userEmail : inputEmail.val(),
 				userPwd : inputPwd.val()
 			}, function(msg) { // success
-				self.alertView.dismissAlert();
-				this.$('input[type="submit"]').attr('disabled',false);
+				self.alertview.dismissAlert();
+				self.$('input[type="submit"]').attr('disabled',false);
 
 				if(msg.errors){
-					self.alertView.displayAlert('warning', msg.errors.title, i18n[msg.errors.errorCode]);
+					self.alertview.displayAlert('warning', msg.errors.title, i18n[msg.errors.errorCode]);
 				}else{ // Everything is good
 					self.user.connect(msg.user);
 					if(self.$('input[type="checkbox"]').is(':checked')){
@@ -72,8 +71,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl) {
 				}
 				
 			}, function(msg) { // error
-				self.alertView.displayError(msg.status, msg.errorCode);
-				this.$('input[type="submit"]').attr('disabled',false);
+				self.alertview.displayError(msg.status, msg.errorCode);
+				self.$('input[type="submit"]').attr('disabled',false);
 			});
 		},
 		/*

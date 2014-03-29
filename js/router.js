@@ -1,8 +1,8 @@
 // Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
+define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
         'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
         'views/pronos/creategamesview', 'views/pronos/pronosview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreateGamesView, PronosView) {
+function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView, HomepageView, LoginView, CreateGamesView, PronosView) {
 	
   var AppRouter = Backbone.Router.extend({
     routes : _.object([
@@ -20,13 +20,15 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 			this.browserStorage = options.browserStorage;
 			this.teams = options.teams;
 
-			// Global event bus
+			// Global event bus & alert view
+			this.alertview = new AlertView();
 			this.eventBus = EventBus.create();
 			this.listenTo(this.eventBus, 'url:change', function(e) {
 				self.navigate(e.url, {
 					trigger : true
 				});
 			});
+			
 
 			// Set header and footer
 			var headerView = new HeaderView({
@@ -39,7 +41,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 			Backbone.history.start();
 		},
 		loadView : function(view){
-			this.view && this.view.undelegateEvents();
+			this.view && (this.view.close ? this.view.close() : this.view.undelegateEvents());
 			this.view = view;
 		},
 		/*
@@ -47,7 +49,8 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 		 */
 		homepage : function() {
 				this.loadView(new HomepageView({
-					user : this.user
+					user : this.user,
+					alertview : this.alertview
 				}));
 				if (this.user.checkAuth()) {
 					this.view.render();
@@ -61,6 +64,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 			login : function() {
 				this.loadView(new LoginView({
 					user : this.user,
+					alertview : this.alertview,
 					browserStorage : this.browserStorage,
 					eventBus : this.eventBus
 				}));
@@ -75,6 +79,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 			creategames : function() {
 				this.loadView(new CreateGamesView({
 					user : this.user,
+					alertview : this.alertview,
 					teams : this.teams
 				}));
 				if (this.user.checkAuth()) {
@@ -89,6 +94,7 @@ function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, L
 			pronos : function() {
 				this.loadView(new PronosView({
 					user : this.user,
+					alertview : this.alertview,
 					teams : this.teams
 				}));
 				if (this.user.checkAuth()) {

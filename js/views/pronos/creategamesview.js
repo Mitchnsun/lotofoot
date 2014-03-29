@@ -1,9 +1,9 @@
 define(['jquery', 'jqueryUI', 'underscore', 'backbone',
-				'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
+				'fmk/templateengine', 'fmk/lotofootapi', 'fmk/urls',
 				'collections/games', 'views/teams/pickTeamView', 'views/pronos/tablecreategamesview',
 				'i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country', 'text!tmpl/pronos/creategames.html'],
 function($, $UI, _, Backbone,
-				te, LotofootApi, AlertView, urls,
+				te, LotofootApi, urls,
 				Games, PickTeamView, TableGamesView,
 				i18n, country, tmpl)
 {
@@ -12,7 +12,7 @@ function($, $UI, _, Backbone,
 		initialize : function() {
 			this.user = this.options.user;
 			this.teams = this.options.teams;
-			this.alertView = new AlertView();
+			this.alertview = this.options.alertview;
 
 			this.games = new Games(); // Collection with the created games
 		},
@@ -25,7 +25,8 @@ function($, $UI, _, Backbone,
 			}));
 
 			this.tableGames = new TableGamesView({
-				el : this.$('#newGamesContainer')
+				el : this.$('#newGamesContainer'),
+				alertview : this.alertview
 			});
 			this.pickTeamView = new PickTeamView({
 				el : this.$('#pickTeam'),
@@ -56,6 +57,14 @@ function($, $UI, _, Backbone,
 			} else {
 				selectedTeam.push(game.getFirstSelectedTeam());
 			}
+		},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function(){
+			this.tableGames && (this.tableGames.close ? this.tableGames.close() : this.tableGames.undelegateEvents());
+			this.pickTeamView && (this.pickTeamView.close ? this.pickTeamView.close() : this.pickTeamView.undelegateEvents());
+			this.undelegateEvents();
 		}
 	});
 

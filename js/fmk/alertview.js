@@ -80,6 +80,12 @@ define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk
                 e.preventDefault();
             }
             this.$('.AlertView').remove();
+        },
+        /*
+         * Unbind : the view is removed from the DOM
+         */
+        unbind : function(){
+        	this.undelegateEvents();
         }
     });
 

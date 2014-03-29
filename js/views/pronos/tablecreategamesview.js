@@ -1,16 +1,16 @@
 /**
  * @author Matthieu Compérat
  */
-define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/alertview', 'fmk/lotofootapi',
+define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
         'i18n!tmpl/pronos/nls/creategames', 'text!tmpl/pronos/tablecreategames.html'],
-function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
+function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
     
   var ClassView = Backbone.View.extend({
     initialize : function(){
       this.el = this.options.el;
+      this.alertview = this.options.alertview;
       this.games = [];
       this.selectedTeam = [];
-      this.alertView = new AlertView();
     },
     render : function() {
       $(this.el).html(te.renderTemplate(tmpl, {
@@ -64,7 +64,7 @@ function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
       
       if(this.$('form tr').length == 0){
       	ready = false;
-      	this.alertView.displayAlert('warning','default', i18n.empty_games);
+      	this.alertview.displayAlert('warning','default', i18n.empty_games);
       	return false;
       }
       
@@ -80,12 +80,12 @@ function($, $UI, _, Backbone, te, AlertView, LotofootApi, i18n, tmpl) {
       		self.$('input:submit').removeAttr("disabled");
       		self.games.reset();
       		$('#newGamesContainer').addClass('hide');
-      		self.alertView.displayAlert('success', 'success', i18n.add_success);
+      		self.alertview.displayAlert('success', 'success', i18n.add_success);
       	}, function(){ /* Error */
       		self.$('input:submit').removeAttr("disabled");
       	});
       }else {
-      	this.alertView.displayAlert('warning','default', i18n.wrong_schedule);
+      	this.alertview.displayAlert('warning','default', i18n.wrong_schedule);
       }
     }
   });
