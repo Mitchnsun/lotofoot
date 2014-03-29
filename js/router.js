@@ -1,20 +1,19 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
-        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/creategamesview', 'views/pronos/pronosview'],
-function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView, HomepageView, LoginView, CreateGamesView, PronosView) {
+        'views/headerview', 'views/footerview'],
+function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 	
-  var AppRouter = Backbone.Router.extend({
-    routes : _.object([
-      [urls.HOME, 'homepage'],
-      [urls.LOGIN, 'login'],
-      [urls.PRONOS, 'pronos'],
-      [urls.CREATE_GAMES, 'creategames'],
-      ['*action', 'defaultAction']
-    ]),
+	var AppRouter = Backbone.Router.extend({
+		routes : _.object([
+			[urls.HOME, 'homepage'],
+			[urls.LOGIN, 'login'],
+			[urls.PRONOS, 'pronos'],
+			[urls.CREATE_GAMES, 'creategames'],
+			['*action', 'defaultAction']
+		]),
 		start : function(options) {
 			var self = this;
-			
+
 			// Models
 			this.user = options.user;
 			this.browserStorage = options.browserStorage;
@@ -28,19 +27,16 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView, Home
 					trigger : true
 				});
 			});
-			
 
 			// Set header and footer
-			var headerView = new HeaderView({
-				user : this.user
-			});
+			var headerView = new HeaderView({user : this.user});
 			var footerView = new FooterView();
 			headerView.render();
 			footerView.render();
 
 			Backbone.history.start();
 		},
-		loadView : function(view){
+		loadView : function(view) {
 			this.view && (this.view.close ? this.view.close() : this.view.undelegateEvents());
 			this.view = view;
 		},
@@ -48,70 +44,82 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView, Home
 		 * Set view for the routes
 		 */
 		homepage : function() {
-				this.loadView(new HomepageView({
-					user : this.user,
-					alertview : this.alertview
-				}));
-				if (this.user.checkAuth()) {
-					this.view.render();
-				} else {
-					this.user.set('urlFrom', urls.HOME);
-					this.eventBus.trigger('url:change', {
-						url : '#' + urls.LOGIN
-					});
-				}
-			},
-			login : function() {
-				this.loadView(new LoginView({
-					user : this.user,
-					alertview : this.alertview,
-					browserStorage : this.browserStorage,
-					eventBus : this.eventBus
-				}));
-				if (this.user.checkAuth()) {
-					this.eventBus.trigger('url:change', {
-						url : '#' + this.user.get('urlFrom')
-					});
-				} else {
-					this.view.render();
-				}
-			},
-			creategames : function() {
-				this.loadView(new CreateGamesView({
-					user : this.user,
-					alertview : this.alertview,
-					teams : this.teams
-				}));
-				if (this.user.checkAuth()) {
-					this.view.render();
-				} else {
-					this.user.set('urlFrom', urls.CREATE_GAMES);
-					this.eventBus.trigger('url:change', {
-						url : '#' + urls.LOGIN
-					});
-				}
-			},
-			pronos : function() {
-				this.loadView(new PronosView({
-					user : this.user,
-					alertview : this.alertview,
-					teams : this.teams
-				}));
-				if (this.user.checkAuth()) {
-					this.view.render();
-				} else {
-					this.user.set('urlFrom', urls.PRONOS);
-					this.eventBus.trigger('url:change', {
-						url : '#' + urls.LOGIN
-					});
-				}
-			},
-			/* Route by default */
-			defaultAction : function(actions) {
-				// We have no matching route, lets just log what the URL was
-				console.log('No route:', actions);
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/homepageview'], function(HomepageView) {
+					self.loadView(new HomepageView({
+						user : self.user,
+						alertview : self.alertview
+					}));
+					self.view.render();
+				});
+			} else {
+				this.user.set('urlFrom', urls.HOME);
+				this.eventBus.trigger('url:change', {
+					url : '#' + urls.LOGIN
+				});
 			}
-	});
+		},
+		login : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				this.eventBus.trigger('url:change', {
+					url : '#' + this.user.get('urlFrom')
+				});
+			} else {
+				require(['views/authentication/loginview'], function(LoginView) {
+					self.loadView(new LoginView({
+						user : self.user,
+						alertview : self.alertview,
+						browserStorage : self.browserStorage,
+						eventBus : self.eventBus
+					}));
+					self.view.render();
+				});
+			}
+		},
+		creategames : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/pronos/creategamesview'], function(CreateGamesView) {
+					self.loadView(new CreateGamesView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+				});
+			} else {
+				this.user.set('urlFrom', urls.CREATE_GAMES);
+				this.eventBus.trigger('url:change', {
+					url : '#' + urls.LOGIN
+				});
+			}
+		},
+		pronos : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/pronos/pronosview'], function(PronosView) {
+					self.loadView(new PronosView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+				});
+			} else {
+				this.user.set('urlFrom', urls.PRONOS);
+				this.eventBus.trigger('url:change', {
+					url : '#' + urls.LOGIN
+				});
+			}
+		},
+		/* Route by default */
+		defaultAction : function(actions) {
+			// We have no matching route, lets just log what the URL was
+			console.log('No route:', actions);
+		}
+	}); 
 
   return AppRouter;
 });
