@@ -1,9 +1,9 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/lotofootapi'], function($, _, Backbone, LotofootApi) {
+define(['jquery', 'underscore', 'backbone', 'fmk/lotofootapi', 'fmk/urls'], function($, _, Backbone, LotofootApi, urls) {
 	var Model = Backbone.Model.extend({
 		defaults : {
 			sessionRetrieve : false,
 			isConnected : false,
-			urlFrom : ""
+			urlFrom : urls.HOME
 		},
 		/*
 		 * Authentication
