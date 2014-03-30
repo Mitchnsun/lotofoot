@@ -15,10 +15,11 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			});
 		},
 		routes : _.object([
+			[urls.CREATE_GAMES, 'creategames'],
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN, 'login'],
 			[urls.PRONOS, 'pronos'],
-			[urls.CREATE_GAMES, 'creategames'],
+			[urls.RANKING, 'ranking'],
 			['*action', 'defaultAction']
 		]),
 		start : function(options) {
@@ -42,6 +43,23 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 		/*
 		 * Set view for the routes
 		 */
+		creategames : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/pronos/creategamesview'], function(CreateGamesView) {
+					self.loadView(new CreateGamesView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.CREATE_GAMES);
+				});
+			} else {
+				this.user.set('urlFrom', urls.CREATE_GAMES);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
 		homepage : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
@@ -75,23 +93,6 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				});
 			}
 		},
-		creategames : function() {
-			var self = this;
-			if (this.user.checkAuth()) {
-				require(['views/pronos/creategamesview'], function(CreateGamesView) {
-					self.loadView(new CreateGamesView({
-						user : self.user,
-						alertview : self.alertview,
-						teams : self.teams
-					}));
-					self.view.render();
-					self.headerView.menuChange(urls.CREATE_GAMES);
-				});
-			} else {
-				this.user.set('urlFrom', urls.CREATE_GAMES);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-			}
-		},
 		pronos : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
@@ -106,6 +107,22 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				});
 			} else {
 				this.user.set('urlFrom', urls.PRONOS);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
+		ranking : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/ranking/rankingview'], function(RankingView) {
+					self.loadView(new RankingView({
+						user : self.user,
+						alertview : self.alertview
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.RANKING);
+				});
+			} else {
+				this.user.set('urlFrom', urls.RANKING);
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},

@@ -1,10 +1,12 @@
 define([], function() {
     return {
     		/* Front */
+    		CREATE_GAMES : "create-games",
         HOME : "",
         LOGIN : "login",
         PRONOS : "pronos",
-        CREATE_GAMES : "create-games",
+        RANKING : "ranking",
+        
         
         /* Server */
        	/* Authentication */
