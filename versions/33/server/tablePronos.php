@@ -35,7 +35,7 @@
 			$reqTeam -> execute(array($row['id_teamA']));
 			$result = $reqTeam -> fetch();
 			
-			echo '<td class="teamA"><label class="control-label" for="prono'.$row['id_teamA'].$row['id_game'].'"> '.$result['name'].' </label></td>';
+			echo '<td class="teamA"><label class="control-label" for="prono'.$row['id_teamA'].$row['id_game'].'"> '.utf8_encode($result['name']).' </label></td>';
 			echo '<td class="scoreA"><select class="input-mini selectScore" id="prono'.$row['id_teamA'].$row['id_game'].'">';
 			for($i=0;$i<10;$i++){
 				echo '<option value="'.$i.'">'.$i.'</option>';
@@ -53,7 +53,7 @@
 			$reqTeam -> execute(array($row['id_teamB']));
 			$result = $reqTeam -> fetch();
 			
-			echo '<td class="teamB"><label class="control-label" for="prono'.$row['id_teamB'].'"> '.$result['name'].' </label></td>';
+			echo '<td class="teamB"><label class="control-label" for="prono'.$row['id_teamB'].'"> '.utf8_encode($result['name']).' </label></td>';
 			echo '</tr>';
 		}
 	}

@@ -103,9 +103,9 @@
 					echo '<tr style="border-top:solid 5px grey;font-weight:bold;">';
 					echo '<td class="schedule">'.date('d/m/Y',$game['schedule']).'</td>';
 					echo '<td class="scheduleTime">'.date('G',$game['schedule']).'h'.date('i',$game['schedule']).'</td>';
-					echo '<td class="teamA"> '.$game['teamA'].' </td>';
+					echo '<td class="teamA"> '.utf8_encode($game['teamA']).' </td>';
 					echo '<td class="separation"> <strong> '.$game['scoreA'].' - '.$game['scoreB'].' </strong> </td>';
-					echo '<td class="teamB"> '.$game['teamB'].' </td>';
+					echo '<td class="teamB"> '.utf8_encode($game['teamB']).' </td>';
 					echo '</tr>';
 					
 					$query ="SELECT * FROM pronos p INNER JOIN users u ON p.userid = u.userid WHERE p.id_game = '".$game['id_game']."' ORDER BY p.prono_date DESC";
@@ -113,7 +113,7 @@
 						echo '<tr>';
 						echo '<td class="schedule">'.date('d/m/Y',$prono['prono_date']).'</td>';
 						echo '<td class="scheduleTime">'.date('G',$prono['prono_date']).'h'.date('i',$prono['prono_date']).'</td>';
-						echo '<td class="teamA"> '.$prono['firstname'].' '.$prono['lastname'].' </td>';
+						echo '<td class="teamA"> '.utf8_encode($prono['firstname'].' '.$prono['lastname']).' </td>';
 						echo '<td class="separation"> <strong> '.$prono['scoreA'].' - '.$prono['scoreB'].' </strong> </td>';
 						echo '<td></td>';
 						echo '</tr>';

@@ -32,9 +32,9 @@
 		$query = "INSERT INTO teams(name,country,division) VALUES(:name,:country,:division)";
 		$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
 		$req -> execute(array(
-				'name' => $team,
-				'country' => $country,
-				'division' => $division
+				'name' => utf8_decode($team),
+				'country' => utf8_decode($country),
+				'division' => utf8_decode($division)
 		));
 	}
 
@@ -113,9 +113,9 @@
 			$query = "SELECT * FROM teams ORDER BY id_team DESC";
 			foreach ($bdd -> query($query) as $row) {
 				echo "<tr>";
-				echo "<td>".$row['name']."</td>";
-				echo "<td>".$row['country']."</td>";
-				echo "<td>".$row['division']."</td>";
+				echo "<td>".utf8_encode($row['name'])."</td>";
+				echo "<td>".utf8_encode($row['country'])."</td>";
+				echo "<td>".utf8_encode($row['division'])."</td>";
 				echo "</tr>";
 			}
 		?>

@@ -19,8 +19,8 @@
 		$req -> execute(array(
 				'email' => $userEmail,
 				'pwd' => $userPwd,
-				'firstname' => $firstname,
-				'lastname' => $lastname,
+				'firstname' => utf8_decode($firstname),
+				'lastname' => utf8_decode($lastname),
 				'accreditation' => $accreditation
 		));
 			session_start();

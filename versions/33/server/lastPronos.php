@@ -28,7 +28,7 @@
 		$reqTeam -> execute(array($game['id_teamA']));
 		$result = $reqTeam -> fetch();
 		
-		echo '<td class="teamA"> '.$result['name'].' </td>';
+		echo '<td class="teamA"> '.utf8_encode($result['name']).' </td>';
 		echo '<td class="scoreA">'.$row['scoreA'].'</td>
 		<td class="separation"> <strong> - </strong> </td>
 		<td class="scoreB">'.$row['scoreB'].'</td>';
@@ -38,7 +38,7 @@
 		$reqTeam -> execute(array($game['id_teamB']));
 		$result = $reqTeam -> fetch();
 		
-		echo '<td class="teamB"> '.$result['name'].' </td>';
+		echo '<td class="teamB"> '.utf8_encode($result['name']).' </td>';
 		echo '</tr>';
 	}
 

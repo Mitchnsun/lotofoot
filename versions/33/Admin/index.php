@@ -109,7 +109,7 @@
 				<?php
 					$query = "SELECT * FROM teams ORDER BY name ASC";
 					foreach ($bdd -> query($query) as $row) {
-						echo "<option value='".$row['id_team']."'>".$row['name']."</option>";
+						echo "<option value='".$row['id_team']."'>".utf8_encode($row['name'])."</option>";
 					}
 				?>
 				</select>
@@ -118,7 +118,7 @@
 				<?php
 					$query = "SELECT * FROM teams ORDER BY name ASC";
 					foreach ($bdd -> query($query) as $row) {
-						echo "<option value='".$row['id_team']."'>".$row['name']."</option>";
+						echo "<option value='".$row['id_team']."'>".utf8_encode($row['name'])."</option>";
 					}
 				?>
 				</select>
