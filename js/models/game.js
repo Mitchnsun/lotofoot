@@ -24,6 +24,7 @@ function($, _, Backbone, Pronos, Prono) {
     },
     ready : function(){ // Check if the two teams
       if ((this.get('teamA') && this.get('teamB')) != null) {
+      	this.set('pronos', this.pronos.toJSON());
         return true;
       } else{
         return false;

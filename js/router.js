@@ -5,6 +5,8 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
 		initialize : function(){
+			var self = this;
+			
 			// Global event bus & alert view
 			this.alertview = new AlertView();
 			this.eventBus = EventBus.create();
@@ -20,8 +22,6 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			['*action', 'defaultAction']
 		]),
 		start : function(options) {
-			var self = this;
-
 			// Models
 			this.user = options.user;
 			this.browserStorage = options.browserStorage;

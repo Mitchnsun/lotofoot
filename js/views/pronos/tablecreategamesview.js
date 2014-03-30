@@ -75,6 +75,8 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       
       if(ready){
       	this.$('input:submit').attr('disabled',true);
+      	//console.log(this.games.JSONForWS());
+      	//return;
       	LotofootApi.createGames({games : this.games.toJSON()}, function(){ /* Success */
       		self.$('input:submit').removeAttr("disabled");
       		self.games.reset();
