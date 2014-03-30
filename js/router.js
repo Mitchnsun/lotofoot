@@ -28,10 +28,10 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			this.teams = options.teams;
 
 			// Set header and footer
-			var headerView = new HeaderView({user : this.user});
-			var footerView = new FooterView();
-			headerView.render();
-			footerView.render();
+			this.headerView = new HeaderView({user : this.user});
+			this.footerView = new FooterView();
+			this.headerView.render();
+			this.footerView.render();
 
 			Backbone.history.start();
 		},
@@ -51,6 +51,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 						alertview : self.alertview
 					}));
 					self.view.render();
+					self.headerView.menuChange(urls.HOME);
 				});
 			} else {
 				this.user.set('urlFrom', urls.HOME);
@@ -70,6 +71,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 						eventBus : self.eventBus
 					}));
 					self.view.render();
+					self.headerView.menuChange(urls.LOGIN);
 				});
 			}
 		},
@@ -83,6 +85,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 						teams : self.teams
 					}));
 					self.view.render();
+					self.headerView.menuChange(urls.CREATE_GAMES);
 				});
 			} else {
 				this.user.set('urlFrom', urls.CREATE_GAMES);
@@ -99,6 +102,7 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 						teams : self.teams
 					}));
 					self.view.render();
+					self.headerView.menuChange(urls.PRONOS);
 				});
 			} else {
 				this.user.set('urlFrom', urls.PRONOS);

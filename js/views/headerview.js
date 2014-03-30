@@ -1,6 +1,6 @@
 // Filename: headerview.js
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/nls/header', 'text!tmpl/header.html'],
-function($, _, Backbone, te, i18n, tmpl) {
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/urls', 'i18n!tmpl/nls/header', 'text!tmpl/header.html'],
+function($, _, Backbone, te, urls, i18n, tmpl) {
     
     var ClassView = Backbone.View.extend({
         el : $('header'),
@@ -9,7 +9,10 @@ function($, _, Backbone, te, i18n, tmpl) {
         	this.user.on('change', this.manageNavBar, this); // listen to any change of the model user
         },
         render : function() {
-            $(this.el).html(te.renderTemplate(tmpl, {i18n : i18n}));
+            $(this.el).html(te.renderTemplate(tmpl, {
+            	i18n : i18n,
+            	urls : urls
+           }));
             
             if(this.user.get('isConnected') === false){ // Hide navigation bar if the user is not connected
             	this.$('div.nav-collapse, a.btn-navbar').hide();
@@ -23,6 +26,10 @@ function($, _, Backbone, te, i18n, tmpl) {
             	menuItems.hide();
             }
         },
+        menuChange : function(url) {
+        	this.$('ul.nav li').removeClass('active');
+        	this.$('li a[href="#' + url + '"]').parent().addClass('active');
+        }
     });
     
     // Our module now returns our view

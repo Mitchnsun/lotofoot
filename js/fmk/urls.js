@@ -18,6 +18,9 @@ define([], function() {
 				URL_GET_PRONOS : "server/pronos/getpronos.php",
 				
 				/* Get Common datas */
-				URL_GET_TEAMS : "server/common/getTeams.php"
+				URL_GET_TEAMS : "server/common/getTeams.php",
+				
+				/* External links */
+				EXT_BLOG : '/lotofoot/blog'
     };
 });
