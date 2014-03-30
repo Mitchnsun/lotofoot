@@ -20,11 +20,9 @@ function($, _, Backbone, Pronos, Prono) {
       this.set('addedAt', Date.now());
       this.set('id', this.cid);
       this.pronos = new Pronos();
-      this.set('pronos', this.pronos);
     },
     ready : function(){ // Check if the two teams
       if ((this.get('teamA') && this.get('teamB')) != null) {
-      	this.set('pronos', this.pronos.toJSON());
         return true;
       } else{
         return false;
