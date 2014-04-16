@@ -19,7 +19,7 @@
     
         $today = time();
     
-        $query = "INSERT INTO pronos(userid,id_game,scoreA,scoreB,prono_date) VALUES(:userid,:id_game,:scoreA,:scoreB,:prono_date)";
+        $query = "INSERT INTO pronos (userid,id_game,scoreA,scoreB,prono_date) VALUES (:userid,:id_game,:scoreA,:scoreB,:prono_date)";
         $req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
         $req -> execute(array(
                 'userid' => $userid,
