@@ -36,8 +36,8 @@
 			$user = array(
 				"userid" => $result['userid'],
 				"email" => $result['email'],
-				"firstname" => $result['firstname'],
-				"lastname" => $result['lastname'],
+				"firstname" => utf8_decode($result['firstname']),
+				"lastname" => utf8_decode($result['lastname']),
 				"accreditation" => $result['accreditation'],
 				"lastLogedIn" => $result['connectedAt'],
 				"sessionid" => session_id(),
