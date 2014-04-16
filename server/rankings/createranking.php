@@ -14,8 +14,8 @@
   $today = time();
 	$type = 'Overall';
 	$season = 2;
-  $date = DateTime::createFromFormat('d/m/Y', '01/07/2013');
-	$timeStamp = date_format($date, 'U');
+  $startDate = DateTime::createFromFormat('d/m/Y', '01/07/2013');
+	$timeStamp = date_format($startDate, 'U');
   
   try {
     require_once ('../connect_DB.php');
@@ -27,6 +27,7 @@
 	
 	$response['status'] = 200;
 	$response['from'] = $timeStamp;
+	$response['at'] = $today;
 	$response['games'] = array();
 	$response['users'] = array();
 	
@@ -72,7 +73,7 @@
 				'prediction' => floatval($prediction),
 				'pointByProno' => floatval($pointByProno),
 				'luckyRatio' => floatval($luckyRatio),
-				'displayName' => $user['firstname'].' '.$user['lastname']
+				'displayName' => utf8_encode($user['firstname'].' '.$user['lastname'])
 				)
 		);
 	}
@@ -83,13 +84,14 @@
 	$req -> execute(array('type' => $type, 'season' => $season));
 	
 	foreach($response['users'] as $user){
-		$query = "INSERT INTO rankings (at,type,userid,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
-				VALUES (:at,:type,:userid,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
+		$query = "INSERT INTO rankings (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
+				VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
 	  $req -> execute(array(
 		    'at' => $today,
 		    'type' => $type,
 		    'userid' => $user['userid'],
+		    'displayName' => utf8_decode($user['displayName']),
 		    'win' => $user['result']['W'],
 		    'draw' => $user['result']['D'],
 		    'loss' => $user['result']['L'],

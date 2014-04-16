@@ -21,7 +21,7 @@
   }
 	
 	$response['status'] = 200;
-	$response['novalid'] = array();
+	$response['prono_limit'] = 5;
 	$response['games'] = array();
 	
 	$querygames = "SELECT * FROM games WHERE scoreA != '' AND scoreB != '' ";
@@ -38,7 +38,7 @@
 		$querypronos = "SELECT COUNT(*) FROM pronos WHERE id_game=".$id;
 		$result = $bdd -> query($querypronos) -> fetch();
 		
-		if($result['COUNT(*)'] < 5){ // Limit of players
+		if($result['COUNT(*)'] < $response['prono_limit']){ // Limit of players
 			$data['numberOfPlayers'] = $result['COUNT(*)'];
 			array_push($response['games'],$data);
 		}
