@@ -1,3 +1,5 @@
+#betaImage {position:absolute;top:0;left:0;}
+
 /* Pronos view */
 #pronos .wrapper{border-bottom:1px solid #eeeeee;margin:5px 0px}
 #pronos .gameWrapper{font-size: 18px;font-weight: bold;color: #333;padding:5px 0px;line-height:45px;}
