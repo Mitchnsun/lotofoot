@@ -1,4 +1,4 @@
-define(['dust'], function(dust) {
+define(['dust', 'dust-helpers'], function(dust, dustHelpers) {
 
     /**
      * Dust Wrapper - with caching support
