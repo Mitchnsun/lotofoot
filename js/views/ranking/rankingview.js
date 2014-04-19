@@ -7,11 +7,17 @@ function($, _, Backbone, te, i18n, tmpl) {
 		initialize : function(options) {
 			this.user = options.user;
 			this.alertview = options.alertview;
+			this.ranking = options.ranking;
 		},
 		render : function() {
-			$(this.el).html(te.renderTemplate(tmpl, {
-				i18n : i18n
-			}));
+			var self = this;
+			
+			$.when(this.ranking.promise).done(function(){
+				$(self.el).html(te.renderTemplate(tmpl, {
+					i18n : i18n,
+					ranking : self.ranking.toJSON()
+				}));
+			});
 		}
 	});
 

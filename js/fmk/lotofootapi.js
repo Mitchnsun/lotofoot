@@ -77,6 +77,10 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getPronos : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_PRONOS, params, success, error);
 		},
+		/* Rankings */
+		getRanking : function(params, success, error){
+			return performWS('GET', urls.URL_GET_RANKING, params, success, error);
+		},
 		/* Common */
 		getTeams : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_TEAMS, params, success, error);

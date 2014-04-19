@@ -1,7 +1,8 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
+				'collections/ranking',
         'views/headerview', 'views/footerview'],
-function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
+function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
 		initialize : function(){
@@ -27,6 +28,8 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 			this.user = options.user;
 			this.browserStorage = options.browserStorage;
 			this.teams = options.teams;
+			this.ranking = new Ranking();
+			this.ranking.load();
 
 			// Set header and footer
 			this.headerView = new HeaderView({user : this.user});
@@ -66,7 +69,8 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				require(['views/homepageview'], function(HomepageView) {
 					self.loadView(new HomepageView({
 						user : self.user,
-						alertview : self.alertview
+						alertview : self.alertview,
+						ranking : self.ranking
 					}));
 					self.view.render();
 					self.headerView.menuChange(urls.HOME);
@@ -116,7 +120,8 @@ function($, _, Backbone, urls, EventBus, AlertView, HeaderView, FooterView) {
 				require(['views/ranking/rankingview'], function(RankingView) {
 					self.loadView(new RankingView({
 						user : self.user,
-						alertview : self.alertview
+						alertview : self.alertview,
+						ranking : self.ranking
 					}));
 					self.view.render();
 					self.headerView.menuChange(urls.RANKING);
