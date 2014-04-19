@@ -1,7 +1,11 @@
 <ul>
 	{#ranking}
 		<li>
-			<span class="badge badge-warning">{rank}</span>
+			{@if cond="{rank} == 1"}
+				<span class="badge badge-success">{rank}</span>
+			{:else}
+				<span class="badge badge-warning">{rank}</span>
+			{/if}
 			&nbsp; {displayName}
 		</li>
 	{/ranking}

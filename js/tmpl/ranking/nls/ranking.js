@@ -1,6 +1,15 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
-		title : "Classement"
+		draw : "N",
+		loss : "D",
+		luckyRatio : "Cocu Ratio",
+		player : "Joueur",
+		prediction : "Prédiction %",
+		score : "Score",
+		season : 'Saison',
+		title : "Classement",
+		total : "Total",
+		win : "V"
 	}
 });
