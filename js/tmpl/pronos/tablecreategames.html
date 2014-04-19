@@ -23,7 +23,7 @@
           <select name="minutes" class="input-mini minuteSchedule" data-ref='{id}'>
           	{?minute}<option value="{minute}">{minute}</option>{/minute}
             {#minutes}
-              <option value="{.}" {@if cond="{.} == {minute}"}selected{/if}>{.}</option>
+              <option value="{.}">{.}</option>
             {/minutes}
           </select>
         </td>
