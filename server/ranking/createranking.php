@@ -79,12 +79,12 @@
 	}
 
 	// Delete previous ranking
-	$queryDelete = "DELETE FROM rankings WHERE type=:type AND season=:season";
+	$queryDelete = "DELETE FROM ranking WHERE type=:type AND season=:season";
 	$req = $bdd -> prepare($queryDelete) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
 	$req -> execute(array('type' => $type, 'season' => $season));
 	
 	foreach($response['users'] as $user){
-		$query = "INSERT INTO rankings (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
+		$query = "INSERT INTO ranking (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
 				VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
 	  $req -> execute(array(

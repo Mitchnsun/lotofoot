@@ -37,6 +37,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 					i18n : i18n,
 					ranking : _.first(self.ranking.toJSON(),3)
 				}));
+				self.$("#rankingWidget li").first().find('span').removeClass('badge-warning').addClass('badge-success');
 			});
 		},
 		/*

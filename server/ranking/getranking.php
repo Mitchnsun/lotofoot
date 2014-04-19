@@ -15,13 +15,14 @@
 	$response['status'] = 200;
 	$response['users'] = array();
 	
-	$queryranking = "SELECT * FROM rankings WHERE type=:type AND season=:season ORDER BY score DESC, prediction DESC, loss ASC, displayName ASC";
+	$queryranking = "SELECT * FROM ranking WHERE type=:type AND season=:season ORDER BY score DESC, prediction DESC, loss ASC, displayName ASC";
 	$req = $bdd -> prepare($queryranking) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 	$req -> execute(array("type" => $type, "season" => $season));
 	while($result = $req -> fetch()){
 		$user = array(
 		    'at' => $result['at'],
 		    'type' => utf8_encode($result['type']),
+		    'rank' => $result['rank'],
 		    'userid' => $result['userid'],
 		    'displayName' => utf8_encode($result['displayName']),
 		    'win' => $result['win'],

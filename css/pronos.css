@@ -5,3 +5,6 @@
 #pronos .schedule, #pronos .prono{display:inline;}
 #pronos .prono, #pronos .scores{margin-left:25px;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
+
+/* Homepage Widgets */
+#rankingWidget ul {list-style-type: none;}
