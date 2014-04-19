@@ -21,9 +21,9 @@
 	while($result = $req -> fetch()){
 		$user = array(
 		    'at' => $result['at'],
-		    'type' => utf8_decode($result['type']),
+		    'type' => utf8_encode($result['type']),
 		    'userid' => $result['userid'],
-		    'displayName' => utf8_decode($result['displayName']),
+		    'displayName' => utf8_encode($result['displayName']),
 		    'win' => $result['win'],
 		    'draw' => $result['draw'],
 		    'loss' => $result['loss'],
