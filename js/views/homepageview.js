@@ -1,14 +1,15 @@
 // Filename: homepageview.js
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
-        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html',
+        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html', 'text!tmpl/homepage/rankingwidget.html',
         'views/homepage/newpronosview'],
-function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, NewPronosView) {
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPronosView) {
   
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
 		initialize : function(options) {
 			this.user = options.user;
 			this.alertview = options.alertview;
+			this.ranking = options.ranking;
 		},
 		render : function() {
 			var self = this;
@@ -26,6 +27,17 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, NewPronosView) {
 
 			//Render children view
 			this.newPronoView.render();
+			this.widgetsRender();
+		},
+		widgetsRender : function(){
+			var self = this;
+			
+			$.when(this.ranking.promise).done(function(){
+				self.$("#rankingWidget").html(te.renderTemplate(RankingTmpl, {
+					i18n : i18n,
+					ranking : _.first(self.ranking.toJSON(),3)
+				}));
+			});
 		},
 		/*
 		 * Events of the view
