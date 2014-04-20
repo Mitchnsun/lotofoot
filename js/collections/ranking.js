@@ -23,6 +23,7 @@ function($, _, Backbone, LotofootApi, Player) {
 				if(user.total > 0){
 					var player = new Player();
 					player.set(user);
+					player.formatData();
 					self.add(player);
 				}
 			});
