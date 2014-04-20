@@ -71,7 +71,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			});
 		},
 		refuseGame : function(ref) {
-			console.log('Refuse Game : ' + ref);
+			this.$('tr[ref="'+ ref +'"]').remove();
 		},
 	});
 
