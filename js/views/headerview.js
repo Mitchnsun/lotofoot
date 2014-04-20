@@ -1,6 +1,7 @@
 // Filename: headerview.js
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/urls', 'i18n!tmpl/nls/header', 'text!tmpl/header.html'],
-function($, _, Backbone, te, urls, i18n, tmpl) {
+define(['jquery', 'underscore', 'backbone', 'bootstrap',
+				'fmk/templateengine', 'fmk/urls', 'i18n!tmpl/nls/header', 'text!tmpl/header.html'],
+function($, _, Backbone, Bootstrap, te, urls, i18n, tmpl) {
     
     var ClassView = Backbone.View.extend({
         el : $('header'),

@@ -42,9 +42,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 		/*
 		 * Events of the view
 		 */
-		events : {
-
-		},
+		events : {},
 		/*
 		 * Clean views and objects delegated to this view
 		 */

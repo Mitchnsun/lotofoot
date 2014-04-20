@@ -37,6 +37,10 @@ require.config({
 		'dust-helpers' : {
 			deps : ['dust'],
 			exports : 'dust-helpers'
+		},
+		'bootstrap' : {
+			deps : ['jquery'],
+			exports : 'bootstrap'
 		}
 	}
 });
