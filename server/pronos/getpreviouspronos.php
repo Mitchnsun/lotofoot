@@ -11,8 +11,8 @@
 	}
 	session_start();
     
-  if ($_POST['userid'] == $_SESSION['userid']) {
-  	$userid = $_POST['userid'];
+  if ($_GET['userid'] == $_SESSION['userid']) {
+  	$userid = $_GET['userid'];
     $response['status'] = 200;
 		$games = array();
 		$today = time();
