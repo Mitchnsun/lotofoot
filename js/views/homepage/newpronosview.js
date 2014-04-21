@@ -61,7 +61,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		 * Events of the view
 		 */
 		events : {
-			"click td.buttons button" : "actionOnAGame"
+			"click .pronosTable .buttons button" : "actionOnAGame"
 		},
 		actionOnAGame : function(e) {
 			var role = $(e.currentTarget).attr('data-role');
@@ -80,8 +80,8 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		suggestScore : function(ref) {
 			var self = this;
 			var $rowGame = this.$('.rowGame[ref="' + ref + '"]');
-			var scoreA = $rowGame.find('.scoreA select').val();
-			var scoreB = $rowGame.find('.scoreB select').val();
+			var scoreA = $rowGame.find('.teamA select').val();
+			var scoreB = $rowGame.find('.teamB select').val();
 
 			$rowGame.find('.buttons button').attr('disabled', true);
 
@@ -95,19 +95,20 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				$rowGame.remove();
 				// Remove the row
 				$rowGame.find('.buttons button').attr('disabled', false);
+				self.render();
 			}, function(msg) {// error
 				self.alertview.displayError(msg.status, msg.errorCode);
 				$rowGame.find('.buttons button').attr('disabled', false);
 			});
 		},
 		refuseGame : function(ref) {
-			this.$('tr[ref="'+ ref +'"]').remove();
+			this.$('div[ref="'+ ref +'"]').remove();
 		},
 		updateProno : function(ref){
 			var self = this;
 			var $rowProno = this.$('.rowProno[ref="' + ref + '"]');
-			var scoreA = $rowProno.find('.scoreA select').val();
-			var scoreB = $rowProno.find('.scoreB select').val();
+			var scoreA = $rowProno.find('.teamA select').val();
+			var scoreB = $rowProno.find('.teamB select').val();
 
 			$rowProno.find('.buttons button').attr('disabled', true);
 
