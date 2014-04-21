@@ -39,7 +39,7 @@
 	<table id="pronosToUpdate" class="table">
 		<tbody>
 			{#previousPronos}
-				<tr class="rowProno" ref="{prono.id_prono}">
+				<tr class="rowProno" ref="{id_game}">
 					<td class="schedule">{schedule}</td>
 					<td class="scheduleTime">{scheduleTime}</td>
 					<td class="teamA"><label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label></td>
@@ -66,7 +66,7 @@
 					</select></td>
 					<td class="teamB"><label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label></td>
 					<td class="buttons">
-					<button class="btn btn-success btn-mini" type="button" data-role="update" data-ref="{prono.id_prono}">
+					<button class="btn btn-success btn-mini" type="button" data-role="update" data-ref="{id_game}">
 						<i class="icon-ok"></i>
 					</button></td>
 				</tr>

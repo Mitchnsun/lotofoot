@@ -113,7 +113,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 
 			LotofootApi.updateProno({
 				userid : this.user.get('userid'),
-				id_prono : ref,
+				id_game : ref,
 				scoreA : scoreA,
 				scoreB : scoreB
 			}, function(msg) {// success
