@@ -78,7 +78,7 @@ function($, _, Backbone, LotofootApi, country) {
     	var team = this.getNationInfos(id);
     	if(!$.isEmptyObject(team)){
     		/* Do Nothing the team is a country */
-    	}else if(country === undefined){
+    	}else if(country === undefined || country == ''){
     		_.every(this.get('clubs'), function(object){
     			team = self.getClubInfos(id,object.id);
     			if(!$.isEmptyObject(team)){
