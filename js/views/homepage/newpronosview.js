@@ -8,25 +8,54 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			this.user = options.user;
 			this.el = options.el;
 			this.alertview = options.alertview;
+			this.teams = options.teams;
 		},
 		render : function() {
 			var self = this;
-
-			LotofootApi.getNewPronos({
-				userid : this.user.get('userid')
-			}, function(msg) {// success
-				if (msg.pronos.length > 0) {
+			var scoreArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+			var params = {userid : this.user.get('userid')};
+			
+			$.when(LotofootApi.getNewPronos(params), LotofootApi.getPreviousPronos(params))
+			.then(function(msg_newpronos,msg_previous){
+				var dataNewPronos = self.parseData(msg_newpronos[0]);
+				var dataPreviousPronos = self.parseData(msg_previous[0]);
+				
+				_.each(dataPreviousPronos.games, function(game){
+					game.teamA = self.teams.getTeams(game.id_teamA);
+					game.teamB = self.teams.getTeams(game.id_teamB);
+				});
+				
+				if (dataNewPronos.pronos.length == 0 && dataPreviousPronos.games.length == 0) {
+					$(self.el).remove();// the div "new pronos" is removed
+				} else {
 					$(self.el).html(te.renderTemplate(tmpl, {
 						i18n : i18n,
-						pronos : msg.pronos
+						pronos : dataNewPronos.pronos,
+						previousPronos : dataPreviousPronos.games,
+						score : scoreArray
 					}));
-				} else {
-					$(self.el).remove();
-					// the div "new pronos" is removed
 				}
-			}, function(msg) {// error
-				self.alertview.displayError(msg.status, msg.errorCode);
 			});
+		},
+		parseData : function(data){
+			var jsondata;
+			try {// Parse JSON
+				jsondata = $.parseJSON(data);
+			} catch(err) {
+				jsondata = {
+					status : 422,
+					errorCode : 'JSON',
+					error : err,
+					data : data
+				};
+			}
+
+			if (jsondata.status == 200) {
+				return jsondata;
+			} else {
+				this.alertview.displayError(jsondata.status, jsondata.errorCode);
+			}
+			return {};
 		},
 		/*
 		 * Events of the view
@@ -39,9 +68,10 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			var ref = $(e.currentTarget).attr('data-ref');
 			if (role == "bet") {// User suggests a score for the game
 				this.suggestScore(ref);
-			}
-			if (role == "nobet") {// User decides to not bet on this game
+			}else if (role == "nobet") {// User decides to not bet on this game
 				this.refuseGame(ref);
+			}else if (role == "update") {// User decides to update his prono
+				this.updateProno(ref);
 			}
 		},
 		/*
@@ -73,6 +103,27 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		refuseGame : function(ref) {
 			this.$('tr[ref="'+ ref +'"]').remove();
 		},
+		updateProno : function(ref){
+			var self = this;
+			var $rowProno = this.$('.rowProno[ref="' + ref + '"]');
+			var scoreA = $rowProno.find('.scoreA select').val();
+			var scoreB = $rowProno.find('.scoreB select').val();
+
+			$rowProno.find('.buttons button').attr('disabled', true);
+
+			LotofootApi.updateProno({
+				userid : this.user.get('userid'),
+				id_prono : ref,
+				scoreA : scoreA,
+				scoreB : scoreB
+			}, function(msg) {// success
+				self.alertview.displayAlert('success', 'success', i18n.updateProno);
+				$rowProno.find('.buttons button').attr('disabled', false);
+			}, function(msg) {// error
+				self.alertview.displayError(msg.status, msg.errorCode);
+				$rowProno.find('.buttons button').attr('disabled', false);
+			});
+		}
 	});
 
 	// Our module now returns our view

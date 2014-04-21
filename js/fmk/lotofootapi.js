@@ -80,6 +80,9 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getPreviousPronos : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_PREVIOUS_PRONOS, params, success, error);
 		},
+		updateProno : function(params, success, error){
+			return performWS('POST', urls.URL_UPDATE_PRONO, params, success, error);
+		},
 		/* Rankings */
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);

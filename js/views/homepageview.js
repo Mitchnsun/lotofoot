@@ -9,6 +9,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 		initialize : function(options) {
 			this.user = options.user;
 			this.alertview = options.alertview;
+			this.teams = options.teams;
 			this.ranking = options.ranking;
 		},
 		render : function() {
@@ -22,7 +23,8 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 			this.newPronoView = new NewPronosView({
 				el : '#newpronos',
 				user : this.user,
-				alertview : this.alertview
+				alertview : this.alertview,
+				teams : this.teams
 			});
 
 			//Render children view

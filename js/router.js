@@ -70,6 +70,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 					self.loadView(new HomepageView({
 						user : self.user,
 						alertview : self.alertview,
+						teams : self.teams,
 						ranking : self.ranking
 					}));
 					self.view.render();

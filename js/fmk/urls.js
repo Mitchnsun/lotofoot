@@ -19,6 +19,7 @@ define([], function() {
 				URL_CREATE_GAMES : "server/pronos/creategames.php",
 				URL_GET_PRONOS : "server/pronos/getpronos.php",
 				URL_GET_PREVIOUS_PRONOS : "server/pronos/getpreviouspronos.php",
+				URL_UPDATE_PRONO : "server/pronos/updateprono.php",
 				
 				/* Rankings */
 				URL_GET_RANKING : "server/ranking/getranking.php",
