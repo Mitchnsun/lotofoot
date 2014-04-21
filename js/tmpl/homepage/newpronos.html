@@ -1,49 +1,47 @@
 {?pronos}
 	<h2>{i18n.title}</h2>
-	<table id="pronosToDo" class="table">
-		<tbody>
-			{#pronos}
-				<tr class="rowGame" ref="{id}">
-					<td class="schedule">{date}</td>
-					<td class="scheduleTime">{schedule}</td>
-					<td class="teamA"><label class="control-label" for="prono{teamA.id}{id}">{teamA.name}</label></td>
-					<td class="scoreA">
+	<div id="pronosToDo" class="pronosTable">
+		{#pronos}
+			<div class="row-fluid rowGame" ref="{id}">
+				<div class="span3 schedule">{date} {schedule}</div>
+				<div class="span3 teamA">
+					<label class="control-label" for="prono{teamA.id}{id}">{teamA.name}</label>
 					<select class="input-mini selectScore" id="prono{teamA.id}{id}">
 						{#score}
 							<option value="{.}">{.}</option>
 						{/score}
-					</select></td>
-					<td class="separation"><strong> - </strong></td>
-					<td class="scoreB">
+					</select>
+				</div>
+				<div class="span1 separation"><strong> - </strong></div>
+				<div class="span3 teamB">
+					<label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label>
 					<select class="input-mini selectScore" id="prono{teamB.id}{id}">
 						{#score}
 							<option value="{.}">{.}</option>
 						{/score}
-					</select></td>
-					<td class="teamB"><label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label></td>
-					<td class="buttons">
+					</select>
+				</div>
+				<div class="span2 buttons">
 					<button class="btn btn-success btn-mini" type="button" data-role="bet" data-ref="{id}">
 						<i class="icon-ok"></i>
 					</button> &nbsp;
 					<button class="btn btn-danger btn-mini" type="button" data-role="nobet" data-ref="{id}">
 						<i class="icon-remove"></i>
-					</button></td>
-				</tr>
-			{/pronos}
-		</tbody>
-	</table>
+					</button>
+				</div>
+			</div>
+		{/pronos}
+	</div>
 {/pronos}
 {?pronos}{?previousPronos}<hr>{/previousPronos}{/pronos}
 {?previousPronos}
 	<h2>{i18n.last_pronos}</h2>
-	<table id="pronosToUpdate" class="table">
-		<tbody>
-			{#previousPronos}
-				<tr class="rowProno" ref="{id_game}">
-					<td class="schedule">{schedule}</td>
-					<td class="scheduleTime">{scheduleTime}</td>
-					<td class="teamA"><label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label></td>
-					<td class="scoreA">
+	<div id="pronosToUpdate" class="pronosTable">
+		{#previousPronos}
+			<div class="row-fluid rowProno" ref="{id_game}">
+				<div class="span3 schedule">{schedule} {scheduleTime}</div>
+				<div class="span3 teamA">
+					<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
 					<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
 						{#score scoreA=prono.scoreA}
 							{@if cond="{scoreA} == {.}"}
@@ -52,9 +50,11 @@
 								<option value="{.}">{.}</option>
 							{/if}
 						{/score}
-					</select></td>
-					<td class="separation"><strong> - </strong></td>
-					<td class="scoreB">
+					</select>
+				</div>
+				<div class="span1 separation"><strong> - </strong></div>
+				<div class="span3 teamB">
+					<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
 					<select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
 						{#score scoreB=prono.scoreB}
 							{@if cond="{scoreB} == {.}"}
@@ -63,14 +63,14 @@
 								<option value="{.}">{.}</option>
 							{/if}
 						{/score}
-					</select></td>
-					<td class="teamB"><label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label></td>
-					<td class="buttons">
+					</select>
+				</div>
+				<div class="span2 buttons">
 					<button class="btn btn-success btn-mini" type="button" data-role="update" data-ref="{id_game}">
 						<i class="icon-ok"></i>
-					</button></td>
-				</tr>
-			{/previousPronos}
-		</tbody>
-	</table>
+					</button>
+				</div>
+			</div>
+		{/previousPronos}
+	</div>
 {/previousPronos}

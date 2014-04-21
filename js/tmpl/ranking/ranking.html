@@ -1,12 +1,12 @@
-<div class="row">
-	<div class="span12">
+<div class="row-fluid">
+	<div class="span12" style="padding:0 10px;">
 		<h2>{i18n.title} - {i18n.season} 2013/2014</h2>
 		<table class="table table-striped table-hover table-condensed">
 			<thead>
 		    <tr>
 		      <th>#</th><th>{i18n.player}</th><th>{i18n.score}</th>
 		      <th>{i18n.win}</th><th>{i18n.draw}</th><th>{i18n.loss}</th><th>{i18n.total}</th>
-		      <th>{i18n.prediction}</th><th>{i18n.luckyRatio}</th>
+		      <th>{i18n.prediction}</th><th class="hidden-phone">{i18n.luckyRatio}</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -18,7 +18,7 @@
 		  		{/if}
 		  			<td>{rank}</td><td>{displayName}</td><td>{score}</td>
 		  			<td>{win}</td><td>{draw}</td><td>{loss}</td><td>{total}</td>
-		  			<td>{prediction}</td><td>{luckyRatio}</td>
+		  			<td>{prediction}</td><td class="hidden-phone">{luckyRatio}</td>
 		  		</tr>
 				{/ranking}
 		  </tbody>

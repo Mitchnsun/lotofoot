@@ -8,5 +8,36 @@
 #pronos .prono, #pronos .scores{margin-left:25px;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
 
+/* Homepage */
+.pronosTable {font-size:15px;}
+.pronosTable .control-label {display:inline;}
+.pronosTable select {margin: 0px 5px;}
+.pronosTable .teamA {text-align: right;}
+.rowGame, .rowProno {border-spacing: 2px;border-bottom: 1px solid #dddddd;}
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	.hero-unit {padding:30px;}
+	.pronosTable .span12 {width: 100%;*width: 99.94680851063829%;}
+  .pronosTable .span11 {width: 91.43646408839778%;*width: 91.38327259903608%;}
+  .pronosTable .span10 {width: 82.87292817679558%;*width: 82.81973668743387%;}
+  .pronosTable .span9 {width: 74.30939226519337%;*width: 74.25620077583166%;}
+  .pronosTable .span8 {width: 65.74585635359117%;*width: 65.69266486422946%;}
+  .pronosTable .span7 {width: 57.18232044198895%;*width: 57.12912895262725%;}
+  .pronosTable .span6 {width: 48.61878453038674%;*width: 48.56559304102504%;}
+  .pronosTable .span5 {width: 40.05524861878453%;*width: 40.00205712942283%;}
+  .pronosTable .span4 {width: 31.491712707182323%;*width: 31.43852121782062%;}
+  .pronosTable .span3 {width: 25%;*width: 25%;}
+  .pronosTable .span2 {width: 14.3646408839779%;*width: 14.311449394616199%;}
+  .pronosTable .span1 {width: 5.801104972375691%;*width: 5.747913483013988%;}
+  .pronosTable [class*="span"]{float:left;}
+  #pronos .gameWrapper{position:relative;font-size:15px;}
+  #pronos i {position:absolute;right:0;top:0;}
+}
+@media (max-width: 480px) {
+	body {padding-right:10px;padding-left:10px;}
+	h2{font-size:24px;}
+	.hero-unit {padding:15px;}
+	.pronosTable .span3 {width: 26%;*width: 26%;}
+}
 /* Homepage Widgets */
 #rankingWidget ul {list-style-type: none;}
