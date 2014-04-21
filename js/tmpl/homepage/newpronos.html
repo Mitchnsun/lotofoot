@@ -33,7 +33,7 @@
 		</tbody>
 	</table>
 {/pronos}
-<hr>
+{?pronos}{?previousPronos}<hr>{/previousPronos}{/pronos}
 {?previousPronos}
 	<h2>{i18n.last_pronos}</h2>
 	<table id="pronosToUpdate" class="table">
