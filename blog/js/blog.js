@@ -24,7 +24,7 @@ function bindVersionEvents() {
   if (version == "0.1") {
 
   } else if (version == "0.2") {
-    $('#formVersionName').on("submit", events.pollForNameVersion);
+  	
   }
 }
 
@@ -34,14 +34,10 @@ function customDisplayForVersion() {
   if (version == "0.1") {
 
   } else if (version == "0.2") {
-    var showPollResults = localStorage["versionName" + version] !== undefined
-        && parseInt(localStorage["voteTime"],10) + oneDayToSeconds > Date.now();
-    if (showPollResults){
-      $("#formVersionName").remove();
-      $("#pollResults").show();
-      $('#pollResults .alert-success').remove();
-      webService.loadPollResult('versionName');
-    }
+    $("#formVersionName").remove();
+    $("#pollResults").show();
+    $('#pollResults .alert-success').remove();
+    webService.loadPollResult('versionName');
     buildProgress($('.percentage'));
   }
 }
@@ -100,15 +96,10 @@ var events = {
   },
   pollForNameVersion : function(e) {
     e.preventDefault();
-    var choice = $("#formVersionName input:checked").val();
-    if (choice === undefined) {
-      $("#formVersionName .alert").show();
-    } else {
-      $("#formVersionName").remove();
-      $("#pollResults").show();
-      localStorage["versionName" + version] = choice;
-      webService.loadPollResult('versionName',choice);
-    }
+    $("#formVersionName").remove();
+    $("#pollResults").show();
+    localStorage["versionName" + version] = choice;
+    webService.loadPollResult('versionName',choice);
   },
   hidePopUp : function(e){
     var logBox = $('#logBox');
