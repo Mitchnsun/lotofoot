@@ -20,6 +20,11 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				var dataNewPronos = self.parseData(msg_newpronos[0]);
 				var dataPreviousPronos = self.parseData(msg_previous[0]);
 				
+				_.each(dataNewPronos.pronos, function(prono){
+					prono.teamA = self.teams.getTeams(prono.id_teamA);
+					prono.teamB = self.teams.getTeams(prono.id_teamB);
+				});
+				
 				_.each(dataPreviousPronos.games, function(game){
 					game.teamA = self.teams.getTeams(game.id_teamA);
 					game.teamB = self.teams.getTeams(game.id_teamB);
