@@ -1,64 +1,67 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="Matthieu Compérat">
-        <title>Lotofoot</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Matthieu Compérat">
+		<link rel="icon" type="image/gif" href="img/ico_FootballLarge.gif" />
+		<title>Lotofoot</title>
 
-        <!-- CSS -->
-        <!-- Bootstrap v2.3.2 -->
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="css/jquery-ui.min.css" rel="stylesheet">
-        <link href="css/pronos.css" rel="stylesheet">
-    </head>
-    <body>
-        <header></header>
-        <div id="container">
-            <div class="container-fluid">
-            	<div class="span3 offset4">
-            		<p>Chargement en cours...</p>
-            	</div>
-                <div class="progress progress-striped active span3 offset4">
-                    <div class="bar" style="width: 100%;"></div>
-                </div>
-            </div>
-        </div>
-        <footer></footer>
+		<!-- CSS -->
+		<!-- Bootstrap v2.3.2 -->
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<style type="text/css">
+			body {
+				padding-top: 60px;
+				padding-bottom: 40px;
+			}
+		</style>
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/jquery-ui.min.css" rel="stylesheet">
+		<link href="css/pronos.css" rel="stylesheet">
+	</head>
+	<body>
+		<header></header>
+		<div id="container">
+			<div class="container-fluid">
+				<div class="span3 offset4">
+					<p>
+						Chargement en cours...
+					</p>
+				</div>
+				<div class="progress progress-striped active span3 offset4">
+					<div class="bar" style="width: 100%;"></div>
+				</div>
+			</div>
+		</div>
+		<footer></footer>
 
-        <!-- Le javascript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <!-- Load the script "js/main.js" as our entry point -->
-        <script data-main="js/main" src="libs/require.js"></script>
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<!-- Load the script "js/main.js" as our entry point -->
+		<script data-main="js/main" src="libs/require.js"></script>
 
-        <!--[if lt IE 9]>
-        	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        
-        <!-- Google Analytics -->
-        <script type="text/javascript">
-			/*var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-36979515-1']);
-			_gaq.push(['_setDomainName', 'mcomper.at']);
-			_gaq.push(['_trackPageview']);
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 
-			(function() {
-				var ga = document.createElement('script');
-				ga.type = 'text/javascript';
-				ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(ga, s);
-			})();*/
+		<!-- Google Analytics -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			 _gaq.push(['_setAccount', 'UA-36979515-1']);
+			 _gaq.push(['_setDomainName', 'mcomper.at']);
+			 _gaq.push(['_trackPageview']);
+
+			 (function() {
+			 var ga = document.createElement('script');
+			 ga.type = 'text/javascript';
+			 ga.async = true;
+			 ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+			 var s = document.getElementsByTagName('script')[0];
+			 s.parentNode.insertBefore(ga, s);
+			 })();
 		</script>
-    </body>
+	</body>
 </html>
