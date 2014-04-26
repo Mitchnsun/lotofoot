@@ -97,10 +97,8 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				scoreB : scoreB
 			}, function(msg) {// success
 				self.alertview.displayAlert('success', 'success', i18n.AddProno);
-				$rowGame.remove();
-				// Remove the row
+				$rowGame.remove(); // Remove the row
 				$rowGame.find('.buttons button').attr('disabled', false);
-				self.render();
 			}, function(msg) {// error
 				self.alertview.displayError(msg.status, msg.errorCode);
 				$rowGame.find('.buttons button').attr('disabled', false);
