@@ -8,19 +8,19 @@
 		    <tr>
 		      <th>#</th><th>{i18n.player}</th><th>{i18n.score}</th>
 		      <th>{i18n.win}</th><th>{i18n.draw}</th><th>{i18n.loss}</th><th>{i18n.total}</th>
-		      <th>{i18n.prediction}</th><th class="hidden-phone">{i18n.luckyRatio}</th>
+		      <th class="hidden-phone">{i18n.prediction}</th><th class="hidden-phone">{i18n.luckyRatio}</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  	{#ranking}
-		  		{@if cond="{rank} < 4"}
+		  		{@lt key="{rank}" value=4}
 		  		<tr class="success">
 		  		{:else}
 		  		<tr>
-		  		{/if}
+		  		{/lt}
 		  			<td>{rank}</td><td>{displayName}</td><td>{score}</td>
 		  			<td>{win}</td><td>{draw}</td><td>{loss}</td><td>{total}</td>
-		  			<td>{prediction}</td><td class="hidden-phone">{luckyRatio}</td>
+		  			<td class="hidden-phone">{prediction}</td><td class="hidden-phone">{luckyRatio}</td>
 		  		</tr>
 				{/ranking}
 		  </tbody>
