@@ -3,7 +3,7 @@
 	<div id="pronosToDo" class="pronosTable">
 		{#pronos}
 			<div class="row-fluid rowGame" ref="{id}">
-				<div class="span3 schedule">{date} {schedule}</div>
+				<div class="schedule">{date} {schedule}</div>
 				<div class="span3 teamA">
 					<label class="control-label" for="prono{teamA.id}{id}">{teamA.name}</label>
 					<select class="input-mini selectScore" id="prono{teamA.id}{id}">
@@ -12,14 +12,14 @@
 						{/score}
 					</select>
 				</div>
-				<div class="span1 separation"><strong> - </strong></div>
+				<div class="separation"><strong> - </strong></div>
 				<div class="span3 teamB">
-					<label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label>
 					<select class="input-mini selectScore" id="prono{teamB.id}{id}">
 						{#score}
 							<option value="{.}">{.}</option>
 						{/score}
 					</select>
+					<label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label>
 				</div>
 				<div class="span2 buttons">
 					<button class="btn btn-success btn-mini" type="button" data-role="bet" data-ref="{id}">
@@ -39,7 +39,7 @@
 	<div id="pronosToUpdate" class="pronosTable">
 		{#previousPronos}
 			<div class="row-fluid rowProno" ref="{id_game}">
-				<div class="span3 schedule">{schedule} {scheduleTime}</div>
+				<div class="schedule">{schedule} {scheduleTime}</div>
 				<div class="span3 teamA">
 					<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
 					<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
@@ -52,9 +52,8 @@
 						{/score}
 					</select>
 				</div>
-				<div class="span1 separation"><strong> - </strong></div>
+				<div class="separation"><strong> - </strong></div>
 				<div class="span3 teamB">
-					<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
 					<select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
 						{#score scoreB=prono.scoreB}
 							{@if cond="{scoreB} == {.}"}
@@ -64,6 +63,7 @@
 							{/if}
 						{/score}
 					</select>
+					<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
 				</div>
 				<div class="span2 buttons">
 					<button class="btn btn-success btn-mini" type="button" data-role="update" data-ref="{id_game}">
