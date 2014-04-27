@@ -1,4 +1,4 @@
-var version = '0.1'; // version in production
+var version = '0.2'; // version in production
 var urlHTMLDefault = 'version/blogv' + version + '.html';
 
 /* DOM Ready and events function */

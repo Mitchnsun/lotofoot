@@ -268,7 +268,7 @@ a:hover, a:focus {
 #logElement{
   cursor:pointer;
   font-size:0.7em;
-  position:fixed;
+  position:absolute;
   top:5px;
   left:5px;
   -webkit-border-radius: 15px;
