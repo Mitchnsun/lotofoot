@@ -10,6 +10,7 @@ define({
 		season : 'Saison',
 		title : "Classement",
 		total : "Total",
+		last_update : "Dernière mise à jour",
 		win : "V"
 	}
 });

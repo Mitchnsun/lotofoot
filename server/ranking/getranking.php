@@ -20,6 +20,7 @@
 	$req -> execute(array("type" => $type, "season" => $season));
 	while($result = $req -> fetch()){
 		$user = array(
+				'update' => date('d/m/Y',$result['at'])." ".date('G',$result['at']).'h'.date('i',$result['at']),
 		    'at' => $result['at'],
 		    'type' => utf8_encode($result['type']),
 		    'rank' => $result['rank'],
