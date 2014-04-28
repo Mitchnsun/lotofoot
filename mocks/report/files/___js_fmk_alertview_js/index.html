@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">67.68</p>
+      <p class="stat">68.80</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">88</p>
+      <p class="stat">96</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">23.09</p>
+      <p class="stat">21.24</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.52</p>
+      <p class="stat">0.53</p>
     </div>
   </div>
 </div>
@@ -90,93 +90,101 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'i18n!tmpl/fmk/nls/alert', 'text!tmpl/fmk/alert.html'], function($, _, Backbone, te, i18n, tmpl) {
+    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone',
+				'fmk/templateengine', 'i18n!tmpl/fmk/nls/alert', 'text!tmpl/fmk/alert.html'],
+function($, _, Backbone, te, i18n, tmpl) {
 
-    var ClassView = Backbone.View.extend({
-        el : $('#container'),
-        render : function(type) {
-            this.dismissAlert();
-            $(this.el).prepend(te.renderTemplate(tmpl, {
-                type : type,
-                msg : this.msg
-            }));
-        },
-        /*
-         * displayError : error messages are displayed with a status (ex: 500) and a code
-         */
-        displayError : function(status, code) {
-            this.msg = {
-                "Title" : i18n.default_Title
-            };
+	var ClassView = Backbone.View.extend({
+		el : $('#container'),
+		render : function(type) {
+			this.dismissAlert();
+			$(this.el).prepend(te.renderTemplate(tmpl, {
+				type : type,
+				msg : this.msg
+			}));
+		},
+		/*
+		 * displayError : error messages are displayed with a status (ex: 500) and a code
+		 */
+		displayError : function(status, code) {
+			this.msg = {
+				"Title" : i18n.default_Title
+			};
 
-            if (status) {
-                this.msg.status = i18n[status];
-            }
-            if (code) {
-                this.msg.message = i18n[code];
-            } else {
-                this.msg.message = this.getMessage(status);
-            }
+			if (status) {
+				this.msg.status = i18n[status];
+			}
+			if (code) {
+				this.msg.message = i18n[code];
+			} else {
+				this.msg.message = this.getMessage(status);
+			}
 
-            var type = this.setType('error');
+			var type = this.setType('error');
 
-            this.render(type);
-        },
-        /*
-         * Three type of alert : success, info and warning (default).
-         * code is for the message to display.
-         */
-        displayAlert : function(type, title, code) {
-            if (i18n[title + "_Title"] === undefined) {
-                this.msg = {
-                    "Title" : i18n.default_Title
-                };
-            } else {
-                this.msg = {
-                    "Title" : i18n[title + "_Title"]
-                };
-            }
+			this.render(type);
+		},
+		/*
+		 * Three type of alert : success, info and warning (default).
+		 * code is for the message to display.
+		 */
+		displayAlert : function(type, title, msg) {
+			if (i18n[title + "_Title"] !== undefined) {
+				this.msg = {
+					"Title" : i18n[title + "_Title"]
+				};
+			} else {
+				this.msg = {
+					"Title" : title
+				};
+			}
 
-            if (code) {
-                this.msg.message = i18n[code];
-            }
+			if (msg) {
+				this.msg.message = msg;
+			}
 
-            type = this.setType(type);
+			type = this.setType(type);
 
-            this.render(type);
-        },
-        getMessage : function(status) {
-            return i18n['message_' + status];
-        },
-        setType : function(type) {// add the specific class to the alert bloc
-            switch(type) {
-                case 'error':
-                    return 'alert-error';
-                case 'success':
-                    return 'alert-success';
-                case 'info':
-                    return 'alert-info';
-                default:
-                    return '';
-            }
-        },
-        /*
-         * Events of the view
-         * dismissAlert : function to remove the alert from DOM
-         */
-        events : {
-            'click .close' : 'dismissAlert'
-        },
-        dismissAlert : function(e) {
-            if (e !== undefined) {
-                e.preventDefault();
-            }
-            this.$('.AlertView').remove();
-        }
-    });
+			this.render(type);
+		},
+		getMessage : function(status) {
+			return i18n['message_' + status];
+		},
+		setType : function(type) {// add the specific class to the alert bloc
+			switch(type) {
+				case 'error':
+					return 'alert-error';
+				case 'success':
+					return 'alert-success';
+				case 'info':
+					return 'alert-info';
+				default:
+					return '';
+			}
+		},
+		/*
+		 * Events of the view
+		 * dismissAlert : function to remove the alert from DOM
+		 */
+		events : {
+			'click .close' : 'dismissAlert'
+		},
+		dismissAlert : function(e) {
+			if (e !== undefined) {
+				e.preventDefault();
+			}
+			this.$('.AlertView').remove();
+		},
+		/*
+		 * Unbind : the view is removed from the DOM
+		 */
+		unbind : function() {
+			this.undelegateEvents();
+		}
+	});
 
-    // Our module now returns our view
-    return ClassView;
+	// Our module now returns our view
+	return ClassView;
 });</textarea>
   </div>
 </div>

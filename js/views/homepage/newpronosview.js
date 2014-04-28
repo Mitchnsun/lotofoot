@@ -30,7 +30,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 					game.teamB = self.teams.getTeams(game.id_teamB);
 				});
 				
-				if (dataNewPronos.pronos.length == 0 && dataPreviousPronos.games.length == 0) {
+				if (dataNewPronos.pronos.length === 0 && dataPreviousPronos.games.length === 0) {
 					$("#newpronos h3").html(i18n.no_pronos);// the div "new pronos" is removed
 				} else {
 					$(self.el).html(te.renderTemplate(tmpl, {

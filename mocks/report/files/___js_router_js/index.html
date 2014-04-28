@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">66.53</p>
+      <p class="stat">68.56</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">76</p>
+      <p class="stat">142</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">17.72</p>
+      <p class="stat">31.73</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.76</p>
+      <p class="stat">1.54</p>
     </div>
   </div>
 </div>
@@ -91,81 +91,147 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="span12">// Filename: router.js
-define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus',
-        'views/headerview', 'views/footerview', 'views/homepageview', 'views/authentication/loginview',
-        'views/pronos/createpronoview'],
-function($, _, Backbone, urls, EventBus, HeaderView, FooterView, HomepageView, LoginView, CreatePronoView) {
+define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
+				'collections/ranking',
+        'views/headerview', 'views/footerview'],
+function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterView) {
+	
+	var AppRouter = Backbone.Router.extend({
+		initialize : function(){
+			var self = this;
+			
+			// Global event bus & alert view
+			this.alertview = new AlertView();
+			this.eventBus = EventBus.create();
+			this.listenTo(this.eventBus, 'url:change', function(e) {
+				self.navigate(e.url, {trigger : true});
+			});
+		},
+		routes : _.object([
+			[urls.CREATE_GAMES, 'creategames'],
+			[urls.HOME, 'homepage'],
+			[urls.LOGIN, 'login'],
+			[urls.PRONOS, 'pronos'],
+			[urls.RANKING, 'ranking'],
+			['*action', 'defaultAction']
+		]),
+		start : function(options) {
+			// Models
+			this.user = options.user;
+			this.browserStorage = options.browserStorage;
+			this.teams = options.teams;
+			this.ranking = new Ranking();
+			this.ranking.load();
 
-    var AppRouter = Backbone.Router.extend({
-        routes : _.object([
-            [urls.HOME, 'homepage'],
-            [urls.LOGIN, 'login'],
-            [urls.CREATE_PRONO, 'createprono'],
-            ['*action', 'defaultAction']
-        ])
-    });
+			// Set header and footer
+			this.headerView = new HeaderView({user : this.user});
+			this.footerView = new FooterView();
+			this.headerView.render();
+			this.footerView.render();
 
-    var initialize = function(options) {
-    	
-        var self = this;
-        var app_router = new AppRouter();
-        
-        this.user = options.user;
-        this.browserStorage = options.browserStorage;
+			Backbone.history.start();
+		},
+		loadView : function(view) {
+			this.view && (this.view.close ? this.view.close() : this.view.undelegateEvents());
+			this.view = view;
+		},
+		/*
+		 * Set view for the routes
+		 */
+		creategames : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/pronos/creategamesview'], function(CreateGamesView) {
+					self.loadView(new CreateGamesView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.CREATE_GAMES);
+				});
+			} else {
+				this.user.set('urlFrom', urls.CREATE_GAMES);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
+		homepage : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/homepageview'], function(HomepageView) {
+					self.loadView(new HomepageView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams,
+						ranking : self.ranking
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.HOME);
+				});
+			} else {
+				this.user.set('urlFrom', urls.HOME);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
+		login : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				this.eventBus.trigger('url:change', {url : '#' + this.user.get('urlFrom')});
+			} else {
+				require(['views/authentication/loginview'], function(LoginView) {
+					self.loadView(new LoginView({
+						user : self.user,
+						alertview : self.alertview,
+						browserStorage : self.browserStorage,
+						eventBus : self.eventBus
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.LOGIN);
+				});
+			}
+		},
+		pronos : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/pronos/pronosview'], function(PronosView) {
+					self.loadView(new PronosView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.PRONOS);
+				});
+			} else {
+				this.user.set('urlFrom', urls.PRONOS);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
+		ranking : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/ranking/rankingview'], function(RankingView) {
+					self.loadView(new RankingView({
+						user : self.user,
+						alertview : self.alertview,
+						ranking : self.ranking
+					}));
+					self.view.render();
+					self.headerView.menuChange(urls.RANKING);
+				});
+			} else {
+				this.user.set('urlFrom', urls.RANKING);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
+		/* Route by default */
+		defaultAction : function(actions) {
+			// We have no matching route, lets just log what the URL was
+			console.log('No route:', actions);
+		}
+	}); 
 
-        // Global event bus
-        this.eventBus = EventBus.create();
-        app_router.listenTo(this.eventBus, 'url:change', function(e) {
-            app_router.navigate(e.url, {
-                trigger : true
-            });
-        });
-
-        // Set header and footer
-        var headerView = new HeaderView({user : this.user});
-        var footerView = new FooterView();
-        headerView.render();
-        footerView.render();
-
-        /* Set view for the routes */
-        app_router.on('route:homepage', function() {
-            var homepageView = new HomepageView({user : self.user});
-            if(self.user.checkAuth()){
-                homepageView.render();
-            }else{
-            	self.user.set('urlFrom', urls.HOME);
-                self.eventBus.trigger('url:change',{url:'#'+urls.LOGIN});
-            }
-        });
-        app_router.on('route:login', function() {
-        	var loginView = new LoginView({user : self.user, browserStorage : self.browserStorage, eventBus : self.eventBus});
-        	if(self.user.checkAuth()){
-                self.eventBus.trigger('url:change',{url:'#'+self.user.get('urlFrom')});
-            }else{
-            	loginView.render();
-            }
-        });
-        app_router.on('route:createprono', function(){
-            var createpronoview = new CreatePronoView({user : self.user});
-            if(self.user.checkAuth()){
-                createpronoview.render();
-            }else{
-                self.user.set('urlFrom', urls.HOME);
-                self.eventBus.trigger('url:change',{url:'#'+urls.LOGIN});
-            }
-        });
-        
-        /* Route by default */
-        app_router.on('route:defaultAction', function(actions) {
-            // We have no matching route, lets just log what the URL was
-            console.log('No route:', actions);
-        });
-
-        Backbone.history.start();
-    };
-    return {
-        initialize : initialize
-    };
+  return AppRouter;
 });</textarea>
   </div>
 </div>

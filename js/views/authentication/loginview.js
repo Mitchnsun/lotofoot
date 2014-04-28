@@ -38,11 +38,11 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			var inputPwd = this.$('#userPwd');
 
 			// Check value
-			if (inputEmail.val() == '') {
+			if (inputEmail.val() === '') {
 				inputEmail.parent().parent().addClass('error');
 				errors = true;
 			}
-			if (inputPwd.val() == '') {
+			if (inputPwd.val() === '') {
 				inputPwd.parent().parent().addClass('error');
 				errors = true;
 			}

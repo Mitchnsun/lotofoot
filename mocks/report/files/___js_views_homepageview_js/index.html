@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">70.84</p>
+      <p class="stat">71.56</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">38</p>
+      <p class="stat">58</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">9.23</p>
+      <p class="stat">15.53</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.22</p>
+      <p class="stat">0.46</p>
     </div>
   </div>
 </div>
@@ -91,43 +91,63 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="span12">// Filename: homepageview.js
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview',
-        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html',
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
+        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html', 'text!tmpl/homepage/rankingwidget.html',
         'views/homepage/newpronosview'],
-function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, tmpl, NewPronosView) {
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPronosView) {
+  
+	var ClassView = Backbone.View.extend({
+		el : $('#container'),
+		initialize : function(options) {
+			this.user = options.user;
+			this.alertview = options.alertview;
+			this.teams = options.teams;
+			this.ranking = options.ranking;
+		},
+		render : function() {
+			var self = this;
+			$(this.el).html(te.renderTemplate(tmpl, {
+				i18n : i18n,
+				urls : urls
+			}));
 
-    var ClassView = Backbone.View.extend({
-        el : $('#container'),
-        initialize : function() {
-            this.user = this.options.user;
-            this.alertView = new AlertView();
-        },
-        render : function() {
-            var self = this;
-            $(this.el).html(te.renderTemplate(tmpl, {
-                i18n : i18n,
-                urls : urls
-            }));
-            
-            // Initialize children view
-            this.newPronoView = new NewPronosView({
-                el : '#newpronos',
-                user : this.user
-            });
-            
-            //Render children view
-            this.newPronoView.render();
-        },
-        /*
-         * Events of the view
-         */
-        events : {
+			// Initialize children view
+			this.newPronoView = new NewPronosView({
+				el : '#newpronos',
+				user : this.user,
+				alertview : this.alertview,
+				teams : this.teams
+			});
 
-        }
-    });
+			//Render children view
+			this.newPronoView.render();
+			this.widgetsRender();
+		},
+		widgetsRender : function(){
+			var self = this;
+			
+			$.when(this.ranking.promise).done(function(){
+				self.$("#rankingWidget").html(te.renderTemplate(RankingTmpl, {
+					i18n : i18n,
+					ranking : _.first(self.ranking.toJSON(),3)
+				}));
+			});
+		},
+		/*
+		 * Events of the view
+		 */
+		events : {},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function() {
+			this.newPronoView && (this.newPronoView.close ? this.newPronoView.close() : this.newPronoView.undelegateEvents());
+			this.undelegateEvents();
+		}
+	});
 
-    // Our module now returns our view
-    return ClassView;
+	// Our module now returns our view
+	return ClassView;
 });</textarea>
   </div>
 </div>
