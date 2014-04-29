@@ -1,4 +1,7 @@
+/* Menu */
 #betaImage {position:absolute;top:0;left:0;}
+.pure-menu-heading {text-align:center;}
+#menu li.active a{color:white;}
 
 /* Pronos view */
 #pickTeam {margin-bottom:5px;}

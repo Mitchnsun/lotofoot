@@ -1,13 +1,13 @@
 // Filename: headerview.js
 define(['jquery', 'underscore', 'backbone', 'bootstrap',
-				'fmk/templateengine', 'fmk/urls', 'i18n!tmpl/nls/header', 'text!tmpl/header.html'],
+				'fmk/templateengine', 'fmk/urls', 'i18n!tmpl/nls/menu', 'text!tmpl/menu.html'],
 function($, _, Backbone, Bootstrap, te, urls, i18n, tmpl) {
 
   var ClassView = Backbone.View.extend({
-    el : $('header'),
+    el : $('menu'),
     initialize : function(options) {
       this.user = options.user;
-      this.user.on('change', this.manageNavBar, this); // listen to any change of the model user
+      this.user.on('change', this.manageMenu, this); // listen to any change of the model user
     },
     render : function() {
       $(this.el).html(te.renderTemplate(tmpl, {
@@ -15,12 +15,12 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, tmpl) {
         urls : urls
       }));
 
-      if (this.user.get('isConnected') === false) {// Hide navigation bar if the user is not connected
-        this.$('div.nav-collapse, a.btn-navbar').hide();
+      if (this.user.get('isConnected') === false) {// Hide menu items if the user is not connected
+        this.$('#menu ul').hide();
       }
     },
-    manageNavBar : function() {
-      var menuItems = this.$('div.nav-collapse, a.btn-navbar');
+    manageMenu : function() {
+      var menuItems = this.$('#menu ul');
       if (this.user.get('isConnected')) {
         menuItems.show();
       } else {
@@ -28,7 +28,7 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, tmpl) {
       }
     },
     menuChange : function(url) {
-      this.$('ul.nav li').removeClass('active');
+      this.$('#menu li').removeClass('active');
       this.$('li a[href="#' + url + '"]').parent().addClass('active');
     }
   });

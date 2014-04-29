@@ -1,8 +1,8 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
 				'collections/ranking',
-        'views/headerview', 'views/footerview'],
-function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterView) {
+        'views/menuview', 'views/footerview'],
+function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
 		initialize : function(){
@@ -31,10 +31,10 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 			this.ranking = new Ranking();
 			this.ranking.load();
 
-			// Set header and footer
-			this.headerView = new HeaderView({user : this.user});
+			// Set menu and footer
+			this.menuView = new MenuView({user : this.user});
 			this.footerView = new FooterView();
-			this.headerView.render();
+			this.menuView.render();
 			this.footerView.render();
 
 			Backbone.history.start();
@@ -56,7 +56,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 						teams : self.teams
 					}));
 					self.view.render();
-					self.headerView.menuChange(urls.CREATE_GAMES);
+					self.menuView.menuChange(urls.CREATE_GAMES);
 				});
 			} else {
 				this.user.set('urlFrom', urls.CREATE_GAMES);
@@ -74,7 +74,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 						ranking : self.ranking
 					}));
 					self.view.render();
-					self.headerView.menuChange(urls.HOME);
+					self.menuView.menuChange(urls.HOME);
 				});
 			} else {
 				this.user.set('urlFrom', urls.HOME);
@@ -94,7 +94,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 						eventBus : self.eventBus
 					}));
 					self.view.render();
-					self.headerView.menuChange(urls.LOGIN);
+					self.menuView.menuChange(urls.LOGIN);
 				});
 			}
 		},
@@ -108,7 +108,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 						teams : self.teams
 					}));
 					self.view.render();
-					self.headerView.menuChange(urls.PRONOS);
+					self.menuView.menuChange(urls.PRONOS);
 				});
 			} else {
 				this.user.set('urlFrom', urls.PRONOS);
@@ -125,7 +125,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, HeaderView, FooterV
 						ranking : self.ranking
 					}));
 					self.view.render();
-					self.headerView.menuChange(urls.RANKING);
+					self.menuView.menuChange(urls.RANKING);
 				});
 			} else {
 				this.user.set('urlFrom', urls.RANKING);
