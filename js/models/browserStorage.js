@@ -9,10 +9,10 @@ function($, _, Backbone) {
 			sessionStorage : ""
 		},
 		initialize : function(){
-			if(typeof localStorage != undefined) {
+			if(typeof localStorage !== undefined) {
 				this.set('hasLocalStorage',true);
 			}
-			if(typeof sessionStorage != undefined) {
+			if(typeof sessionStorage !== undefined) {
 				this.set('hasSessionStorage',true);
 			}
 		},

@@ -108,8 +108,8 @@ function($, _, Backbone) {
 				this.set('hasSessionStorage',true);
 			}
 		},
-		noSupport : function(alertView,context){
-			alertView.displayAlert('info', 'info', context);	
+		noSupport : function(alertView, msg){
+			alertView.displayAlert('info', 'info', msg);	
 		}
 	});
 	// Return the model for the module

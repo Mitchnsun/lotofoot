@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.91</p>
+      <p class="stat">63.73</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">26</p>
+      <p class="stat">114</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">9.42</p>
+      <p class="stat">21.45</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.20</p>
+      <p class="stat">1.19</p>
     </div>
   </div>
 </div>
@@ -90,31 +90,119 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'text!tmpl/teams/pickTeam.html',
-        'i18n!tmpl/pronos/nls/createprono', 'i18n!nls/country',],
-function($, _, Backbone, te, tmpl, i18n, country) {
+    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'models/game',
+        'text!tmpl/teams/pickTeam.html','i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country',],
+function($, _, Backbone, te, Game, tmpl, i18n, country) {
     
-    var ClassView = Backbone.View.extend({
-        initialize : function(){
-            this.gameType = null; // variable for the type of the game : league, cup, international, etc.
-            this.teams = []; // Array with the two teams for the game
-            this.games = []; // Array with the created games
-            
-            this.el = this.options.el;
-            this.clubs = this.options.clubs; // List of all the clubs
-            this.international = this.options.international; // list of international teams
-        },
-        render : function() {
-            $(this.el).html(te.renderTemplate(tmpl, {
-                i18n : i18n,
-                clubs : this.clubs,
-                international : this.international
-            }));
-        }
-    });
-    
-    // Our module now returns our view
-    return ClassView;
+  var ClassView = Backbone.View.extend({
+    initialize : function(options){
+      this.user = options.user;
+      this.el = options.el;
+      this.teams = options.teams;
+      
+      this.newGame();
+    },
+    render : function() {
+      $(this.el).html(te.renderTemplate(tmpl, {
+        i18n : i18n,
+        clubs : this.teams.get('clubs'),
+        international : this.teams.get('international')
+      }));
+    },
+    newGame : function(){
+      this.game = new Game({addBy : this.user.get('userid')});
+    },
+    /*
+     * Events of the view
+     */
+    events : {
+      "click #SelectGame a" : "kindOfGame",
+      "click #Clubs a.country" : "selectCountry",
+      "click a.club" : "pickATeam",
+      "click a.international" : "pickANationalTeam",
+    },
+    kindOfGame : function(e) {// Pick the type of the game to bet
+      e.preventDefault();
+      this.game.set('type', this.$(e.currentTarget).attr('ref'));
+      
+      this.$("#SelectGame").addClass('hide');
+      // Display the right list in terms of the choice
+      if (this.game.get('type') == i18n.ref_international_game) {
+        this.$('#International').removeClass('hide');
+      } else {
+        this.$('#Clubs').removeClass('hide');
+      }
+    },
+    selectCountry : function(e) {// Pick the country where the clubs are from
+      e.preventDefault();
+      var ref = this.$(e.currentTarget).attr('ref');
+      var $selectedCountry = this.$(e.currentTarget).parent();
+      $selectedCountry.removeClass('span3').addClass('span12');
+
+      var $listCountry = this.$("#Clubs > div.span3");
+      $listCountry.addClass('hide');
+      
+      // Hide the other country
+      $selectedCountry.find('div.row.hide').removeClass('hide');
+    },
+    pickATeam : function(e) {// Pick a team
+      e.preventDefault();
+      
+      if (this.game.ready()) {// A game cannot have more than two teams !
+        return false;
+      }
+
+      /* Initialize variables */
+      var gameType = this.game.get('type');
+      var $element = this.$(e.currentTarget);
+      var ref = $element.attr('ref');
+      var country = $element.attr('data-country');
+      var $selectedCountry = $element.parents('div.span12');
+      var $listCountry = this.$("#Clubs > div.span3");
+      var team = this.teams.getClubInfos(ref, country);
+
+      if (gameType == i18n.ref_league_game || gameType == i18n.ref_cup_game) {
+        this.game.addTeam(team);
+        this.game.set('country', country);
+      } else if (gameType == i18n.ref_europa_game) {
+        this.game.addTeam(team);
+        $selectedCountry.find('div.row').addClass('hide');
+        $selectedCountry.removeClass('span12').addClass('span3');
+        $listCountry.removeClass('hide');
+      } else {
+        return false;
+        // TODO : Display errors
+      }
+
+      $element.parent().addClass('hide');
+      this.trigger('add:team', this.game);
+    },
+    pickANationalTeam : function(e) {
+      e.preventDefault();
+
+      if (this.game.ready()) {// A game cannot have more than two teams !
+        return false;
+      }
+      
+      /* Initialize variables */
+      var ref = this.$(e.currentTarget).attr('ref');
+      var nation = this.teams.getNationInfos(ref);
+      var gameType = this.game.get('type');
+
+      if (gameType == i18n.ref_international_game) {
+        this.game.addTeam(nation);
+      } else {
+        return false;
+        // TODO : Display errors
+      }
+
+      this.$(e.currentTarget).parent().addClass('hide');
+      this.trigger('add:team', this.game);
+    }
+  });
+  
+  // Our module now returns our view
+  return ClassView;
 });</textarea>
   </div>
 </div>

@@ -45,11 +45,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">72.89</p>
+      <p class="stat">68.67</p>
     </div>
     <div class="span6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">75</p>
+      <p class="stat">135</p>
     </div>
   </div>
   <div class="row historical">
@@ -63,11 +63,11 @@
   <div class="row">
     <div class="span6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">18.23</p>
+      <p class="stat">23.37</p>
     </div>
     <div class="span6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.74</p>
+      <p class="stat">1.58</p>
     </div>
   </div>
 </div>
@@ -90,80 +90,140 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'i18n!tmpl/homepage/nls/newpronos', 'text!tmpl/homepage/newpronos.html'], function($, _, Backbone, te, LotofootApi, AlertView, i18n, tmpl) {
+    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone', 
+				'fmk/templateengine', 'fmk/lotofootapi',
+				'i18n!tmpl/homepage/nls/newpronos', 'text!tmpl/homepage/newpronos.html'],
+function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 
-    var ClassView = Backbone.View.extend({
-        initialize : function() {
-            this.user = this.options.user;
-            this.el = this.options.el;
-            this.alertView = new AlertView();
-        },
-        render : function() {
-            var self = this;
-            
-            LotofootApi.getNewPronos({
-                userid : this.user.get('userid')
-            }, function(msg) {// success
-                if (msg.pronos.length > 0) {
-                    $(self.el).html(te.renderTemplate(tmpl, {
-                        i18n : i18n,
-                        pronos : msg.pronos
-                    }));
-                }else{
-                    $(self.el).remove(); // the div "new pronos" is removed
-                }
-            }, function(msg) {// error
-                self.alertView.displayError(msg.status, msg.errorCode);
-            });
-        },
-        /*
-         * Events of the view
-         */
-        events : {
-            "click td.buttons button" : "actionOnAGame"
-        },
-        actionOnAGame : function(e) {
-            var role = $(e.currentTarget).attr('data-role');
-            var ref = $(e.currentTarget).attr('data-ref');
-            if (role == "bet") {// User suggests a score for the game
-                this.suggestScore(ref);
-            }
-            if (role == "nobet") {// User decides to not bet on this game
-                this.refuseGame(ref);
-            }
-        },
-        /*
-         * Action on the buttons bet and no-bet
-         */
-        suggestScore : function(ref) {
-            var self = this;
-            var $rowGame = this.$('.rowGame[ref="' + ref + '"]');
-            var scoreA = $rowGame.find('.scoreA select').val();
-            var scoreB = $rowGame.find('.scoreB select').val();
-            
-            $rowGame.find('.buttons button').attr('disabled',true);
+	var ClassView = Backbone.View.extend({
+		initialize : function(options) {
+			this.user = options.user;
+			this.el = options.el;
+			this.alertview = options.alertview;
+			this.teams = options.teams;
+		},
+		render : function() {
+			var self = this;
+			var scoreArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+			var params = {userid : this.user.get('userid')};
+			
+			$.when(LotofootApi.getNewPronos(params), LotofootApi.getPreviousPronos(params))
+			.then(function(msg_newpronos,msg_previous){
+				var dataNewPronos = self.parseData(msg_newpronos[0]);
+				var dataPreviousPronos = self.parseData(msg_previous[0]);
+				
+				_.each(dataNewPronos.pronos, function(prono){
+					prono.teamA = self.teams.getTeams(prono.id_teamA);
+					prono.teamB = self.teams.getTeams(prono.id_teamB);
+				});
+				
+				_.each(dataPreviousPronos.games, function(game){
+					game.teamA = self.teams.getTeams(game.id_teamA);
+					game.teamB = self.teams.getTeams(game.id_teamB);
+				});
+				
+				if (dataNewPronos.pronos.length == 0 && dataPreviousPronos.games.length == 0) {
+					$("#newpronos h3").html(i18n.no_pronos);// the div "new pronos" is removed
+				} else {
+					$(self.el).html(te.renderTemplate(tmpl, {
+						i18n : i18n,
+						pronos : dataNewPronos.pronos,
+						previousPronos : dataPreviousPronos.games,
+						score : scoreArray
+					}));
+				}
+			});
+		},
+		parseData : function(data){
+			var jsondata;
+			try {// Parse JSON
+				jsondata = $.parseJSON(data);
+			} catch(err) {
+				jsondata = {
+					status : 422,
+					errorCode : 'JSON',
+					error : err,
+					data : data
+				};
+			}
 
-            LotofootApi.addProno({
-                userid : this.user.get('userid'),
-                id_game : ref,
-                scoreA : scoreA,
-                scoreB : scoreB
-            }, function(msg) {// success
-                self.alertView.displayAlert('success', 'success', 'AddProno');
-                $rowGame.remove();// Remove the row
-                $rowGame.find('.buttons button').attr('disabled',false);
-            }, function(msg) {// error
-                self.alertView.displayError(msg.status, msg.errorCode);
-                $rowGame.find('.buttons button').attr('disabled',false);
-            });
-        },
-        refuseGame : function(ref) {
-            console.log('Refuse Game : ' + ref);
-        }
-    });
+			if (jsondata.status == 200) {
+				return jsondata;
+			} else {
+				this.alertview.displayError(jsondata.status, jsondata.errorCode);
+			}
+			return {};
+		},
+		/*
+		 * Events of the view
+		 */
+		events : {
+			"click .pronosTable .buttons button" : "actionOnAGame"
+		},
+		actionOnAGame : function(e) {
+			var role = $(e.currentTarget).attr('data-role');
+			var ref = $(e.currentTarget).attr('data-ref');
+			if (role == "bet") {// User suggests a score for the game
+				this.suggestScore(ref);
+			}else if (role == "nobet") {// User decides to not bet on this game
+				this.refuseGame(ref);
+			}else if (role == "update") {// User decides to update his prono
+				this.updateProno(ref);
+			}
+		},
+		/*
+		 * Action on the buttons bet and no-bet
+		 */
+		suggestScore : function(ref) {
+			var self = this;
+			var $rowGame = this.$('.rowGame[ref="' + ref + '"]');
+			var scoreA = $rowGame.find('.teamA select').val();
+			var scoreB = $rowGame.find('.teamB select').val();
 
-    // Our module now returns our view
-    return ClassView;
+			$rowGame.find('.buttons button').attr('disabled', true);
+
+			LotofootApi.addProno({
+				userid : this.user.get('userid'),
+				id_game : ref,
+				scoreA : scoreA,
+				scoreB : scoreB
+			}, function(msg) {// success
+				self.alertview.displayAlert('success', 'success', i18n.AddProno);
+				$rowGame.remove(); // Remove the row
+				$rowGame.find('.buttons button').attr('disabled', false);
+			}, function(msg) {// error
+				self.alertview.displayError(msg.status, msg.errorCode);
+				$rowGame.find('.buttons button').attr('disabled', false);
+			});
+		},
+		refuseGame : function(ref) {
+			this.$('div[ref="'+ ref +'"]').remove();
+		},
+		updateProno : function(ref){
+			var self = this;
+			var $rowProno = this.$('.rowProno[ref="' + ref + '"]');
+			var scoreA = $rowProno.find('.teamA select').val();
+			var scoreB = $rowProno.find('.teamB select').val();
+
+			$rowProno.find('.buttons button').attr('disabled', true);
+
+			LotofootApi.updateProno({
+				userid : this.user.get('userid'),
+				id_game : ref,
+				scoreA : scoreA,
+				scoreB : scoreB
+			}, function(msg) {// success
+				self.alertview.displayAlert('success', 'success', i18n.updateProno);
+				$rowProno.find('.buttons button').attr('disabled', false);
+			}, function(msg) {// error
+				self.alertview.displayError(msg.status, msg.errorCode);
+				$rowProno.find('.buttons button').attr('disabled', false);
+			});
+		}
+	});
+
+	// Our module now returns our view
+	return ClassView;
 });</textarea>
   </div>
 </div>

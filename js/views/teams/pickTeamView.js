@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'models/game',
-        'text!tmpl/teams/pickTeam.html','i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country',],
+        'text!tmpl/teams/pickTeam.html','i18n!tmpl/pronos/nls/creategames', 'i18n!nls/country'],
 function($, _, Backbone, te, Game, tmpl, i18n, country) {
     
   var ClassView = Backbone.View.extend({
@@ -27,7 +27,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
       "click #SelectGame a" : "kindOfGame",
       "click #Clubs a.country" : "selectCountry",
       "click a.club" : "pickATeam",
-      "click a.international" : "pickANationalTeam",
+      "click a.international" : "pickANationalTeam"
     },
     kindOfGame : function(e) {// Pick the type of the game to bet
       e.preventDefault();
