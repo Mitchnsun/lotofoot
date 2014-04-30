@@ -204,7 +204,7 @@ body {
 		padding-right: 2em;
 	}
 
-	#layout {
+	#layout, #layout.active {
 		padding-left: 150px; /* left col width "#menu" */
 		left: 0;
 	}

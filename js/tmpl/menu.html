@@ -1,3 +1,6 @@
+<!-- Menu toggle -->
+<a href="#menu" id="menuLink" class="menu-link"> <!-- Hamburger icon --> <span></span> </a>
+
 <div id="menu">
 	<img id="betaImage" src="/lotofoot/img/beta.png" alt='Beta version'/>
 	<div class="pure-menu pure-menu-open">
@@ -5,10 +8,14 @@
 
 		<ul>
 			<li>
-				<a href="#{urls.HOME}">{i18n.home}</a>
+				<a href="#{urls.RANKING}">{i18n.ranking}</a>
+				<div id="rankingWidget"></div>
 			</li>
 			<li>
 				<a href="#{urls.PRONOS}">{i18n.pronos}</a>
+			</li>
+			<li>
+				<a href="#{urls.CREATE_GAMES}">{i18n.new_game}</a>
 			</li>
 			<li>
 				<a href="{urls.EXT_BLOG}">{i18n.blog}</a>

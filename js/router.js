@@ -32,7 +32,10 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			this.ranking.load();
 
 			// Set menu and footer
-			this.menuView = new MenuView({user : this.user});
+			this.menuView = new MenuView({
+				user : this.user,
+				ranking : this.ranking
+			});
 			this.footerView = new FooterView();
 			this.menuView.render();
 			this.footerView.render();
