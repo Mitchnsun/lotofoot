@@ -1,3 +1,9 @@
+/* Body */
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 20px;
+}
+
 /* Menu */
 #betaTriangle {
 	width: 0;
@@ -12,8 +18,11 @@
 	color:#5eb95e;
 	font-weight:bold;
 	font-size:10px;
+	transform:rotate(-45deg);
+	-ms-transform:rotate(-45deg); /* IE 9 */
 	-webkit-transform: rotate(-45deg); 
 	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
 	position:absolute;
 	padding-top: 5px;
 }
