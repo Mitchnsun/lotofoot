@@ -61,13 +61,13 @@ function($, _, Backbone, te, i18n, tmpl) {
 		setType : function(type) {// add the specific class to the alert bloc
 			switch(type) {
 				case 'error':
-					return 'alert-error';
+					return 'alert-danger';
 				case 'success':
 					return 'alert-success';
 				case 'info':
 					return 'alert-info';
 				default:
-					return '';
+					return 'alert-warning';
 			}
 		},
 		/*
