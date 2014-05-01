@@ -21,6 +21,7 @@ define({
        GR : "Grèce",
        HR : "Croatie",
        IT : "Italie",
+       IS : "Israël",
        NL : "Pays-Bas",
        NO : "Norvège",
        OZ : "Australie",

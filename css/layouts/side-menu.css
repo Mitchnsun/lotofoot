@@ -120,7 +120,7 @@
  This styles the selected menu item `<li>`.
  */
 #menu .pure-menu-selected, #menu .pure-menu-heading {
-	background: #5eb95e;
+	background: #5cb85c;
 }
 /*
  This styles a link within a selected menu item `<li>`.

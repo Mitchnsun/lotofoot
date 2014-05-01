@@ -1,4 +1,4 @@
-<div id="SelectGame" class="row">
+<div id="SelectGame" class="row-fluid">
 	<h3>{i18n.select_game}</h3>
 	<hr>
 	<div class="span3">
@@ -14,13 +14,13 @@
 		<a href="#"  ref="{i18n.ref_international_game}">{i18n.international_game}</a>
 	</div>
 </div>
-<div id="Clubs" class="row hide">
+<div id="Clubs" class="row-fluid hide">
 	<h3>{i18n.clubs}</h3>
 	<hr>
 	{#clubs}
 	<div class="span3">
 		<a href="#" class="country" ref="{id}">{name}</a>
-		<div class="row hide">
+		<div class="row-fluid hide">
 			{#recs}
 			<div class="span3">
 				<a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
@@ -30,7 +30,7 @@
 	</div>
 	{/clubs}
 </div>
-<div id="International" class="row hide">
+<div id="International" class="row-fluid hide">
 	<h3>{i18n.international}</h3>
 	<hr>
 	{#international}

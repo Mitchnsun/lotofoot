@@ -1,10 +1,14 @@
-<form class="form-inline">
+<div class="corner cornerTopLeft"></div>
+<div class="corner cornerTopRight"></div>
+<div class="corner cornerBottomLeft"></div>
+<div class="corner cornerBottomRight"></div>
+<form class="pure-form form-inline">
   <table>
     <tbody>
       {#games:i18n}
       <tr id='{id}'>
         <td>
-          <button class="btn btn-danger btn-mini remove-prono" type="button" data-role="remove" data-ref='{id}'>
+          <button class="btn btn-danger btn-sm remove-prono" type="button" data-role="remove" data-ref='{id}'>
             <i class="icon-remove"></i>
           </button>
         </td>

@@ -51,7 +51,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
       $listCountry.addClass('hide');
       
       // Hide the other country
-      $selectedCountry.find('div.row.hide').removeClass('hide');
+      $selectedCountry.find('div.row-fluid.hide').removeClass('hide');
     },
     pickATeam : function(e) {// Pick a team
       e.preventDefault();
@@ -74,7 +74,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
         this.game.set('country', country);
       } else if (gameType == i18n.ref_europa_game) {
         this.game.addTeam(team);
-        $selectedCountry.find('div.row').addClass('hide');
+        $selectedCountry.find('div.row-fluid').addClass('hide');
         $selectedCountry.removeClass('span12').addClass('span3');
         $listCountry.removeClass('hide');
       } else {

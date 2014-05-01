@@ -228,9 +228,6 @@
        -moz-box-sizing: border-box;
             box-sizing: border-box;
   }
-  .row-fluid [class*="span"]:first-child {
-    margin-left: 0;
-  }
   .row-fluid .controls-row [class*="span"] + [class*="span"] {
     margin-left: 2.564102564102564%;
   }
@@ -271,8 +268,8 @@
     *width: 31.570740134569924%;
   }
   .row-fluid .span3 {
-    width: 23.076923076923077%;
-    *width: 23.023731587561375%;
+    width: 22.076923076923077%;
+    *width: 22.023731587561375%;
   }
   .row-fluid .span2 {
     width: 14.52991452991453%;
