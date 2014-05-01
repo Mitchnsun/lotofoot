@@ -85,6 +85,9 @@ footer {font-size:0.8em;}
 	.hero-unit {padding:15px;}
 	.pronosTable .span3 {width: 26%;*width: 26%;}
 }
+/* Ranking */
+table.table {font-size:14px;}
+
 /* Homepage Widgets */
 #rankingWidget{
 	color : #777;
