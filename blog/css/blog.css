@@ -268,7 +268,7 @@ a:hover, a:focus {
 #logElement{
   cursor:pointer;
   font-size:0.7em;
-  position:absolute;
+  position:fixed;
   top:5px;
   left:5px;
   -webkit-border-radius: 15px;
@@ -320,6 +320,9 @@ a:hover, a:focus {
   }
 }
 @media (max-width: 850px) {
+	#logElement{
+		position:absolute;
+	}
   .percentage {
     left: 50px;
   }
