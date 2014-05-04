@@ -14,9 +14,11 @@
 			<li>
 				<a href="#{urls.PRONOS}">{i18n.pronos}</a>
 			</li>
+			{@if cond="'{user.accreditation}' == 'Admin'"}
 			<li>
 				<a href="#{urls.CREATE_GAMES}">{i18n.new_game}</a>
 			</li>
+			{/if}
 			<li>
 				<a href="{urls.EXT_BLOG}">{i18n.blog}</a>
 			</li>

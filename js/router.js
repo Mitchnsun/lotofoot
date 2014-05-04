@@ -51,7 +51,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		 */
 		creategames : function() {
 			var self = this;
-			if (this.user.checkAuth()) {
+			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
 				require(['views/pronos/creategamesview'], function(CreateGamesView) {
 					self.loadView(new CreateGamesView({
 						user : self.user,
@@ -61,6 +61,8 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 					self.view.render();
 					self.menuView.menuChange(urls.CREATE_GAMES);
 				});
+			} else if(this.user.checkAuth()){
+				this.eventBus.trigger('url:change', {url : '#' + urls.HOME});
 			} else {
 				this.user.set('urlFrom', urls.CREATE_GAMES);
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
