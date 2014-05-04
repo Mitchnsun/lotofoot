@@ -6,21 +6,33 @@
 			<div class="wrapper">
 				<div class="gameWrapper">
 					<div class="schedule">
-						{date} {time}
+						<label class="control-label">{date} {time}</label>
 					</div>
-					<div class="prono">
-						{teamA.name} {scoreA} - {scoreB} {teamB.name}
+					<div class="pronos 	teamsContainer">
+						<div class="span4 teamA">
+							{teamA.name} {?scoreA}<span class="score">{scoreA}</span>{/scoreA}
+						</div>
+						<div class="separation"><strong> - </strong></div>
+						<div class="span4 teamB">
+							{?scoreB}<span class="score">{scoreB}</span>{/scoreB} {teamB.name} 
+						</div>
 					</div>
 					{?pronos}<i class="icon-chevron-down"></i>{/pronos}
 				</div>
 				<div class="pronosWrapper">
 					{#pronos}
 						<div class="pronoWrapper">
-							<div class="schedule">
+							<div class="pronoSchedule">
 								{date} {time}
 							</div>
-							<div class="prono">
-								{player} <span class="scores">{scoreA} - {scoreB}</span>
+							<div class="teamsContainer">
+								<div class="span4 teamA">
+									{player} <span class="score">{scoreA}</span>
+								</div>
+								<div class="separation"><strong> - </strong></div>
+								<div class="span4 teamB">
+									<span class="score">{scoreB}</span>
+								</div>
 							</div>
 						</div>
 					{/pronos}

@@ -8,11 +8,22 @@ footer {font-size:0.8em;}
 	height:20px;
 	width:20px;
 }
+@media (max-width: 1024px) {
+	.hero-unit{padding:20px 20px;}
+	.container-fluid {padding:0px 10px;}
+}
+@media (max-width: 767px) {
+	.hero-unit{padding:20px 10px;}
+}
 .cornerTopLeft{position:absolute;top:0;left:0;border-top:1px solid #999;border-left:1px solid #999;}
 .cornerTopRight{position:absolute;top:0;right:0;border-top:1px solid #999;border-right:1px solid #999;}
 .cornerBottomLeft{position:absolute;bottom:0;left:0;border-bottom:1px solid #999;border-left:1px solid #999;}
 .cornerBottomRight{position:absolute;bottom:0;right:0;border-bottom:1px solid #999;border-right:1px solid #999;}
-
+@media (max-width: 480px) {
+	body {padding-right:10px;padding-left:10px;}
+	h2{font-size:24px;}
+	.hero-unit {padding:15px;}
+}
 /* Menu */
 #AdMenu{padding:0.3em 0.6em;}
 #betaTriangle {
@@ -41,30 +52,41 @@ footer {font-size:0.8em;}
 
 /* Pronos view */
 #pickTeam {margin-bottom:5px;}
-#pronos .wrapper{border-bottom:1px solid #eeeeee;margin:5px 0px}
-#pronos .gameWrapper{font-size: 18px;font-weight: bold;color: #333;padding:5px 0px;line-height:45px;}
-#pronos .pronosWrapper{display:none;}
-#pronos .schedule, #pronos .prono{display:inline;}
+#pronos .wrapper{border-bottom:1px solid #eeeeee;margin:5px 0px;overflow: hidden;}
+#pronos .gameWrapper{font-size: 18px;font-weight: bold;color: #333;padding:5px 0px;line-height:45px;overflow:hidden;}
+#pronos .pronosWrapper{display:none;font-size:14px;}
+#pronos .pronoWrapper{overflow:hidden;}
+#pronos .teamA {text-align: right;}
+#pronos .teamA span.score{margin-left:15px;}
+#pronos .teamB span.score{margin-right:15px;}
+#pronos .schedule, #pronos .prono, #pronos .control-label{display:inline;}
+#pronos .pronoSchedule{float:left;}
 #pronos .prono, #pronos .scores{margin-left:25px;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
+#pronos .schedule {float:left;min-height:45px;line-height:45px;}
+#pronos .separation {float:left;margin-left:2%}
+
+@media (max-width: 1024px) {
+	#pronos .schedule, #pronos .pronoSchedule {width:130px;}
+	#pronos .gameWrapper .separation {display:none;}
+	#pronos .gameWrapper .teamA,#pronos .gameWrapper .teamB{width:92%;text-align:left;margin-left:2%!important;}
+	#pronos span.score{float:right;}
+	#pronos .gameWrapper .teamA span.score{margin-left:0px;}
+	#pronos .gameWrapper .teamB span.score{margin-right:0px;}
+	#pronos .teamsContainer{border-left: 1px solid #dddddd;float:left;width:65%;margin-right:4%}
+	#pronos .pronoWrapper .teamA{width:85%;text-align:left;margin-left:2%!important;}
+	#pronos .pronoWrapper .teamB{width:5%;text-align:left;margin-left:2%!important;}
+}
 @media (max-width: 767px) {
-	.pronosTable .span12 {width: 100%;*width: 99.94680851063829%;}
-  .pronosTable .span11 {width: 91.43646408839778%;*width: 91.38327259903608%;}
-  .pronosTable .span10 {width: 82.87292817679558%;*width: 82.81973668743387%;}
-  .pronosTable .span9 {width: 74.30939226519337%;*width: 74.25620077583166%;}
-  .pronosTable .span8 {width: 65.74585635359117%;*width: 65.69266486422946%;}
-  .pronosTable .span7 {width: 57.18232044198895%;*width: 57.12912895262725%;}
-  .pronosTable .span6 {width: 48.61878453038674%;*width: 48.56559304102504%;}
-  .pronosTable .span5 {width: 40.05524861878453%;*width: 40.00205712942283%;}
-  .pronosTable .span4 {width: 31.491712707182323%;*width: 31.43852121782062%;}
-  .pronosTable .span3 {width: 25%;*width: 25%;}
-  .pronosTable .span2 {width: 14.3646408839779%;*width: 14.311449394616199%;}
-  .pronosTable .span1 {width: 5.801104972375691%;*width: 5.747913483013988%;}
-  .pronosTable [class*="span"]{float:left;}
   #pronos .gameWrapper{position:relative;font-size:15px;}
   #pronos i {position:absolute;right:0;top:0;}
+  #pronos .pronoWrapper .teamA, #pronos .pronoWrapper .teamB{float:left;}
 }
-
+@media (max-width: 480px) {
+	#pronos .pronoSchedule{display:none;}
+	#pronos .schedule{float:none;width:100%;text-align:left;min-height:30px;line-height:30px;}
+	#pronos .teamsContainer{width:90%;margin-right:2%}
+}
 /* Homepage */
 .pronosTable {font-size:15px;padding-bottom:20px;}
 .pronosTable .control-label {display:inline;}
@@ -80,8 +102,6 @@ footer {font-size:0.8em;}
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 1024px) {
-	.hero-unit{padding:20px 20px;}
-	.container-fluid {padding:0px 10px;}
 	.pronosTable .schedule {width:130px;}
 	.pronosTable .separation {display:none;}
 	.pronosTable .teamA .control-label,.pronosTable .teamB .control-label {line-height: 30px;}
@@ -93,18 +113,15 @@ footer {font-size:0.8em;}
 	.rowGame, .rowProno {border:none;margin-bottom:10px;}
 }
 @media (max-width: 767px) {
-	.hero-unit{padding:20px 10px;}
 	.pronosTable .schedule {margin-right:2%;line-height:32px;width:80px;text-align: center;}
 	.pronosTable .schedule span{padding-top:5px;}
 }
 @media (max-width: 480px) {
-	body {padding-right:10px;padding-left:10px;}
-	h2{font-size:24px;}
-	.hero-unit {padding:15px;}
 	.pronosTable .schedule{float:none;width:100%;text-align:left;}
 	.pronosTable .teamsContainer{width:85%;margin-right:2%}
 	.pronosTable .buttons{width:12%;float:left;}
 }
+
 /* Ranking */
 table.table {font-size:14px;}
 
