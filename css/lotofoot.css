@@ -7,11 +7,6 @@ footer {font-size:0.8em;}
 .hero-unit .corner {
 	height:20px;
 	width:20px;
-	-webkit-transition: all 0.5s ease-out;
-	-moz-transition: all 0.5s ease-out;
-	-ms-transition: all 0.5s ease-out;
-	-o-transition: all 0.5s ease-out;
-	transition: all 0.5s ease-out;
 }
 .cornerTopLeft{position:absolute;top:0;left:0;border-top:1px solid #999;border-left:1px solid #999;}
 .cornerTopRight{position:absolute;top:0;right:0;border-top:1px solid #999;border-right:1px solid #999;}
@@ -19,6 +14,7 @@ footer {font-size:0.8em;}
 .cornerBottomRight{position:absolute;bottom:0;right:0;border-bottom:1px solid #999;border-right:1px solid #999;}
 
 /* Menu */
+#AdMenu{padding:0.3em 0.6em;}
 #betaTriangle {
 	width: 0;
 	height: 0;
@@ -51,18 +47,7 @@ footer {font-size:0.8em;}
 #pronos .schedule, #pronos .prono{display:inline;}
 #pronos .prono, #pronos .scores{margin-left:25px;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
-
-/* Homepage */
-.pronosTable {font-size:15px;}
-.pronosTable .control-label {display:inline;}
-.pronosTable select {margin: 0px 5px;}
-.pronosTable .teamA {text-align: right;}
-.rowGame, .rowProno {border-spacing: 2px;border-bottom: 1px solid #dddddd;}
-.pronosTable .schedule {float:left;}
-.pronosTable .separation {float:left;margin-left:2%}
-/* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
-	.hero-unit {padding:30px;}
 	.pronosTable .span12 {width: 100%;*width: 99.94680851063829%;}
   .pronosTable .span11 {width: 91.43646408839778%;*width: 91.38327259903608%;}
   .pronosTable .span10 {width: 82.87292817679558%;*width: 82.81973668743387%;}
@@ -79,11 +64,46 @@ footer {font-size:0.8em;}
   #pronos .gameWrapper{position:relative;font-size:15px;}
   #pronos i {position:absolute;right:0;top:0;}
 }
+
+/* Homepage */
+.pronosTable {font-size:15px;padding-bottom:20px;}
+.pronosTable .control-label {display:inline;}
+.pronosTable select {margin: 0px 5px;}
+.pronosTable .teamA {text-align: right;}
+.rowGame, .rowProno {border-spacing: 2px;border-bottom: 1px solid #dddddd;}
+.pronosTable .schedule {float:left;min-height:30px;line-height:30px;}
+.pronosTable .separation {float:left;margin-left:2%}
+.pronosTable .buttons{text-align:right;}
+.pronosTable .buttons .btn {margin-bottom:5px;margin-right:5px;}
+@media (min-width: 1024px) {
+	.rowGame, .rowProno {margin-top:5px;}
+}
+/* Landscape phone to portrait tablet */
+@media (max-width: 1024px) {
+	.hero-unit{padding:20px 20px;}
+	.container-fluid {padding:0px 10px;}
+	.pronosTable .schedule {width:130px;}
+	.pronosTable .separation {display:none;}
+	.pronosTable .teamA .control-label,.pronosTable .teamB .control-label {line-height: 30px;}
+	.pronosTable .teamA,.pronosTable .teamB{width:100%;text-align:left;margin-left:2%!important;}
+	.pronosTable .teamB{padding-top:5px;}
+	.pronosTable .buttons{width:35px;float:left;}
+	.pronosTable select{float:right;}
+	.pronosTable .teamsContainer{border-left: 1px solid #dddddd;float:left;width:65%;margin-right:4%}
+	.rowGame, .rowProno {border:none;margin-bottom:10px;}
+}
+@media (max-width: 767px) {
+	.hero-unit{padding:20px 10px;}
+	.pronosTable .schedule {margin-right:2%;line-height:32px;width:80px;text-align: center;}
+	.pronosTable .schedule span{padding-top:5px;}
+}
 @media (max-width: 480px) {
 	body {padding-right:10px;padding-left:10px;}
 	h2{font-size:24px;}
 	.hero-unit {padding:15px;}
-	.pronosTable .span3 {width: 26%;*width: 26%;}
+	.pronosTable .schedule{float:none;width:100%;text-align:left;}
+	.pronosTable .teamsContainer{width:85%;margin-right:2%}
+	.pronosTable .buttons{width:12%;float:left;}
 }
 /* Ranking */
 table.table {font-size:14px;}

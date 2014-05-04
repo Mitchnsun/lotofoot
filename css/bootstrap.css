@@ -2826,7 +2826,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-sm,
 .btn-group-sm > .btn {
-  padding: 5px 10px;
+  padding: 4px 8px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
@@ -4869,6 +4869,11 @@ a.thumbnail:focus {
   font-size: 18px;
   color: inherit;
   background-color: transparent;
+  -webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
 }
 
 .hero-unit li {

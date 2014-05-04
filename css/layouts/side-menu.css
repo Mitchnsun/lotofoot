@@ -64,7 +64,7 @@
 }
 
 .content-subhead {
-	margin: 50px 0 20px 0;
+	margin: 20px 0 20px 0;
 	font-weight: 300;
 	color: #888;
 }
@@ -216,5 +216,10 @@
 
 	#layout.active .menu-link {
 		left: 150px;
+	}
+}
+@media (max-width: 48em) {
+	#layout{
+		margin-top:50px;
 	}
 }

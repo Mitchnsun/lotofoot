@@ -31,7 +31,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				});
 				
 				if (dataNewPronos.pronos.length === 0 && dataPreviousPronos.games.length === 0) {
-					$("#newpronos h3").html(i18n.no_pronos);// the div "new pronos" is removed
+					$("#newpronos h2").html(i18n.no_pronos);// the div "new pronos" is removed
 				} else {
 					$(self.el).html(te.renderTemplate(tmpl, {
 						i18n : i18n,
