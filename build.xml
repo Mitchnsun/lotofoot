@@ -1,16 +1,26 @@
 <?xml version="1.0" ?>
 <project default="default" basedir=".">
 
-	<target name="default" depends="load.properties, css.concatenate, css.minify" />
+	<target name="default" depends="load.properties, clean.dist, css.concatenate, css.minify, css.copy, project.copy" />
+	
 	<target name="load.properties">
 		<echo>Initialize Variables</echo>
-		<property name="css.version" value="0.2.1" />
 		<property name="css.path" value="css" />
 		<echo message="css.path: ${css.path}" />
 		<property name="build.path" value="dist" />
 		<echo message="build.path: ${build.path}" />
 		<property name="yuiCompressor.path" value="build/yuicompressor-2.4.8.jar" />
 		<echo message="yuiCompressor.path: ${yuiCompressor.path}" />
+	</target>
+	
+	<!-- ## Clean Dist ## -->
+	<target name="clean.dist" depends="load.properties">
+		<echo># Clean Dist</echo>
+		<delete>
+		   <fileset dir="${build.path}">
+		      <include name="**/*"/>
+		   </fileset>
+		</delete>
 	</target>
 	
 	<!-- ## CSS Compression ## -->
@@ -30,7 +40,7 @@
 		<echo>java -jar ${yuiCompressor.path} ${build.path}/${css.path}/style.css -o ${build.path}/${css.path}/style.min.css</echo>
 		<apply executable="java" parallel="false">
 			<fileset dir="${build.path}/${css.path}" includes="style.css" />
-			<mapper type="glob" from="style.css" to="${build.path}/${css.path}/style-v${css.version}.min.css" />
+			<mapper type="glob" from="style.css" to="${build.path}/${css.path}/style.min.css" />
 			<arg line="-jar" />
 			<arg path="${yuiCompressor.path}" />
 			<srcfile />
@@ -38,6 +48,71 @@
 			<targetfile />
 		</apply>
 	</target>
+	<target name="css.copy" depends="load.properties">
+		<echo># Copy non compressed css/images files:</echo>
+		<copy todir="${build.path}/${css.path}/images">
+		  <fileset dir="${css.path}/images">
+		     <include name="*"/>
+		  </fileset>
+		</copy>
+		<copy todir="${build.path}/${css.path}">
+			<fileset dir="${css.path}/layouts">
+		     <include name="side-menu-old-ie.css"/>
+		  </fileset>
+		</copy>
+	</target>
 
+	<!-- ## Copy files -->
+	<target name="project.copy" depends="load.properties">
+		<echo># Copy the rest of the project</echo>
+		<echo>Copy Beta</echo>
+		<copy todir="${build.path}/beta">
+		  <fileset dir="beta">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Blog</echo>
+		<copy todir="${build.path}/blog">
+		  <fileset dir="blog">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Images</echo>
+		<copy todir="${build.path}/img">
+		  <fileset dir="img">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Javascript</echo>
+		<copy todir="${build.path}/js">
+		  <fileset dir="js">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy JS Library</echo>
+		<copy todir="${build.path}/libs">
+		  <fileset dir="libs">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Server Files</echo>
+		<copy todir="${build.path}/server">
+		  <fileset dir="server">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Old Versions</echo>
+		<copy todir="${build.path}/versions">
+		  <fileset dir="versions">
+		     <include name="**/*"/>
+		  </fileset>
+		</copy>
+		<echo>Copy Index.html</echo>
+		<copy todir="${build.path}">
+		  <fileset dir="">
+		     <include name="index.html"/>
+		  </fileset>
+		</copy>
+	</target>
 </project>
 
