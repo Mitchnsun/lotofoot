@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <project default="default" basedir=".">
 
-	<target name="default" depends="load.properties, clean.dist, css.concatenate, css.minify, css.copy, project.copy" />
-	
+	<target name="default" depends="load.properties, clean.dist, css.concatenate, css.minify, css.copy, project.copy, js.minify" />
 	<target name="load.properties">
 		<echo>Initialize Variables</echo>
 		<property name="css.path" value="css" />
@@ -11,18 +10,20 @@
 		<echo message="build.path: ${build.path}" />
 		<property name="yuiCompressor.path" value="build/yuicompressor-2.4.8.jar" />
 		<echo message="yuiCompressor.path: ${yuiCompressor.path}" />
+		<property name="googleCompiler.path" value="build/compiler.jar" />
+		<echo message="googleCompiler.path: ${googleCompiler.path}" />
 	</target>
-	
+
 	<!-- ## Clean Dist ## -->
 	<target name="clean.dist" depends="load.properties">
 		<echo># Clean Dist</echo>
 		<delete>
-		   <fileset dir="${build.path}">
-		      <include name="**/*"/>
-		   </fileset>
+			<fileset dir="${build.path}">
+				<include name="**/*"/>
+			</fileset>
 		</delete>
 	</target>
-	
+
 	<!-- ## CSS Compression ## -->
 	<target name="css.concatenate" depends="load.properties">
 		<echo># Concatenate CSS files</echo>
@@ -51,14 +52,14 @@
 	<target name="css.copy" depends="load.properties">
 		<echo># Copy non compressed css/images files:</echo>
 		<copy todir="${build.path}/${css.path}/images">
-		  <fileset dir="${css.path}/images">
-		     <include name="*"/>
-		  </fileset>
+			<fileset dir="${css.path}/images">
+				<include name="*"/>
+			</fileset>
 		</copy>
 		<copy todir="${build.path}/${css.path}">
 			<fileset dir="${css.path}/layouts">
-		     <include name="side-menu-old-ie.css"/>
-		  </fileset>
+				<include name="side-menu-old-ie.css"/>
+			</fileset>
 		</copy>
 	</target>
 
@@ -67,52 +68,77 @@
 		<echo># Copy the rest of the project</echo>
 		<echo>Copy Beta</echo>
 		<copy todir="${build.path}/beta">
-		  <fileset dir="beta">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="beta">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Blog</echo>
 		<copy todir="${build.path}/blog">
-		  <fileset dir="blog">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="blog">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Images</echo>
 		<copy todir="${build.path}/img">
-		  <fileset dir="img">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="img">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Javascript</echo>
 		<copy todir="${build.path}/js">
-		  <fileset dir="js">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="js">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
-		<echo>Copy JS Library</echo>
+		<echo>Copy JS Libraries</echo>
 		<copy todir="${build.path}/libs">
-		  <fileset dir="libs">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="js">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Server Files</echo>
 		<copy todir="${build.path}/server">
-		  <fileset dir="server">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="server">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Old Versions</echo>
 		<copy todir="${build.path}/versions">
-		  <fileset dir="versions">
-		     <include name="**/*"/>
-		  </fileset>
+			<fileset dir="versions">
+				<include name="**/*"/>
+			</fileset>
 		</copy>
 		<echo>Copy Index.html</echo>
 		<copy todir="${build.path}">
-		  <fileset dir="">
-		     <include name="index.html"/>
-		  </fileset>
+			<fileset dir="">
+				<include name="index.html"/>
+			</fileset>
 		</copy>
 	</target>
+	
+	<!-- ## Javascript Minification ## -->
+	<target name="js.minify" depends="load.properties">
+		<echo># Minify JavaScript using Google Closure Compiler:</echo>
+		<apply executable="java" parallel="false">
+        <fileset dir="${build.path}/js" includes="router.js" />
+        <mapper type="glob" from="router.js" to="${build.path}/js/router.min.js" />
+        <arg line="-jar" />
+        <arg path="${googleCompiler.path}" />
+        <arg line="--js" />
+        <srcfile />
+        <arg line="--js_output_file" />
+        <targetfile />
+    </apply>
+		<!--<apply executable="java" parallel="false">
+        <fileset dir="${build.path}/libs" includes="*"/>
+        <arg line="-jar"/>
+        <arg path="${googleCompiler.path}"/>
+        <srcfile/>
+        <arg line="-o"/>
+        <mapper type="glob" from="*.js" to="*-test.js"/>
+        <targetfile/>
+ </apply>-->
+	</target>
+
 </project>
 
