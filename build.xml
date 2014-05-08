@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<project default="default" basedir=".">
+
+	<target name="default" depends="load.properties, css.concatenate, css.minify" />
+	<target name="load.properties">
+		<echo>Initialize Variables</echo>
+		<property name="css.version" value="0.2.1" />
+		<property name="css.path" value="css" />
+		<echo message="css.path: ${css.path}" />
+		<property name="build.path" value="dist" />
+		<echo message="build.path: ${build.path}" />
+		<property name="yuiCompressor.path" value="build/yuicompressor-2.4.8.jar" />
+		<echo message="yuiCompressor.path: ${yuiCompressor.path}" />
+	</target>
+	
+	<!-- ## CSS Compression ## -->
+	<target name="css.concatenate" depends="load.properties">
+		<echo># Concatenate CSS files</echo>
+		<concat destfile="${build.path}/${css.path}/style.css" encoding="UTF-8" eol="lf" fixlastline="yes" outputencoding="UTF-8">
+			<filelist dir="${css.path}" files="bootstrap.css" />
+			<filelist dir="${css.path}" files="bootstrap-responsive.css" />
+			<filelist dir="${css.path}" files="jquery-ui.min.css" />
+			<filelist dir="${css.path}" files="pure.css" />
+			<filelist dir="${css.path}" files="layouts/side-menu.css" />
+			<filelist dir="${css.path}" files="lotofoot.css" />
+		</concat>
+	</target>
+	<target name="css.minify" depends="load.properties">
+		<echo># Minify CSS using YUI Compressor:</echo>
+		<echo>java -jar ${yuiCompressor.path} ${build.path}/${css.path}/style.css -o ${build.path}/${css.path}/style.min.css</echo>
+		<apply executable="java" parallel="false">
+			<fileset dir="${build.path}/${css.path}" includes="style.css" />
+			<mapper type="glob" from="style.css" to="${build.path}/${css.path}/style-v${css.version}.min.css" />
+			<arg line="-jar" />
+			<arg path="${yuiCompressor.path}" />
+			<srcfile />
+			<arg line="-o" />
+			<targetfile />
+		</apply>
+	</target>
+
+</project>
+
