@@ -20,9 +20,10 @@ footer {font-size:0.8em;}
 .cornerBottomLeft{position:absolute;bottom:0;left:0;border-bottom:1px solid #999;border-left:1px solid #999;}
 .cornerBottomRight{position:absolute;bottom:0;right:0;border-bottom:1px solid #999;border-right:1px solid #999;}
 @media (max-width: 480px) {
-	body {padding-right:10px;padding-left:10px;}
+	body {padding-right:5px;padding-left:5px;}
+	.container-fluid {padding:0px;}
 	h2{font-size:24px;}
-	.hero-unit {padding:15px;}
+	.hero-unit {padding:10px;}
 }
 /* Menu */
 #menu h1{margin:0;font-size:inherit;}
@@ -61,10 +62,10 @@ footer {font-size:0.8em;}
 #pronos .teamA span.score{margin-left:15px;}
 #pronos .teamB span.score{margin-right:15px;}
 #pronos .schedule, #pronos .prono, #pronos .control-label{display:inline;}
-#pronos .pronoSchedule{float:left;}
-#pronos .prono, #pronos .scores{margin-left:25px;}
+#pronos .pronoSchedule, #pronos .schedule{float:left;}
+#pronos .prono, #pronos .scores{margin-left:25px;min-width:130px;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
-#pronos .schedule {float:left;min-height:45px;line-height:45px;}
+#pronos .schedule {min-height:45px;line-height:45px;}
 #pronos .separation {float:left;margin-left:2%}
 
 @media (max-width: 1024px) {
@@ -79,7 +80,7 @@ footer {font-size:0.8em;}
 	#pronos .pronoWrapper .teamB{width:5%;text-align:left;margin-left:2%!important;}
 }
 @media (max-width: 767px) {
-  #pronos .gameWrapper{position:relative;font-size:15px;}
+  #pronos .gameWrapper{position:relative;font-size:14px;}
   #pronos i {position:absolute;right:0;top:0;}
   #pronos .pronoWrapper .teamA, #pronos .pronoWrapper .teamB{float:left;}
 }
@@ -118,6 +119,7 @@ footer {font-size:0.8em;}
 	.pronosTable .schedule span{padding-top:5px;}
 }
 @media (max-width: 480px) {
+	.pronosTable {font-size:12px;padding-bottom:10px;}
 	.pronosTable .schedule{float:none;width:100%;text-align:left;}
 	.pronosTable .teamsContainer{width:85%;margin-right:2%}
 	.pronosTable .buttons{width:12%;float:left;}
@@ -125,7 +127,9 @@ footer {font-size:0.8em;}
 
 /* Ranking */
 table.table {font-size:14px;}
-
+@media (max-width: 480px) {
+	table.table {font-size:12px;}
+}
 /* Homepage Widgets */
 #rankingWidget{
 	color : #777;
