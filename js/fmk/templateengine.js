@@ -53,8 +53,8 @@ define(['dust', 'dust-helpers'], function(dust, dustHelpers) {
         hashFunction : function(str) {
             var hash = 'lotofoot';
             for ( i = 0; i < str.length; i++) {
-                char = str.charCodeAt(i);
-                hash = ((hash << 5) + hash) + char;
+                var character = str.charCodeAt(i);
+                hash = ((hash << 5) + hash) + character;
             }
             return hash;
         }
