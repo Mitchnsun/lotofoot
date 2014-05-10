@@ -1,0 +1,4 @@
+( {
+	baseUrl : "../work",
+	dir : "../dist",
+}); 

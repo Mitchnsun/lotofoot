@@ -14,6 +14,12 @@
 		<echo message="yuiCompressor.path: ${yuiCompressor.path}" />
 		<property name="googleCompiler.path" value="build/compiler.jar" />
 		<echo message="googleCompiler.path: ${googleCompiler.path}" />
+		<property name="rjs.path" value="build/r.js" />
+		<echo message="rjs.path: ${rjs.path}" />
+		<property name="rhinojs.path" value="build/rhino-js.jar" />
+		<echo message="rhinojs.path: ${rhinojs.path}" />
+		<property name="js.build" value="build/js.build.js" />
+		<echo message="js build: ${js.build}" />
 	</target>
 
 	<!-- ## Clean ## -->
@@ -140,21 +146,44 @@
         <exclude name="**/tmpl/**/*" />
       </fileset>
     </copy>
+    <echo>Copy Javascript Libs</echo>
+    <copy todir="${work.path}/libs">
+      <fileset dir="libs">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
   </target>	
   
 	<!-- ## Javascript Minification ## -->
 	<target name="js.minify" depends="load.properties">
 		<echo># Minify JavaScript using Google Closure Compiler:</echo>
 		<apply executable="java" parallel="false">
-        <fileset dir="${work.path}/js" includes="*/**" />
-        <mapper type="glob" from="*" to="${build.path}/js/*" />
-        <arg line="-jar" />
-        <arg path="${googleCompiler.path}" />
-        <arg line="--js" />
-        <srcfile />
-        <arg line="--js_output_file" />
-        <targetfile />
-    </apply>
+	    <fileset dir="${work.path}/js" includes="*/**" />
+	    <mapper type="glob" from="*" to="${build.path}/js/*" />
+	    <arg line="-jar" />
+	    <arg path="${googleCompiler.path}" />
+	    <arg line="--js" />
+	    <srcfile />
+	    <arg line="--js_output_file" />
+	    <targetfile />
+	 	</apply>
+	 	<!--<antcall target="js.optimize">
+			<param name="requirejs.optimizer.settings" value="${js.build}" />
+	</antcall>-->
+	</target>
+	
+	<target name="js.optimize">
+		<echo message="Combining and minifying JS files." />
+		<java classname="org.mozilla.javascript.tools.shell.Main">
+			<classpath>
+				<pathelement location="${rhinojs.path}" />
+				<pathelement location="${googleCompiler.path}" />
+			</classpath>
+			<arg value="${rjs.path}"/>
+			<arg value="-o"/>
+			<arg value="${requirejs.optimizer.settings}"/>
+		</java>
+		<echo message="optimized ${requirejs.optimizer.settings}" />
 	</target>
 
 </project>
