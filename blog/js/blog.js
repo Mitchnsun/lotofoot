@@ -24,7 +24,7 @@ function bindVersionEvents() {
   if (version == "0.1") {
 
   } else if (version == "0.2") {
-  	
+  	$('.showExplicit').on('click',events.showExplicit);
   }
 }
 
@@ -107,6 +107,13 @@ var events = {
     if(!logBox.is(e.target) && logBox.has(e.target).length === 0){
       $('#logContainer').hide();
     }
+  },
+  showExplicit : function(e){
+  	e.preventDefault();
+  	
+  	var elementsToShow = $(e.currentTarget).parent().parent().find('span.explicitContent');
+  	$(elementsToShow).show();
+  	$(e.currentTarget).remove();
   }
 };
 

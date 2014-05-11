@@ -313,6 +313,10 @@ a:hover, a:focus {
   background-color:rgb(103, 103, 180);
 }
 
+/* Post Images */
+.post-images.vertical-image{float:left;margin:1em;width:40%;}
+span.explicitContent {display:none;font-style:italic;}
+
 /* Responsive */
 @media (max-width: 1268px) {
   .percentage {
@@ -344,6 +348,7 @@ a:hover, a:focus {
   .xsmallDevice {
     display:none;
   }
+  .post-images.vertical-image{float:none;margin:1em;width:auto;}
 }
 @media (max-width: 400px) {
   .xxsmallDevice {
