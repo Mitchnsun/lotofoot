@@ -19,6 +19,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.CREATE_GAMES, 'creategames'],
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN, 'login'],
+			[urls.NEW_ACCOUNT, 'newaccount'],
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING, 'ranking'],
 			['*action', 'defaultAction']
@@ -102,6 +103,19 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 					self.menuView.menuChange(urls.LOGIN);
 				});
 			}
+		},
+		newaccount : function() {
+			var self = this;
+			require(['views/account/createview'], function(CreateAccountView) {
+				self.loadView(new CreateAccountView({
+					user : self.user,
+					alertview : self.alertview,
+					browserStorage : self.browserStorage,
+					eventBus : self.eventBus
+				}));
+				self.view.render();
+				self.menuView.menuChange(urls.NEW_ACCOUNT);
+			});
 		},
 		pronos : function() {
 			var self = this;

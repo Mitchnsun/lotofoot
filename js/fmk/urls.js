@@ -4,6 +4,7 @@ define([], function() {
     CREATE_GAMES : "create-games",
     HOME : "",
     LOGIN : "login",
+    NEW_ACCOUNT : "new-account",
     PRONOS : "pronos",
     RANKING : "ranking",
 
