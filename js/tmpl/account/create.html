@@ -1,5 +1,11 @@
 <div class="container-fluid">
-
+  <div class="container-fluid AlertView">
+    <div class="alert alert-dismissable alert-info">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>{i18n.alertTitle},</strong><br/>
+      {i18n.message|s}
+    </div>
+  </div>
 	<!-- Main hero unit for a primary marketing message or call to action -->
 	<div class="hero-unit">
 		<div class="corner cornerTopLeft"></div>
@@ -8,33 +14,39 @@
 		<div class="corner cornerBottomRight"></div>
 		<form class="form-horizontal">
 			<div class="control-group">
-				<label class="control-label" for="inputEmail">Email</label>
+				<label class="control-label" for="inputEmail">{i18n.email}</label>
 				<div class="controls">
-					<input type="text" id="inputEmail" placeholder="Email">
+					<input type="text" id="inputEmail" name="email" placeholder="{i18n.email}">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="inputPassword">Password</label>
+				<label class="control-label" for="inputPassword">{i18n.password}</label>
 				<div class="controls">
-					<input type="password" id="inputPassword" placeholder="Password">
+					<input type="password" id="inputPassword" name="password" placeholder="{i18n.password}">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="inputPassword">Password</label>
+				<label class="control-label" for="inputFirstName">{i18n.firstname}</label>
 				<div class="controls">
-					<input type="password" id="inputPassword" placeholder="Password">
+					<input type="text" id="inputFirstName" name="firstname" placeholder="{i18n.firstname}">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="inputPassword">Password</label>
+				<label class="control-label" for="inputLastName">{i18n.lastname}</label>
 				<div class="controls">
-					<input type="password" id="inputPassword" placeholder="Password">
+					<input type="text" id="inputLastName" name="lastname" placeholder="{i18n.lastname}">
 				</div>
 			</div>
+			<div class="control-group">
+        <label class="control-label" for="inputPseudo">{i18n.pseudo}</label>
+        <div class="controls">
+          <input type="text" id="inputPseudo" name="pseudo" placeholder="{i18n.pseudo}">
+        </div>
+      </div>
 			<div class="control-group">
 				<div class="controls">
 					<button type="submit" class="btn">
-						Sign in
+						{i18n.signin}
 					</button>
 				</div>
 			</div>
