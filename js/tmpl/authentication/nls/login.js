@@ -1,8 +1,10 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
+		"alertTitle" : "Pas de compte ?",
 		"email" : "Email",
 		"login" : "Se connecter",
+		"new_account_message" : "Il n'y a pas de problème, créez-en un",
 		"password" : "Mot de passe",
 		"remember" : "Se souvenir de moi",
 		
