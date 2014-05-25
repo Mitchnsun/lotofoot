@@ -17,7 +17,7 @@
 		$req = $bdd -> prepare($query) or die(print_r($bdd->errorInfo()));
 		$req -> execute(array('userid' => $userid));
 		$result = $req -> fetch();
-		if($result['accreditation'] == 'Joueur'){
+		if($result['accreditation'] == 'Player'){
 			header('Location:../');
 		}
 	}
