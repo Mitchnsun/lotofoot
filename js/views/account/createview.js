@@ -25,66 +25,57 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		 * submitLogIn : submit the form to log in, check if the input are filled, call WS and make the redirection
 		 */
 		events : {
-			"submit" : "submitLogIn"
+			"submit" : "submitSignIn"
 		},
-		submitLogIn : function(e) {
+		submitSignIn : function(e){
 			e.preventDefault();// cancel all actions linked to this click
 			this.$('input[type="submit"]').attr('disabled',true);
 			
 			var self = this;
 			var params = {};
-			var errors = false;
-			var inputEmail = this.$('#userEmail');
-			var inputPwd = this.$('#userPwd');
+			var errors = [];
+			var inputs = this.$('input.data');
+			
+			_.each(inputs, function(input){
+				params[self.$(input).attr('name')] = self.$(input).val();
+			});
 
 			// Check value
-			if (inputEmail.val() === '') {
-				inputEmail.parent().parent().addClass('error');
-				errors = true;
+			if(params.email === '' || !i18n.regexEmail.test(params.email)){
+				errors.push('email');
 			}
-			if (inputPwd.val() === '') {
-				inputPwd.parent().parent().addClass('error');
-				errors = true;
+			
+			if(params.pseudo == "" && (params.firstname == "" || params.lastname == "")){
+				errors.push('username');
 			}
-
-			if (errors) {// Display errors if they exist
-				this.alertview.displayAlert('warning', 'default', i18n.EmptyLogIn);
+			
+			if (errors.length > 0) {// Display errors if they exist
+				this.displayErrors(errors);
 				this.$('input[type="submit"]').attr('disabled',false);
 				return;
 			}
 
-			LotofootApi.login({
-				userEmail : inputEmail.val(),
-				userPwd : inputPwd.val()
-			}, function(msg) { // success
+			LotofootApi.newAccount(params, function(msg) { // success
 				self.alertview.dismissAlert();
 				self.$('input[type="submit"]').attr('disabled',false);
-
-				if(msg.errors){
-					self.alertview.displayAlert('warning', msg.errors.title, i18n[msg.errors.errorCode]);
-				}else{ // Everything is good
-					self.user.connect(msg.user);
-					if(self.$('input[type="checkbox"]').is(':checked')){
-						self.saveSession();
-					}
-					self.eventBus.trigger('url:change',{url:'#'+urls.HOME});
-				}
 				
+				if(msg.errors.length > 0){
+					self.displayErrors(msg.errors);
+				}else {
+					var username = params.pseudo != ''? params.pseudo:params.firstname;
+					self.eventBus.trigger('url:change',{url:'#' + urls.LOGIN + '/welcome/' + username});
+				}
 			}, function(msg) { // error
 				self.alertview.displayError(msg.status, msg.errorCode);
 				self.$('input[type="submit"]').attr('disabled',false);
 			});
 		},
-		/*
-		 * Save session id, userid and date of connexion in the local Storage
-		 * Permits to retrieve the session later
-		 */
-		saveSession : function(){
-			if(this.browserStorage.get('hasLocalStorage')){
-				localStorage.setItem("userid",this.user.get('userid'));
-				localStorage.setItem("sessionid",this.user.get('sessionid'));
-				localStorage.setItem("lastLogedIn",this.user.get('lastLogedIn'));
-			}	
+		displayErrors : function(errors){
+			var errorMessage = "";
+			_.each(errors,function(key){
+				errorMessage += i18n.errors[key] + " ";
+			});
+			this.alertview.displayAlert('warning', 'default', errorMessage);
 		}
 	});
 

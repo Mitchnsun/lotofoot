@@ -64,6 +64,10 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		checkSession : function(params, success, error) {
 			return performWS('POST', urls.URL_CHECK_SESSION, params, success, error);
 		},
+		/* Account */
+		newAccount : function(params, success, error) {
+			return performWS('POST', urls.URL_NEW_ACCOUNT, params, success, error);
+		},
 		/* Pronos */
 		getNewPronos : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_NEW_PRONOS, params, success, error);

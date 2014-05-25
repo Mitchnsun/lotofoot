@@ -18,7 +18,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		routes : _.object([
 			[urls.CREATE_GAMES, 'creategames'],
 			[urls.HOME, 'homepage'],
-			[urls.LOGIN, 'login'],
+			[urls.LOGIN + '(/:action/:param)', 'login'],
 			[urls.NEW_ACCOUNT, 'newaccount'],
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING, 'ranking'],

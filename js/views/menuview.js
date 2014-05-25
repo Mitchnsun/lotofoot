@@ -12,7 +12,6 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, RankingTmpl, tmpl) {
       this.user.on('change', this.manageMenu, this); // listen to any change of the model user
     },
     render : function() {
-    	console.log(this.user.toJSON());
       $(this.el).html(te.renderTemplate(tmpl, {
         i18n : i18n,
         urls : urls,
