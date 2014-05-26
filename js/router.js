@@ -22,6 +22,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.NEW_ACCOUNT, 'newaccount'],
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING, 'ranking'],
+			[urls.WORLDCUP, 'worldcup'],
 			['*action', 'defaultAction']
 		]),
 		start : function(options) {
@@ -152,6 +153,19 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				this.user.set('urlFrom', urls.RANKING);
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
+		},
+		worldcup : function() {
+			var self = this;
+			require(['views/events/worldcupview'], function(WorldCupView) {
+				self.loadView(new WorldCupView({
+					user : self.user,
+					alertview : self.alertview,
+					teams : self.teams,
+					ranking : self.ranking
+				}));
+				self.view.render();
+				self.menuView.menuChange(urls.WORLDCUP);
+			});
 		},
 		/* Route by default */
 		defaultAction : function(actions) {

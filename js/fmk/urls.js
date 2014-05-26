@@ -7,6 +7,7 @@ define([], function() {
 		NEW_ACCOUNT : "new-account",
 		PRONOS : "pronos",
 		RANKING : "ranking",
+		WORLDCUP : "world-cup",
 
 		/* Server */
 		/* Authentication */
