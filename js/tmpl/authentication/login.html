@@ -1,5 +1,13 @@
 <div class="container-fluid">
-
+	{@if cond="'{action}' == 'welcome'"}
+		<div class="container-fluid AlertView">
+	    <div class="alert alert-dismissable alert-info">
+	      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	      <strong>{i18n.welcomeTitle} {param},</strong><br/>
+	      {i18n.welcome_message|s}
+	    </div>
+	  </div>
+  {/if}
 	<!-- Main hero unit for a primary marketing message or call to action -->
 	<div class="hero-unit">
 		<div class="corner cornerTopLeft"></div>
@@ -28,12 +36,14 @@
 		</form>
 	</div>
 	<!-- hero unit /end -->
-	<div class="container-fluid AlertView">
-    <div class="alert alert-dismissable alert-info">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>{i18n.alertTitle}</strong><br/>
-      {i18n.new_account_message|s} <a href="#{urls.NEW_ACCOUNT}">ici</a>
-    </div>
-  </div>
+	{^action}
+		<div class="container-fluid AlertView">
+	    <div class="alert alert-dismissable alert-info">
+	      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	      <strong>{i18n.alertTitle}</strong><br/>
+	      {i18n.new_account_message|s} <a href="#{urls.NEW_ACCOUNT}">ici</a>
+	    </div>
+	  </div>
+  {/action}
 </div>
 <!-- /container -->

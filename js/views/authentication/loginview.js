@@ -10,12 +10,17 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			this.alertview = options.alertview;
 			this.browserStorage = options.browserStorage;
 			this.eventBus = options.eventBus;
+			this.action = options.action;
+			this.param = options.param;
+			console.log(options);
 		},
 		el : $('#container'),
 		render : function() {
 			$(this.el).html(te.renderTemplate(tmpl, {
 				i18n : i18n,
-				urls : urls
+				urls : urls,
+				action : this.action,
+				param : this.param
 			}));
 			
 			if(this.browserStorage.get('hasLocalStorage') === false){ // Display a message if the browser can't use localStorage

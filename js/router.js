@@ -87,7 +87,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
-		login : function() {
+		login : function(action, param) {
 			var self = this;
 			if (this.user.checkAuth()) {
 				this.eventBus.trigger('url:change', {url : '#' + this.user.get('urlFrom')});
@@ -97,7 +97,9 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 						user : self.user,
 						alertview : self.alertview,
 						browserStorage : self.browserStorage,
-						eventBus : self.eventBus
+						eventBus : self.eventBus,
+						action : action,
+						param : param
 					}));
 					self.view.render();
 					self.menuView.menuChange(urls.LOGIN);
