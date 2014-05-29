@@ -5,5 +5,20 @@
 		<div class="corner cornerBottomLeft"></div>
 		<div class="corner cornerBottomRight"></div>
 		<h2 class="content-subhead">{i18n.title}</h2>
+		<hr />
+		{#i18n.groups:i18n}
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3>{group} {id}</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<ul>
+					{#teams}
+						<li ref="{id}">{name}</li>
+					{/teams}
+				</ul>
+		  </div>
+		</div>
+		{/i18n.groups}
 	</div>
 </div>
