@@ -27,6 +27,27 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       this.games = params.games;
       this.selectedTeam = params.team;
     },
+    buildStage : function(id, competition, selectedStage) {
+      var stages = i18n["stage_" + competition];
+      var container = this.$('#' + id).find('.selectStage');
+      
+      var elts = "<select data-ref='" + id + "'>"
+      _.each(stages,function(stage, inc){
+        if(selectedStage === stage){
+          elts += '<option value="' + stage + '" selected="selected">' + stage + '</option>';
+        } else {
+          elts += '<option value="' + stage + '">' + stage + '</option>';
+        }
+        
+        if (inc == 0 && !selectedStage){
+          selectedStage = stage;
+        }
+      });
+      elts += "</select>";
+      
+      $(container).html(elts);
+      return selectedStage;
+    },
     /*
      * Events of the view
      */
@@ -45,6 +66,12 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       var inputTime = this.$('#' + id).find('select');
       game.set('hour', $(inputTime[0]).val());
       game.set('minute', $(inputTime[1]).val());
+      game.set('competition', $(inputTime[2]).val());
+      
+      var selectedStage = $(inputTime[3]).val()?$(inputTime[3]).val():undefined;
+      game.set('stage', this.buildStage(id,$(inputTime[2]).val(),selectedStage));
+      this.delegateEvents();
+      console.log(this.games.toJSON());
     },
     removeProno : function(e) {
       var role = $(e.currentTarget).attr('data-role');

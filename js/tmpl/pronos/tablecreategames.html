@@ -32,6 +32,14 @@
           </select>
         </td>
         <td> {teamA.name} - {teamB.name} </td>
+        <td>
+          <select data-ref='{id}'>
+            {#competitions}
+              <option value="{.}">{.}</option>
+            {/competitions}
+          </select>
+        </td>
+        <td class="selectStage"></td>
       </tr>
       {/games}
     </tbody>
