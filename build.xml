@@ -48,6 +48,7 @@
 			<filelist dir="${css.path}" files="pure.css" />
 			<filelist dir="${css.path}" files="layouts/side-menu.css" />
 			<filelist dir="${css.path}" files="lotofoot.css" />
+			<filelist dir="${css.path}" files="worldcup.css" />
 		</concat>
 	</target>
 	<target name="css.minify" depends="load.properties">

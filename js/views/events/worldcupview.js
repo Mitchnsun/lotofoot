@@ -21,7 +21,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 				});
 				group.teams = teams;
 			});
-			console.log(i18n.groups);
+			
 			$(this.el).html(te.renderTemplate(tmpl, {
 				i18n : i18n,
 				urls : urls
@@ -30,7 +30,14 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		/*
 		 * Events of the view
 		 */
-		events : {}
+		events : {
+		  'click .panel-footer' : 'enlargeGroup'
+		},
+		enlargeGroup : function(e){
+		  var $target = this.$(e.currentTarget);
+		  this.$("#worldcup .group").removeClass('active');
+		  $target.parent().parent().addClass('active');
+		}
 	});
 
 	// Our module now returns our view

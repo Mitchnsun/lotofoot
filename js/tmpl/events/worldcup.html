@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<div id="newpronos" class="hero-unit">
+	<div id="worldcup" class="hero-unit">
 		<div class="corner cornerTopLeft"></div>
 		<div class="corner cornerTopRight"></div>
 		<div class="corner cornerBottomLeft"></div>
@@ -7,18 +7,35 @@
 		<h2 class="content-subhead">{i18n.title}</h2>
 		<hr />
 		{#i18n.groups:i18n}
-		<div class="panel panel-info">
-		  <div class="panel-heading">
-		    <h3>{group} {id}</h3>
-		  </div>
-		  <div class="panel-body">
-		  	<ul>
-					{#teams}
-						<li ref="{id}">{name}</li>
-					{/teams}
-				</ul>
-		  </div>
-		</div>
+		<div class="group">
+  		<div class="panel panel-info">
+  		  <div class="panel-heading">
+  		    <h3>{group} {id}</h3>
+  		  </div>
+  		  <div class="panel-body">
+  		  	<ul>
+  					{#teams}
+  						<li ref="{id}">{name}</li>
+  					{/teams}
+  				</ul>
+  		  </div>
+  		  <div class="panel-footer">
+  		    Détails &raquo;
+  		  </div>
+  		</div>
+  		<div class="panel panel-success">
+        <div class="panel-heading">
+          <h3>{group} {id}</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            {#teams}
+              <li ref="{id}">{name}</li>
+            {/teams}
+          </ul>
+        </div>
+      </div>
+     </div>
 		{/i18n.groups}
 	</div>
 </div>
