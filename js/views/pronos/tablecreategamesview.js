@@ -71,7 +71,6 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       var selectedStage = $(inputTime[3]).val()?$(inputTime[3]).val():undefined;
       game.set('stage', this.buildStage(id,$(inputTime[2]).val(),selectedStage));
       this.delegateEvents();
-      console.log(this.games.toJSON());
     },
     removeProno : function(e) {
       var role = $(e.currentTarget).attr('data-role');

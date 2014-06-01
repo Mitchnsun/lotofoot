@@ -19,8 +19,8 @@
   	$response['status'] = 200;
 		$today = time();
   	$userid = $_SESSION['userid'];
-  	$query = "INSERT INTO games(type,country,id_teamA,id_teamB,schedule,addBy) 
-  						VALUES(:type,:country,:teamA,:teamB,:schedule,:userid)";
+  	$query = "INSERT INTO games(type,country,competition,stage,id_teamA,id_teamB,schedule,addBy) 
+  						VALUES(:type,:country,:competition,:stage,:teamA,:teamB,:schedule,:userid)";
 		
   	$games = $_POST['games'];
 		foreach($games as $game){
@@ -32,6 +32,8 @@
 				$req -> execute(array(
 					'type' => $game['type'],
 					'country' => $game['country'],
+					'competition' => $game['competition'],
+					'stage' => $game['stage'],
 					'teamA' => $game['teamA']['id'],
 					'teamB' => $game['teamB']['id'],
 					'schedule' => $timeStamp,
