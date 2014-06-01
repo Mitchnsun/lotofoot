@@ -6,6 +6,7 @@ define({
 		"new_game" : "Créer un match",
 		"pronos" : "Pronostics",
 		"ranking" : "Classement",
-		"title" : "Lotofoot"
+		"title" : "Lotofoot",
+		"worldcup" : "CM 2014"
 	}
 });
