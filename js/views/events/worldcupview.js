@@ -17,9 +17,13 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			_.each(i18n.groups, function(group){
 				var teams = []
 				_.each(group.teams,function(team){
-					teams.push(self.teams.getNationInfos(team));
+				  if(_.isNumber(team)){
+				    teams.push(self.teams.getNationInfos(team));
+				  }
 				});
-				group.teams = teams;
+				if(teams.length > 0){
+				  group.teams = teams;
+				}
 			});
 			
 			$(this.el).html(te.renderTemplate(tmpl, {
