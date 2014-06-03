@@ -39,6 +39,7 @@
         $game['id'] = $row['id_game'];
         $game['date'] = date('d/m/Y', $row['schedule']);
         $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
+        $game['stage'] = $row['stage'];
       } else {
         // Game information, id / date / schedule
         $game['id_teamA'] = $row['id_teamA'];
@@ -52,9 +53,10 @@
         );
         $game['date'] = date('d/m/Y', $row['schedule']);
         $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
+        $game['stage'] = $row['stage'];
       }
       
-      if ($row['schedule'] < $today){
+      if ($row['schedule'] > $today){
         $game['bet'] = TRUE;
       }else {
         $game['bet'] = FALSE;
