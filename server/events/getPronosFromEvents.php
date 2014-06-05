@@ -24,7 +24,7 @@
     $response['games'] = array();
     
     foreach ($bdd -> query($query) as $row) {
-      $querygame = "SELECT count(*) FROM pronos WHERE userid = :userid AND id_game = :id_game";
+      $querygame = "SELECT * FROM pronos WHERE userid = :userid AND id_game = :id_game";
       // Find if the user already bet on this game
       $reqgame = $bdd -> prepare($querygame) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
       $reqgame -> execute(array('userid' => $userid, 'id_game' => $row['id_game']));
@@ -32,11 +32,11 @@
       
       $game = array();
       
-      if ($result['count(*)'] == 0) {// no bet on this game
+      if (!isset($result['id_prono'])) {// no bet on this game
         // Game information, id / date / schedule
         $game['id_teamA'] = $row['id_teamA'];
         $game['id_teamB'] = $row['id_teamB'];
-        $game['id'] = $row['id_game'];
+        $game['id_game'] = $row['id_game'];
         $game['date'] = date('d/m/Y', $row['schedule']);
         $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
         $game['stage'] = $row['stage'];
@@ -44,12 +44,13 @@
         // Game information, id / date / schedule
         $game['id_teamA'] = $row['id_teamA'];
         $game['id_teamB'] = $row['id_teamB'];
-        $game['id'] = $row['id_game'];
+        $game['id_game'] = $row['id_game'];
         $game['prono'] = array(
-            "scoreA" => $row['scoreA'],
-            "scoreB" => $row['scoreB'],
-            "date" => date('d/m/Y', $row['prono_date']),
-            "schedule" => date('G', $row['prono_date']) . 'h' . date('i', $row['prono_date'])
+        		"id_prono" => $result['id_prono'],
+            "scoreA" => $result['scoreA'],
+            "scoreB" => $result['scoreB'],
+            "date" => date('d/m/Y', $result['prono_date']),
+            "schedule" => date('G', $result['prono_date']) . 'h' . date('i', $row['prono_date'])
         );
         $game['date'] = date('d/m/Y', $row['schedule']);
         $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);

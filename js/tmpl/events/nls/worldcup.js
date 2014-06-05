@@ -2,7 +2,9 @@ define({
 	/* Please sort alphabetically */
 	"root" : {
 		"group" : "Groupe",
+		"nopronos" : "Il n'y a aucun pronostic en cours pour ce groupe",
 		"official_website" : "http://fr.fifa.com/worldcup/",
+		"prono" : "Pronostics",
 		"title" : "Coupe du monde 2014 - Rio",
 		
 		/* Groups */

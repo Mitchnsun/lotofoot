@@ -1,0 +1,47 @@
+{?games}
+	<div class="pronosTable">
+		{#games score=score}
+			<div class="row-fluid rowGame" ref="{id_game}">
+				<div class="schedule"><label class="control-label">{date} {schedule}</label></div>
+				<div class="teamsContainer">
+					<div class="span4 teamA">
+						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
+						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
+							{^prono}<option></option>{/prono}
+							{#score scoreA=prono.scoreA}
+								{@if cond="'{scoreA}' === '{.}'"}
+									<option value="{.}" selected="selected">{.}</option>
+								{:else}
+									<option value="{.}">{.}</option>
+								{/if}
+							{/score}
+						</select>
+					</div>
+					<div class="separation"><strong> - </strong></div>
+					<div class="span4 teamB">
+						<select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
+							{^prono}<option></option>{/prono}
+							{#score scoreB=prono.scoreB}
+								{@if cond="'{scoreB}' === '{.}'"}
+									<option value="{.}" selected="selected">{.}</option>
+								{:else}
+									<option value="{.}">{.}</option>
+								{/if}
+							{/score}
+						</select>
+						<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
+					</div>
+				</div>
+				{@if cond="{bet}"}
+					<div class="buttons">
+						<button class="btn btn-success btn-sm" type="button" data-role="bet" data-ref="{id_game}">
+							<i class="icon-ok"></i>
+						</button>
+					</div>
+				{/if}
+			</div>
+		{/games}
+	</div>
+{:else}
+	<p>{i18n.nopronos}</p>
+{/games}

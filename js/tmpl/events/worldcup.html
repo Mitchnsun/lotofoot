@@ -19,21 +19,15 @@
   					{/teams}
   				</ul>
   		  </div>
-  		  <div class="panel-footer">
+  		  <div class="panel-footer" data-ref="{id}">
   		    Détails &raquo;
   		  </div>
   		</div>
   		<div class="panel panel-success">
         <div class="panel-heading">
-          <h3>{group} {id}</h3>
+          <h3>{prono}</h3>
         </div>
-        <div class="panel-body">
-          <ul>
-            {#teams}
-              <li ref="{id}">{name}</li>
-            {/teams}
-          </ul>
-        </div>
+        <div class="panel-body games"></div>
       </div>
      </div>
 		{/i18n.groups}

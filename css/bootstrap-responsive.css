@@ -891,6 +891,9 @@
   .modal.fade.in {
     top: 20px;
   }
+  .panel-body {
+	  padding: 5px;
+	}
 }
 
 @media (max-width: 480px) {
