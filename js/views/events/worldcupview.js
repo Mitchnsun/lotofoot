@@ -119,6 +119,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
       }));
       
       this.delegateEvents();
+      $('html, body').animate({scrollTop:this.$('.group.active').position().top}, 'slow');
     },
     /*
      * Action on the bet button
