@@ -76,7 +76,8 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
      * Events of the view
      */
     events : {
-      'click .panel-footer' : 'enlargeGroup'
+      'click .panel-footer' : 'enlargeGroup',
+      'click button.scoreUpdate' : 'betOnAGame'
     },
     enlargeGroup : function(e) {
     	var self = this;
@@ -87,6 +88,16 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
       	var id = $target.attr('data-ref');
       	self.displayGameFor(id);
       });
+    },
+    betOnAGame : function(e) {
+      var ref = $(e.currentTarget).attr('data-ref');
+      var game = this.groupsGames.findWhere({"id_game" : ref});
+      console.log(game.get('prono'));
+      if (game.get('prono') === undefined) {// User suggests a score for the game
+        this.suggestScore(ref, game);
+      }else {// User decides to update his prono
+        this.updateProno(ref, game);
+      }
     },
     /*
      * Handle pronos
@@ -106,7 +117,63 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
         games : games,
         score : _.range(10)
       }));
-      console.log(this.groupsGames.toJSON());
+      
+      this.delegateEvents();
+    },
+    /*
+     * Action on the bet button
+     */
+    suggestScore : function(ref, game) {
+      var self = this;
+      var $rowGame = this.$('.rowGame[ref="' + ref + '"]');
+      var scoreA = $rowGame.find('.teamA select').val();
+      var scoreB = $rowGame.find('.teamB select').val();
+      var prono = {
+        scoreA : scoreA,
+        scoreB : scoreB
+      };
+      
+      $rowGame.find('.buttons button').attr('disabled', true);
+      
+      LotofootApi.addProno({
+        userid : this.user.get('userid'),
+        id_game : ref,
+        scoreA : scoreA,
+        scoreB : scoreB
+      }, function(msg) {// success
+        self.alertview.displayAlert('success', 'success', i18n.AddProno);
+        $rowGame.find('.buttons button').attr('disabled', false);
+        game.set('prono', prono);
+      }, function(msg) {// error
+        self.alertview.displayError(msg.status, msg.errorCode);
+        $rowGame.find('.buttons button').attr('disabled', false);
+      });
+    },
+    updateProno : function(ref, game){
+      var self = this;
+      var $rowGame = this.$('.rowGame[ref="' + ref + '"]');
+      var scoreA = $rowGame.find('.teamA select').val();
+      var scoreB = $rowGame.find('.teamB select').val();
+      var prono = {
+        scoreA : scoreA,
+        scoreB : scoreB
+      };
+      
+      $rowGame.find('.buttons button').attr('disabled', true);
+
+      LotofootApi.updateProno({
+        userid : this.user.get('userid'),
+        id_game : ref,
+        scoreA : scoreA,
+        scoreB : scoreB
+      }, function(msg) {// success
+        self.alertview.displayAlert('success', 'success', i18n.updateProno);
+        $rowGame.find('.buttons button').attr('disabled', false);
+        game.set('prono', prono);
+      }, function(msg) {// error
+        self.alertview.displayError(msg.status, msg.errorCode);
+        $rowGame.find('.buttons button').attr('disabled', false);
+      });
     }
   });
 

@@ -40,13 +40,15 @@
 						<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
 					</div>
 				</div>
-				{@if cond="{bet}"}
-					<div class="buttons">
-						<button class="btn btn-success btn-sm" type="button" data-role="bet" data-ref="{id_game}">
-							<i class="icon-ok"></i>
-						</button>
-					</div>
-				{/if}
+				{^scoreA}{^scoreB}
+  				{@if cond="{bet}"}
+  					<div class="buttons">
+  						<button class="btn btn-success btn-sm scoreUpdate" type="button" data-role="bet" data-ref="{id_game}">
+  							<i class="icon-ok"></i>
+  						</button>
+  					</div>
+  				{/if}
+				{/scoreB}{/scoreA}
 			</div>
 		{/games}
 	</div>

@@ -32,6 +32,10 @@ define({
 		},{
 			"id" : "H",
 			"idTeams" : [135,136,137,138]
-		}]
+		}],
+		
+		/* Alert Success */
+    "AddProno" : "Votre pronostic a été enregistré",
+    "updateProno" : "Votre pronostic a été mis à jour"
 	}
 });
