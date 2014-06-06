@@ -13,7 +13,7 @@
 	$response['status'] = 200;
 	$games = array();
 	
-	$gameQuery = "SELECT * FROM games ORDER BY schedule DESC LIMIT 25";
+	$gameQuery = "SELECT * FROM games ORDER BY schedule DESC LIMIT 100";
 	foreach ($bdd -> query($gameQuery) as $row) {
 		$game = array(
 			'addBy' => $row['addBy'],
