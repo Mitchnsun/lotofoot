@@ -6,29 +6,37 @@
 				<div class="teamsContainer">
 					<div class="span4 teamA">
 						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
-						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
-							{^prono}<option></option>{/prono}
-							{#score scoreA=prono.scoreA}
-								{@if cond="'{scoreA}' === '{.}'"}
-									<option value="{.}" selected="selected">{.}</option>
-								{:else}
-									<option value="{.}">{.}</option>
-								{/if}
-							{/score}
-						</select>
+						{?scoreA}
+						  &nbsp;{scoreA}
+						{:else}
+  						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
+                {^prono}<option></option>{/prono}
+                {#score scoreA=prono.scoreA}
+                  {@if cond="'{scoreA}' === '{.}'"}
+                    <option value="{.}" selected="selected">{.}</option>
+                  {:else}
+                    <option value="{.}">{.}</option>
+                  {/if}
+                {/score}
+              </select>
+						{/scoreA}
 					</div>
 					<div class="separation"><strong> - </strong></div>
 					<div class="span4 teamB">
-						<select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
-							{^prono}<option></option>{/prono}
-							{#score scoreB=prono.scoreB}
-								{@if cond="'{scoreB}' === '{.}'"}
-									<option value="{.}" selected="selected">{.}</option>
-								{:else}
-									<option value="{.}">{.}</option>
-								{/if}
-							{/score}
-						</select>
+					  {?scoreB}
+              {scoreB}&nbsp;
+            {:else}
+              <select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
+                {^prono}<option></option>{/prono}
+                {#score scoreB=prono.scoreB}
+                  {@if cond="'{scoreB}' === '{.}'"}
+                    <option value="{.}" selected="selected">{.}</option>
+                  {:else}
+                    <option value="{.}">{.}</option>
+                  {/if}
+                {/score}
+              </select>
+            {/scoreB}
 						<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
 					</div>
 				</div>

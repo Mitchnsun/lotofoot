@@ -34,6 +34,8 @@
       // Game information, id / date / schedule
       $game['id_teamA'] = $row['id_teamA'];
       $game['id_teamB'] = $row['id_teamB'];
+      $game['scoreA'] = $row['scoreA'];
+      $game['scoreB'] = $row['scoreB'];
       $game['id_game'] = $row['id_game'];
       $game['date'] = date('d/m/Y', $row['schedule']);
       $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
