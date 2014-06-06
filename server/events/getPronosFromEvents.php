@@ -31,30 +31,23 @@
       $result = $reqgame -> fetch();
       
       $game = array();
+      // Game information, id / date / schedule
+      $game['id_teamA'] = $row['id_teamA'];
+      $game['id_teamB'] = $row['id_teamB'];
+      $game['id_game'] = $row['id_game'];
+      $game['date'] = date('d/m/Y', $row['schedule']);
+      $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
+      $game['stage'] = $row['stage'];
       
-      if (!isset($result['id_prono'])) {// no bet on this game
-        // Game information, id / date / schedule
-        $game['id_teamA'] = $row['id_teamA'];
-        $game['id_teamB'] = $row['id_teamB'];
-        $game['id_game'] = $row['id_game'];
-        $game['date'] = date('d/m/Y', $row['schedule']);
-        $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
-        $game['stage'] = $row['stage'];
-      } else {
-        // Game information, id / date / schedule
-        $game['id_teamA'] = $row['id_teamA'];
-        $game['id_teamB'] = $row['id_teamB'];
-        $game['id_game'] = $row['id_game'];
+      if (isset($result['id_prono'])) {// bet on this game
         $game['prono'] = array(
-        		"id_prono" => $result['id_prono'],
+            "id_prono" => $result['id_prono'],
             "scoreA" => $result['scoreA'],
             "scoreB" => $result['scoreB'],
             "date" => date('d/m/Y', $result['prono_date']),
-            "schedule" => date('G', $result['prono_date']) . 'h' . date('i', $row['prono_date'])
+            "schedule" => date('G', $result['prono_date']) . 'h' . date('i', $result['prono_date'])
         );
-        $game['date'] = date('d/m/Y', $row['schedule']);
-        $game['schedule'] = date('G', $row['schedule']) . 'h' . date('i', $row['schedule']);
-        $game['stage'] = $row['stage'];
+        $game['result'] = $result;
       }
       
       if ($row['schedule'] > $today){
