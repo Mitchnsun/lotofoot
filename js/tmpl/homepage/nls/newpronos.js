@@ -1,8 +1,8 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
-		"last_pronos" : "Mes derniers pronostics",
-		"title" : "Pronostics du jour",
+		"last_pronos" : "Les 5 prochains matchs déjà pronostiqués",
+		"title" : "Les 5 prochains pronostics",
 		"no_pronos" : "Aucun pronostic n'est en cours.",
 		
 		/* Alert Success */

@@ -12,7 +12,6 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		},
 		render : function() {
 			var self = this;
-			var scoreArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 			var params = {userid : this.user.get('userid')};
 			
 			$.when(LotofootApi.getNewPronos(params), LotofootApi.getPreviousPronos(params))
@@ -29,15 +28,15 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 					game.teamA = self.teams.getTeams(game.id_teamA);
 					game.teamB = self.teams.getTeams(game.id_teamB);
 				});
-				
+				console.log(dataNewPronos,dataPreviousPronos);
 				if (dataNewPronos.pronos.length === 0 && dataPreviousPronos.games.length === 0) {
 					$("#newpronos h2").html(i18n.no_pronos);// the div "new pronos" is removed
 				} else {
 					$(self.el).html(te.renderTemplate(tmpl, {
 						i18n : i18n,
-						pronos : dataNewPronos.pronos,
-						previousPronos : dataPreviousPronos.games,
-						score : scoreArray
+						pronos : _.first(dataNewPronos.pronos,5),
+						previousPronos : _.first(dataPreviousPronos.games,5),
+						score : _.range(10)
 					}));
 				}
 			});

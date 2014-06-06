@@ -2,11 +2,12 @@ define([], function() {
 	return {
 		/* Front */
 		CREATE_GAMES : "create-games",
-		HOME : "",
+		HOME : "home",
 		LOGIN : "login",
 		NEW_ACCOUNT : "new-account",
 		PRONOS : "pronos",
 		RANKING : "ranking",
+		ROOT : "",
 		WORLDCUP : "world-cup",
 
 		/* Server */

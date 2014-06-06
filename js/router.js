@@ -16,6 +16,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			});
 		},
 		routes : _.object([
+		  [urls.ROOT, 'worldcup'],
 			[urls.CREATE_GAMES, 'creategames'],
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN + '(/:action/:param)', 'login'],
