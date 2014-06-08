@@ -8,6 +8,7 @@ define([], function() {
 		PRONOS : "pronos",
 		RANKING : "ranking",
 		ROOT : "",
+		TOP_PRONOS : "top/pronos",
 		WORLDCUP : "world-cup",
 
 		/* Server */

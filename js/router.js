@@ -23,6 +23,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.NEW_ACCOUNT, 'newaccount'],
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING, 'ranking'],
+			[urls.TOP_PRONOS + "/:event", 'toppronos'],
 			[urls.WORLDCUP, 'worldcup'],
 			['*action', 'defaultAction']
 		]),
@@ -155,6 +156,23 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
+		toppronos : function() {
+      var self = this;
+      if (this.user.checkAuth()) {
+        require(['views/pronos/topview'], function(TopView) {
+          self.loadView(new TopView({
+            user : self.user,
+            alertview : self.alertview,
+            teams : self.teams
+          }));
+          self.view.render();
+          self.menuView.menuChange(urls.TOP_PRONOS);
+        });
+      } else {
+        this.user.set('urlFrom', urls.TOP_PRONOS);
+        this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+      }
+    },
 		worldcup : function() {
 			var self = this;
 			require(['views/events/worldcupview'], function(WorldCupView) {

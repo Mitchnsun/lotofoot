@@ -1,6 +1,9 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
+	  "alertMessage" : "Vous pouvez jusqu'au 17 juin 2014, pronostiquer sur les quatres équipes que vous pensez "
+	     + "qui atteindront les demi-finales. Vous pourrez choisir le gagnant, le finaliste et le troisième. A vos paris à cette adresse :",
+	  "alertTitle" : "Pronostiquez sur le dernier carré !",
 		"group" : "Groupe",
 		"nopronos" : "Il n'y a aucun pronostic en cours pour ce groupe",
 		"official_website" : "http://fr.fifa.com/worldcup/",
