@@ -26,12 +26,16 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
       });
       
       teams = _.sortBy(teams, 'name');
-      console.log(teams);
+      
       $(this.el).html(te.renderTemplate(tmpl, {
         i18n : i18n,
         urls : urls,
         teams : teams
       }));
+      
+      /*LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
+        console.log(msg);
+      },function(msg){});*/
     },
     /*
      * Events

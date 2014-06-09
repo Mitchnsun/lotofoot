@@ -93,6 +93,9 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		betTop : function(params, success, error) {
 		  return performWS('POST', urls.URL_BET_TOP, params, success, error);
 		},
+		getTopPronos : function(params, success, error) {
+		  return performWS('GET', urls.URL_GET_TOP_PRONOS, params, success, error);
+		},
 		/* Rankings */
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);

@@ -26,6 +26,7 @@ define([], function() {
 		URL_UPDATE_PRONO : "server/pronos/updateprono.php",
 		URL_GET_PRONOS_FROM_EVENTS : "server/events/getPronosFromEvents.php",
 		URL_BET_TOP : "server/pronos/betTop.php",
+		URL_GET_TOP_PRONOS : "server/pronos/getTopPronos.php",
 		/* Rankings */
 		URL_GET_RANKING : "server/ranking/getranking.php",
 		/* Get Common datas */

@@ -9,12 +9,15 @@ define({
 	  bet : "Parier",
 	  first : "Vainqueur",
 	  fourth : "Quatrième",
+	  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
+	   + " Merci de votre patience.",
 	  second : "Finaliste",
 	  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
 	  third : "Troisième",
 		title : "Derniers pronostics",
 		topPronosMessage : "Choissisez les équipes qui finiront aux quatre premières places."
-		    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points.",
+		    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points."
+		    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
 		toppronosTitle : "Coupe du monde 2014 - Top 4",
 		
 		/* Errors */
