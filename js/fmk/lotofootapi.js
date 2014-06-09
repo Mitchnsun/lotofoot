@@ -90,6 +90,9 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getPronosFromEvents : function(params, success, error){
 		  return performWS('GET', urls.URL_GET_PRONOS_FROM_EVENTS, params, success, error);
 		},
+		betTop : function(params, success, error) {
+		  return performWS('POST', urls.URL_BET_TOP, params, success, error);
+		},
 		/* Rankings */
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);
