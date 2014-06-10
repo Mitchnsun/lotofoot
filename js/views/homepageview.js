@@ -29,7 +29,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 
 			//Render children view
 			this.newPronoView.render();
-			this.widgetsRender();
+			//this.widgetsRender();
 		},
 		widgetsRender : function(){
 			var self = this;

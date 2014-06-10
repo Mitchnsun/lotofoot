@@ -18,7 +18,7 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, RankingTmpl, tmpl) {
         user : this.user.toJSON()
       }));
 			
-			this.rankingRender();
+			//this.rankingRender();
 			
       if (this.user.get('isConnected') === false) {// Hide menu items if the user is not connected
         this.$('#menu ul').hide();
