@@ -11,7 +11,9 @@ define({
 	   + "</ul>",
 		draw : "N",
 		infosTitle : "Informations,",
-		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. Il apparaitra après le match d'ouverture en fonction des différents pronostics.",
+		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "
+			+ "Il apparaitra après le match d'ouverture en fonction des différents pronostics. "
+			+ "Ce sera un nouveau classement, le tableau ci-dessous sera réinitialisé.",
 		loss : "D",
 		luckyRatio : "Cocu Ratio",
 		player : "Joueur",
