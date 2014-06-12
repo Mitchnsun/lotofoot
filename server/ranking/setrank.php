@@ -1,7 +1,7 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'Overall';
+	$type = 'CM2014';
 	$season = 2;
   
   try {

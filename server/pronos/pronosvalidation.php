@@ -24,7 +24,7 @@
 	$response['prono_limit'] = 5;
 	$response['games'] = array();
 	
-	$querygames = "SELECT * FROM games WHERE scoreA != '' AND scoreB != '' ";
+	$querygames = "SELECT * FROM games WHERE scoreA != '' AND scoreB != '' AND validation = 0";
 	foreach ($bdd -> query($querygames) as $row) {
 		$id = $row['id_game'];
 		$data = array(
@@ -42,6 +42,12 @@
 			$data['numberOfPlayers'] = $result['COUNT(*)'];
 			array_push($response['games'],$data);
 		}
+		
+		// Update pronos
+		$queryvalidGame = "UPDATE games SET validation = 1 WHERE id_game = '$id'";
+	
+		$req = $bdd  -> prepare($queryvalidGame) or die(print_r($bdd->errorInfo()));
+		$req -> execute();
 	}
 	
 	// Update pronos

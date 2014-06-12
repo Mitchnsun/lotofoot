@@ -12,9 +12,9 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'Overall';
+	$type = 'CM2014';
 	$season = 2;
-  $startDate = DateTime::createFromFormat('d/m/Y', '01/07/2013');
+  $startDate = DateTime::createFromFormat('d/m/Y', '01/06/2014');
 	$timeStamp = date_format($startDate, 'U');
   
   try {
@@ -84,24 +84,26 @@
 	$req -> execute(array('type' => $type, 'season' => $season));
 	
 	foreach($response['users'] as $user){
-		$query = "INSERT INTO ranking (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
-				VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
-		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
-	  $req -> execute(array(
-		    'at' => $today,
-		    'type' => $type,
-		    'userid' => $user['userid'],
-		    'displayName' => utf8_decode($user['displayName']),
-		    'win' => $user['result']['W'],
-		    'draw' => $user['result']['D'],
-		    'loss' => $user['result']['L'],
-		    'total' => $user['total'],
-		    'score' => $user['score'],
-		    'prediction' => $user['prediction'],
-		    'pointByProno' => $user['pointByProno'],
-		    'luckyRatio' => $user['luckyRatio'],
-		    'season' => $season
-    ));
+		if($user['total'] > 0){
+			$query = "INSERT INTO ranking (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
+					VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
+			$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
+		  $req -> execute(array(
+			    'at' => $today,
+			    'type' => $type,
+			    'userid' => $user['userid'],
+			    'displayName' => utf8_decode($user['displayName']),
+			    'win' => $user['result']['W'],
+			    'draw' => $user['result']['D'],
+			    'loss' => $user['result']['L'],
+			    'total' => $user['total'],
+			    'score' => $user['score'],
+			    'prediction' => $user['prediction'],
+			    'pointByProno' => $user['pointByProno'],
+			    'luckyRatio' => $user['luckyRatio'],
+			    'season' => $season
+	    ));
+		}
 	}
 	
 	// return the JSON

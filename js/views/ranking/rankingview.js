@@ -12,7 +12,6 @@ function($, _, Backbone, te, i18n, tmpl) {
 		render : function() {
 			var self = this;
 			$.when(this.ranking.promise).done(function(){
-				console.log(self.ranking.toJSON());
 				$(self.el).html(te.renderTemplate(tmpl, {
 					i18n : i18n,
 					ranking : self.ranking.toJSON()
