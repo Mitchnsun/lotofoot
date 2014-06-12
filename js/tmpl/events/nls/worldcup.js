@@ -1,7 +1,7 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
-	  "alertMessage" : "Vous pouvez jusqu'au 17 juin 2014, pronostiquer sur les quatres équipes que vous pensez "
+	  "alertMessage" : "Vous pouvez jusqu'au 17 juin 2014 pronostiquer sur les quatre équipes "
 	     + "qui atteindront les demi-finales. Vous pourrez choisir le gagnant, le finaliste et le troisième. A vos paris à cette adresse :",
 	  "alertTitle" : "Pronostiquez sur le dernier carré !",
 		"group" : "Groupe",
