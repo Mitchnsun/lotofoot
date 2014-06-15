@@ -1,7 +1,7 @@
 <ul>
-	{#ranking}
+	{#ranking currentUserId=user.userid}
 		<li>
-			{@if cond="{rank} == 1"}
+			{@if cond="'{userid}' == '{currentUserId}'"}
 				<span class="badge badge-success">{rank}</span>
 			{:else}
 				<span class="badge badge-warning">{rank}</span>

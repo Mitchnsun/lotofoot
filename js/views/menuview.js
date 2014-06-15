@@ -18,7 +18,7 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, RankingTmpl, tmpl) {
         user : this.user.toJSON()
       }));
 			
-			//this.rankingRender();
+			this.rankingRender();
 			
       if (this.user.get('isConnected') === false) {// Hide menu items if the user is not connected
         this.$('#menu ul').hide();
@@ -42,9 +42,42 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, RankingTmpl, tmpl) {
 			
 			$.when(this.ranking.promise).done(function(){
 				self.$("#rankingWidget").html(te.renderTemplate(RankingTmpl, {
-					ranking : _.first(self.ranking.toJSON(),3)
+					user : self.user.toJSON(),
+					ranking : self.getRankingsForWidget()
 				}));
 			});
+		},
+		getRankingsForWidget : function(){
+			var current = this.ranking.findWhere({userid : this.user.get('userid')});
+			if(current != undefined){
+				current = current.toJSON();
+			} else { // No ranking for the user, show the podium
+				return _.first(this.ranking.toJSON(),3);
+			}
+			
+			var previousRank = parseInt(current.rank,10) - 1;
+			var nextRank = parseInt(current.rank,10) + 1;
+			
+			var previous = this.ranking.findWhere({rank : JSON.stringify(previousRank)});
+			previous = previous!=undefined?previous.toJSON():{};
+			var next = this.ranking.findWhere({rank : JSON.stringify(nextRank)});
+			next = next!=undefined?next.toJSON():{};
+			
+			if(parseInt(current.rank,10) == 1){ // user is first
+				var nextAfterRank = parseInt(current.rank,10) + 2;
+				var nextAfter = this.ranking.findWhere({rank : JSON.stringify(nextAfterRank)});
+				nextAfter = nextAfter!=undefined?nextAfter.toJSON():{};
+				return [current, next, nextAfter];
+			}
+			
+			if(parseInt(current.rank,10) == this.ranking.length){ // user is last
+				var beforePreviousRank = parseInt(current.rank,10) - 2;
+				var beforePrevious = this.ranking.findWhere({rank : JSON.stringify(beforePreviousRank)});
+				beforePrevious = beforePrevious!=undefined?beforePrevious.toJSON():{};
+				return [beforePrevious, previous, current];
+			}
+			
+			return [previous, current, next];
 		},
 		/*
 		 * Events

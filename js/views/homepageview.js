@@ -29,17 +29,6 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 
 			//Render children view
 			this.newPronoView.render();
-			//this.widgetsRender();
-		},
-		widgetsRender : function(){
-			var self = this;
-			
-			$.when(this.ranking.promise).done(function(){
-				self.$("#rankingWidget").html(te.renderTemplate(RankingTmpl, {
-					i18n : i18n,
-					ranking : _.first(self.ranking.toJSON(),3)
-				}));
-			});
 		},
 		/*
 		 * Events of the view
