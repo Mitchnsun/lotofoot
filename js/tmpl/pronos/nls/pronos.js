@@ -11,6 +11,7 @@ define({
 	  fourth : "Quatrième",
 	  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
 	   + " Merci de votre patience.",
+	  player : "Joueur",
 	  second : "Finaliste",
 	  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
 	  third : "Troisième",

@@ -12,7 +12,33 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     },
     render : function() {
       var self = this;
-      var teamsId = [];
+      
+      LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
+	      
+	      $(self.el).html(te.renderTemplate(tmpl, {
+	        i18n : i18n,
+	        urls : urls,
+	        teams : self.getWorldCupTeams(),
+	        toppronos : self.getTeamsForTopPronos(msg.pronos)
+	      }));
+	      
+      },function(msg){});
+    },
+    getTeamsForTopPronos : function(toppronos){
+    	var self = this;
+    	
+    	_.each(toppronos, function(prono){
+    		prono.team_first = self.teams.getNationInfos(prono.first);
+    		prono.team_second = self.teams.getNationInfos(prono.second);
+    		prono.team_third = self.teams.getNationInfos(prono.third);
+    		prono.team_fourth = self.teams.getNationInfos(prono.fourth);
+    	});
+    	
+    	return toppronos;
+    },
+    getWorldCupTeams : function(){
+    	var self = this;
+    	var teamsId = [];
       var teams = [];
       
       _.each(worldcup.groups, function(group){
@@ -25,17 +51,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
         }
       });
       
-      teams = _.sortBy(teams, 'name');
-      
-      $(this.el).html(te.renderTemplate(tmpl, {
-        i18n : i18n,
-        urls : urls,
-        teams : teams
-      }));
-      
-      /*LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
-        console.log(msg);
-      },function(msg){});*/
+      return _.sortBy(teams, 'name');
     },
     /*
      * Events
@@ -66,13 +82,14 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
         if(msg.errorCode !== undefined){
           self.alertView.displayAlert('warning', 'default', i18n[msg.errorCode]);
         } else {
-          self.alertView.displayAlert('success', 'success', i18n.success);
+        	self.render();
+          //self.alertView.displayAlert('success', 'success', i18n.success);
         }
         console.log(msg);
       }, function(msg){ // error
         // TODO : handle errors
         console.log(msg);
-      })
+      });
       console.log(choices);
     }
   });

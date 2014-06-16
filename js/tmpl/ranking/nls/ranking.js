@@ -9,6 +9,7 @@ define({
 	   + "<li> Prédiction : pourcentage de pronostics corrects (V+N). </li>"
 	   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 	   + "</ul>",
+	  CMRanking : "Coupe du monde 2014 - Brésil",
 		draw : "N",
 		infosTitle : "Informations,",
 		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "

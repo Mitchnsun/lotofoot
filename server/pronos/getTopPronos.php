@@ -19,21 +19,17 @@
   $query = "SELECT * FROM pronos_bonus p INNER JOIN users u ON p.userid = u.userid WHERE p.id_bonus = '".$id_bonus."' ORDER BY p.at DESC";
   foreach($bdd -> query($query) as $data){
     $prono = array(
-      "at" => $data['at'],
+      "schedule" => date('d/m/Y',$data['at']),
+			"scheduleTime" => date('G',$data['at']).'h'.date('i',$data['at']),
       "first" => $data['first'],
       "second" => $data['second'],
       "third" => $data['third'],
       "fourth" => $data['fourth'],
-      "data" => $data
+      "displayName" => utf8_encode($data['firstname']).' '.utf8_encode($data['lastname'])
     );
-    $prono['displayName'] = $data['firstname'].' '.$data['lastname'];
-    $prono['display_name'] = '&&'.$data['firstname'].' '.$data['lastname'];
-    if($data['pseudo'] != ''){
-      $prono['display_name'] = '##'.$data['pseudo'];
-    }
-    
-    array_push($response['pronos'], $prono);
+		
+		array_push($response['pronos'], $prono);
   }
-  
+	
   echo json_encode($response);// return the JSON
 ?>

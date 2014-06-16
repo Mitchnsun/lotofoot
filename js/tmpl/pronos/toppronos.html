@@ -69,9 +69,27 @@
   </div>
 </div>
 
-<div class="container-fluid AlertView">
-    <div class="alert alert-dismissable alert-info">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {i18n.getTopPronosIncoming|s}
-    </div>
+<div class="container-fluid">
+  <div id="worldcup" class="hero-unit">
+    <div class="corner cornerTopLeft"></div>
+    <div class="corner cornerTopRight"></div>
+    <div class="corner cornerBottomLeft"></div>
+    <div class="corner cornerBottomRight"></div>
+    <table class="table table-striped table-hover table-condensed">
+			<thead>
+		    <tr>
+		      <th></th><th>{i18n.player}</th><th>{i18n.first}</th>
+		      <th>{i18n.second}</th><th>{i18n.third}</th><th>{i18n.fourth}</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	{#toppronos}
+		  		<tr>
+		  			<td>{schedule} {scheduleTime}</td><td>{displayName}</td><td>{team_first.name}</td><td>{team_second.name}</td>
+		  			<td>{team_third.name}</td><td>{team_fourth.name}</td>
+		  		</tr>
+				{/toppronos}
+		  </tbody>
+		</table>
+  </div>
 </div>
