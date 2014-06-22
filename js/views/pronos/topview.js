@@ -8,13 +8,14 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     initialize : function(options) {
       this.user = options.user;
       this.teams = options.teams;
+      this.el = options.el !== undefined? options.el:this.el;
       this.alertView = new AlertView();
     },
     render : function() {
       var self = this;
       
       LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
-	      
+	      console.log($(self.el), self.el);
 	      $(self.el).html(te.renderTemplate(tmpl, {
 	        i18n : i18n,
 	        urls : urls,

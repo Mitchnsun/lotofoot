@@ -68,8 +68,10 @@ footer {font-size:0.8em;}
 #pronos .icon-chevron-down, #pronos .icon-chevron-up{float:right;margin-top:15px;}
 #pronos .schedule {min-height:45px;line-height:45px;}
 #pronos .separation {float:left;margin-left:2%}
+#toppronos {display:none}
 
 @media (max-width: 1024px) {
+	.nav-tabs.nav-justified {padding: 0 10px;}
 	#pronos .schedule, #pronos .pronoSchedule {width:130px;}
 	#pronos .gameWrapper .separation {display:none;}
 	#pronos .gameWrapper .teamA,#pronos .gameWrapper .teamB{width:92%;text-align:left;margin-left:2%!important;}
@@ -86,6 +88,7 @@ footer {font-size:0.8em;}
   #pronos .pronoWrapper .teamA, #pronos .pronoWrapper .teamB{float:left;}
 }
 @media (max-width: 480px) {
+	.nav-tabs.nav-justified {padding: 0;}
 	#pronos .pronoSchedule{display:none;}
 	#pronos .schedule{float:none;width:100%;text-align:left;min-height:30px;line-height:30px;}
 	#pronos .teamsContainer{width:90%;margin-right:2%}

@@ -1,8 +1,8 @@
 define(['jquery', 'jqueryUI', 'underscore', 'backbone',
 				'fmk/templateengine', 'fmk/lotofootapi', 'fmk/alertview', 'fmk/urls',
-				'collections/games','models/game',
+				'collections/games','models/game', 'views/pronos/topview',
 				'i18n!tmpl/pronos/nls/pronos', 'i18n!nls/country', 'text!tmpl/pronos/pronos.html'],
-function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, i18n, country, tmpl)
+function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, TopView, i18n, country, tmpl)
 {
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
@@ -40,18 +40,36 @@ function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, i18
 				urls : urls,
 				games : this.games.toJSON()
 			}));
+			
+			this.topview = new TopView({
+				user : this.user,
+	      teams : this.teams,
+	      el : '#toppronos'
+			});
+			
+			this.topview.render();
 		},
 		/*
 		 * Events
 		 */
 		events : {
-			"click .gameWrapper" : "togglePronos"
+			"click .gameWrapper" : "togglePronos",
+			"click .nav a" : "pronosnav"
 		},
 		togglePronos : function(e){
 			if($(e.currentTarget).find('i').length == 0){ // No pronos to display
 				return false;
 			}
 			$(e.currentTarget).next().slideToggle();
+		},
+		pronosnav : function(e){
+			e.preventDefault();
+			this.$('ul li.active').removeClass('active');
+			this.$(e.currentTarget).parent().addClass('active');
+			this.$('.pronopanel').hide();
+			
+			var id = this.$(e.currentTarget).attr('ref');
+			this.$(id).show();
 		}
 	});
 
