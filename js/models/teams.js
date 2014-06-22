@@ -24,12 +24,12 @@ function($, _, Backbone, LotofootApi, country) {
       var clubsList = [];
 
       _.each(clubs, function(item) {// fetch the right name of the country
-        item.name = country[item.id];
+        item.name = country[item.id].name;
         clubsList.push(item);
       });
 
       _.each(international, function(item) {// Function for the multi-lingual, the database is in French
-        item.name = country[item.country];
+        item.name = country[item.country].name;
       });
 
       this.set('clubs', clubsList);
