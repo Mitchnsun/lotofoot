@@ -18,6 +18,10 @@
 #worldcup .group.active {display:block;clear:both;width:100%}
 #worldcup .group.active .panel-success {display:block;width:70%;margin-right:0;}
 #worldcup .group.active .panel-footer {display:none}
+#worldcup .pronosTable .schedule {width:130px;}
+#worldcup .scoreA, #worldcup .scoreB {display:inline;font-weight:bold}
+#worldcup .scoreA {margin-left:10px}
+#worldcup .scoreB {margin-right:10px}
 /* Landscape phone to portrait tablet */
 @media (max-width: 1350px) {
   #worldcup .group {width:30%;min-width:230px;}
@@ -25,15 +29,15 @@
 }
 @media (max-width: 1160px) {
 	#worldcup .group.active .panel-success {width:60%;margin-right:0;}
-	#worldcup .pronosTable .schedule {width:130px;}
 	#worldcup .pronosTable .separation {display:none;}
 	#worldcup .pronosTable .teamA .control-label,.pronosTable .teamB .control-label {line-height: 30px;}
-	#worldcup .pronosTable .teamA,.pronosTable .teamB{width:100%;text-align:left;margin-left:2%!important;}
+	#worldcup .pronosTable .teamA,#worldcup .pronosTable .teamB{width:100%;text-align:left;margin-left:2%!important;}
 	#worldcup .pronosTable .teamB{padding-top:5px;}
 	#worldcup .pronosTable .buttons{width:35px;float:left;}
 	#worldcup .pronosTable select{float:right;}
 	#worldcup .pronosTable .teamsContainer{border-left: 1px solid #dddddd;float:left;width:55%;margin-right:4%}
 	#worldcup .rowGame, #worldcup .rowProno {border:none;margin-bottom:10px;}
+	#worldcup .scoreA, #worldcup .scoreB {float:right;margin:0;}
 }
 @media (max-width: 1024px) {
 	#worldcup .group.active .panel {width:100%;margin-right:0;}

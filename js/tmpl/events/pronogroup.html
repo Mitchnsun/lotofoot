@@ -7,7 +7,7 @@
 					<div class="span4 teamA">
 						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
 						{?scoreA}
-						  &nbsp;{scoreA}
+						  <div class="scoreA">{scoreA}</div>
 						{:else}
   						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
                 {^prono}<option></option>{/prono}
@@ -24,7 +24,7 @@
 					<div class="separation"><strong> - </strong></div>
 					<div class="span4 teamB">
 					  {?scoreB}
-              {scoreB}&nbsp;
+              <div class="scoreB">{scoreB}</div>
             {:else}
               <select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
                 {^prono}<option></option>{/prono}
