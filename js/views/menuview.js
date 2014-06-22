@@ -83,11 +83,15 @@ function($, _, Backbone, Bootstrap, te, urls, i18n, RankingTmpl, tmpl) {
 		 * Events
 		 */
 		events : {
-			'click #menuLink' : 'menuToggle'
+			'click #menuLink' : 'menuToggle',
+			'click #menu a' : 'closeMenu'
 		},
 		menuToggle : function(e){
       e.preventDefault();
-      $('#layout').toggleClass('active');
+      this.closeMenu(e);
+		},
+		closeMenu : function(e){
+			$('#layout').toggleClass('active');
       $('#menu').toggleClass('active');
       $('#menuLink').toggleClass('active');
 		}

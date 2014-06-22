@@ -19,7 +19,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 					game.teamB = self.teams.getNationWithFIFACode(game.away_team.code);
 					game.teamB.goals = game.away_team.goals;
 				});
-				console.log(msg);
+				
 				$(self.el).prepend(te.renderTemplate(tmpl, {
 					i18n : i18n,
 					urls : urls,
