@@ -33,6 +33,7 @@ define([], function() {
 		URL_GET_TEAMS : "server/common/getTeams.php",
 
 		/* External links */
-		EXT_BLOG : '/lotofoot/blog'
+		EXT_BLOG : '/lotofoot/blog',
+		API_WC14_CURRENT_GAMES : 'http://worldcup.sfg.io/matches/current'
 	};
 });

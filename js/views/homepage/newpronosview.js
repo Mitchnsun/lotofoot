@@ -28,7 +28,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 					game.teamA = self.teams.getTeams(game.id_teamA);
 					game.teamB = self.teams.getTeams(game.id_teamB);
 				});
-				console.log(dataNewPronos,dataPreviousPronos);
+				
 				if (dataNewPronos.pronos.length === 0 && dataPreviousPronos.games.length === 0) {
 					$("#newpronos h2").html(i18n.no_pronos);// the div "new pronos" is removed
 				} else {

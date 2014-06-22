@@ -1,8 +1,8 @@
 // Filename: homepageview.js
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
-        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html', 'text!tmpl/homepage/rankingwidget.html',
-        'views/homepage/newpronosview'],
-function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPronosView) {
+        'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html',
+        'views/homepage/newpronosview', 'views/homepage/currentgamesview'],
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, NewPronosView, CurrentGamesView) {
   
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
@@ -19,16 +19,23 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, RankingTmpl, NewPron
 				urls : urls
 			}));
 
-			// Initialize children view
+			// Initialize children views
 			this.newPronoView = new NewPronosView({
 				el : '#newpronos',
 				user : this.user,
 				alertview : this.alertview,
 				teams : this.teams
 			});
+			
+			this.currentGamesView = new CurrentGamesView({
+				el : this.el,
+				user : this.user,
+				teams : this.teams
+			});
 
 			//Render children view
 			this.newPronoView.render();
+			this.currentGamesView.render();
 		},
 		/*
 		 * Events of the view

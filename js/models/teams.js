@@ -30,6 +30,7 @@ function($, _, Backbone, LotofootApi, country) {
 
       _.each(international, function(item) {// Function for the multi-lingual, the database is in French
         item.name = country[item.country].name;
+        item.fifa_code = country[item.country].fifa_code;
       });
 
       this.set('clubs', clubsList);
@@ -65,6 +66,19 @@ function($, _, Backbone, LotofootApi, country) {
 
       _.every(this.get('international'), function(item) {
         if (item.id == id) {
+          nation = item;
+          return false;
+        }
+        return true;
+      });
+
+      return nation;
+    },
+    getNationWithFIFACode : function(fifa_code){
+    	var nation = {};
+
+      _.every(this.get('international'), function(item) {
+        if (item.fifa_code == fifa_code) {
           nation = item;
           return false;
         }

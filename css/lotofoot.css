@@ -100,6 +100,7 @@ footer {font-size:0.8em;}
 .pronosTable .separation {float:left;margin-left:2%}
 .pronosTable .buttons{text-align:right;}
 .pronosTable .buttons .btn {margin-bottom:5px;margin-right:5px;}
+.currentGames p {text-align:center;font-size:1.3em;line-height:normal;margin-top:10px;}
 @media (min-width: 1024px) {
 	.rowGame, .rowProno {margin-top:5px;}
 }
@@ -124,6 +125,7 @@ footer {font-size:0.8em;}
 	.pronosTable .schedule{float:none;width:100%;text-align:left;}
 	.pronosTable .teamsContainer{width:85%;margin-right:2%}
 	.pronosTable .buttons{width:12%;float:left;}
+	.currentGames p {font-size:1.1em;}
 }
 
 /* Ranking */

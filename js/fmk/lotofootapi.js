@@ -32,7 +32,20 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 			},
 			error : errorHandler(error)
 		});
-	}
+	};
+	
+	/* For external api where the data is already a json */
+	function externWS(type, endpoint, data, success, error) {
+		return $.ajax({
+			url : endpoint,
+			type : type,
+			data : data,
+			contentType: "application/json",
+      dataType: "json",
+			success : function(data){success(data);},
+			error : errorHandler(error)
+		});
+	};
 
 	/*
 	 * Handler based on the http status or 'fallback' key if nothing is registered for the status
@@ -103,6 +116,10 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		/* Common */
 		getTeams : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_TEAMS, params, success, error);
+		},
+		/* External API */
+		getCurrentGames : function(params, success, error){
+			return externWS('GET', urls.API_WC14_CURRENT_GAMES, params, success, error);
 		}
 	};
 });
