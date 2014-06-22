@@ -7,7 +7,7 @@
 	<h2 class="content-subhead">{i18n.title}</h2>
 	<hr/>
 	<div class='row-fluid'>
-		{#games}
+		{#games:user}
 			<div class="wrapper">
 				<div class="gameWrapper">
 					<div class="schedule">
@@ -25,8 +25,12 @@
 					{?pronos}<i class="icon-chevron-down"></i>{/pronos}
 				</div>
 				<div class="pronosWrapper">
-					{#pronos}
-						<div class="pronoWrapper">
+					{#pronos user_id=userid}
+						{@if cond="'{userid}' == '{user_id}'"}
+							<div class="pronoWrapper active">
+						{:else}
+							<div class="pronoWrapper">
+						{/if}
 							<div class="pronoSchedule">
 								{date} {time}
 							</div>

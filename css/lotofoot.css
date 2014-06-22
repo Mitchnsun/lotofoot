@@ -58,9 +58,12 @@ footer {font-size:0.8em;}
 #pronos .gameWrapper{font-size: 18px;font-weight: bold;color: #333;padding:5px 0px;line-height:45px;overflow:hidden;}
 #pronos .pronosWrapper{display:none;font-size:14px;}
 #pronos .pronoWrapper{overflow:hidden;}
-#pronos .teamA {text-align: right;}
+#pronos .pronoWrapper.active{background-color:#d9edf7;border-radius: 3px;}
+#pronos .pronoSchedule, #pronos .schedule {margin-left:5px}
+#pronos .teamA {text-align: right}
 #pronos .teamA span.score{margin-left:15px;}
 #pronos .teamB span.score{margin-right:15px;}
+#pronos .teamA, #pronos .teamB, #pronos .separation, #pronos .pronoSchedule {padding-top:5px;}
 #pronos .schedule, #pronos .prono, #pronos .control-label{display:inline;}
 #pronos .schedule, #pronos .pronoSchedule {width:150px;}
 #pronos .pronoSchedule, #pronos .schedule{float:left;}
