@@ -15,10 +15,11 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
       var self = this;
       
       LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
-	      console.log($(self.el), self.el);
+      	
 	      $(self.el).html(te.renderTemplate(tmpl, {
 	        i18n : i18n,
 	        urls : urls,
+	        user : self.user.toJSON(),
 	        teams : self.getWorldCupTeams(),
 	        toppronos : self.getTeamsForTopPronos(msg.pronos)
 	      }));

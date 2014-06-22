@@ -83,8 +83,12 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	{#toppronos}
+		  	{#toppronos user_id=user.userid}
+		  		{@if cond="'{userid}' == '{user_id}'"}
+		  		<tr class="info">
+		  		{:else}
 		  		<tr>
+		  		{/if}
 		  			<td>{schedule} {scheduleTime}</td><td>{displayName}</td><td>{team_first.name}</td><td>{team_second.name}</td>
 		  			<td>{team_third.name}</td><td>{team_fourth.name}</td>
 		  		</tr>

@@ -25,6 +25,7 @@
       "second" => $data['second'],
       "third" => $data['third'],
       "fourth" => $data['fourth'],
+      "userid" => $data['userid'],
       "displayName" => utf8_encode($data['firstname']).' '.utf8_encode($data['lastname'])
     );
 		
