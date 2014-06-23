@@ -175,16 +175,21 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
     },
 		worldcup : function() {
 			var self = this;
-			require(['views/events/worldcupview'], function(WorldCupView) {
-				self.loadView(new WorldCupView({
-					user : self.user,
-					alertview : self.alertview,
-					teams : self.teams,
-					ranking : self.ranking
-				}));
-				self.view.render();
-				self.menuView.menuChange(urls.WORLDCUP);
-			});
+			if (this.user.checkAuth()) {
+				require(['views/events/worldcupview'], function(WorldCupView) {
+					self.loadView(new WorldCupView({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams,
+						ranking : self.ranking
+					}));
+					self.view.render();
+					self.menuView.menuChange(urls.WORLDCUP);
+				});
+			} else {
+        this.user.set('urlFrom', urls.WORLDCUP);
+        this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+      }
 		},
 		/* Route by default */
 		defaultAction : function(actions) {
