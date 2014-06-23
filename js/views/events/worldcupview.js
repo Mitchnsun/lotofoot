@@ -1,7 +1,7 @@
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/urls',
         'collections/games', 'models/game', 'i18n!tmpl/events/nls/worldcup',
-        'text!tmpl/events/worldcup.html', 'text!tmpl/events/pronogroup.html'],
-function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGroup) {
+        'text!tmpl/events/worldcup.html', 'text!tmpl/events/pronoworldcup.html'],
+function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplProno) {
 
   var ClassView = Backbone.View.extend({
     el : $('#container'),
@@ -50,14 +50,21 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
     succesGetGames : function(msg) {
       var self = this;
       this.groupsGames.reset();
+      this.secondStageGames.reset();
       _.each(msg.games, function(game){
-        var groupId = self.getGroupId(game.id_teamA, game.id_teamB);
-        var game = new Game(game);
-        game.set('groupId',groupId);
-        game.set('teamA', self.teams.getNationInfos(game.get('id_teamA')));
+      	var game = new Game(game);
+      	game.set('teamA', self.teams.getNationInfos(game.get('id_teamA')));
     		game.set('teamB', self.teams.getNationInfos(game.get('id_teamB')));
-        self.groupsGames.add(game);
+      	if(game.get('stage') == "Groups"){
+      		var groupId = self.getGroupId(game.get('id_teamA'), game.get('id_teamB'));
+      		game.set('groupId',groupId);
+      		self.groupsGames.add(game);
+      	} else {
+      		self.secondStageGames.add(game);
+      	}
       });
+      
+      this.setPlayoffGames();
     },
     getGroupId : function(id_teamA, id_teamB){
       var id = 0;
@@ -72,12 +79,35 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
       });
       return id;
     },
+    setPlayoffGames : function(){
+    	var self = this;
+    	var stages = ["Final", "Semi", "Last8", "Last16"];
+    	
+    	_.each(stages, function(stage){
+    		var tempArray = self.secondStageGames.where({"stage" : stage});
+	    	var games = [];
+	    	
+	    	_.each(tempArray, function(game){
+	    		games.push(game.toJSON());
+	    	});
+	    	
+	    	self.$('#playoff').append(te.renderTemplate(tmplProno, {
+	        i18n : i18n,
+	        urls : urls,
+	        games : games,
+	        title : i18n[stage],
+	        score : _.range(10)
+	      }));
+    	});
+    	this.delegateEvents();
+    },
     /*
      * Events of the view
      */
     events : {
       'click .panel-footer' : 'enlargeGroup',
-      'click button.scoreUpdate' : 'betOnAGame'
+      'click button.scoreUpdate' : 'betOnAGame',
+      'click .nav a' : 'worldcupnav'
     },
     enlargeGroup : function(e) {
     	var self = this;
@@ -92,13 +122,25 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
     betOnAGame : function(e) {
       var ref = $(e.currentTarget).attr('data-ref');
       var game = this.groupsGames.findWhere({"id_game" : ref});
-      console.log(game.get('prono'));
+      if(game === undefined){
+      	game = this.secondStageGames.findWhere({"id_game" : ref});
+      }
+      
       if (game.get('prono') === undefined) {// User suggests a score for the game
         this.suggestScore(ref, game);
       }else {// User decides to update his prono
         this.updateProno(ref, game);
       }
     },
+    worldcupnav : function(e){
+			e.preventDefault();
+			this.$('ul li.active').removeClass('active');
+			this.$(e.currentTarget).parent().addClass('active');
+			this.$('.worldcuppanel').hide();
+			
+			var id = this.$(e.currentTarget).attr('ref');
+			this.$(id).show();
+		},
     /*
      * Handle pronos
      */
@@ -111,7 +153,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplGro
     		games.push(game.toJSON());
     	});
     	
-    	this.$('.group.active .panel-body.games').html(te.renderTemplate(tmplGroup, {
+    	this.$('.group.active .panel-body.games').html(te.renderTemplate(tmplProno, {
         i18n : i18n,
         urls : urls,
         games : games,

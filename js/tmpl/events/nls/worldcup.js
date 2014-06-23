@@ -4,11 +4,17 @@ define({
 	  "alertMessage" : "Vous pouvez jusqu'au 17 juin 2014 pronostiquer sur les quatre équipes "
 	     + "qui atteindront les demi-finales. Vous pourrez choisir le gagnant, le finaliste et le troisième. A vos paris à cette adresse :",
 	  "alertTitle" : "Pronostiquez sur le dernier carré !",
+	  "Final" : "Finale",
 		"group" : "Groupe",
+		"Last8" : "Quart de finale",
+		"Last16" : "Huitième de finale",
+		"nav_groups" : "Groupes",
 		"nopronos" : "Il n'y a aucun pronostic en cours pour ce groupe",
 		"official_website" : "http://fr.fifa.com/worldcup/",
+		"playoff" : "Phase finale", 
 		"prono" : "Pronostics",
-		"title" : "Coupe du monde 2014 - Rio",
+		"Semi" : "Demi-finale",
+		"title" : "Coupe du monde 2014 - Brésil",
 		
 		/* Groups */
 		"groups" : [{

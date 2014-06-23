@@ -1,4 +1,8 @@
 {?games}
+	{?title}
+		<h2 class="content-subhead">{title}</h2>
+		<hr/>
+	{/title}
 	<div class="pronosTable">
 		{#games score=score}
 			<div class="row-fluid rowGame" ref="{id_game}">
@@ -52,6 +56,4 @@
 			</div>
 		{/games}
 	</div>
-{:else}
-	<p>{i18n.nopronos}</p>
 {/games}
