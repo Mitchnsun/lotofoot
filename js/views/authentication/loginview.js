@@ -12,7 +12,6 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			this.eventBus = options.eventBus;
 			this.action = options.action;
 			this.param = options.param;
-			console.log(options);
 		},
 		el : $('#container'),
 		render : function() {
