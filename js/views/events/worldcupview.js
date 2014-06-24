@@ -107,7 +107,9 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
     events : {
       'click .panel-footer' : 'enlargeGroup',
       'click button.scoreUpdate' : 'betOnAGame',
-      'click .nav a' : 'worldcupnav'
+      'click .nav a' : 'worldcupnav',
+      'change #playoff select.selectScore' : 'enablePlayoffWinner',
+      'click .teamsContainer.active label' : 'selectWinner'
     },
     enlargeGroup : function(e) {
     	var self = this;
@@ -141,6 +143,41 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
 			var id = this.$(e.currentTarget).attr('ref');
 			this.$(id).show();
 		},
+		enablePlayoffWinner : function(e){
+			var self = this;
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var scoreA = 'A';
+			var scoreB = 'B';
+			
+			_.each(teamsContainer.find('select'), function(select){
+				var $select = self.$(select);
+				if($select.attr('ref') == 'A'){
+					scoreA = $select.val();
+				} else if ($select.attr('ref') == 'B'){
+					scoreB = $select.val();
+				}
+			});
+			
+			if (scoreA != scoreB){
+				return false;
+			}
+			
+			// Same score, enable the choice for the winner
+			teamsContainer.addClass('active');
+		},
+		selectWinner : function(e){
+			e.preventDefault();
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var $parentElement = this.$(e.currentTarget).parent();
+			
+			if ($parentElement.hasClass('winner')){
+				$parentElement.removeClass('winner');
+			} else {
+				var span = this.$(teamsContainer).find('.span4');
+				this.$(span).removeClass('winner');
+				$parentElement.addClass('winner');
+			}
+		},
     /*
      * Handle pronos
      */
@@ -173,7 +210,8 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
       var scoreB = $rowGame.find('.teamB select').val();
       var prono = {
         scoreA : scoreA,
-        scoreB : scoreB
+        scoreB : scoreB,
+        winner : this.getWinner($rowGame)
       };
       
       $rowGame.find('.buttons button').attr('disabled', true);
@@ -182,7 +220,8 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
         userid : this.user.get('userid'),
         id_game : ref,
         scoreA : scoreA,
-        scoreB : scoreB
+        scoreB : scoreB,
+        winner : prono.winner
       }, function(msg) {// success
         self.alertview.displayAlert('success', 'success', i18n.AddProno);
         $rowGame.find('.buttons button').attr('disabled', false);
@@ -199,7 +238,8 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
       var scoreB = $rowGame.find('.teamB select').val();
       var prono = {
         scoreA : scoreA,
-        scoreB : scoreB
+        scoreB : scoreB,
+        winner : this.getWinner($rowGame)
       };
       
       $rowGame.find('.buttons button').attr('disabled', true);
@@ -208,7 +248,8 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
         userid : this.user.get('userid'),
         id_game : ref,
         scoreA : scoreA,
-        scoreB : scoreB
+        scoreB : scoreB,
+        winner : prono.winner
       }, function(msg) {// success
         self.alertview.displayAlert('success', 'success', i18n.updateProno);
         $rowGame.find('.buttons button').attr('disabled', false);
@@ -217,7 +258,16 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
         self.alertview.displayError(msg.status, msg.errorCode);
         $rowGame.find('.buttons button').attr('disabled', false);
       });
-    }
+    },
+    getWinner : function($rowGame){
+    	var winner = $rowGame.find('.winner');
+    	
+    	if(winner.length > 0){
+    		return this.$(winner).attr('ref');
+    	} else {
+    		return false;
+    	}
+    },
   });
 
   // Our module now returns our view

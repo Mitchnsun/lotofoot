@@ -96,6 +96,12 @@ footer {font-size:0.8em;}
 	#pronos .schedule{float:none;width:100%;text-align:left;min-height:30px;line-height:30px;}
 	#pronos .teamsContainer{width:90%;margin-right:2%}
 }
+/* Playoff pronos */
+.teamA i, .teamB i {display:none;opacity:0.25;}
+.teamsContainer.active .teamA i, .teamsContainer.active .teamB i {display:inline-block}
+.teamA.winner i, .teamB.winner i {opacity:1}
+.teamA.winner label, .teamB.winner label {color:#5cb85c}
+
 /* Homepage */
 .pronosTable {font-size:15px;padding-bottom:20px;}
 .pronosTable .control-label {display:inline;}
