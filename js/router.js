@@ -24,7 +24,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING, 'ranking'],
 			[urls.TOP_PRONOS + "/:event", 'toppronos'],
-			[urls.WORLDCUP, 'worldcup'],
+			[urls.WORLDCUP + '(/:type)', 'worldcup'],
 			['*action', 'defaultAction']
 		]),
 		start : function(options) {
@@ -173,7 +173,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
         this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
       }
     },
-		worldcup : function() {
+		worldcup : function(type) {
 			var self = this;
 			if (this.user.checkAuth()) {
 				require(['views/events/worldcupview'], function(WorldCupView) {
@@ -181,7 +181,8 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 						user : self.user,
 						alertview : self.alertview,
 						teams : self.teams,
-						ranking : self.ranking
+						ranking : self.ranking,
+						type : type
 					}));
 					self.view.render();
 					self.menuView.menuChange(urls.WORLDCUP);

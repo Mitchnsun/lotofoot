@@ -10,6 +10,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
       this.alertview = options.alertview;
       this.teams = options.teams;
       this.ranking = options.ranking;
+      this.panelType = options.type;
       
       this.groupsGames = new Games(); // Collection with the games for groups stage
       this.secondStageGames = new Games(); // Collection with the games after the groups
@@ -34,6 +35,13 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
         i18n : i18n,
         urls : urls
       }));
+      
+      if(this.panelType == 'playoff'){
+      	this.$('.worldcuppanel').hide();
+      	this.$('#' + this.panelType).show();
+      	this.$('ul li.active').removeClass('active');
+				this.$('#playoffNav').addClass('active');
+      }
 
       this.getGames();
     },
