@@ -36,11 +36,11 @@
 							</div>
 							<div class="teamsContainer">
 								<div class="span4 teamA">
-									{player} <span class="score">{scoreA}</span>
+									{player} <span class="score {@if cond="'{winner}' == 'A'"}winner{/if}">{scoreA}</span>
 								</div>
 								<div class="separation"><strong> - </strong></div>
 								<div class="span4 teamB">
-									<span class="score">{scoreB}</span>
+									<span class="score {@if cond="'{winner}' == 'B'"}winner{/if}">{scoreB}</span>
 								</div>
 							</div>
 						</div>

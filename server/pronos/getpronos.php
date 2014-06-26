@@ -48,6 +48,7 @@
 				'timestamp' => $data['prono_date'],
 				'scoreA' => $data["scoreA"],
 				'scoreB' => $data["scoreB"],
+				'winner' => $data["penalties"],
 				'by' => $user
 			);
 

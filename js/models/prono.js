@@ -22,6 +22,7 @@ function($, _, Backbone) {
 				id_game : item.id_game,
 				scoreA : item.scoreA,
 				scoreB : item.scoreB,
+				winner : item.winner,
 				date : item.prono_date,
 				time : item.prono_time,
 				timestamp : item.timestamp
