@@ -40,7 +40,15 @@
 	
 	$queryusers = "SELECT userid, firstname, lastname FROM users";
 	foreach($bdd -> query($queryusers) as $user){
-		$resultsUser = array('W' => 0, 'D' => 0, 'L' => 0);
+		$resultsUser = array(
+				'W' => 0,
+				'WF' => 0,
+				'WE' => 0,
+				'WFE' => 0,
+				'D' => 0,
+				'DE' => 0,
+				'L' => 0
+		);
 		$querypronos = "SELECT result, COUNT(1) AS 'count' FROM pronos WHERE userid = :userid AND id_game IN (".stringOfIds($response['games']).") GROUP BY result";
 		$req = $bdd -> prepare($querypronos) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 		$req -> execute(array("userid" => $user['userid']));
@@ -48,8 +56,13 @@
 			$resultsUser[$row['result']] = intval($row['count']);
 		}
 		
-		$total =  $resultsUser['W'] + $resultsUser['D'] + $resultsUser['L'];
-		$score =  $resultsUser['W'] * 3 + $resultsUser['D'];
+		/* Add penalties prono on W and D */
+		$resultsUser['W'] = $resultsUser['W'] + $resultsUser['WF'] + $resultsUser['WE'] + $resultsUser['WFE'];
+		$resultsUser['D'] = $resultsUser['D'] + $resultsUser['DE'];
+		
+		$total = $resultsUser['W'] + $resultsUser['D'] + $resultsUser['L'];
+		$bonus = $resultsUser['WF'] * 2 + $resultsUser['WE'] + $resultsUser['WFE'] * 3 + $resultsUser['DE'];
+		$score = $resultsUser['W'] * 3 + $resultsUser['D'] + $bonus;
 		
 		if($total > 0){
 			$prediction = ($resultsUser['W'] + $resultsUser['D'])*100 / $total;
@@ -70,6 +83,7 @@
 				'userid' => intval($user['userid']),
 				'total' => intval($total),
 				'score' => intval($score),
+				'bonus' => intval($bonus),
 				'prediction' => floatval($prediction),
 				'pointByProno' => floatval($pointByProno),
 				'luckyRatio' => floatval($luckyRatio),
@@ -85,8 +99,8 @@
 	
 	foreach($response['users'] as $user){
 		if($user['total'] > 0){
-			$query = "INSERT INTO ranking (at,type,userid,displayName,win,draw,loss,total,score,prediction,pointByProno,luckyRatio,season) 
-					VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:prediction,:pointByProno,:luckyRatio,:season)";
+			$query = "INSERT INTO ranking (at,type,userid,displayName,win,draw,loss,total,score,bonus,prediction,pointByProno,luckyRatio,season) 
+					VALUES (:at,:type,:userid,:displayName,:win,:draw,:loss,:total,:score,:bonus,:prediction,:pointByProno,:luckyRatio,:season)";
 			$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
 		  $req -> execute(array(
 			    'at' => $today,
@@ -98,6 +112,7 @@
 			    'loss' => $user['result']['L'],
 			    'total' => $user['total'],
 			    'score' => $user['score'],
+			    'bonus' => $user['bonus'],
 			    'prediction' => $user['prediction'],
 			    'pointByProno' => $user['pointByProno'],
 			    'luckyRatio' => $user['luckyRatio'],
