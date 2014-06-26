@@ -19,9 +19,9 @@
 #worldcup .group.active .panel-success {display:block;width:70%;margin-right:0;}
 #worldcup .group.active .panel-footer {display:none}
 #worldcup .pronosTable .schedule {width:130px;}
-#worldcup .scoreA, #worldcup .scoreB {display:inline;font-weight:bold}
-#worldcup .scoreA {margin-left:10px}
-#worldcup .scoreB {margin-right:10px}
+#worldcup .scoreA, #worldcup .scoreB ,#playoff .scoreA, #playoff .scoreB {display:inline;font-weight:bold}
+#worldcup .scoreA, #playoff .scoreA {margin-left:10px}
+#worldcup .scoreB, #playoff .scoreB {margin-right:10px}
 #playoff {display:none}
 /* Landscape phone to portrait tablet */
 @media (max-width: 1350px) {

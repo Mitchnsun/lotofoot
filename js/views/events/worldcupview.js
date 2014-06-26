@@ -167,11 +167,13 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
 			});
 			
 			if (scoreA != scoreB){
-				return false;
+				teamsContainer.removeClass('active');
+				var winner = teamsContainer.find('.winner');
+				this.$(winner).removeClass('winner');
+			} else {
+				// Same score, enable the choice for the winner
+				teamsContainer.addClass('active');
 			}
-			
-			// Same score, enable the choice for the winner
-			teamsContainer.addClass('active');
 		},
 		selectWinner : function(e){
 			e.preventDefault();
@@ -273,7 +275,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
     	if(winner.length > 0){
     		return this.$(winner).attr('ref');
     	} else {
-    		return false;
+    		return '';
     	}
     },
   });

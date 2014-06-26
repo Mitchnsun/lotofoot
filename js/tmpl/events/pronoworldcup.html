@@ -7,9 +7,11 @@
 		{#games score=score}
 			<div class="row-fluid rowGame" ref="{id_game}">
 				<div class="schedule"><label class="control-label">{date} {schedule}</label></div>
-				<div class="teamsContainer">
-					<div class="span4 teamA" ref='A'>
-						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name} <i class="icon-ok-sign"></i></label>
+				<div class="teamsContainer {?bet}{@if cond="'{prono.scoreA}' == '{prono.scoreB}'"}active{/if}{/bet}">
+					<div class="span4 teamA {?bet}{@if cond="'{prono.winner}' == 'A'"}winner{/if}{/bet}" ref='A'>
+						<label class="control-label" for="prono{teamA.id}{id_game}">
+							{teamA.name} <i class="icon-ok-sign"></i>
+						</label>
 						{?scoreA}
 						  <div class="scoreA">{scoreA}</div>
 						{:else}
@@ -26,7 +28,7 @@
 						{/scoreA}
 					</div>
 					<div class="separation"><strong> - </strong></div>
-					<div class="span4 teamB" ref='B'>
+					<div class="span4 teamB {?bet}{@if cond="'{prono.winner}' == 'B'"}winner{/if}{/bet}" ref='B'>
 					  {?scoreB}
               <div class="scoreB">{scoreB}</div>
             {:else}
@@ -41,17 +43,19 @@
                 {/score}
               </select>
             {/scoreB}
-						<label class="control-label" for="prono{teamB.id}{id_game}"><i class="icon-ok-sign"></i> {teamB.name}</label>
+						<label class="control-label" for="prono{teamB.id}{id_game}">
+							<i class="icon-ok-sign"></i> {teamB.name}
+						</label>
 					</div>
 				</div>
 				{^scoreA}{^scoreB}
-  				{@if cond="{bet}"}
+  				{?bet}
   					<div class="buttons">
   						<button class="btn btn-success btn-sm scoreUpdate" type="button" data-role="bet" data-ref="{id_game}">
   							<i class="icon-ok"></i>
   						</button>
   					</div>
-  				{/if}
+  				{/bet}
 				{/scoreB}{/scoreA}
 			</div>
 		{/games}

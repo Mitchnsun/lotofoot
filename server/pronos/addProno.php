@@ -16,16 +16,18 @@
         $scoreA = $_POST['scoreA'];
         $scoreB = $_POST['scoreB'];
         $userid = $_SESSION['userid'];
+				$winner = isset($_POST['winner'])?$_POST['winner']:'';
     
         $today = time();
     
-        $query = "INSERT INTO pronos (userid,id_game,scoreA,scoreB,prono_date) VALUES (:userid,:id_game,:scoreA,:scoreB,:prono_date)";
+        $query = "INSERT INTO pronos (userid,id_game,scoreA,scoreB,penalties,prono_date) VALUES (:userid,:id_game,:scoreA,:scoreB,:penalties,:prono_date)";
         $req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
         $req -> execute(array(
                 'userid' => $userid,
                 'id_game' => $id_game,
                 'scoreA' => $scoreA,
                 'scoreB' => $scoreB,
+                'penalties' => $winner,
                 'prono_date' => $today
         ));
     

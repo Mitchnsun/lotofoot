@@ -46,10 +46,10 @@
             "id_prono" => $result['id_prono'],
             "scoreA" => $result['scoreA'],
             "scoreB" => $result['scoreB'],
+            "winner" => $result['penalties'],
             "date" => date('d/m/Y', $result['prono_date']),
             "schedule" => date('G', $result['prono_date']) . 'h' . date('i', $result['prono_date'])
         );
-        $game['result'] = $result;
       }
       
       if ($row['schedule'] > $today){

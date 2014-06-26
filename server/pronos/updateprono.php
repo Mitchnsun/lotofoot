@@ -33,10 +33,18 @@
 		$scoreA = $_POST['scoreA'];
 		$scoreB = $_POST['scoreB'];
 		$userid = $_SESSION['userid'];
+		$winner = isset($_POST['winner'])?$_POST['winner']:'';
 	
-		$query = "UPDATE pronos SET scoreA=:scoreA, scoreB=:scoreB, prono_date=:prono_date WHERE id_game=:id_game AND userid=:userid";
+		$query = "UPDATE pronos SET scoreA=:scoreA, scoreB=:scoreB, penalties=:winner, prono_date=:prono_date WHERE id_game=:id_game AND userid=:userid";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
-		$req -> execute(array('userid' => $userid, 'id_game' => $id_game, 'scoreA' => $scoreA, 'scoreB' => $scoreB, 'prono_date' => $today));
+		$req -> execute(array(
+				'userid' => $userid,
+				'id_game' => $id_game,
+				'scoreA' => $scoreA,
+				'scoreB' => $scoreB,
+				'winner' => $winner,
+				'prono_date' => $today
+		));
 	
 		$response['status'] = 200;
 	
