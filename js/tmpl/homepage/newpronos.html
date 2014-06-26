@@ -8,10 +8,10 @@
 		{#pronos}
 			<div class="row-fluid rowGame" ref="{id}">
 				<div class="schedule"><label class="control-label">{date} {schedule}</label></div>
-				<div class="teamsContainer">
-					<div class="span4 teamA">
-						<label class="control-label" for="prono{teamA.id}{id}">{teamA.name}</label>
-						<select class="input-mini selectScore" id="prono{teamA.id}{id}">
+				<div class="teamsContainer ">
+					<div class="span4 teamA" ref="A">
+						<label class="control-label" for="prono{teamA.id}{id}">{teamA.name} <i class="icon-ok-sign"></i></label>
+						<select class="input-mini selectScore" id="prono{teamA.id}{id}" ref="A">
 							<option></option>
 							{#score}
 								<option value="{.}">{.}</option>
@@ -19,14 +19,14 @@
 						</select>
 					</div>
 					<div class="separation"><strong> - </strong></div>
-					<div class="span4 teamB">
-						<select class="input-mini selectScore" id="prono{teamB.id}{id}">
+					<div class="span4 teamB" ref="B">
+						<select class="input-mini selectScore" id="prono{teamB.id}{id}" ref="B">
 							<option></option>
 							{#score}
 								<option value="{.}">{.}</option>
 							{/score}
 						</select>
-						<label class="control-label" for="prono{teamB.id}{id}">{teamB.name}</label>
+						<label class="control-label" for="prono{teamB.id}{id}"><i class="icon-ok-sign"></i> {teamB.name}</label>
 					</div>
 				</div>
 				<div class="buttons">
@@ -47,10 +47,10 @@
 		{#previousPronos}
 			<div class="row-fluid rowProno" ref="{id_game}">
 				<div class="schedule"><label class="control-label">{schedule} {scheduleTime}</label></div>
-				<div class="teamsContainer">
-					<div class="span4 teamA">
-						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name}</label>
-						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}">
+				<div class="teamsContainer {@if cond="'{prono.scoreA}' == '{prono.scoreB}'"}active{/if}">
+					<div class="span4 teamA {@if cond="'{prono.winner}' == 'A'"}winner{/if}" ref="A">
+						<label class="control-label" for="prono{teamA.id}{id_game}">{teamA.name} <i class="icon-ok-sign"></i></label>
+						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}" ref="A">
 							{#score scoreA=prono.scoreA}
 								{@if cond="{scoreA} == {.}"}
 									<option value="{.}" selected="selected">{.}</option>
@@ -61,8 +61,8 @@
 						</select>
 					</div>
 					<div class="separation"><strong> - </strong></div>
-					<div class="span4 teamB">
-						<select class="input-mini selectScore" id="prono{teamB.id}{id_game}">
+					<div class="span4 teamB {@if cond="'{prono.winner}' == 'B'"}winner{/if}" ref="B">
+						<select class="input-mini selectScore" id="prono{teamB.id}{id_game}" ref="B">
 							{#score scoreB=prono.scoreB}
 								{@if cond="{scoreB} == {.}"}
 									<option value="{.}" selected="selected">{.}</option>
@@ -71,7 +71,7 @@
 								{/if}
 							{/score}
 						</select>
-						<label class="control-label" for="prono{teamB.id}{id_game}">{teamB.name}</label>
+						<label class="control-label" for="prono{teamB.id}{id_game}"><i class="icon-ok-sign"></i> {teamB.name}</label>
 					</div>
 				</div>
 				<div class="buttons">

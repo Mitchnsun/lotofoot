@@ -34,6 +34,7 @@
 						'userid' => $row['userid'],
 						'scoreA' => $row['scoreA'],
 						'scoreB' => $row['scoreB'],
+						'winner' => $row['penalties'],
 						'prono_date' => date('d/m/Y',$row['prono_date']),
 						'prono_time' => date('G',$row['prono_date']).'h'.date('i',$row['prono_date'])
 				)

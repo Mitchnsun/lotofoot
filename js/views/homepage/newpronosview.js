@@ -65,7 +65,9 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		 * Events of the view
 		 */
 		events : {
-			"click .pronosTable .buttons button" : "actionOnAGame"
+			"click .pronosTable .buttons button" : "actionOnAGame",
+			'change select.selectScore' : 'enablePlayoffWinner',
+			'click .teamsContainer.active label' : 'selectWinner'
 		},
 		actionOnAGame : function(e) {
 			var role = $(e.currentTarget).attr('data-role');
@@ -76,6 +78,43 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				this.refuseGame(ref);
 			}else if (role == "update") {// User decides to update his prono
 				this.updateProno(ref);
+			}
+		},
+		enablePlayoffWinner : function(e){
+			var self = this;
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var scoreA = 'A';
+			var scoreB = 'B';
+			console.log(teamsContainer);
+			_.each(teamsContainer.find('select'), function(select){
+				var $select = self.$(select);
+				if($select.attr('ref') == 'A'){
+					scoreA = $select.val();
+				} else if ($select.attr('ref') == 'B'){
+					scoreB = $select.val();
+				}
+			});
+			
+			if (scoreA != scoreB){
+				teamsContainer.removeClass('active');
+				var winner = teamsContainer.find('.winner');
+				this.$(winner).removeClass('winner');
+			} else {
+				// Same score, enable the choice for the winner
+				teamsContainer.addClass('active');
+			}
+		},
+		selectWinner : function(e){
+			e.preventDefault();
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var $parentElement = this.$(e.currentTarget).parent();
+			
+			if ($parentElement.hasClass('winner')){
+				$parentElement.removeClass('winner');
+			} else {
+				var span = this.$(teamsContainer).find('.span4');
+				this.$(span).removeClass('winner');
+				$parentElement.addClass('winner');
 			}
 		},
 		/*
@@ -93,11 +132,15 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				userid : this.user.get('userid'),
 				id_game : ref,
 				scoreA : scoreA,
-				scoreB : scoreB
+				scoreB : scoreB,
+				winner : this.getWinner($rowGame)
 			}, function(msg) {// success
 				self.alertview.displayAlert('success', 'success', i18n.AddProno);
 				$rowGame.remove(); // Remove the row
 				$rowGame.find('.buttons button').attr('disabled', false);
+				if (self.$('.rowGame').length == 0){
+					self.render();
+				}
 			}, function(msg) {// error
 				self.alertview.displayError(msg.status, msg.errorCode);
 				$rowGame.find('.buttons button').attr('disabled', false);
@@ -118,7 +161,8 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				userid : this.user.get('userid'),
 				id_game : ref,
 				scoreA : scoreA,
-				scoreB : scoreB
+				scoreB : scoreB,
+				winner : this.getWinner($rowProno)
 			}, function(msg) {// success
 				self.alertview.displayAlert('success', 'success', i18n.updateProno);
 				$rowProno.find('.buttons button').attr('disabled', false);
@@ -126,7 +170,16 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 				self.alertview.displayError(msg.status, msg.errorCode);
 				$rowProno.find('.buttons button').attr('disabled', false);
 			});
-		}
+		},
+		getWinner : function($rowGame){
+    	var winner = $rowGame.find('.winner');
+    	
+    	if(winner.length > 0){
+    		return this.$(winner).attr('ref');
+    	} else {
+    		return '';
+    	}
+    }
 	});
 
 	// Our module now returns our view

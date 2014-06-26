@@ -277,7 +277,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
     	} else {
     		return '';
     	}
-    },
+    }
   });
 
   // Our module now returns our view
