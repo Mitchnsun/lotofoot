@@ -63,7 +63,7 @@
 			/* Do nothing the game got not score yet */
 		}else if($row['scoreA'] == $response['games'][$id]['scoreA'] && $row['scoreB'] == $response['games'][$id]['scoreB']){
 			
-			if($row['penalties'] == $response['games'][$id]['extra']){
+			if($response['games'][$id]['extra'] != '' && $row['penalties'] == $response['games'][$id]['extra']){
 				$data['result'] = 'WE';
 				array_push($response['pronos']['WE'],$data);
 			} else {
@@ -73,7 +73,7 @@
 			
 		}else if($row['scoreA'] == $row['scoreB'] && $response['games'][$id]['scoreA'] == $response['games'][$id]['scoreB']){
 				
-			if($row['penalties'] == $response['games'][$id]['extra']){
+			if($response['games'][$id]['extra'] != '' && $row['penalties'] == $response['games'][$id]['extra']){
 				$data['result'] = 'DE';
 				array_push($response['pronos']['DE'],$data);
 			} else {
