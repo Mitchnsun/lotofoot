@@ -15,11 +15,11 @@
 					</div>
 					<div class="pronos 	teamsContainer">
 						<div class="span4 teamA">
-							{teamA.name} {?scoreA}<span class="score">{scoreA}</span>{/scoreA}
+							{teamA.name} {?scoreA}<span class="score {@if cond="'{extra}' == 'A'"}winner{/if}">{scoreA}</span>{/scoreA}
 						</div>
 						<div class="separation"><strong> - </strong></div>
 						<div class="span4 teamB">
-							{?scoreB}<span class="score">{scoreB}</span>{/scoreB} {teamB.name} 
+							{?scoreB}<span class="score {@if cond="'{extra}' == 'B'"}winner{/if}">{scoreB}</span>{/scoreB} {teamB.name} 
 						</div>
 					</div>
 					{?pronos}<i class="icon-chevron-down"></i>{/pronos}

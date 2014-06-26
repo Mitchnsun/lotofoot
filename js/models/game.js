@@ -60,6 +60,7 @@ function($, _, Backbone, Pronos, Prono) {
         scoreA : data.scoreA,
         teamB : data.teamB,
         scoreB : data.scoreB,
+        extra : data.extra,
         date : data.schedule,
         time : data.scheduleTime,
         type : data.type,

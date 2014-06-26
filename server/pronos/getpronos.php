@@ -26,6 +26,7 @@
 			'timestamp' => $row['schedule'],
 			'scoreA' => $row['scoreA'],
 			'scoreB' => $row['scoreB'],
+			'extra' => $row['extra'],
 			'type' => $row['type'],
 			'pronos' => array()
 		);
