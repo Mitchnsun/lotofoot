@@ -31,6 +31,7 @@
 		    'loss' => $result['loss'],
 		    'total' => $result['total'],
 		    'score' => $result['score'],
+		    'bonus' => $result['bonus'],
 		    'prediction' => $result['prediction'],
 		    'pointByProno' => $result['pointByProno'],
 		    'luckyRatio' => $result['luckyRatio'],

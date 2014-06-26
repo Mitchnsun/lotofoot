@@ -1,11 +1,13 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
+		bonus : "B",
 	  captionTitle : "Légende,",
 	  captionMsg : "<ul>"
 	   + "<li> V : victoire, score exact pronostiqué - tout-pile. (3 points)</li>"
 	   + "<li> N : issue du match correcte pronostiqué mais le score était inexact. (1 point)</li>"
 	   + "<li> D : défaite, le pronostic est raté, mauvaise issue mauvais score. (0 point)</li>"
+	   + "<li> B : points bonus</li>"
 	   + "<li> Prédiction : pourcentage de pronostics corrects (V+N). </li>"
 	   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 	   + "</ul>",
