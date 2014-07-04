@@ -13,7 +13,8 @@ define({
 		"official_website" : "http://fr.fifa.com/worldcup/",
 		"playoff" : "Phase finale", 
 		"prono" : "Pronostics",
-		"Semi" : "Demi-finale",
+		"Semi" : "Demi-finales",
+		"ThirdPlace" : "Petite Finale",
 		"title" : "Coupe du monde 2014 - Brésil",
 		
 		/* Groups */

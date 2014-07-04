@@ -89,7 +89,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
     },
     setPlayoffGames : function(){
     	var self = this;
-    	var stages = ["Final", "Semi", "Last8", "Last16"];
+    	var stages = ["Final", "ThirdPlace", "Semi", "Last8", "Last16"];
     	
     	_.each(stages, function(stage){
     		var tempArray = self.secondStageGames.where({"stage" : stage});
