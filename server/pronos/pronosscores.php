@@ -105,7 +105,7 @@
 	$querywin = "UPDATE pronos SET result = 'W' WHERE id_prono IN (".stringOfIds($response['pronos']['W']).");";
 	$querywinfinal = "UPDATE pronos SET result = 'WF' WHERE id_prono IN (".stringOfIds($response['pronos']['WF']).");";
 	$querywinextra = "UPDATE pronos SET result = 'WE' WHERE id_prono IN (".stringOfIds($response['pronos']['WE']).");";
-	$querylosefinalextra = "UPDATE pronos SET result = 'WFE' WHERE id_prono IN (".stringOfIds($response['pronos']['WFE']).");";
+	$querywinfinalextra = "UPDATE pronos SET result = 'WFE' WHERE id_prono IN (".stringOfIds($response['pronos']['WFE']).");";
 	$querydraw = "UPDATE pronos SET result = 'D' WHERE id_prono IN (".stringOfIds($response['pronos']['D']).");";
 	$querydrawextra = "UPDATE pronos SET result = 'DE' WHERE id_prono IN (".stringOfIds($response['pronos']['DE']).");";
 	$querylose = "UPDATE pronos SET result = 'L' WHERE id_prono IN (".stringOfIds($response['pronos']['L']).");";
@@ -116,7 +116,7 @@
 	$req -> execute();
 	$req = $bdd -> prepare($querywinextra) or die(print_r($bdd->errorInfo()));
 	$req -> execute();
-	$req = $bdd  -> prepare($querylosefinalextra) or die(print_r($bdd->errorInfo()));
+	$req = $bdd  -> prepare($querywinfinalextra) or die(print_r($bdd->errorInfo()));
 	$req -> execute();
 	$req = $bdd -> prepare($querydraw) or die(print_r($bdd->errorInfo()));
 	$req -> execute();
