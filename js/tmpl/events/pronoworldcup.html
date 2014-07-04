@@ -13,7 +13,7 @@
 							{teamA.name} <i class="icon-ok-sign"></i>
 						</label>
 						{?scoreA}
-						  <div class="scoreA">{scoreA}</div>
+						  <div class="scoreA {@if cond="'{winner}' == 'A'"}winner{/if}">{scoreA}</div>
 						{:else}
   						<select class="input-mini selectScore" id="prono{teamA.id}{id_game}" ref="A">
                 {^prono}<option></option>{/prono}
@@ -30,7 +30,7 @@
 					<div class="separation"><strong> - </strong></div>
 					<div class="span4 teamB {?bet}{@if cond="'{prono.winner}' == 'B'"}winner{/if}{/bet}" ref='B'>
 					  {?scoreB}
-              <div class="scoreB">{scoreB}</div>
+              <div class="scoreB {@if cond="'{winner}' == 'B'"}winner{/if}">{scoreB}</div>
             {:else}
               <select class="input-mini selectScore" id="prono{teamB.id}{id_game}" ref="B">
                 {^prono}<option></option>{/prono}

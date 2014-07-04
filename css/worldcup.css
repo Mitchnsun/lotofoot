@@ -22,6 +22,8 @@
 #worldcup .scoreA, #worldcup .scoreB ,#playoff .scoreA, #playoff .scoreB {display:inline;font-weight:bold}
 #worldcup .scoreA, #playoff .scoreA {margin-left:10px}
 #worldcup .scoreB, #playoff .scoreB {margin-right:10px}
+#worldcup .scoreA.winner, #playoff .scoreA.winner,
+#worldcup .scoreB.winner, #playoff .scoreB.winner {font-weight:bold;color:#5cb85c}
 #playoff {display:none}
 /* Landscape phone to portrait tablet */
 @media (max-width: 1350px) {
