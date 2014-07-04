@@ -4,6 +4,8 @@
 		$result = $bdd -> query($querygame) -> fetch();
 		$data = array(
 			"id_game" => $result['id_game'],
+			"competition" => $result['competition'],
+			"stage" => $result['stage'],
 			"scoreA" => $result['scoreA'],
 			"scoreB" => $result['scoreB'],
 			"extra" => $result['extra']
@@ -63,9 +65,15 @@
 			/* Do nothing the game got not score yet */
 		}else if($row['scoreA'] == $response['games'][$id]['scoreA'] && $row['scoreB'] == $response['games'][$id]['scoreB']){
 			
-			if($response['games'][$id]['extra'] != '' && $row['penalties'] == $response['games'][$id]['extra']){
+			if($response['games'][$id]['extra'] != '' && $row['penalties'] == $response['games'][$id]['extra'] && $response['games'][$id]['stage'] == 'Final'){
+				$data['result'] = 'WFE';
+				array_push($response['pronos']['WFE'],$data);
+			} else if ($response['games'][$id]['extra'] != '' && $row['penalties'] == $response['games'][$id]['extra']){
 				$data['result'] = 'WE';
 				array_push($response['pronos']['WE'],$data);
+			} else if ($response['games'][$id]['stage'] == 'Final'){
+				$data['result'] = 'WF';
+				array_push($response['pronos']['WF'],$data);
 			} else {
 				$data['result'] = 'W';
 				array_push($response['pronos']['W'],$data);
