@@ -10,6 +10,7 @@ define([], function() {
 		ROOT : "",
 		TOP_PRONOS : "top/pronos",
 		WORLDCUP : "world-cup",
+		WORLDCUP_PLAYOFF : "world-cup/playoff",
 
 		/* Server */
 		/* Authentication */
