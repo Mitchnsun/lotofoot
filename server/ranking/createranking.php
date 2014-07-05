@@ -28,8 +28,16 @@
 	$response['status'] = 200;
 	$response['from'] = $timeStamp;
 	$response['at'] = $today;
+	$response['id_bonus'] = array();
 	$response['games'] = array();
 	$response['users'] = array();
+	
+	$querybonus = "SELECT id_bonus FROM bonus WHERE type=:type AND season=:season";
+	$req = $bdd -> prepare($querybonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+	$req -> execute(array("type" => $type,"season" => $season));
+	while($result = $req -> fetch()){
+		array_push($response['id_bonus'],$result['id_bonus']);
+	}
 	
 	$querygames = "SELECT id_game FROM games WHERE schedule > :time";
 	$req = $bdd -> prepare($querygames) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
@@ -62,6 +70,15 @@
 		
 		$total = $resultsUser['W'] + $resultsUser['D'] + $resultsUser['L'];
 		$bonus = $resultsUser['WF'] * 2 + $resultsUser['WE'] + $resultsUser['WFE'] * 3 + $resultsUser['DE'];
+		
+		/* Get bonus points from prono bonus */
+		$querypronobonus = "SELECT points FROM pronos_bonus WHERE userid=:userid AND id_bonus IN (".stringOfIds($response['id_bonus']).")";
+		$reqbonus = $bdd -> prepare($querypronobonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+		$reqbonus -> execute(array("userid" => $user['userid']));
+		while ($data = $reqbonus -> fetch()) {
+			$bonus += $data['points'];
+		}
+		
 		$score = $resultsUser['W'] * 3 + $resultsUser['D'] + $bonus;
 		
 		if($total > 0){
@@ -88,7 +105,7 @@
 				'pointByProno' => floatval($pointByProno),
 				'luckyRatio' => floatval($luckyRatio),
 				'displayName' => utf8_encode($user['firstname'].' '.$user['lastname'])
-				)
+			)
 		);
 	}
 
