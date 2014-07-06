@@ -72,7 +72,7 @@
 		$bonus = $resultsUser['WF'] * 2 + $resultsUser['WE'] + $resultsUser['WFE'] * 3 + $resultsUser['DE'];
 		
 		/* Get bonus points from prono bonus */
-		$querypronobonus = "SELECT points FROM pronos_bonus WHERE userid=:userid AND id_bonus IN (".stringOfIds($response['id_bonus']).")";
+		$querypronobonus = "SELECT points FROM pronos_bonus WHERE userid=:userid AND validation='1' AND id_bonus IN (".stringOfIds($response['id_bonus']).")";
 		$reqbonus = $bdd -> prepare($querypronobonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 		$reqbonus -> execute(array("userid" => $user['userid']));
 		while ($data = $reqbonus -> fetch()) {
