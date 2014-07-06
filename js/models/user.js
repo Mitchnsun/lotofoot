@@ -10,9 +10,11 @@ function($, _, Backbone, LotofootApi, urls) {
      * Authentication
      */
     connect : function(user) {
+    	var urlFrom = this.get('urlFrom');
       this.set(user);
       this.set({
-        isConnected : true
+        isConnected : true,
+        urlFrom : urlFrom
       });
     },
     checkAuth : function() {

@@ -74,7 +74,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 					if(self.$('input[type="checkbox"]').is(':checked')){
 						self.saveSession();
 					}
-					self.eventBus.trigger('url:change',{url:'#'+urls.HOME});
+					self.eventBus.trigger('url:change',{url:'#' + self.user.get('urlFrom')});
 				}
 				
 			}, function(msg) { // error
