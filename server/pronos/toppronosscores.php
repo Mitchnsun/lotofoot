@@ -110,7 +110,7 @@
 		array_push($response['pronos'],$data);
 		
 		// Update pronos
-		$queryupdate = "UPDATE pronos_bonus SET points = :points WHERE id = :id;";
+		$queryupdate = "UPDATE pronos_bonus SET points = :points, validation = '1' WHERE id = :id;";
 		$req = $bdd  -> prepare($queryupdate) or die(print_r($bdd->errorInfo()));
 		$req -> execute(array(
 				"points" => $points,
