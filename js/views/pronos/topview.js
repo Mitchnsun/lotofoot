@@ -21,6 +21,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
 	        urls : urls,
 	        user : self.user.toJSON(),
 	        teams : self.getWorldCupTeams(),
+	        bonus : self.getTeamsForTopPronos([msg.bonus])[0],
+	        time : msg.time,
 	        toppronos : self.getTeamsForTopPronos(msg.pronos)
 	      }));
 	      

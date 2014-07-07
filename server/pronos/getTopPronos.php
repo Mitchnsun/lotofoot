@@ -51,11 +51,15 @@
       "third" => $data['third'],
       "fourth" => $data['fourth'],
       "userid" => $data['userid'],
+      "validation" => $data['validation'],
+      "points" => $data['points'],
       "displayName" => utf8_encode($data['firstname']).' '.utf8_encode($data['lastname'])
     );
 		
 		array_push($response['pronos'], $prono);
   }
+	
+	$response['time'] = $today;
 	
   echo json_encode($response);// return the JSON
 ?>
