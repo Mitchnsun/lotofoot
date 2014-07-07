@@ -19,11 +19,13 @@
   if ($_GET['userid'] == $_SESSION['userid']) {
     $userid = $_GET['userid'];
   
-    $query = "SELECT * FROM games WHERE competition = '$events' ORDER BY schedule";
+    $query = "SELECT * FROM games WHERE competition = :events ORDER BY schedule";
+		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));
+		$req -> execute(array('events' => $events));
     // retrieve all games from the events
     $response['games'] = array();
     
-    foreach ($bdd -> query($query) as $row) {
+    while ($row = $req -> fetch()) {
       $querygame = "SELECT * FROM pronos WHERE userid = :userid AND id_game = :id_game";
       // Find if the user already bet on this game
       $reqgame = $bdd -> prepare($querygame) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd -> errorInfo())));

@@ -17,8 +17,10 @@
 		$games = array();
 		$today = time();
 		
-		$gameQuery = "SELECT * FROM games g INNER JOIN pronos p ON g.id_game = p.id_game WHERE g.schedule > '".$today."' AND p.userid = '".$userid."' ORDER BY g.schedule ASC";
-		foreach ($bdd -> query($gameQuery) as $row) {
+		$gameQuery = "SELECT * FROM games g INNER JOIN pronos p ON g.id_game = p.id_game WHERE g.schedule > :today AND p.userid = :userid ORDER BY g.schedule ASC";
+		$req = $bdd -> prepare($gameQuery) or die(json_encode(array("status" => 500, "errorCode" => "BDLogin", "message" => $bdd->errorInfo())));
+  	$req -> execute(array("today" => $today, "userid" => $userid));
+		while ($row = $req -> fetch()) {
 			$game = array(
 				'addBy' => $row['addBy'],
 				'country' => $row['country'],
