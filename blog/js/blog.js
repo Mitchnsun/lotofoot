@@ -21,9 +21,7 @@ $(document).ready(function() {
  * Events binding by version
  */
 function bindVersionEvents() {
-  if (version == "0.1") {
-
-  } else if (version == "0.2") {
+  if (version == "0.2") {
   	$('.showExplicit').on('click',events.showExplicit);
   }
 }
@@ -31,13 +29,12 @@ function bindVersionEvents() {
 // Manage HTML DOM for each version page
 function customDisplayForVersion() {
   var oneDayToSeconds = 24*60*60;
-  if (version == "0.1") {
-
-  } else if (version == "0.2") {
-    $("#formVersionName").remove();
+  if (version == "0.2") {
+  	$("#formVersionName").remove();
     $("#pollResults").show();
     $('#pollResults .alert-success').remove();
     webService.loadPollResult('versionName');
+  } else if (version == "0.3") {
     buildProgress($('.percentage'));
   }
 }
