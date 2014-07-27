@@ -1,8 +1,8 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'CM2014';
-	$season = 2;
+	$type = $_GET['type'];
+	$season = $_GET['season'];
   
   try {
     require_once ('../connect_DB.php');

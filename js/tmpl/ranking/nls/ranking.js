@@ -11,21 +11,22 @@ define({
 	   + "<li> Prédiction : pourcentage de pronostics corrects (V+N). </li>"
 	   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 	   + "</ul>",
-	  CMRanking : "Coupe du monde 2014 - Brésil",
+	  CMRanking : "Saison 2014/2015 - Overall",
 		draw : "N",
 		infosTitle : "Informations,",
 		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "
 			+ "Il apparaitra après le match d'ouverture en fonction des différents pronostics. "
 			+ "Ce sera un nouveau classement, le tableau ci-dessous sera réinitialisé.",
+		last_update : "Dernière mise à jour",
 		loss : "D",
 		luckyRatio : "Cocu Ratio",
+		no_update : "Aucune",
 		player : "Joueur",
 		prediction : "Prédiction %",
 		score : "Score",
 		season : 'Saison',
 		title : "Classement",
 		total : "Total",
-		last_update : "Dernière mise à jour",
 		win : "V"
 	}
 });

@@ -3,9 +3,14 @@ function($, _, Backbone, LotofootApi, Player) {
 
 	var Collection = Backbone.Collection.extend({
 		model : Player,
+		default_type : "Overall",
+		default_season : 3,
 		load : function(options){
 			if(options === undefined){ // Default configuration : 2014 -> Overall season 2
-				options = {};
+				options = {
+				  type : this.default_type,
+				  season : this.default_season
+				};
 			}
 			
 			// Bind functions to the view
