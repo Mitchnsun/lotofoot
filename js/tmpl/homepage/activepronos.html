@@ -1,0 +1,48 @@
+<div class="corner cornerTopLeft"></div>
+<div class="corner cornerTopRight"></div>
+<div class="corner cornerBottomLeft"></div>
+<div class="corner cornerBottomRight"></div>
+{?pronos}
+	<h2 class="content-subhead">{i18n.title}</h2>
+	<div id="pronosToDo" class="pronosTable">
+		{#pronos}
+			<div class="row-fluid rowGame" ref="{id}">
+				<div class="schedule"><label class="control-label">{date} {schedule}</label></div>
+				<div class="teamsContainer ">
+					<div class="span4 teamA" ref="A">
+						<label class="control-label" for="prono{teamA.id}{id}">{teamA.name} <i class="icon-ok-sign"></i></label>
+						<select class="input-mini selectScore" id="prono{teamA.id}{id}" ref="A">
+							{^prono}<option></option>{/prono}
+              {#score scoreA=prono.scoreA}
+                {@if cond="'{scoreA}' === '{.}'"}
+                  <option value="{.}" selected="selected">{.}</option>
+                {:else}
+                  <option value="{.}">{.}</option>
+                {/if}
+              {/score}
+						</select>
+					</div>
+					<div class="separation"><strong> - </strong></div>
+					<div class="span4 teamB" ref="B">
+						<select class="input-mini selectScore" id="prono{teamB.id}{id}" ref="B">
+							{^prono}<option></option>{/prono}
+              {#score scoreB=prono.scoreB}
+                {@if cond="'{scoreB}' === '{.}'"}
+                  <option value="{.}" selected="selected">{.}</option>
+                {:else}
+                  <option value="{.}">{.}</option>
+                {/if}
+              {/score}
+						</select>
+						<label class="control-label" for="prono{teamB.id}{id}"><i class="icon-ok-sign"></i> {teamB.name}</label>
+					</div>
+				</div>
+				<div class="buttons">
+					<button class="btn btn-success btn-sm" type="button" data-role="bet" data-ref="{id}">
+						<i class="icon-ok"></i>
+					</button>
+				</div>
+			</div>
+		{/pronos}
+	</div>
+{/pronos}

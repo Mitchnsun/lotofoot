@@ -82,12 +82,18 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 			return performWS('POST', urls.URL_NEW_ACCOUNT, params, success, error);
 		},
 		/* Pronos */
+		getActivePronos : function(params, success, error) {
+      return performWS('GET', urls.URL_GET_ACTIVE_PRONOS, params, success, error);
+    },
 		getNewPronos : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_NEW_PRONOS, params, success, error);
 		},
 		addProno : function(params, success, error) {
 			return performWS('POST', urls.URL_ADD_PRONO, params, success, error);
 		},
+		betProno : function(params, success, error) {
+      return performWS('POST', urls.URL_BET_PRONO, params, success, error);
+    },
 		createGames : function(params, success, error) {
 			return performWS('POST', urls.URL_CREATE_GAMES, params, success, error);
 		},

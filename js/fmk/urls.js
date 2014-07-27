@@ -19,8 +19,10 @@ define([], function() {
 		/* Account */
 		URL_NEW_ACCOUNT : "server/account/newaccount.php",
 		/* Pronos */
+		URL_GET_ACTIVE_PRONOS : "server/pronos/getActivePronos.php",
 		URL_GET_NEW_PRONOS : "server/pronos/getNewPronos.php",
 		URL_ADD_PRONO : "server/pronos/addProno.php",
+		URL_BET_PRONO : "server/pronos/betProno.php",
 		URL_CREATE_GAMES : "server/pronos/creategames.php",
 		URL_GET_PRONOS : "server/pronos/getpronos.php",
 		URL_GET_PREVIOUS_PRONOS : "server/pronos/getpreviouspronos.php",

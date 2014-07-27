@@ -21,21 +21,21 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, NewPronosView, Curre
 
 			// Initialize children views
 			this.newPronoView = new NewPronosView({
-				el : '#newpronos',
+				el : '#activepronos',
 				user : this.user,
 				alertview : this.alertview,
 				teams : this.teams
 			});
 			
-			this.currentGamesView = new CurrentGamesView({
+			/*this.currentGamesView = new CurrentGamesView({
 				el : this.el,
 				user : this.user,
 				teams : this.teams
-			});
+			});*/
 
 			//Render children view
 			this.newPronoView.render();
-			this.currentGamesView.render();
+			//this.currentGamesView.render();
 		},
 		/*
 		 * Events of the view
