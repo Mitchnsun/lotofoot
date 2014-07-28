@@ -1,8 +1,8 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'CM2014';
-	$season = 2;
+	$type = $_GET['type'];
+	$season = $_GET['season'];
   
   try {
     require_once ('../connect_DB.php');
@@ -19,9 +19,9 @@
 	$req = $bdd -> prepare($queryranking) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 	$req -> execute(array("type" => $type, "season" => $season));
 	while($result = $req -> fetch()){
-		$queryrank = "UPDATE ranking SET rank = :rank WHERE userid = :userid";
+		$queryrank = "UPDATE ranking SET rank = :rank WHERE userid = :userid AND type=:type AND season=:season";
 		$request = $bdd -> prepare($queryrank) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
-		$request -> execute(array("rank" => $rank, "userid" => $result['userid']));
+		$request -> execute(array("rank" => $rank, "userid" => $result['userid'], "type" => $type, "season" => $season));
 		$rank++;
 	};
 	

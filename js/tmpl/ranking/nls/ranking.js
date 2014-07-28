@@ -11,7 +11,6 @@ define({
 	   + "<li> Prédiction : pourcentage de pronostics corrects (V+N). </li>"
 	   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 	   + "</ul>",
-	  CMRanking : "Saison 2014/2015 - Overall",
 		draw : "N",
 		infosTitle : "Informations,",
 		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "
@@ -25,7 +24,9 @@ define({
 		prediction : "Prédiction %",
 		score : "Score",
 		season : 'Saison',
-		title : "Classement",
+		title : "Saison 2014/2015 - Overall",
+		title_CM2014_2 : "Coupe du monde 2014 - Brésil",
+		title_Overall_2 : "Saison 2013:2014 - Overall",
 		total : "Total",
 		win : "V"
 	}

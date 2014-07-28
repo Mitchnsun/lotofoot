@@ -22,7 +22,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.LOGIN + '(/:action/:param)', 'login'],
 			[urls.NEW_ACCOUNT, 'newaccount'],
 			[urls.PRONOS, 'pronos'],
-			[urls.RANKING, 'ranking'],
+			[urls.RANKING + '(/:type/s:season)', 'ranking'],
 			[urls.TOP_PRONOS + "/:event", 'toppronos'],
 			[urls.WORLDCUP + '(/:type)', 'worldcup'],
 			['*action', 'defaultAction']
@@ -139,11 +139,13 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
-		ranking : function() {
+		ranking : function(type, season) {
 			var self = this;
 			if (this.user.checkAuth()) {
 				require(['views/ranking/rankingview'], function(RankingView) {
 					self.loadView(new RankingView({
+					  type : type,
+					  season : season,
 						user : self.user,
 						alertview : self.alertview,
 						ranking : self.ranking
