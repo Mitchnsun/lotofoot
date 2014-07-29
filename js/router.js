@@ -154,7 +154,11 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 					self.menuView.menuChange(urls.RANKING);
 				});
 			} else {
-				this.user.set('urlFrom', urls.RANKING);
+				var urlRedirect = urls.RANKING;
+				if(type !== undefined && season !== undefined){
+					urlRedirect += '/' + type + '/s' + season;
+				}
+				this.user.set('urlFrom', urlRedirect);
 				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
 			}
 		},
