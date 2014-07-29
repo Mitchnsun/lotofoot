@@ -155,7 +155,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				});
 			} else {
 				var urlRedirect = urls.RANKING;
-				if(type !== undefined && season !== undefined){
+				if(type && season){
 					urlRedirect += '/' + type + '/s' + season;
 				}
 				this.user.set('urlFrom', urlRedirect);

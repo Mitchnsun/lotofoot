@@ -14,7 +14,7 @@ function($, _, Backbone, te, i18n, tmpl) {
 		render : function() {
 			var self = this;
 			
-			if(this.type !== undefined && this.season !== undefined){
+			if(this.type && this.season){
 			  this.ranking.load({
 			    type : this.type,
 			    season : this.season
@@ -34,9 +34,10 @@ function($, _, Backbone, te, i18n, tmpl) {
 		setTitle : function(){
 		  var title = i18n.title;
 		  
-		  if(this.type !== undefined && this.season !== undefined){
+		  if(this.type && this.season){
 		    title = i18n['title_' + this.type + '_' + this.season];
 		  }
+		  
 		  return title;
 		}
 	});
