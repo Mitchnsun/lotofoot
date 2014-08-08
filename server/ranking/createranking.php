@@ -12,9 +12,9 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'CM2014';
-	$season = 2;
-  $startDate = DateTime::createFromFormat('d/m/Y', '01/06/2014');
+	$type = 'Overall';
+	$season = 3;
+  $startDate = DateTime::createFromFormat('d/m/Y', '25/07/2014');
 	$timeStamp = date_format($startDate, 'U');
   
   try {
