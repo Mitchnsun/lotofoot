@@ -21,7 +21,7 @@
 	$sessionid = $_POST['sessionid'];
 	
 	/* Retrieve user information and check if the session id matches */
-	$query = "SELECT userid, email, firstname, lastname, accreditation, connectedAt FROM users WHERE userid = :userid AND sessionid = :sessionid";
+	$query = "SELECT userid, email, firstname, lastname, accreditation, sessionid, connectedAt FROM users WHERE userid = :userid AND sessionid = :sessionid";
 	$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 	$req -> execute(array("userid" => $userid,"sessionid" => $sessionid));
 	$count = $req -> rowCount();
@@ -38,7 +38,7 @@
 			"lastname" => utf8_encode($result['lastname']),
 			"accreditation" => $result['accreditation'],
 			"lastLogedIn" => $result['connectedAt'],
-			"sessionid" => session_id(),
+			"sessionid" => $result['sessionid']?$result['sessionid']:session_id(),
 			"connectedAt" => $today
 		);
 		
@@ -50,7 +50,7 @@
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
 		$req -> execute(array(
 				"time" => $user['connectedAt'],
-				"sessionid" => session_id(),
+				"sessionid" => $user['sessionid'],
 				"userid" => $user['userid']
 		));
 	}else{ // No Session found

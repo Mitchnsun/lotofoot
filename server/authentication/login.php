@@ -24,7 +24,7 @@
 		unset($_POST); // The password no exists in the session anymore
 		
 		/* Check user and password in the databse and retrieve the user information */
-		$query = "SELECT userid, email, firstname, lastname, accreditation, connectedAt FROM users WHERE email = :userEmail AND pwd = :userPwd";
+		$query = "SELECT userid, email, firstname, lastname, accreditation, sessionid, connectedAt FROM users WHERE email = :userEmail AND pwd = :userPwd";
 		$req = $bdd -> prepare($query) or die(json_encode(array("status" => 500, "errorCode" => "BDLogin", "message" => $bdd->errorInfo())));
 		$req -> execute(array("userEmail" => $userEmail,"userPwd" => $userPwd));
 		$count = $req -> rowCount();
@@ -36,11 +36,11 @@
 			$user = array(
 				"userid" => $result['userid'],
 				"email" => $result['email'],
-				"firstname" => utf8_decode($result['firstname']),
-				"lastname" => utf8_decode($result['lastname']),
+				"firstname" => utf8_encode($result['firstname']),
+				"lastname" => utf8_encode($result['lastname']),
 				"accreditation" => $result['accreditation'],
 				"lastLogedIn" => $result['connectedAt'],
-				"sessionid" => session_id(),
+				"sessionid" => $result['sessionid']?$result['sessionid']:session_id(),
 				"connectedAt" => $today
 			);
 			$response['user'] = $user;
