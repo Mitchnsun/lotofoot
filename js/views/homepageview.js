@@ -1,8 +1,8 @@
 // Filename: homepageview.js
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
         'fmk/urls', 'i18n!tmpl/nls/homepage', 'text!tmpl/homepage.html',
-        'views/homepage/activepronosview'],
-function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, ActivePronosView) {
+        'views/homepage/activepronosview', 'views/homepage/activetopsview'],
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, ActivePronosView, ActiveTopsView) {
   
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
@@ -26,9 +26,17 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, ActivePronosView) {
 				alertview : this.alertview,
 				teams : this.teams
 			});
+			
+			this.activeTopsView = new ActiveTopsView({
+				el : '#activepronos',
+				user : this.user,
+				alertview : this.alertview,
+				teams : this.teams
+			});
 
 			//Render children view
 			this.activePronosView.render();
+			this.activeTopsView.render();
 		},
 		/*
 		 * Events of the view

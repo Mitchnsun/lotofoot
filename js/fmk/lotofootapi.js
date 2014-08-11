@@ -115,6 +115,9 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getTopPronos : function(params, success, error) {
 		  return performWS('GET', urls.URL_GET_TOP_PRONOS, params, success, error);
 		},
+		getActiveTops : function(params, success, error) {
+			return performWS('GET', urls.URL_GET_ACTIVE_TOPS, params, success, error);
+		},
 		/* Rankings */
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);

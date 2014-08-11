@@ -1,0 +1,65 @@
+<div class="corner cornerTopLeft"></div>
+<div class="corner cornerTopRight"></div>
+<div class="corner cornerBottomLeft"></div>
+<div class="corner cornerBottomRight"></div>
+{@if cond="{bonus.dead_line} > {time}"}
+	<div class="container-fluid AlertView">
+    <div class="alert alert-dismissable alert-info">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>{i18n.alertTopPronosTitle}</strong><br/>
+      {i18n.alertTopPronosMessage|s}
+    </div>
+	</div>
+  <p>{i18n.topPronosMessage|s}</p>
+  <form class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="firstTeam">{i18n.first}</label>
+      <div class="controls">
+        <select name="first" id="firstTeam">
+          <option></option>
+          {#teams}
+            <option value="{id}">{name}</option>
+          {/teams}
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="secondTeam">{i18n.second}</label>
+      <div class="controls">
+        <select name="second" id="secondTeam">
+          <option></option>
+          {#teams}
+            <option value="{id}">{name}</option>
+          {/teams}
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="thirdTeam">{i18n.third}</label>
+      <div class="controls">
+        <select name="third" id="thirdTeam">
+          <option></option>
+          {#teams}
+            <option value="{id}">{name}</option>
+          {/teams}
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="fourthTeam">{i18n.fourth}</label>
+      <div class="controls">
+        <select name="fourth" id="fourthTeam">
+          <option></option>
+          {#teams}
+            <option value="{id}">{name}</option>
+          {/teams}
+        </select>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" class="btn btn-success">{i18n.bet}</button>
+      </div>
+    </div>
+  </form>
+{/if}
