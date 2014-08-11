@@ -28,7 +28,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, ActivePronosView, Ac
 			});
 			
 			this.activeTopsView = new ActiveTopsView({
-				el : '#activepronos',
+				el : '#activetops',
 				user : this.user,
 				alertview : this.alertview,
 				teams : this.teams

@@ -16,6 +16,13 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			
 			LotofootApi.getActiveTops(params, function(msg){
 			  console.log(msg);
+			  $(self.el).html(te.renderTemplate(tmpl, {
+	        i18n : i18n,
+	        user : self.user.toJSON(),
+	        bonus : msg.bonus[0],
+	        time : msg.time,
+	        teams : {},
+	      }));
 			}, function(msg){
 			  console.log(msg); // TODO : handle errors
 			});
