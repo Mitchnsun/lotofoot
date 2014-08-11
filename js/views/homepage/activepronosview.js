@@ -49,7 +49,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			var teamsContainer = this.$(e.currentTarget).parent().parent();
 			var scoreA = 'A';
 			var scoreB = 'B';
-			console.log(teamsContainer);
+			
 			_.each(teamsContainer.find('select'), function(select){
 				var $select = self.$(select);
 				if($select.attr('ref') == 'A'){
