@@ -21,6 +21,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN + '(/:action/:param)', 'login'],
 			[urls.NEW_ACCOUNT, 'newaccount'],
+			[urls.PROFILE, 'profile'],
 			[urls.PRONOS, 'pronos'],
 			[urls.RANKING + '(/:type/s:season)', 'ranking'],
 			[urls.TOP_PRONOS + "/:event", 'toppronos'],
@@ -121,6 +122,25 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				self.view.render();
 				self.menuView.menuChange(urls.NEW_ACCOUNT);
 			});
+		},
+		profile : function() {
+			var self = this;
+			if (this.user.checkAuth()) {
+				require(['views/account/profileview'], function(ProfileView) {
+					self.loadView(new ProfileView({
+						user : self.user,
+						alertview : self.alertview,
+						browserStorage : self.browserStorage,
+						eventBus : self.eventBus,
+						ranking : self.ranking
+					}));
+					self.view.render();
+					self.menuView.menuChange(urls.PROFILE);
+				});
+			} else {
+				this.user.set('urlFrom', urls.PROFILE);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
 		},
 		pronos : function() {
 			var self = this;

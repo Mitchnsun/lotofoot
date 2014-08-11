@@ -5,6 +5,7 @@ define([], function() {
 		HOME : "home",
 		LOGIN : "login",
 		NEW_ACCOUNT : "new-account",
+		PROFILE : "profile",
 		PRONOS : "pronos",
 		RANKING : "ranking",
 		ROOT : "",
