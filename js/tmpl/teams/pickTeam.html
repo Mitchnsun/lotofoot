@@ -18,16 +18,9 @@
 	<h3>{i18n.clubs}</h3>
 	<hr>
 	{#clubs}
-	<div class="span3">
-		<a href="#" class="country" ref="{id}">{name}</a>
-		<div class="row-fluid hide">
-			{#recs}
-			<div class="span3">
-				<a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
-			</div>
-			{/recs}
+		<div class="span3">
+			<a href="#" class="club"  ref="{id}" data-country="{country}">{name}</a>
 		</div>
-	</div>
 	{/clubs}
 </div>
 <div id="International" class="row-fluid hide">

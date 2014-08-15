@@ -22,9 +22,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
       _.each(i18n.groups, function(group) {
         var teams = [];
         _.each(group.idTeams, function(team) {
-          if (_.isNumber(team)) {
-            teams.push(self.teams.getNationInfos(team));
-          }
+          teams.push(self.teams.getTeams(team));
         });
         if (teams.length > 0) {
           group.teams = teams;
@@ -59,10 +57,11 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
       var self = this;
       this.groupsGames.reset();
       this.secondStageGames.reset();
+      
       _.each(msg.games, function(game){
       	var game = new Game(game);
-      	game.set('teamA', self.teams.getNationInfos(game.get('id_teamA')));
-    		game.set('teamB', self.teams.getNationInfos(game.get('id_teamB')));
+      	game.set('teamA', self.teams.getTeams(game.get('id_teamA')));
+    		game.set('teamB', self.teams.getTeams(game.get('id_teamB')));
       	if(game.get('stage') == "Groups"){
       		var groupId = self.getGroupId(game.get('id_teamA'), game.get('id_teamB'));
       		game.set('groupId',groupId);
@@ -76,8 +75,7 @@ function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplPro
     },
     getGroupId : function(id_teamA, id_teamB){
       var id = 0;
-      id_teamA = parseInt(id_teamA,10);
-      id_teamB = parseInt(id_teamB,10);
+      
       _.every(i18n.groups, function(group){
         if(_.indexOf(group.idTeams,id_teamA) != -1 && _.indexOf(group.idTeams,id_teamB) != -1){
           id = group.id;

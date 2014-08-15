@@ -15,7 +15,12 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			var params = {userid : this.user.get('userid')};
 			
 			LotofootApi.getActiveTops(params, function(msg){
-			  console.log(msg);
+			 
+			  _.each(msg.bonus,function(item){
+					item.title = i18n['top_' + item.type + '_' + item.season + '_title'];
+					item.description = i18n['top_' + item.type + '_' + item.season + '_desc'];
+				});
+			  
 			  $(self.el).html(te.renderTemplate(tmpl, {
 	        i18n : i18n,
 	        user : self.user.toJSON(),
@@ -26,6 +31,10 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			}, function(msg){
 			  console.log(msg); // TODO : handle errors
 			});
+		},
+		getTeamsForTop : function(bonus){
+			
+			return bonus;
 		},
 		/*
 		 * Events of the view

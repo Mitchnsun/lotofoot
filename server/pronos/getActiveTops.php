@@ -32,8 +32,6 @@
 	while($result = $reqbonus -> fetch()){
 		$bonus = array(
 			"id_bonus" => $result['id_bonus'],
-			"name" => $result['name'],
-			"id_description" => $result['id_description'],
 			"table_link" => $result['table_link'],
 			"dead_line" => $result['dead_line'],
 			"schedule" => date('d/m/Y',$result['dead_line']),

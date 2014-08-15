@@ -35,7 +35,7 @@ define([], function() {
 		/* Rankings */
 		URL_GET_RANKING : "server/ranking/getranking.php",
 		/* Get Common datas */
-		URL_GET_TEAMS : "server/common/getTeams.php",
+		URL_GET_TEAMS : "server/common/v2/getTeams.php",
 
 		/* External links */
 		EXT_BLOG : '/lotofoot/blog',

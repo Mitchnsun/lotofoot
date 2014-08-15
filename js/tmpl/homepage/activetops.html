@@ -6,11 +6,10 @@
 	<div class="container-fluid AlertView">
     <div class="alert alert-dismissable alert-info">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>{i18n.alertTopPronosTitle}</strong><br/>
-      {i18n.alertTopPronosMessage|s}
+      {i18n.topPronosMessage}
     </div>
 	</div>
-  <p>{i18n.topPronosMessage|s}</p>
+	{?bonus.description}<p>{bonus.description}</p>{/bonus.description}
   <form class="form-horizontal">
     <div class="control-group">
       <label class="control-label" for="firstTeam">{i18n.first}</label>

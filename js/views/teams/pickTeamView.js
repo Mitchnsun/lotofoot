@@ -13,9 +13,10 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
     render : function() {
       $(this.el).html(te.renderTemplate(tmpl, {
         i18n : i18n,
-        clubs : this.teams.get('clubs'),
-        international : this.teams.get('international')
+        clubs : this.teams.getClubs(),
+        international : this.teams.getNations()
       }));
+      console.log(this.teams.getClubs(),this.teams.getNations());
     },
     newGame : function(){
       this.game = new Game({addBy : this.user.get('userid')});
@@ -67,7 +68,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
       var country = $element.attr('data-country');
       var $selectedCountry = $element.parents('div.span12');
       var $listCountry = this.$("#Clubs > div.span3");
-      var team = this.teams.getClubInfos(ref, country);
+      var team = this.teams.getTeams(ref);
 
       if (gameType == i18n.ref_league_game || gameType == i18n.ref_cup_game) {
         this.game.addTeam(team);
@@ -94,7 +95,7 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
       
       /* Initialize variables */
       var ref = this.$(e.currentTarget).attr('ref');
-      var nation = this.teams.getNationInfos(ref);
+      var nation = this.teams.getTeams(ref);
       var gameType = this.game.get('type');
 
       if (gameType == i18n.ref_international_game) {

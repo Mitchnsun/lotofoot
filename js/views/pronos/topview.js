@@ -31,10 +31,10 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     	var self = this;
     	
     	_.each(toppronos, function(prono){
-    		prono.team_first = self.teams.getNationInfos(prono.first);
-    		prono.team_second = self.teams.getNationInfos(prono.second);
-    		prono.team_third = self.teams.getNationInfos(prono.third);
-    		prono.team_fourth = self.teams.getNationInfos(prono.fourth);
+    		prono.team_first = self.teams.getTeams(prono.first);
+    		prono.team_second = self.teams.getTeams(prono.second);
+    		prono.team_third = self.teams.getTeams(prono.third);
+    		prono.team_fourth = self.teams.getTeams(prono.fourth);
     	});
     	
     	return toppronos;
@@ -50,7 +50,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
       
       _.each(teamsId, function(team) {
         if (_.isNumber(team)) {
-          teams.push(self.teams.getNationInfos(team));
+          teams.push(self.teams.getTeams(team));
         }
       });
       

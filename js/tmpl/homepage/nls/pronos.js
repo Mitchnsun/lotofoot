@@ -24,10 +24,15 @@ define({
 	  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
 	  third : "Troisième",
 		toppronos : "Top Pronos",
-		topPronosMessage : "Choissisez les équipes qui finiront aux quatre premières places."
-		    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points."
+		topPronosMessage : "Choissisez soigneusement les équipes qui rempliront ce top."
+		    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le top mais à la mauvaise place vaudra 1 points."
 		    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
-		toppronosTitle : "Coupe du monde 2014 - Top 4",
+		
+		/* Tops */
+		top_CM2014_2_title : "Coupe du monde 2014 - Top 4",
+		top_CM2014_2_desc : "",
+		top_L1_3_title : "Ligue 1 2014/2015 - Top 5",
+		top_L1_3_desc : "",
 		
 		/* Errors */
 		teams_errorMsg : "Vous devez impérativement choisir quatre équipes. Si vous n'avez aucune idée, choissisez au hasard peut être que la chance vous sourira",
