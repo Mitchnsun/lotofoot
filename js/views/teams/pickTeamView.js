@@ -16,7 +16,6 @@ function($, _, Backbone, te, Game, tmpl, i18n, country) {
         clubs : this.teams.getClubs(),
         international : this.teams.getNations()
       }));
-      console.log(this.teams.getClubs(),this.teams.getNations());
     },
     newGame : function(){
       this.game = new Game({addBy : this.user.get('userid')});
