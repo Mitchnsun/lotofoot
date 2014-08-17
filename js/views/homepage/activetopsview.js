@@ -20,14 +20,19 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			
 			LotofootApi.getActiveTops(params, function(msg){
 			  
-			  $(self.el).html(te.renderTemplate(tmpl, {
-	        i18n : i18n,
-	        user : self.user.toJSON(),
-	        bonus : self.getDatas(msg.bonus),
-	        time : msg.time,
-	        teams : {},
-	      }));
-
+			  if(msg.bonus.length > 0){
+			  	$(self.el).html(te.renderTemplate(tmpl, {
+		        i18n : i18n,
+		        user : self.user.toJSON(),
+		        bonus : self.getDatas(msg.bonus),
+		        time : msg.time,
+		        teams : {},
+		      }));
+					
+					self.selectedTops(msg.bonus);
+			  } else{
+			  	self.close();
+			  }
 			}, function(msg){
 			  console.log(msg); // TODO : handle errors
 			});
@@ -42,6 +47,19 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			});
 			
 			return bonus;
+		},
+		selectedTops : function(bonus){
+			var self = this;
+			
+			_.each(bonus, function(item){
+				if(item.prono){
+					self.$('#bonus' + item.id_bonus + " select.firstTeam").val(item.prono.first);
+					self.$('#bonus' + item.id_bonus + " select.secondTeam").val(item.prono.second);
+					self.$('#bonus' + item.id_bonus + " select.thirdTeam").val(item.prono.third);
+					self.$('#bonus' + item.id_bonus + " select.fourthTeam").val(item.prono.fourth);
+					self.$('#bonus' + item.id_bonus + " select.fifthTeam").val(item.prono.fifth);
+				}
+			});
 		},
 		/*
 		 * Events of the view
@@ -74,6 +92,13 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
       } else {
       	this.alertview.displayAlert('success', 'success', i18n.AddProno);
       }
+		},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function() {
+			$('#activetops').remove();
+			this.undelegateEvents();
 		}
 	});
 

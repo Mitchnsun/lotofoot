@@ -46,7 +46,8 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl, ActivePronosView, Ac
 		 * Clean views and objects delegated to this view
 		 */
 		close : function() {
-			this.newPronoView && (this.newPronoView.close ? this.newPronoView.close() : this.newPronoView.undelegateEvents());
+			this.activePronosView && (this.activePronosView.close ? this.activePronosView.close() : this.activePronosView.undelegateEvents());
+			this.activeTopsView && (this.activeTopsView.close ? this.activeTopsView.close() : this.activeTopsView.undelegateEvents());
 			this.undelegateEvents();
 		}
 	});

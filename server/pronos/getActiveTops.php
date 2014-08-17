@@ -63,7 +63,7 @@
 	      "second" => $data['second'],
 	      "third" => $data['third'],
 	      "fourth" => $data['fourth'],
-	      "fifth" => $data['fourth'],
+	      "fifth" => $data['fifth'],
 	      "validation" => $data['validation'],
 	      "points" => $data['points']
 	    );

@@ -11,12 +11,12 @@
 {#bonus:i18n time=time}
 	<h2 class="content-subhead">{title}</h2>
 	{?description}<p>{description}</p>{/description}
-  <form class="form-horizontal" ref="{id_bonus}">
+  <form id="bonus{id_bonus}" class="form-horizontal" ref="{id_bonus}">
   	{@if cond="{top} >= 1"}
 	    <div class="control-group">
 	      <label class="control-label" for="firstTeam">{first_txt}</label>
 	      <div class="controls">
-	        <select name="first" id="firstTeam">
+	        <select name="first" class="firstTeam">
 	          <option></option>
 	          {#teams}
 	            <option value="{id}">{name}</option>
@@ -29,7 +29,7 @@
 	    <div class="control-group">
 	      <label class="control-label" for="secondTeam">{second_txt}</label>
 	      <div class="controls">
-	        <select name="second" id="secondTeam">
+	        <select name="second" class="secondTeam">
 	          <option></option>
 	          {#teams}
 	            <option value="{id}">{name}</option>
@@ -42,7 +42,7 @@
 	    <div class="control-group">
 	      <label class="control-label" for="thirdTeam">{third_txt}</label>
 	      <div class="controls">
-	        <select name="third" id="thirdTeam">
+	        <select name="third" class="thirdTeam">
 	          <option></option>
 	          {#teams}
 	            <option value="{id}">{name}</option>
@@ -55,7 +55,7 @@
 	    <div class="control-group">
 	      <label class="control-label" for="fourthTeam">{fourth_txt}</label>
 	      <div class="controls">
-	        <select name="fourth" id="fourthTeam">
+	        <select name="fourth" class="fourthTeam">
 	          <option></option>
 	          {#teams}
 	            <option value="{id}">{name}</option>
@@ -68,7 +68,7 @@
 	    <div class="control-group">
 	      <label class="control-label" for="fifthTeam">{fifth_txt}</label>
 	      <div class="controls">
-	        <select name="fifth" id="fifthTeam">
+	        <select name="fifth" class="fifthTeam">
 	          <option></option>
 	          {#teams}
 	            <option value="{id}">{name}</option>
