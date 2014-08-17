@@ -10,6 +10,7 @@ function($, _, Backbone, te, i18n, tmpl) {
 				type : type,
 				msg : this.msg
 			}));
+			$('body').animate({scrollTop : $(this.el).position().top}, 'slow');
 		},
 		/*
 		 * displayError : error messages are displayed with a status (ex: 500) and a code
@@ -23,7 +24,7 @@ function($, _, Backbone, te, i18n, tmpl) {
 				this.msg.status = i18n[status];
 			}
 			if (code) {
-				this.msg.message = i18n[code];
+				this.msg.message = i18n[code]?i18n[code]:this.getMessage(status);
 			} else {
 				this.msg.message = this.getMessage(status);
 			}

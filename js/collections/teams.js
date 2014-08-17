@@ -61,6 +61,13 @@ function($, _, Backbone, LotofootApi, country, Team) {
     		nations.push(item.toJSON());
     	});
     	return nations;
+    },
+    getTeamsForTops : function(type, link){
+    	var teams = [];
+    	_.each(this.where({"league" : link}), function(team){
+    		teams.push(team.toJSON());
+    	});
+    	return teams;
     }
   });
 
