@@ -26,7 +26,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		        user : self.user.toJSON(),
 		        bonus : self.getDatas(msg.bonus),
 		        time : msg.time,
-		        teams : {},
+		        teams : {}
 		      }));
 					
 					self.selectedTops(msg.bonus);
