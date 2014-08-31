@@ -22,7 +22,12 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		/*
 		 * Events of the view
 		 */
-		events : {},
+		events : {
+			"click #ranking .actions button" : "ranking"
+		},
+		ranking : function (e){
+			
+		},
 		/*
 		 * Clean views and objects delegated to this view
 		 */

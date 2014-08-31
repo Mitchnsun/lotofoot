@@ -1,0 +1,6 @@
+#adminpanel section {padding:5px;border-bottom:1px solid #eeeeee}
+#adminpanel .actions select {margin-left:5px}
+
+/* Games */
+/* Ranking */
+#adminpanel #ranking .icon-ok{display:none}

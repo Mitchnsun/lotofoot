@@ -1,9 +1,36 @@
+<link href="css/admin.css" rel="stylesheet">
 <div class="container-fluid">
-  <div id="activepronos" class="hero-unit">
+  <div id="adminpanel" class="hero-unit">
 		<div class="corner cornerTopLeft"></div>
 		<div class="corner cornerTopRight"></div>
 		<div class="corner cornerBottomLeft"></div>
 		<div class="corner cornerBottomRight"></div>
 		<h2 class="content-subhead">{i18n.title}</h2>
+		<section id="games">
+			<h3 class="content-subhead">{i18n.admin_games_title}</h3>
+			<a href="#{urls.CREATE_GAMES}">{i18n.new_game}</a>
+		</section>
+		<section id="ranking">
+			<h3 class="content-subhead">{i18n.admin_ranking_title}</h3>
+			<ul>
+				<li>{i18n.pronosvalidation} <i class="icon-ok"></i></li>
+				<li>{i18n.pronosscore} <i class="icon-ok"></i></li>
+				<li>{i18n.createranking} <i class="icon-ok"></i></li>
+				<li>{i18n.setrank} <i class="icon-ok"></i></li>
+			</ul>
+			<div class="actions">
+				<button class="btn btn-info" type="button">{i18n.run_ranking}</button>
+				<select>
+					{#i18n.competitions}
+						<option value="{.}">{.}</option>
+					{/i18n.competitions}
+				</select>
+				<select>
+					{#i18n.seasons}
+						<option value="{.}">{.}</option>
+					{/i18n.seasons}
+				</select>
+			</div>
+		</section>
 	</div>
 </div>
