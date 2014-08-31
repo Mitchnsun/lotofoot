@@ -1,6 +1,7 @@
 define([], function() {
 	return {
 		/* Front */
+		ADMIN : "admin",
 		CREATE_GAMES : "create-games",
 		HOME : "home",
 		LOGIN : "login",

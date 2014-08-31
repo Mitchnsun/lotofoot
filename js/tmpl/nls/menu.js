@@ -1,6 +1,7 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
+		"admin" : "Admin",
 		"blog" : "Blog",
 		"home" : "Accueil",
 		"new_game" : "Créer un match",

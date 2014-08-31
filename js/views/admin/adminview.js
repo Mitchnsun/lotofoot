@@ -3,7 +3,7 @@
  */
 // Filename: adminview.js
 define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
-        'fmk/urls', 'i18n!tmpl/nls/admin', 'text!tmpl/adminpage.html'],
+        'fmk/urls', 'i18n!tmpl/admin/nls/admin', 'text!tmpl/admin/adminpage.html'],
 function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
   
 	var ClassView = Backbone.View.extend({
@@ -11,8 +11,6 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		initialize : function(options) {
 			this.user = options.user;
 			this.alertview = options.alertview;
-			this.teams = options.teams;
-			this.ranking = options.ranking;
 		},
 		render : function() {
 			var self = this;

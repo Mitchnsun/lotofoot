@@ -17,6 +17,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		},
 		routes : _.object([
 		  [urls.ROOT, 'homepage'],
+		  [urls.ADMIN, 'adminpage'],
 			[urls.CREATE_GAMES, 'creategames'],
 			[urls.HOME, 'homepage'],
 			[urls.LOGIN + '(/:action/:param)', 'login'],
@@ -54,6 +55,24 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		/*
 		 * Set view for the routes
 		 */
+		adminpage : function() {
+			var self = this;
+			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
+				require(['views/admin/adminview'], function(AdminView) {
+					self.loadView(new AdminView({
+						user : self.user,
+						alertview : self.alertview
+					}));
+					self.view.render();
+					self.menuView.menuChange(urls.ADMIN);
+				});
+			} else if(this.user.checkAuth()){
+				this.eventBus.trigger('url:change', {url : '#' + urls.HOME});
+			} else {
+				this.user.set('urlFrom', urls.ADMIN);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+			}
+		},
 		creategames : function() {
 			var self = this;
 			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
