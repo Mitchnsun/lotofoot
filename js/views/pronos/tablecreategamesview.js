@@ -30,24 +30,22 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
     buildStage : function(id, competition, selectedStage) {
       var stages = i18n["stage_" + competition];
       var container = this.$('#' + id).find('.selectStage');
+
+    	var elts = "<select data-ref='" + id + "' class='input-small'>"
+      _.each(stages,function(stage, inc){
+        if(selectedStage === stage){
+          elts += '<option value="' + stage + '" selected="selected">' + stage + '</option>';
+        } else {
+          elts += '<option value="' + stage + '">' + stage + '</option>';
+        }
+        
+        if (inc == 0){
+          selectedStage = stage;
+        }
+      });
+      elts += "</select>";
       
-      if(selectedStage === undefined){
-      	var elts = "<select data-ref='" + id + "'>"
-	      _.each(stages,function(stage, inc){
-	        if(selectedStage === stage){
-	          elts += '<option value="' + stage + '" selected="selected">' + stage + '</option>';
-	        } else {
-	          elts += '<option value="' + stage + '">' + stage + '</option>';
-	        }
-	        
-	        if (inc == 0){
-	          selectedStage = stage;
-	        }
-	      });
-	      elts += "</select>";
-	      
-	      $(container).html(elts);
-      }
+      $(container).html(elts);
       
       return selectedStage;
     },

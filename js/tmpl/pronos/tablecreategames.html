@@ -14,7 +14,7 @@
         </td>
         <td>
           <input type="text" name="schedule" 
-          		class="input-medium schedule" data-ref='{id}' 
+          		class="input-small schedule" data-ref='{id}' 
           		placeholder="{placeholderSchedule}" value="{date}" />
         </td>
         <td>
@@ -33,7 +33,7 @@
         </td>
         <td> {teamA.name} - {teamB.name} </td>
         <td>
-          <select data-ref='{id}'>
+          <select data-ref='{id}' class='input-medium'>
             {#competitions}
               <option value="{.}">{.}</option>
             {/competitions}
