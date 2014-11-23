@@ -33,7 +33,7 @@
 					'type' => $game['type'],
 					'country' => $game['country'],
 					'competition' => $game['competition'],
-					'stage' => $game['stage'],
+					'stage' => isset($game['stage'])?$game['stage']:'',
 					'teamA' => $game['teamA']['id'],
 					'teamB' => $game['teamB']['id'],
 					'schedule' => $timeStamp,
