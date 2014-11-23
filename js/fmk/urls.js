@@ -33,7 +33,11 @@ define([], function() {
 		URL_BET_TOP : "server/pronos/betTop.php",
 		URL_GET_TOP_PRONOS : "server/pronos/getTopPronos.php",
 		URL_GET_ACTIVE_TOPS : "server/pronos/getActiveTops.php",
+		URL_PRONOS_VALIDATION : "server/pronos/pronosvalidation.php",
+		URL_PRONOS_SCORES : "server/pronos/pronosscores.php",
 		/* Rankings */
+		URL_CREATE_RANKING : "server/ranking/createranking.php",
+		URL_SET_RANK : "server/ranking/setrank.php",
 		URL_GET_RANKING : "server/ranking/getranking.php",
 		/* Get Common datas */
 		URL_GET_TEAMS : "server/common/v2/getTeams.php",

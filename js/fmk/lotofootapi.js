@@ -118,9 +118,21 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getActiveTops : function(params, success, error) {
 			return performWS('GET', urls.URL_GET_ACTIVE_TOPS, params, success, error);
 		},
+		pronosValidation : function(params, success, error){
+			return performWS('POST', urls.URL_PRONOS_VALIDATION, params, success, error);
+		},
+		pronosScores : function(params, success, error){
+			return performWS('POST', urls.URL_PRONOS_SCORES, params, success, error);
+		},
 		/* Rankings */
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);
+		},
+		createRanking : function(params, success, error){
+			return performWS('POST', urls.URL_CREATE_RANKING, params, success, error);
+		},
+		setRank : function(params, success, error){
+			return performWS('POST', urls.URL_SET_RANK, params, success, error);
 		},
 		/* Common */
 		getTeams : function(params, success, error) {

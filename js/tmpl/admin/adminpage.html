@@ -13,19 +13,19 @@
 		<section id="ranking">
 			<h3 class="content-subhead">{i18n.admin_ranking_title}</h3>
 			<ul>
-				<li>{i18n.pronosvalidation} <i class="icon-ok"></i></li>
-				<li>{i18n.pronosscore} <i class="icon-ok"></i></li>
-				<li>{i18n.createranking} <i class="icon-ok"></i></li>
-				<li>{i18n.setrank} <i class="icon-ok"></i></li>
+				<li id="pronosvalidation">{i18n.pronosvalidation} <i class="icon-ok hidden"></i></li>
+				<li id="pronosscore">{i18n.pronosscore} <i class="icon-ok hidden"></i></li>
+				<li id="createranking">{i18n.createranking} <i class="icon-ok hidden"></i></li>
+				<li id="setrank">{i18n.setrank} <i class="icon-ok hidden"></i></li>
 			</ul>
 			<div class="actions">
 				<button class="btn btn-info" type="button">{i18n.run_ranking}</button>
-				<select>
+				<select name="type">
 					{#i18n.competitions}
 						<option value="{.}">{.}</option>
 					{/i18n.competitions}
 				</select>
-				<select>
+				<select name="season">
 					{#i18n.seasons}
 						<option value="{.}">{.}</option>
 					{/i18n.seasons}
