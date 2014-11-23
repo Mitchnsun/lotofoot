@@ -33,8 +33,9 @@ define({
     /* Select List */
     hours : [20, 21, 22, 23, 14, 15, 16, 17, 18, 19, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     minutes : ['00', '05', 15, 30, 45],
-    competitions : ["French-L1", "UEFA-CL", "UEFA-EL", "French-Cup", "Friendly"],
+    competitions : ["French-L1", "UEFA-CL", "UEFA-EL", "French-Cup", "Friendly", "Euro"],
     "stage_CM2014" : ["Groups", "Last16", "Last8", "Semi", "ThirdPlace", "Final"],
+    "stage_Euro" : ["Qualification", "Playoff", "Groups", "Last8", "Semi", "ThirdPlace", "Final"],
     "stage_French-L1" : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     "stage_UEFA-CL" : ["Round1", "Round2", "Round3", "Playoff", "Groups", "Last16", "Last8", "Semi", "Final"],
     "stage_UEFA-EL" : ["Round1", "Round2", "Round3", "Playoff", "Groups", "Last32", "Last16", "Last8", "Semi", "Final"],

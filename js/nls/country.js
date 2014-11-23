@@ -42,6 +42,7 @@ define({
        NO : {name : "Norvège", fifa_code : "NOR"},
        PT : {name : "Portugal", fifa_code : "POR"},
        RO : {name : "Roumanie", fifa_code : "ROU"},
+       RS : {name : "Serbie", fifa_code : "SRB"},
        RU : {name : "Russie", fifa_code : "RUS"},
        SC : {name : "Ecosse", fifa_code : "SCO"},
        SE : {name : "Suède", fifa_code : "SWE"},
