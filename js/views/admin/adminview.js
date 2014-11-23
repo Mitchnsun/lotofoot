@@ -11,6 +11,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		initialize : function(options) {
 			this.user = options.user;
 			this.alertview = options.alertview;
+			this.params = {};
 		},
 		render : function() {
 			var self = this;
@@ -26,8 +27,27 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			"click #ranking .actions button" : "ranking"
 		},
 		ranking : function (e){
+			var self = this;
+			this.params = {};
 			
+			_.each(this.$('#ranking select'), function(select){
+				self.params[$(select).attr('name')] = $(select).val();
+			});
+			
+			this.pronosvalidation();
 		},
+		/* Ranking */
+		pronosvalidation : function(){
+			var self = this;
+			LotofootApi.pronosValidation(this.params, function(msg){
+				self.$('#pronosvalidation i').removeClass('hidden');
+				console.log(msg, self.params);
+				self.pronosscores();
+			});
+		},
+		pronosscores : function(){},
+		createranking : function(){},
+		setrank : function(){},
 		/*
 		 * Clean views and objects delegated to this view
 		 */

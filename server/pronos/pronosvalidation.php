@@ -22,6 +22,7 @@
 	
 	$response['status'] = 200;
 	$response['prono_limit'] = 5;
+	$response['unvalidgames'] = array();
 	$response['games'] = array();
 	
 	$querygames = "SELECT * FROM games WHERE scoreA != '' AND scoreB != '' AND validation = 0";
@@ -37,22 +38,21 @@
 		
 		$querypronos = "SELECT COUNT(*) FROM pronos WHERE id_game=".$id;
 		$result = $bdd -> query($querypronos) -> fetch();
+		$data['numberOfPlayers'] = $result['COUNT(*)'];
 		
 		if($result['COUNT(*)'] < $response['prono_limit']){ // Limit of players
-			$data['numberOfPlayers'] = $result['COUNT(*)'];
-			array_push($response['games'],$data);
+			array_push($response['unvalidgames'],$data);
 		}
 		
-		// Update pronos
-		$queryvalidGame = "UPDATE games SET validation = 1 WHERE id_game = '$id'";
-	
-		$req = $bdd  -> prepare($queryvalidGame) or die(print_r($bdd->errorInfo()));
-		$req -> execute();
+		array_push($response['games'],$data);
 	}
 	
 	// Update pronos
-	$queryunvalid = "UPDATE pronos SET result = 'X' WHERE id_game IN (".stringOfIds($response['games']).");";
-
+	$queryvalidGame = "UPDATE games SET validation = 1 WHERE id_game IN (".stringOfIds($response['games']).");";
+	$req = $bdd  -> prepare($queryvalidGame) or die(print_r($bdd->errorInfo()));
+	$req -> execute();
+	
+	$queryunvalid = "UPDATE pronos SET result = 'X' WHERE id_game IN (".stringOfIds($response['unvalidgames']).");";
 	$req = $bdd  -> prepare($queryunvalid) or die(print_r($bdd->errorInfo()));
 	$req -> execute();
 
