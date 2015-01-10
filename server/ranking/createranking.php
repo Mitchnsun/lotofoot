@@ -12,8 +12,8 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = 'Overall';
-	$season = 3;
+	$type = $_POST['type'];
+	$season = $_POST['season'];
   $startDate = DateTime::createFromFormat('d/m/Y', '25/07/2014');
 	$timeStamp = date_format($startDate, 'U');
   

@@ -8,12 +8,13 @@ define({
 		
 		/* Classement*/
 		"createranking" : "Création du classement",
-		"pronosscore" : "Attribution des points",
+		"pronosscores" : "Attribution des points",
 		"pronosvalidation" : "Validation des pronostics",
 		"run_ranking" : "Créer le classement",
 		"setrank" : "Attribution des places",
 		
 		"competitions" : ["Overall", "French-L1", "Europa", "International"],
-		"seasons" : [3, 2, 1]
+		"seasons" : [3, 2, 1],
+		"seasons_starting" : ['01/07/2012', '01/07/2013', '25/07/2014']
 	}
 });

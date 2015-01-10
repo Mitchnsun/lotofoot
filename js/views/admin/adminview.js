@@ -24,7 +24,8 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 		 * Events of the view
 		 */
 		events : {
-			"click #ranking .actions button" : "ranking"
+			"click #ranking .actions button" : "ranking",
+			"change #ranking select" : "cleanRanking"
 		},
 		ranking : function (e){
 			var self = this;
@@ -36,18 +37,37 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			
 			this.pronosvalidation();
 		},
+		cleanRanking : function(){
+			this.$('#ranking i').addClass('hidden');
+		},
 		/* Ranking */
 		pronosvalidation : function(){
 			var self = this;
 			LotofootApi.pronosValidation(this.params, function(msg){
 				self.$('#pronosvalidation i').removeClass('hidden');
-				console.log(msg, self.params);
 				self.pronosscores();
 			});
 		},
-		pronosscores : function(){},
-		createranking : function(){},
-		setrank : function(){},
+		pronosscores : function(){
+			var self = this;
+			LotofootApi.pronosScores(this.params, function(msg){
+				self.$('#pronosscores i').removeClass('hidden');
+				self.createranking();
+			});
+		},
+		createranking : function(){
+			var self = this;
+			LotofootApi.createRanking(this.params, function(msg){
+				self.$('#createranking i').removeClass('hidden');
+				self.setrank();
+			});
+		},
+		setrank : function(){
+			var self = this;
+			LotofootApi.setRank(this.params, function(msg){
+				self.$('#setrank i').removeClass('hidden');
+			});
+		},
 		/*
 		 * Clean views and objects delegated to this view
 		 */
