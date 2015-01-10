@@ -35,6 +35,13 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 				self.params[$(select).attr('name')] = $(select).val();
 			});
 			
+			_.each(i18n.seasons, function(season){
+				if(season.id == self.params.season){
+					self.params.startDate = season.startDate;
+					self.params.endDate = season.endDate;
+				}
+			});
+			
 			this.pronosvalidation();
 		},
 		cleanRanking : function(){

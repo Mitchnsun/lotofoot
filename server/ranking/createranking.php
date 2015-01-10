@@ -12,10 +12,10 @@
 <?php
   $response = array(); // initialize JSON (array php)
   $today = time();
-	$type = $_POST['type'];
+	$type = $_POST['type']; // could be the game's type or competition. Overall means all games
 	$season = $_POST['season'];
-  $startDate = DateTime::createFromFormat('d/m/Y', '25/07/2014');
-	$timeStamp = date_format($startDate, 'U');
+	$startDate = date_format(DateTime::createFromFormat('d/m/Y', $_POST['startDate']), 'U');
+	$endDate = date_format(DateTime::createFromFormat('d/m/Y', $_POST['endDate']), 'U');
   
   try {
     require_once ('../connect_DB.php');
@@ -26,7 +26,7 @@
   }
 	
 	$response['status'] = 200;
-	$response['from'] = $timeStamp;
+	$response['time'] = array("from" => $startDate, "to" => $endDate);
 	$response['at'] = $today;
 	$response['id_bonus'] = array();
 	$response['games'] = array();
@@ -39,9 +39,16 @@
 		array_push($response['id_bonus'],$result['id_bonus']);
 	}
 	
-	$querygames = "SELECT id_game FROM games WHERE schedule > :time";
-	$req = $bdd -> prepare($querygames) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
-	$req -> execute(array("time" => $response['from']));
+	if($type == "Overall"){
+		$querygames = "SELECT id_game FROM games WHERE schedule > :from AND schedule < :to";
+		$req = $bdd -> prepare($querygames) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+		$req -> execute(array("from" => $response['time']['from'], "to" => $response['time']['to']));
+	}else {
+		$querygames = "SELECT id_game FROM games WHERE schedule > :from AND schedule < :to AND (type=:type OR competition=:type)";
+		$req = $bdd -> prepare($querygames) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+		$req -> execute(array("from" => $response['time']['from'], "to" => $response['time']['to'], "type" => $type));
+	}
+
 	while($result = $req -> fetch()){
 		array_push($response['games'],$result['id_game']);
 	}

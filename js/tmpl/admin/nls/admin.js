@@ -14,7 +14,18 @@ define({
 		"setrank" : "Attribution des places",
 		
 		"competitions" : ["Overall", "French-L1", "Europa", "International"],
-		"seasons" : [3, 2, 1],
-		"seasons_starting" : ['01/07/2012', '01/07/2013', '25/07/2014']
+		"seasons" : [{
+			"id" : 3,
+			"startDate" : "25/07/2014",
+			"endDate" : "01/06/2015"
+		}, {
+			"id" : 2,
+			"startDate" : "01/07/2013",
+			"endDate" : "01/06/2014"
+		}, {
+			"id" : 1,
+			"startDate" : "01/07/2012",
+			"endDate" : "01/06/2013"
+		}]
 	}
 });
