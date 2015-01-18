@@ -39,6 +39,7 @@ define([], function() {
 		URL_CREATE_RANKING : "server/ranking/createranking.php",
 		URL_SET_RANK : "server/ranking/setrank.php",
 		URL_GET_RANKING : "server/ranking/getranking.php",
+		URL_GET_RANKINGS_LIST : "server/ranking/getrankingslist.php",
 		/* Get Common datas */
 		URL_GET_TEAMS : "server/common/v2/getTeams.php",
 

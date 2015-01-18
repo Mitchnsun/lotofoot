@@ -128,6 +128,9 @@ define(['jquery', 'fmk/urls'], function($, urls) {
 		getRanking : function(params, success, error){
 			return performWS('GET', urls.URL_GET_RANKING, params, success, error);
 		},
+		getRankingsList : function(params, success, error){
+			return performWS('GET', urls.URL_GET_RANKINGS_LIST, params, success, error);
+		},
 		createRanking : function(params, success, error){
 			return performWS('POST', urls.URL_CREATE_RANKING, params, success, error);
 		},
