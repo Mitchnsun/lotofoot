@@ -5,7 +5,6 @@ function($, _, Backbone, LotofootApi, Player) {
 		model : Player,
 		default_type : "Overall",
 		default_season : 3,
-		default_value : true,
 		load : function(options){
 		  
 			if(options === undefined){ // Default configuration : 2015 -> Overall season 3
@@ -13,9 +12,6 @@ function($, _, Backbone, LotofootApi, Player) {
 				  type : this.default_type,
 				  season : this.default_season
 				};
-				this.default_value = false;
-			} else {
-			  this.default_value = true;
 			}
 			
 			// Bind functions to the view

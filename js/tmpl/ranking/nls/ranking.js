@@ -11,6 +11,7 @@ define({
 	   + "<li> Prédiction : pourcentage de pronostics corrects (V+N). </li>"
 	   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 	   + "</ul>",
+	  CM2014 : "Coupe du monde 2014 - Brésil",
 		draw : "N",
 		infosTitle : "Informations,",
 		infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "
@@ -24,9 +25,19 @@ define({
 		prediction : "Prédiction %",
 		score : "Score",
 		season : 'Saison',
-		title : "Saison 2014/2015 - Overall",
-		title_CM2014_2 : "Coupe du monde 2014 - Brésil",
-		title_Overall_2 : "Saison 2013:2014 - Overall",
+		seasons : {
+			"1" : "2012/2013",
+			"2" : "2013/2014",
+			"3" : "2014/2015",
+			"4" : "2015/2016"
+		},
+		title : "Classement",
+		types : {
+			"Overall" : "Overall",
+			"French-L1" : "Ligue 1",
+			"Europa" : "Matchs Européens",
+			"International" : "Matchs Internationaux"
+		},
 		total : "Total",
 		win : "V"
 	}
