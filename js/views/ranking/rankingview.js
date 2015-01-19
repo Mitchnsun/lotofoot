@@ -10,7 +10,11 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			this.ranking = options.ranking;
 			this.type = options.type;
 			this.season = options.season;
-			this.rankingList = [];
+			this.rankingsList = [];
+			
+			// Bind functions to the view
+      // By default, they bind to the window because they are callback functions
+			this.getRankingsListSuccess = _.bind(this.rankingsListProcess, this);
 		},
 		render : function() {
 			var self = this;
@@ -28,29 +32,57 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
       $.when(this.ranking.promise, self.getRankingsList()).done(function() {
         $(self.el).html(te.renderTemplate(tmpl, {
           i18n : i18n,
-          title : self.setTitle(),
-          ranking : self.ranking.toJSON()
+          ranking : self.ranking.toJSON(),
+          rankings : self.rankingsList
         }));
       });
 		},
-		setTitle : function(){
+		getRankingsList : function(){
+			var self = this;
+			return LotofootApi.getRankingsList({}, this.getRankingsListSuccess, function(msg) {// error
+        console.log(msg); // TODO : manage errors
+      });
+		},
+		rankingsListProcess : function(msg){
+			var self = this;
+			this.rankingsList = msg.rankings;
+			
+			_.each(this.rankingsList, function(item){
+				item.title = self.setTitle(item);
+				if(self.type == item.type && self.season == item.season){
+					item.active = true;
+				}
+			});
+			console.log(this.rankingsList);
+		},
+		setTitle : function(item){
 		  var title = i18n.title;
 		  
-		  if(i18n[this.type]){
-		  	return i18n[this.type];
-		  }
-		  
-		  if(this.type && this.season){
-		    title = i18n.season + " " + i18n.seasons[this.season] + " - " + i18n.types[this.type];
+		  if(i18n[item.type]){
+		  	title = i18n[item.type];
+		  }else if(item.type && item.season){
+		    title = i18n.season + " " + i18n.seasons[item.season] + " - " + i18n.types[item.type];
 		  }
 		  
 		  return title;
 		},
-		getRankingsList : function(){
-			var self = this;
-			return LotofootApi.getRankingsList({}, function(msg){
-				self.rankingList = msg.rankings;
-			});
+		/*
+		 * Events of the view
+		 */
+		events : {
+			"click ul.dropdown-menu a" : "selectRanking"
+		},
+		selectRanking : function(e){
+			e.preventDefault();
+			this.type = $(e.currentTarget).attr('data-type');
+			this.season = $(e.currentTarget).attr('data-season');
+			this.render();
+		},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function() {
+			this.undelegateEvents();
 		}
 	});
 

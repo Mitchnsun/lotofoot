@@ -17,7 +17,23 @@
 <div class="row-fluid">
 	<div class="span11" style="padding:0 10px;">
 		<div class="page-header">
-			<h2 class="content-subhead">{title} &nbsp; <small>{i18n.last_update}: {?ranking[0].update}{ranking[0].update}{:else}{i18n.no_update}{/ranking[0].update}</small></h2>
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle content-subhead" type="button" data-toggle="dropdown" aria-expanded="true">
+					{#rankings:i18n}
+						{?active}
+							{title} &nbsp; <small class="hidden-phone">{last_update}: {?update}{update}{:else}{no_update}{/update}</small>
+						{/active}
+					{/rankings}
+			    &nbsp;<span class="caret"></span>
+			  </button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+					{#rankings}
+						<li role="presentation" {?active}class="disabled"{/active}>
+							<a role="menuitem" tabindex="-1" href="#" data-type="{type}" data-season="{season}">{title}</a>
+						</li>
+					{/rankings}
+			  </ul>
+			</div>
 		</div>
 		<table class="table table-striped table-hover table-condensed">
 			<thead>
