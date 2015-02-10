@@ -143,6 +143,7 @@ footer {font-size:0.8em;}
 
 /* Ranking */
 table.table {font-size:14px;}
+#selectRankings{font-size:16px;}
 @media (max-width: 480px) {
 	table.table {font-size:12px;}
 }

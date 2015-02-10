@@ -53,7 +53,6 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 					item.active = true;
 				}
 			});
-			console.log(this.rankingsList);
 		},
 		setTitle : function(item){
 		  var title = i18n.title;
