@@ -14,7 +14,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     render : function() {
       var self = this;
       
-      LotofootApi.getTopPronos({id_bonus:1},function(msg){ // success
+      LotofootApi.getTopPronos({id_bonus:2},function(msg){ // success
       	
 	      $(self.el).html(te.renderTemplate(tmpl, {
 	        i18n : i18n,
@@ -35,26 +35,10 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     		prono.team_second = self.teams.getTeams(prono.second);
     		prono.team_third = self.teams.getTeams(prono.third);
     		prono.team_fourth = self.teams.getTeams(prono.fourth);
+    		prono.team_fifth = self.teams.getTeams(prono.fifth);
     	});
     	
     	return toppronos;
-    },
-    getWorldCupTeams : function(){
-    	var self = this;
-    	var teamsId = [];
-      var teams = [];
-      
-      _.each(worldcup.groups, function(group){
-        teamsId = _.union(teamsId,group.idTeams);
-      });
-      
-      _.each(teamsId, function(team) {
-        if (_.isNumber(team)) {
-          teams.push(self.teams.getTeams(team));
-        }
-      });
-      
-      return _.sortBy(teams, 'name');
     },
     /*
      * Events

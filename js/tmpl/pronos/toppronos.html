@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div id="worldcup" class="hero-unit">
+  <div class="hero-unit">
     <div class="corner cornerTopLeft"></div>
     <div class="corner cornerTopRight"></div>
     <div class="corner cornerBottomLeft"></div>
@@ -10,13 +10,15 @@
 			<thead>
 		    <tr>
 		      <th></th><th>{i18n.player}</th>
-		      <th>{i18n.first_txt}</th><th>{i18n.second_txt}</th><th>{i18n.third_txt}</th><th>{i18n.fourth_txt}</th>
+		      <th>{i18n.first}</th><th>{i18n.second}</th><th>{i18n.third}</th><th>{i18n.fourth}</th><th>{i18n.fifth}</th>
 		      {@if cond="{bonus.ready} == 1"}<th>Points</th>{/if}
 		    </tr>
 		    {@if cond="{bonus.ready} == 1"}
 			    <tr>
 			      <th></th><th></th>
-			      <th>{bonus.team_first.name}</th><th>{bonus.team_second.name}</th><th>{bonus.team_third.name}</th><th>{bonus.team_fourth.name}</th>
+			      <th>{bonus.team_first.name}</th><th>{bonus.team_second.name}</th>
+			      <th>{bonus.team_third.name}</th><th>{bonus.team_fourth.name}</th>
+			      <th>{bonus.team_fifth.name}</th>
 			      <th></th>
 			    </tr>
 		    {/if}
@@ -33,6 +35,7 @@
 		  			<td>{team_second.name}</td>
 		  			<td>{team_third.name}</td>
 		  			<td>{team_fourth.name}</td>
+		  			<td>{team_fifth.name}</td>
 		  			{@if cond="{validation} == 1"}<td>{points}</td>{/if}
 		  		</tr>
 				{/toppronos}

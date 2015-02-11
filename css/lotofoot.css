@@ -73,6 +73,7 @@ footer {font-size:0.8em;}
 #pronos .separation {float:left;margin-left:2%}
 #pronos span.winner {font-weight:bold;color:#5cb85c}
 #toppronos {display:none}
+#toppronos table.table {font-size:12px}
 
 @media (max-width: 1024px) {
 	.nav-tabs.nav-justified {padding: 0 10px;}
