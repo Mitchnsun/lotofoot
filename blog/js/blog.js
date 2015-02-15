@@ -36,21 +36,8 @@ function customDisplayForVersion() {
     webService.loadPollResult('versionName', 'O.2');
   } else if (version == "0.3") {
     buildProgress($('.percentage'));
-    intializePollForm();
+    $('#formVersionName').on('submit', events.pollForNameVersion);
   }
-}
-
-// Show the form or the results
-function intializePollForm(){
-	var voteTime = localStorage["voteTime"]?parseInt(localStorage["voteTime"]):0;
-	if(voteTime+oneDayToSeconds < Date.now()){
-		$('#formVersionName').on('submit', events.pollForNameVersion);
-	} else {
-		$("#formVersionName").remove();
-    $("#pollResults").show();
-    $('#pollResults .alert-success').remove();
-    webService.loadPollResult('versionName', 'O.3');
-	}
 }
 
 // Build poll results graph
