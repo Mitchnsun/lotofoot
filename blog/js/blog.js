@@ -1,5 +1,6 @@
-var version = '0.2'; // version in production
+var version = '0.3'; // version in production
 var urlHTMLDefault = 'version/blogv' + version + '.html';
+var oneDayToSeconds = 24*60*60*1000; // *1000, Date.now() gives time stamp with milliseconds
 
 /* DOM Ready and events function */
 $(document).ready(function() {
@@ -28,15 +29,28 @@ function bindVersionEvents() {
 
 // Manage HTML DOM for each version page
 function customDisplayForVersion() {
-  var oneDayToSeconds = 24*60*60;
   if (version == "0.2") {
   	$("#formVersionName").remove();
     $("#pollResults").show();
     $('#pollResults .alert-success').remove();
-    webService.loadPollResult('versionName');
+    webService.loadPollResult('versionName', 'O.2');
   } else if (version == "0.3") {
     buildProgress($('.percentage'));
+    intializePollForm();
   }
+}
+
+// Show the form or the results
+function intializePollForm(){
+	var voteTime = localStorage["voteTime"]?parseInt(localStorage["voteTime"]):0;
+	if(voteTime+oneDayToSeconds < Date.now()){
+		$('#formVersionName').on('submit', events.pollForNameVersion);
+	} else {
+		$("#formVersionName").remove();
+    $("#pollResults").show();
+    $('#pollResults .alert-success').remove();
+    webService.loadPollResult('versionName', 'O.3');
+	}
 }
 
 // Build poll results graph
@@ -93,10 +107,15 @@ var events = {
   },
   pollForNameVersion : function(e) {
     e.preventDefault();
-    $("#formVersionName").remove();
-    $("#pollResults").show();
-    localStorage["versionName" + version] = choice;
-    webService.loadPollResult('versionName',choice);
+    var choice = $("#formVersionName input:checked").val();
+    if (choice === undefined) {
+      $("#formVersionName .alert").show();
+    } else {
+      $("#formVersionName").remove();
+      $("#pollResults").show();
+      localStorage["versionName" + version] = choice;
+      webService.loadPollResult('versionName',version,choice);
+    }
   },
   hidePopUp : function(e){
     var logBox = $('#logBox');

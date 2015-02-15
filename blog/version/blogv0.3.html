@@ -1,4 +1,88 @@
 <div class="posts">
+	<h1 class="content-subhead">Sondage</h1>
+	<section class="post">
+		<header class="post-header">
+			<img class="post-avatar" alt="Icone En Ligne" src="img/start.jpg" width="75">
+
+			<h2 class="post-title">Nom de la version 0.3</h2>
+
+			<p class="post-meta">
+				<span class="post-category post-category-green">Lotofoot</span>
+			</p>
+		</header>
+		<form id="formVersionName" class="post-description">
+		  <p class="alert alert-error">
+        Vous devez sélectionner un choix ci-dessous pour pouvoir voter!
+      </p>
+			<p>
+				<input type="radio" id="poll1" class="radioVersionName" name="versionName" value="Belle Brasseuse" />
+				<label for="poll1">Belle Brasseuse</label>
+			</p>
+			<p>
+				<input type="radio" id="poll2" class="radioVersionName" name="versionName" value="La Bécasse" />
+				<label for="poll2">La Bécasse</label>
+			</p>
+			<p>
+				<input type="radio" id="poll3" class="radioVersionName" name="versionName" value="Boxer" />
+				<label for="poll3">Boxer</label>
+			</p>
+			<p>
+				<input type="radio" id="poll4" class="radioVersionName" name="versionName" value="Budweiser" />
+				<label for="poll4">Budweiser</label>
+			</p>
+			<p>
+				<input type="radio" id="poll5" class="radioVersionName" name="versionName" value="Brigand" />
+				<label for="poll5">Brigand</label>
+			</p>
+			<p>
+				<input type="radio" id="poll6" class="radioVersionName" name="versionName" value="Belzebuth" />
+				<label for="poll6">Belzebuth</label>
+			</p>
+			<p>
+				<input type="radio" id="poll7" class="radioVersionName" name="versionName" value="Beck's" />
+				<label for="poll7">Beck's</label>
+			</p>
+			<p>
+			  <input type="submit" class="pure-button" value="Voter" />
+			</p>
+		</form>
+		<div id="pollResults" class="post-description">
+			<p class="alert alert-success">
+				Votre vote a bien été pris en compte. Le choix sera bientôt divulgué.<br/>
+				Patientez quelques instants que les statistiques s'affichent ci-dessous.
+			</p>
+			<p class="results-wrapper"></p>
+		</div>
+	</section>
+</div>
+<div class="posts">
+  <h1 class="content-subhead">Publicité</h1>
+  <section class="post">
+    <header class="post-header">
+      <img class="post-avatar" alt="Icone En Ligne" src="img/pub.jpg" width="75">
+      
+      <p class="post-meta">
+        <span class="post-category">Publicité</span>
+      </p>
+    </header>
+
+    <div class="post-description">
+      <p class="Ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Responsive Ad -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-4388532262126714"
+             data-ad-slot="2509432411"
+             data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </p>
+    </div>
+  </section>
+</div>
+<div class="posts">
   <h1 class="content-subhead">Développement : Objectif 2015</h1>
   <section class="post">
     <header class="post-header">
@@ -15,13 +99,6 @@
     <div class="post-description">
       <ul class="progress">
       	<li>
-          <div class="percentage red">0%</div>
-          Profil utilisateur
-          <p class="details">
-            Page personelle de l'utilisateur avec ses informations et statistiques.
-          </p>
-        </li>
-      	<li>
           <div class="percentage green">100%</div>
           Optimisation du login persistant.
           <p class="details">
@@ -29,15 +106,7 @@
           </p>
         </li>
         <li>
-          <div class="percentage green">95%</div>
-          Nouveau type de pronostics disponibles (Tops)
-          <p class="details">
-            Possibilité de pronostiquer sur le vainqueur final de l'épreuve et les équipes en demi-finale.
-            Ajout des tops des différentes compétitions lors de l'année.
-          </p>
-        </li>
-        <li>
-          <div class="percentage orange">50%</div>
+          <div class="percentage green">90%</div>
           Nouveaux classements disponibles
           <p class="details">
             Classement spéciale Coupe du monde 2014 et FIFA. Classements par compétition
@@ -45,17 +114,32 @@
           </p>
         </li>
         <li>
-          <div class="percentage red">0%</div>
-          Ajouts des pronostics effectués avant la v0.1 et mise à jour des matchs ajoutés avant la v0.2
+          <div class="percentage green">80%</div>
+          Nouveau type de pronostics disponibles (Tops)
           <p class="details">
-            Mise à jour des matchs.
+            Possibilité de pronostiquer sur le vainqueur final de l'épreuve et les équipes en demi-finale.
+            Ajout des tops des différentes compétitions lors de l'année.
+          </p>
+        </li>
+        <li>
+          <div class="percentage orange">60%</div>
+          Console d'administration
+          <p class="details">
+            Ajout de pronostics et de nouvelles équipes. Lancement des scripts pour la création du classement.
           </p>
         </li>
         <li>
           <div class="percentage red">0%</div>
-          Console d'administration
+          Profil utilisateur
           <p class="details">
-            Ajout de pronostics et de nouvelles équipes. Lancement des scripts pour la création du classement.
+            Page personelle de l'utilisateur avec ses informations et statistiques.
+          </p>
+        </li>
+        <li>
+          <div class="percentage red">0%</div>
+          Ajouts des pronostics effectués avant la v0.1 et mise à jour des matchs ajoutés avant la v0.2
+          <p class="details">
+            Mise à jour des matchs.
           </p>
         </li>
         <li>

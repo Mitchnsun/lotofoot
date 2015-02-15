@@ -13,11 +13,11 @@
     
     $type = $_POST['type'];
     $version = $_POST['version'];
+		$choice = isset($_POST['choice'])?$_POST['choice']:null;
     
     // Must be logged to vote
     if(isset($_SESSION['userid'])){
       $userid = $_SESSION['userid'];
-      $choice = $_POST['choice'];
       $today = time();
   
       // Find if the user already vote

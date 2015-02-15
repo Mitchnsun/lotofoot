@@ -38,7 +38,7 @@ var webService = {
       $(window).scrollTop();
     });
   },
-  loadPollResult : function(type,choice){
+  loadPollResult : function(type,version,choice){
     var data = {
       type : type,
       version : version,
