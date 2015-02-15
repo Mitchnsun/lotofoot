@@ -36,7 +36,7 @@ define({
     competitions : ["French-L1", "UEFA-CL", "UEFA-EL", "French-Cup", "Friendly", "Euro"],
     "stage_CM2014" : ["Groups", "Last16", "Last8", "Semi", "ThirdPlace", "Final"],
     "stage_Euro" : ["Qualification", "Playoff", "Groups", "Last8", "Semi", "ThirdPlace", "Final"],
-    "stage_French-L1" : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "stage_French-L1" : [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],
     "stage_UEFA-CL" : ["Round1", "Round2", "Round3", "Playoff", "Groups", "Last16", "Last8", "Semi", "Final"],
     "stage_UEFA-EL" : ["Round1", "Round2", "Round3", "Playoff", "Groups", "Last32", "Last16", "Last8", "Semi", "Final"],
 
