@@ -105,12 +105,12 @@
 				<include name="**/*"/>
 			</fileset>
 		</copy>
-		<echo>Copy Old Versions</echo>
+		<!--<echo>Copy Old Versions</echo>
 		<copy todir="${build.path}/versions">
 			<fileset dir="versions">
 				<include name="**/*"/>
 			</fileset>
-		</copy>
+		</copy>-->
 		<echo>Copy Index.html</echo>
 		<copy todir="${build.path}">
 			<fileset dir="">
