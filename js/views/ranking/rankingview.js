@@ -1,6 +1,6 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'fmk/urls',
 				'i18n!tmpl/ranking/nls/ranking', 'text!tmpl/ranking/ranking.html'],
-function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
 		el : $('#container'),
@@ -75,6 +75,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			e.preventDefault();
 			this.type = $(e.currentTarget).attr('data-type');
 			this.season = $(e.currentTarget).attr('data-season');
+			history.replaceState({}, '', '#' + urls.RANKING + '/' + this.type + '/s' + this.season);
 			this.render();
 		},
 		/*
