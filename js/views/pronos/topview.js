@@ -14,15 +14,18 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     render : function() {
       var self = this;
       
-      LotofootApi.getTopPronos({id_bonus:2},function(msg){ // success
+      LotofootApi.getTopPronos({},function(msg){ // success
       	
+      	_.each(msg.bonus, function(bonus){
+      		self.setTitle(bonus);
+      	});
+
 	      $(self.el).html(te.renderTemplate(tmpl, {
 	        i18n : i18n,
 	        urls : urls,
 	        user : self.user.toJSON(),
-	        bonus : self.getTeamsForTopPronos([msg.bonus])[0],
+	        bonus : self.getTeamsForTopPronos(msg.bonus),
 	        time : msg.time,
-	        toppronos : self.getTeamsForTopPronos(msg.pronos)
 	      }));
 	      
       },function(msg){});
@@ -36,9 +39,29 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
     		prono.team_third = self.teams.getTeams(prono.third);
     		prono.team_fourth = self.teams.getTeams(prono.fourth);
     		prono.team_fifth = self.teams.getTeams(prono.fifth);
+    		
+    		self.getTeamsForTopPronos(prono.pronos);
     	});
     	
     	return toppronos;
+    },
+    // Fetch title for the bonus with his type and season
+    setTitle : function(bonus){
+    	var title = "";
+    	
+    	title += i18n["top_" + bonus.type];
+    	
+    	var year = i18n.LotofootStartingYear + parseInt(bonus.season);
+    	
+    	if(bonus.type == "WC"){
+    		title += " " + year;
+    	} else {
+    		title += " " + (year-1) + '/' + year;
+    	}
+    	
+    	title += " - " + i18n.top + " " + bonus.top;
+    	
+    	bonus.title = title;
     },
     /*
      * Events
@@ -77,7 +100,6 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, worldc
         // TODO : handle errors
         console.log(msg);
       });
-      console.log(choices);
     }
   });
 

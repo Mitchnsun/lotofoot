@@ -12,17 +12,22 @@ define({
 	  fourth : "Quatrième",
 	  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
 	   + " Merci de votre patience.",
+	  LotofootStartingYear : 2012,
 	  player : "Joueur",
 	  pronos : "Pronostics",
 	  second : "Second",
 	  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
 	  third : "Troisième",
 		title : "Derniers pronostics",
+		
+		// Top pronos
+		top : "Top",
+		top_L1 : "Ligue 1",
+		top_WC : "Coupe du monde",
 		toppronos : "Top Pronos",
 		topPronosMessage : "Choissisez les équipes qui finiront aux quatre premières places."
 		    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points."
 		    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
-		toppronosTitle : "Ligue 1 2014/2015 - Top 5",
 		
 		/* Errors */
 		teams_errorMsg : "Vous devez impérativement choisir quatre équipes. Si vous n'avez aucune idée, choissisez au hasard peut être que la chance vous sourira",
