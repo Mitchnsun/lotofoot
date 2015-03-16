@@ -41,13 +41,31 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			var self = this;
 			
 			_.each(bonus, function(item){
-				item.title = i18n['top_' + item.type + '_' + item.season + '_title'];
+				item.title = self.setTitle(item);
 				item.description = i18n['top_' + item.type + '_' + item.season + '_desc'];
 				item.teams = self.teams.getTeamsForTops(item.type, item.table_link);
 			});
 			
 			return bonus;
 		},
+		// Fetch title for the bonus with his type and season
+    setTitle : function(bonus){
+    	var title = "";
+    	
+    	title += i18n["top_" + bonus.type];
+    	
+    	var year = i18n.LotofootStartingYear + parseInt(bonus.season);
+    	
+    	if(bonus.type == "WC"){
+    		title += " " + year;
+    	} else {
+    		title += " " + (year-1) + '/' + year;
+    	}
+    	
+    	title += " - " + i18n.top + " " + bonus.top;
+    	
+    	return title;
+    },
 		selectedTops : function(bonus){
 			var self = this;
 			

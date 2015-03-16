@@ -19,6 +19,7 @@ define({
 	  fourth_txt : "Quatrième",
 	  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
 	   + " Merci de votre patience.",
+	  LotofootStartingYear : 2012,
 	  player : "Joueur",
 	  pronos : "Pronostics",
 	  second_txt : "Second",
@@ -30,10 +31,9 @@ define({
 		    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
 		
 		/* Tops */
-		top_CM2014_2_title : "Coupe du monde 2014 - Top 4",
-		top_CM2014_2_desc : "",
-		top_L1_3_title : "Ligue 1 2014/2015 - Top 5",
-		top_L1_3_desc : "",
+		top : "Top",
+		top_L1 : "Ligue 1",
+		top_WC : "Coupe du monde",
 		
 		/* Errors */
 		teamsBonus_errorMsg : "Vous devez impérativement sélectionner pour chaque position. Si vous n'avez aucune idée, choissisez au hasard peut être que la chance vous sourira",
