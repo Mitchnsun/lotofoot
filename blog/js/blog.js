@@ -33,10 +33,11 @@ function customDisplayForVersion() {
   	$("#formVersionName").remove();
     $("#pollResults").show();
     $('#pollResults .alert-success').remove();
-    webService.loadPollResult('versionName', 'O.2');
+    webService.loadPollResult('versionName', '0.2');
   } else if (version == "0.3") {
     buildProgress($('.percentage'));
     intializePollForm();
+    $('#formVersionName').on('submit', events.pollForNameVersion);
   }
 }
 
@@ -49,7 +50,7 @@ function intializePollForm(){
 		$("#formVersionName").remove();
     $("#pollResults").show();
     $('#pollResults .alert-success').remove();
-    webService.loadPollResult('versionName', 'O.3');
+    webService.loadPollResult('versionName', version);
 	}
 }
 

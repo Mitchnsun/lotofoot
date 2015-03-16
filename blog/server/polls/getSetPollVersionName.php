@@ -65,8 +65,12 @@
       $arr = array('label' => $key, 'recs' => $value);
       $list[$key] = $arr;
     }
-    
+		
     $response['results'] = $list;
+
+		if($choice == null){
+			$response['status'] = 200;
+		}
 
     // return the JSON
     echo json_encode($response);
