@@ -22,7 +22,7 @@ define({
 	  LotofootStartingYear : 2012,
 	  player : "Joueur",
 	  pronos : "Pronostics",
-	  second_txt : "Second",
+	  second_txt : "Deuxième",
 	  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
 	  third_txt : "Troisième",
 		toppronos : "Top Pronos",
