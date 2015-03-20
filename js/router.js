@@ -1,7 +1,7 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
-				'collections/ranking',
-        'views/menuview', 'views/footerview'],
+				'rankings/ranking',
+        'common/menuview', 'common/footerview'],
 function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
@@ -58,7 +58,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		adminpage : function() {
 			var self = this;
 			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
-				require(['views/admin/adminview'], function(AdminView) {
+				require(['admin/adminview'], function(AdminView) {
 					self.loadView(new AdminView({
 						user : self.user,
 						alertview : self.alertview
@@ -76,7 +76,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		creategames : function() {
 			var self = this;
 			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
-				require(['views/pronos/creategamesview'], function(CreateGamesView) {
+				require(['admin/creategamesview'], function(CreateGamesView) {
 					self.loadView(new CreateGamesView({
 						user : self.user,
 						alertview : self.alertview,
@@ -95,7 +95,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		homepage : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
-				require(['views/homepageview'], function(HomepageView) {
+				require(['homepage/homepageview'], function(HomepageView) {
 					self.loadView(new HomepageView({
 						user : self.user,
 						alertview : self.alertview,
@@ -115,7 +115,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			if (this.user.checkAuth()) {
 				this.eventBus.trigger('url:change', {url : '#' + this.user.get('urlFrom')});
 			} else {
-				require(['views/authentication/loginview'], function(LoginView) {
+				require(['authentication/loginview'], function(LoginView) {
 					self.loadView(new LoginView({
 						user : self.user,
 						alertview : self.alertview,
@@ -131,7 +131,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		},
 		newaccount : function() {
 			var self = this;
-			require(['views/account/createview'], function(CreateAccountView) {
+			require(['account/createview'], function(CreateAccountView) {
 				self.loadView(new CreateAccountView({
 					user : self.user,
 					alertview : self.alertview,
@@ -145,7 +145,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		profile : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
-				require(['views/account/profileview'], function(ProfileView) {
+				require(['account/profileview'], function(ProfileView) {
 					self.loadView(new ProfileView({
 						user : self.user,
 						alertview : self.alertview,
@@ -164,7 +164,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		pronos : function() {
 			var self = this;
 			if (this.user.checkAuth()) {
-				require(['views/pronos/pronosview'], function(PronosView) {
+				require(['pronos/pronosview'], function(PronosView) {
 					self.loadView(new PronosView({
 						user : self.user,
 						alertview : self.alertview,
@@ -181,7 +181,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		ranking : function(type, season) {
 			var self = this;
 			if (this.user.checkAuth()) {
-				require(['views/ranking/rankingview'], function(RankingView) {
+				require(['rankings/rankingview'], function(RankingView) {
 					self.loadView(new RankingView({
 					  type : type,
 					  season : season,
@@ -204,7 +204,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		toppronos : function() {
       var self = this;
       if (this.user.checkAuth()) {
-        require(['views/pronos/topview'], function(TopView) {
+        require(['pronos/topview'], function(TopView) {
           self.loadView(new TopView({
             user : self.user,
             alertview : self.alertview,
@@ -221,7 +221,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 		worldcup : function(type) {
 			var self = this;
 			if (this.user.checkAuth()) {
-				require(['views/events/worldcupview'], function(WorldCupView) {
+				require(['events/worldcupview'], function(WorldCupView) {
 					self.loadView(new WorldCupView({
 						user : self.user,
 						alertview : self.alertview,

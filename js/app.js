@@ -1,5 +1,5 @@
 // Filename: app.js
-define(['router', 'models/user', 'models/browserStorage', 'collections/teams'],
+define(['router', 'account/user', 'fmk/browserStorage', 'teams/teams'],
 function(Router, User, BrowserStorage, Teams) {
 
   var initialize = function() {

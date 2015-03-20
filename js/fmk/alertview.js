@@ -1,5 +1,5 @@
 define(['jquery', 'underscore', 'backbone',
-				'fmk/templateengine', 'i18n!tmpl/fmk/nls/alert', 'text!tmpl/fmk/alert.html'],
+				'fmk/templateengine', 'i18n!nls/wordings', 'text!fmk/alert.html'],
 function($, _, Backbone, te, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
@@ -17,14 +17,14 @@ function($, _, Backbone, te, i18n, tmpl) {
 		 */
 		displayError : function(status, code) {
 			this.msg = {
-				"Title" : i18n.default_Title
+				"Title" : i18n.alert.default_Title
 			};
 
 			if (status) {
-				this.msg.status = i18n[status];
+				this.msg.status = i18n.alert[status];
 			}
 			if (code) {
-				this.msg.message = i18n[code]?i18n[code]:this.getMessage(status);
+				this.msg.message = i18n.alert[code]?i18n.alert[code]:this.getMessage(status);
 			} else {
 				this.msg.message = this.getMessage(status);
 			}
@@ -38,9 +38,9 @@ function($, _, Backbone, te, i18n, tmpl) {
 		 * code is for the message to display.
 		 */
 		displayAlert : function(type, title, msg) {
-			if (i18n[title + "_Title"] !== undefined) {
+			if (i18n.alert[title + "_Title"] !== undefined) {
 				this.msg = {
-					"Title" : i18n[title + "_Title"]
+					"Title" : i18n.alert[title + "_Title"]
 				};
 			} else {
 				this.msg = {
@@ -57,7 +57,7 @@ function($, _, Backbone, te, i18n, tmpl) {
 			this.render(type);
 		},
 		getMessage : function(status) {
-			return i18n['message_' + status];
+			return i18n.alert['message_' + status];
 		},
 		setType : function(type) {// add the specific class to the alert bloc
 			switch(type) {

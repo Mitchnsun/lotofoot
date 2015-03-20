@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <project default="default" basedir=".">
 
-	<target name="default" depends="load.properties, clean, css.concatenate, css.minify, css.copy, project.copy, work.copy, js.minify" />
+	<target name="default" depends="load.properties, clean, css.concatenate, css.minify, css.copy, project.copy, work.copy, js.minify, cordova.copy" />
 	<target name="load.properties">
 		<echo>Initialize Variables</echo>
 		<property name="css.path" value="css" />
@@ -124,9 +124,9 @@
       </fileset>
     </copy>
     <echo>Copy tmpl</echo>
-    <copy todir="${build.path}/js/tmpl">
-      <fileset dir="js/tmpl">
-        <include name="**/*"/>
+    <copy todir="${build.path}/js">
+      <fileset dir="js">
+        <include name="**/*.html"/>
       </fileset>
     </copy>
     <echo>Copy JS Libraries</echo>
@@ -144,7 +144,6 @@
     <copy todir="${work.path}/js">
       <fileset dir="js">
         <include name="**/*"/>
-        <exclude name="**/tmpl/**/*" />
       </fileset>
     </copy>
     <echo>Copy Javascript Libs</echo>
@@ -159,7 +158,7 @@
 	<target name="js.minify" depends="load.properties">
 		<echo># Minify JavaScript using Google Closure Compiler:</echo>
 		<apply executable="java" parallel="false">
-	    <fileset dir="${work.path}/js" includes="*/**" />
+	    <fileset dir="${work.path}/js" includes="**/*.js" />
 	    <mapper type="glob" from="*" to="${build.path}/js/*" />
 	    <arg line="-jar" />
 	    <arg path="${googleCompiler.path}" />
@@ -186,5 +185,16 @@
 		</java>
 		<echo message="optimized ${requirejs.optimizer.settings}" />
 	</target>
+	
+	<!-- ## Copy for Cordova## -->
+	<target name="cordova.copy" depends="load.properties">
+	  <echo># Copy JS to cordova/www</echo>
+  	<echo>Copy Javascript</echo>
+    <copy todir="cordova/www">
+      <fileset dir="dist">
+        <include name="**/*"/>
+      </fileset>
+    </copy>
+  </target>	
 
 </project>
