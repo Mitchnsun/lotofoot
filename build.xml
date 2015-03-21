@@ -10,6 +10,8 @@
 		<echo message="build.path: ${build.path}" />
 		<property name="work.path" value="work" />
     <echo message="work.path: ${work.path}" />
+    <property name="cordova.path" value="cordova/www" />
+    <echo message="cordova.path: ${cordova.path}" />
 		<property name="yuiCompressor.path" value="build/yuicompressor-2.4.8.jar" />
 		<echo message="yuiCompressor.path: ${yuiCompressor.path}" />
 		<property name="googleCompiler.path" value="build/compiler.jar" />
@@ -30,6 +32,12 @@
 				<include name="*/**"/>
 			</fileset>
 		</delete>
+		<echo># Clean Cordova/www</echo>
+    <delete includeEmptyDirs="true">
+      <fileset dir="${cordova.path}">
+        <include name="*/**"/>
+      </fileset>
+    </delete>
 		<echo># Clean Work</echo>
     <delete includeEmptyDirs="true">
       <fileset dir="${work.path}">
@@ -190,9 +198,11 @@
 	<target name="cordova.copy" depends="load.properties">
 	  <echo># Copy JS to cordova/www</echo>
   	<echo>Copy Javascript</echo>
-    <copy todir="cordova/www">
+    <copy todir="${cordova.path}">
       <fileset dir="dist">
         <include name="**/*"/>
+        <exclude name="server/"/>
+        <exclude name="beta/"/>
       </fileset>
     </copy>
   </target>	
