@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'models/game',
+define(['jquery', 'underscore', 'backbone', 'fmk/templateengine', 'games/game',
         'text!admin/pickTeam.html','i18n!nls/admin', 'i18n!nls/country'],
 function($, _, Backbone, te, Game, tmpl, i18n, country) {
     

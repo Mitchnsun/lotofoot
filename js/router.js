@@ -1,7 +1,6 @@
 // Filename: router.js
 define(['jquery', 'underscore', 'backbone', 'fmk/urls', 'fmk/eventbus', 'fmk/alertview',
-				'rankings/ranking',
-        'common/menuview', 'common/footerview'],
+				'rankings/ranking', 'common/menuview', 'common/footerview'],
 function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterView) {
 	
 	var AppRouter = Backbone.Router.extend({
@@ -16,19 +15,19 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			});
 		},
 		routes : _.object([
-		  [urls.ROOT, 'homepage'],
-		  [urls.ADMIN, 'adminpage'],
-			[urls.CREATE_GAMES, 'creategames'],
-			[urls.HOME, 'homepage'],
-			[urls.LOGIN + '(/:action/:param)', 'login'],
-			[urls.NEW_ACCOUNT, 'newaccount'],
-			[urls.PROFILE, 'profile'],
-			[urls.PRONOS, 'pronos'],
-			[urls.RANKING + '(/:type/s:season)', 'ranking'],
-			[urls.TOP_PRONOS + "/:event", 'toppronos'],
-			[urls.WORLDCUP + '(/:type)', 'worldcup'],
+		  [urls.ROOT.hash, 'dispatch'],
+		  [urls.ADMIN.hash, 'dispatchAdmin'],
+			[urls.CREATE_GAMES.hash, 'dispatchAdmin'],
+			[urls.HOME.hash, 'dispatch'],
+			[urls.LOGIN.hash + '(/:action/:param)', 'login'],
+			[urls.NEW_ACCOUNT.hash, 'newaccount'],
+			[urls.PROFILE.hash, 'dispatch'],
+			[urls.PRONOS.hash, 'dispatch'],
+			[urls.RANKING.hash + '(/:type/s:season)', 'ranking'],
+			[urls.WORLDCUP.hash + '(/:type)', 'worldcup'],
 			['*action', 'defaultAction']
 		]),
+		/* Start Router */
 		start : function(options) {
 			// Models
 			this.user = options.user;
@@ -52,70 +51,31 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			this.view && (this.view.close ? this.view.close() : this.view.undelegateEvents());
 			this.view = view;
 		},
+		/* Retrieve the path of the view file for an hash */
+		pathForView : function(hash){
+			var path = "";
+			if(hash == ""){
+				return urls.ROOT.path;
+			}
+			_.every(urls, function(item){
+				if(hash.match(item.hash)){
+					path = item.path;
+					return false;
+				}
+				return true;
+			});
+			return path;
+		},
 		/*
-		 * Set view for the routes
+		 * Set view for the routes, specific functions
+		 * see below for generic functions
 		 */
-		adminpage : function() {
-			var self = this;
-			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
-				require(['admin/adminview'], function(AdminView) {
-					self.loadView(new AdminView({
-						user : self.user,
-						alertview : self.alertview
-					}));
-					self.view.render();
-					self.menuView.menuChange(urls.ADMIN);
-				});
-			} else if(this.user.checkAuth()){
-				this.eventBus.trigger('url:change', {url : '#' + urls.HOME});
-			} else {
-				this.user.set('urlFrom', urls.ADMIN);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-			}
-		},
-		creategames : function() {
-			var self = this;
-			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
-				require(['admin/creategamesview'], function(CreateGamesView) {
-					self.loadView(new CreateGamesView({
-						user : self.user,
-						alertview : self.alertview,
-						teams : self.teams
-					}));
-					self.view.render();
-					self.menuView.menuChange(urls.CREATE_GAMES);
-				});
-			} else if(this.user.checkAuth()){
-				this.eventBus.trigger('url:change', {url : '#' + urls.HOME});
-			} else {
-				this.user.set('urlFrom', urls.CREATE_GAMES);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-			}
-		},
-		homepage : function() {
-			var self = this;
-			if (this.user.checkAuth()) {
-				require(['homepage/homepageview'], function(HomepageView) {
-					self.loadView(new HomepageView({
-						user : self.user,
-						alertview : self.alertview,
-						teams : self.teams,
-						ranking : self.ranking
-					}));
-					self.view.render();
-					self.menuView.menuChange(urls.HOME);
-				});
-			} else {
-				this.user.set('urlFrom', urls.HOME);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-			}
-		},
 		login : function(action, param) {
 			var self = this;
 			if (this.user.checkAuth()) {
 				this.eventBus.trigger('url:change', {url : '#' + this.user.get('urlFrom')});
 			} else {
-				require(['authentication/loginview'], function(LoginView) {
+				require([urls.LOGIN.path], function(LoginView) {
 					self.loadView(new LoginView({
 						user : self.user,
 						alertview : self.alertview,
@@ -125,13 +85,13 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 						param : param
 					}));
 					self.view.render();
-					self.menuView.menuChange(urls.LOGIN);
+					self.menuView.menuChange(urls.LOGIN.hash);
 				});
 			}
 		},
 		newaccount : function() {
 			var self = this;
-			require(['account/createview'], function(CreateAccountView) {
+			require([urls.NEW_ACCOUNT.path], function(CreateAccountView) {
 				self.loadView(new CreateAccountView({
 					user : self.user,
 					alertview : self.alertview,
@@ -139,103 +99,68 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 					eventBus : self.eventBus
 				}));
 				self.view.render();
-				self.menuView.menuChange(urls.NEW_ACCOUNT);
+				self.menuView.menuChange(urls.NEW_ACCOUNT.hash);
 			});
 		},
-		profile : function() {
+		ranking : function(type, season) {
+			var params = {
+				type : type,
+				season : season
+			};
+			this.dispatch(params);
+		},
+		worldcup : function(type) {
+			var params = {type : type};
+			this.dispatch(params);
+		},
+		/* Generic function for routing the view */
+		dispatch : function(params){
 			var self = this;
+			var hash = window.location.hash.replace('#','');
+			
 			if (this.user.checkAuth()) {
-				require(['account/profileview'], function(ProfileView) {
-					self.loadView(new ProfileView({
+				require([this.pathForView(hash)], function(View) {
+					self.loadView(new View({
 						user : self.user,
 						alertview : self.alertview,
 						browserStorage : self.browserStorage,
 						eventBus : self.eventBus,
-						ranking : self.ranking
+						teams : self.teams,
+						ranking : self.ranking,
+						params : params
 					}));
 					self.view.render();
-					self.menuView.menuChange(urls.PROFILE);
+					self.menuView.menuChange(hash);
 				});
 			} else {
-				this.user.set('urlFrom', urls.PROFILE);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+				var urlRedirect = hash;
+				if(params.type && params.season){
+					urlRedirect += '/' + params.type + '/s' + params.season;
+				}
+				this.user.set('urlFrom', urlRedirect);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN.hash});
 			}
 		},
-		pronos : function() {
+		dispatchAdmin : function() {
 			var self = this;
-			if (this.user.checkAuth()) {
-				require(['pronos/pronosview'], function(PronosView) {
-					self.loadView(new PronosView({
+			var hash = window.location.hash.replace('#','');
+			
+			if (this.user.checkAuth() && this.user.get('accreditation') == 'Admin') {
+				require([this.pathForView(hash)], function(View) {
+					self.loadView(new View({
 						user : self.user,
 						alertview : self.alertview,
 						teams : self.teams
 					}));
 					self.view.render();
-					self.menuView.menuChange(urls.PRONOS);
+					self.menuView.menuChange(hash);
 				});
+			} else if(this.user.checkAuth()){
+				this.eventBus.trigger('url:change', {url : '#' + urls.HOME.hash});
 			} else {
-				this.user.set('urlFrom', urls.PRONOS);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
+				this.user.set('urlFrom', hash);
+				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN.hash});
 			}
-		},
-		ranking : function(type, season) {
-			var self = this;
-			if (this.user.checkAuth()) {
-				require(['rankings/rankingview'], function(RankingView) {
-					self.loadView(new RankingView({
-					  type : type,
-					  season : season,
-						user : self.user,
-						alertview : self.alertview,
-						ranking : self.ranking
-					}));
-					self.view.render();
-					self.menuView.menuChange(urls.RANKING);
-				});
-			} else {
-				var urlRedirect = urls.RANKING;
-				if(type && season){
-					urlRedirect += '/' + type + '/s' + season;
-				}
-				this.user.set('urlFrom', urlRedirect);
-				this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-			}
-		},
-		toppronos : function() {
-      var self = this;
-      if (this.user.checkAuth()) {
-        require(['pronos/topview'], function(TopView) {
-          self.loadView(new TopView({
-            user : self.user,
-            alertview : self.alertview,
-            teams : self.teams
-          }));
-          self.view.render();
-          self.menuView.menuChange(urls.TOP_PRONOS);
-        });
-      } else {
-        this.user.set('urlFrom', urls.TOP_PRONOS);
-        this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-      }
-    },
-		worldcup : function(type) {
-			var self = this;
-			if (this.user.checkAuth()) {
-				require(['events/worldcupview'], function(WorldCupView) {
-					self.loadView(new WorldCupView({
-						user : self.user,
-						alertview : self.alertview,
-						teams : self.teams,
-						ranking : self.ranking,
-						type : type
-					}));
-					self.view.render();
-					self.menuView.menuChange(urls.WORLDCUP);
-				});
-			} else {
-        this.user.set('urlFrom', urls.WORLDCUP);
-        this.eventBus.trigger('url:change', {url : '#' + urls.LOGIN});
-      }
 		},
 		/* Route by default */
 		defaultAction : function(actions) {

@@ -63,7 +63,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 					self.displayErrors(msg.errors);
 				}else {
 					var username = params.pseudo != ''? params.pseudo:params.firstname;
-					self.eventBus.trigger('url:change',{url:'#' + urls.LOGIN + '/welcome/' + username});
+					self.eventBus.trigger('url:change',{url:'#' + urls.LOGIN.hash + '/welcome/' + username});
 				}
 			}, function(msg) { // error
 				self.alertview.displayError(msg.status, msg.errorCode);

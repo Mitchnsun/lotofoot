@@ -1,18 +1,18 @@
 define([], function() {
 	return {
 		/* Front */
-		ADMIN : "admin",
-		CREATE_GAMES : "create-games",
-		HOME : "home",
-		LOGIN : "login",
-		NEW_ACCOUNT : "new-account",
-		PROFILE : "profile",
-		PRONOS : "pronos",
-		RANKING : "ranking",
-		ROOT : "",
-		TOP_PRONOS : "top/pronos",
-		WORLDCUP : "world-cup",
-		WORLDCUP_PLAYOFF : "world-cup/playoff",
+		ADMIN : {hash : "admin", path : 'admin/adminview'},
+		CREATE_GAMES : {hash : "create-games", path : 'admin/creategamesview'},
+		HOME : {hash : "home", path : 'homepage/homepageview'},
+		LOGIN : {hash : "login", path : 'authentication/loginview'},
+		NEW_ACCOUNT : {hash : "new-account", path : 'account/createview'},
+		PROFILE : {hash : "profile", path : 'account/profileview'},
+		PRONOS : {hash : "pronos", path : 'pronos/pronosview'},
+		RANKING : {hash : "ranking", path : 'rankings/rankingview'},
+		ROOT : {hash : "", path : 'homepage/homepageview'},
+		/*TOP_PRONOS : {hash : "top/pronos", path : 'pronos/topview'},*/
+		WORLDCUP : {hash : "world-cup", path : 'events/worldcupview'},
+		WORLDCUP_PLAYOFF : {hash : "world-cup/playoff", path : 'events/worldcupview'},
 
 		/* Server */
 		/* Authentication */

@@ -8,8 +8,8 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			this.user = options.user;
 			this.alertview = options.alertview;
 			this.ranking = options.ranking;
-			this.type = options.type;
-			this.season = options.season;
+			this.type = options.params.type;
+			this.season = options.params.season;
 			this.rankingsList = [];
 			
 			// Bind functions to the view
@@ -75,7 +75,7 @@ function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
 			e.preventDefault();
 			this.type = $(e.currentTarget).attr('data-type');
 			this.season = $(e.currentTarget).attr('data-season');
-			history.replaceState({}, '', '#' + urls.RANKING + '/' + this.type + '/s' + this.season);
+			history.replaceState({}, '', '#' + urls.RANKING.hash + '/' + this.type + '/s' + this.season);
 			this.render();
 		},
 		/*

@@ -4,22 +4,22 @@
 <div id="menu">
 	<div id="betaTriangle"></div><div id="betaText">BETA</div>
 	<div class="pure-menu pure-menu-open">
-		<h1><a class="pure-menu-heading" href="#{urls.HOME}">{i18n.title}</a></h1>
+		<h1><a class="pure-menu-heading" href="#{urls.HOME.hash}">{i18n.title}</a></h1>
 
 		<ul>
 		  <li>
-        <a href="#{urls.WORLDCUP_PLAYOFF}">{i18n.worldcup}</a>
+        <a href="#{urls.WORLDCUP_PLAYOFF.hash}">{i18n.worldcup}</a>
       </li>
 			<li>
-				<a href="#{urls.RANKING}">{i18n.ranking}</a>
+				<a href="#{urls.RANKING.hash}">{i18n.ranking}</a>
 				<div id="rankingWidget"></div>
 			</li>
 			<li>
-				<a href="#{urls.PRONOS}">{i18n.pronos}</a>
+				<a href="#{urls.PRONOS.hash}">{i18n.pronos}</a>
 			</li>
 			{@if cond="'{user.accreditation}' == 'Admin'"}
 			<li>
-				<a href="#{urls.ADMIN}">{i18n.admin}</a>
+				<a href="#{urls.ADMIN.hash}">{i18n.admin}</a>
 			</li>
 			{/if}
 			<li>

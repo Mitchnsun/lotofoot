@@ -4,7 +4,7 @@ function($, _, Backbone, LotofootApi, urls) {
     defaults : {
       sessionRetrieve : false,
       isConnected : false,
-      urlFrom : urls.HOME
+      urlFrom : urls.HOME.hash
     },
     /*
      * Authentication
