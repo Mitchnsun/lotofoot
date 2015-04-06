@@ -3,7 +3,7 @@
 	$host = 'localhost';
 	$db_name = 'lotofoot';
 	$db_login = 'LotoFoot';
-	$db_pwd = '';
+	$db_pwd = 'mySQLdikwLotoFoot';
     
     /* Development */
     /*$host = 'localhost';
