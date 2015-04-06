@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ../js/admin/pickTeamView.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>../js/admin/pickTeamView.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">63.69</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">114</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">21.67</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.21</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;, &#039;fmk/templateengine&#039;, &#039;games/game&#039;,
+        &#039;text!admin/pickTeam.html&#039;,&#039;i18n!nls/admin&#039;, &#039;i18n!nls/country&#039;],
+function($, _, Backbone, te, Game, tmpl, i18n, country) {
+    
+  var ClassView = Backbone.View.extend({
+    initialize : function(options){
+      this.user = options.user;
+      this.el = options.el;
+      this.teams = options.teams;
+      
+      this.newGame();
+    },
+    render : function() {
+      $(this.el).html(te.renderTemplate(tmpl, {
+        i18n : i18n.create_games,
+        clubs : this.teams.getClubs(),
+        international : this.teams.getNations()
+      }));
+    },
+    newGame : function(){
+      this.game = new Game({addBy : this.user.get(&#039;userid&#039;)});
+    },
+    /*
+     * Events of the view
+     */
+    events : {
+      &quot;click #SelectGame a&quot; : &quot;kindOfGame&quot;,
+      &quot;click #Clubs a.country&quot; : &quot;selectCountry&quot;,
+      &quot;click a.club&quot; : &quot;pickATeam&quot;,
+      &quot;click a.international&quot; : &quot;pickANationalTeam&quot;
+    },
+    kindOfGame : function(e) {// Pick the type of the game to bet
+      e.preventDefault();
+      this.game.set(&#039;type&#039;, this.$(e.currentTarget).attr(&#039;ref&#039;));
+      
+      this.$(&quot;#SelectGame&quot;).addClass(&#039;hide&#039;);
+      // Display the right list in terms of the choice
+      if (this.game.get(&#039;type&#039;) == i18n.create_games.ref_international_game) {
+        this.$(&#039;#International&#039;).removeClass(&#039;hide&#039;);
+      } else {
+        this.$(&#039;#Clubs&#039;).removeClass(&#039;hide&#039;);
+      }
+    },
+    selectCountry : function(e) {// Pick the country where the clubs are from
+      e.preventDefault();
+      var ref = this.$(e.currentTarget).attr(&#039;ref&#039;);
+      var $selectedCountry = this.$(e.currentTarget).parent();
+      $selectedCountry.removeClass(&#039;span3&#039;).addClass(&#039;span12&#039;);
+
+      var $listCountry = this.$(&quot;#Clubs &gt; div.span3&quot;);
+      $listCountry.addClass(&#039;hide&#039;);
+      
+      // Hide the other country
+      $selectedCountry.find(&#039;div.row-fluid.hide&#039;).removeClass(&#039;hide&#039;);
+    },
+    pickATeam : function(e) {// Pick a team
+      e.preventDefault();
+      
+      if (this.game.ready()) {// A game cannot have more than two teams !
+        return false;
+      }
+
+      /* Initialize variables */
+      var gameType = this.game.get(&#039;type&#039;);
+      var $element = this.$(e.currentTarget);
+      var ref = $element.attr(&#039;ref&#039;);
+      var country = $element.attr(&#039;data-country&#039;);
+      var $selectedCountry = $element.parents(&#039;div.span12&#039;);
+      var $listCountry = this.$(&quot;#Clubs &gt; div.span3&quot;);
+      var team = this.teams.getTeams(ref);
+
+      if (gameType == i18n.create_games.ref_league_game || gameType == i18n.create_games.ref_cup_game) {
+        this.game.addTeam(team);
+        this.game.set(&#039;country&#039;, country);
+      } else if (gameType == i18n.create_games.ref_europa_game) {
+        this.game.addTeam(team);
+        $selectedCountry.find(&#039;div.row-fluid&#039;).addClass(&#039;hide&#039;);
+        $selectedCountry.removeClass(&#039;span12&#039;).addClass(&#039;span3&#039;);
+        $listCountry.removeClass(&#039;hide&#039;);
+      } else {
+        return false;
+        // TODO : Display errors
+      }
+
+      $element.parent().addClass(&#039;hide&#039;);
+      this.trigger(&#039;add:team&#039;, this.game);
+    },
+    pickANationalTeam : function(e) {
+      e.preventDefault();
+
+      if (this.game.ready()) {// A game cannot have more than two teams !
+        return false;
+      }
+      
+      /* Initialize variables */
+      var ref = this.$(e.currentTarget).attr(&#039;ref&#039;);
+      var nation = this.teams.getTeams(ref);
+      var gameType = this.game.get(&#039;type&#039;);
+
+      if (gameType == i18n.create_games.ref_international_game) {
+        this.game.addTeam(nation);
+      } else {
+        return false;
+        // TODO : Display errors
+      }
+
+      this.$(e.currentTarget).parent().addClass(&#039;hide&#039;);
+      this.trigger(&#039;add:team&#039;, this.game);
+    }
+  });
+  
+  // Our module now returns our view
+  return ClassView;
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

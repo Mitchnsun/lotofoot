@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - nls/country.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>nls/country.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">33.80</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">55</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">2.96</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.24</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define({
+    /* Please sort alphabetically */
+    &quot;root&quot; : {
+       AL : {name : &quot;Albanie&quot;, fifa_code : &quot;ALB&quot;},
+       AR : {name : &quot;Argentine&quot;, fifa_code : &quot;ARG&quot;},
+       AT : {name : &quot;Autriche&quot;, fifa_code : &quot;AUT&quot;},
+       AU : {name : &quot;Australie&quot;, fifa_code : &quot;AUS&quot;},
+       BA : {name : &quot;Bosnie-et-Herzégovine&quot;, fifa_code : &quot;BIH&quot;},
+       BE : {name : &quot;Belgique&quot;, fifa_code : &quot;BEL&quot;},
+       BG : {name : &quot;Bulgarie&quot;, fifa_code : &quot;BUL&quot;},
+       BR : {name : &quot;Brésil&quot;, fifa_code : &quot;BRA&quot;},
+       BY : {name : &quot;Biélorussie&quot;, fifa_code : &quot;BLR&quot;},
+       CH : {name : &quot;Suisse&quot;, fifa_code : &quot;SUI&quot;},
+       CI : {name : &quot;Côte d&#039;Ivoire&quot;, fifa_code : &quot;CIV&quot;},
+       CL : {name : &quot;Chili&quot;, fifa_code : &quot;CHI&quot;},
+       CM : {name : &quot;Cameroun&quot;, fifa_code : &quot;CMR&quot;},
+       CO : {name : &quot;Colombie&quot;, fifa_code : &quot;COL&quot;},
+       CR : {name : &quot;Costa Rica&quot;, fifa_code : &quot;CRC&quot;},
+       CY : {name : &quot;Chypre&quot;, fifa_code : &quot;CYP&quot;},
+       CZ : {name : &quot;République Tchèque&quot;, fifa_code : &quot;CZE&quot;},
+       DE : {name : &quot;Allemagne&quot;, fifa_code : &quot;GER&quot;},
+       DK : {name : &quot;Danemark&quot;, fifa_code : &quot;DEN&quot;},
+       DZ : {name : &quot;Algérie&quot;, fifa_code : &quot;ALG&quot;},
+       EC : {name : &quot;Equateur&quot;, fifa_code : &quot;ECU&quot;},
+       EN : {name : &quot;Angleterre&quot;, fifa_code : &quot;ENG&quot;},
+       ES : {name : &quot;Espagne&quot;, fifa_code : &quot;ESP&quot;},
+       FI : {name : &quot;Finlande&quot;, fifa_code : &quot;FIN&quot;},
+       FR : {name : &quot;France&quot;, fifa_code : &quot;FRA&quot;},
+       GE : {name : &quot;Georgie&quot;, fifa_code : &quot;GEO&quot;},
+       GH : {name : &quot;Ghana&quot;, fifa_code : &quot;GHA&quot;},
+       GR : {name : &quot;Grèce&quot;, fifa_code : &quot;GRE&quot;},
+       HN : {name : &quot;Honduras&quot;, fifa_code : &quot;HON&quot;},
+       HR : {name : &quot;Croatie&quot;, fifa_code : &quot;CRO&quot;},
+       IL : {name : &quot;Israël&quot;, fifa_code : &quot;ISR&quot;},
+       IT : {name : &quot;Italie&quot;, fifa_code : &quot;ITA&quot;},
+       IR : {name : &quot;Iran&quot;, fifa_code : &quot;IRN&quot;},
+       JP : {name : &quot;Japon&quot;, fifa_code : &quot;JPN&quot;},
+       KR : {name : &quot;Corée du Sud&quot;, fifa_code : &quot;KOR&quot;},
+       MX : {name : &quot;Mexique&quot;, fifa_code : &quot;MEX&quot;},
+       NG : {name : &quot;Nigéria&quot;, fifa_code : &quot;NGA&quot;},
+       NL : {name : &quot;Pays-Bas&quot;, fifa_code : &quot;NED&quot;},
+       NO : {name : &quot;Norvège&quot;, fifa_code : &quot;NOR&quot;},
+       PT : {name : &quot;Portugal&quot;, fifa_code : &quot;POR&quot;},
+       RO : {name : &quot;Roumanie&quot;, fifa_code : &quot;ROU&quot;},
+       RS : {name : &quot;Serbie&quot;, fifa_code : &quot;SRB&quot;},
+       RU : {name : &quot;Russie&quot;, fifa_code : &quot;RUS&quot;},
+       SC : {name : &quot;Ecosse&quot;, fifa_code : &quot;SCO&quot;},
+       SE : {name : &quot;Suède&quot;, fifa_code : &quot;SWE&quot;},
+       SI : {name : &quot;Slovénie&quot;, fifa_code : &quot;SVN&quot;},
+       TR : {name : &quot;Turquie&quot;, fifa_code : &quot;TUR&quot;},
+       UA : {name : &quot;Ukraine&quot;, fifa_code : &quot;UKR&quot;},
+       UR : {name : &quot;Uruguay&quot;, fifa_code : &quot;URU&quot;},
+       US : {name : &quot;USA&quot;, fifa_code : &quot;USA&quot;}
+    }
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

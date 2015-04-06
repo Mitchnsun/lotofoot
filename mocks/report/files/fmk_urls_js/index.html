@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - fmk/urls.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>fmk/urls.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">45.89</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">50</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">4.27</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.41</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define([], function() {
+	return {
+		/* Front */
+		ADMIN : {hash : &quot;admin&quot;, path : &#039;admin/adminview&#039;},
+		CREATE_GAMES : {hash : &quot;create-games&quot;, path : &#039;admin/creategamesview&#039;},
+		HOME : {hash : &quot;home&quot;, path : &#039;homepage/homepageview&#039;},
+		LOGIN : {hash : &quot;login&quot;, path : &#039;authentication/loginview&#039;},
+		NEW_ACCOUNT : {hash : &quot;new-account&quot;, path : &#039;account/createview&#039;},
+		PROFILE : {hash : &quot;profile&quot;, path : &#039;account/profileview&#039;},
+		PRONOS : {hash : &quot;pronos&quot;, path : &#039;pronos/pronosview&#039;},
+		RANKING : {hash : &quot;ranking&quot;, path : &#039;rankings/rankingview&#039;},
+		ROOT : {hash : &quot;&quot;, path : &#039;homepage/homepageview&#039;},
+		/*TOP_PRONOS : {hash : &quot;top/pronos&quot;, path : &#039;pronos/topview&#039;},*/
+		WORLDCUP : {hash : &quot;world-cup&quot;, path : &#039;events/worldcupview&#039;},
+		WORLDCUP_PLAYOFF : {hash : &quot;world-cup/playoff&quot;, path : &#039;events/worldcupview&#039;},
+
+		/* Server */
+		/* Authentication */
+		URL_LOGIN : &quot;server/authentication/login.php&quot;,
+		URL_CHECK_SESSION : &quot;server/authentication/checkSession.php&quot;,
+		/* Account */
+		URL_NEW_ACCOUNT : &quot;server/account/newaccount.php&quot;,
+		/* Pronos */
+		URL_GET_ACTIVE_PRONOS : &quot;server/pronos/getActivePronos.php&quot;,
+		URL_GET_NEW_PRONOS : &quot;server/pronos/getNewPronos.php&quot;,
+		URL_ADD_PRONO : &quot;server/pronos/addProno.php&quot;,
+		URL_BET_PRONO : &quot;server/pronos/betProno.php&quot;,
+		URL_CREATE_GAMES : &quot;server/pronos/creategames.php&quot;,
+		URL_GET_PRONOS : &quot;server/pronos/getpronos.php&quot;,
+		URL_GET_PREVIOUS_PRONOS : &quot;server/pronos/getpreviouspronos.php&quot;,
+		URL_UPDATE_PRONO : &quot;server/pronos/updateprono.php&quot;,
+		URL_GET_PRONOS_FROM_EVENTS : &quot;server/events/getPronosFromEvents.php&quot;,
+		URL_BET_TOP : &quot;server/pronos/betTop.php&quot;,
+		URL_GET_TOP_PRONOS : &quot;server/pronos/getTopPronos.php&quot;,
+		URL_GET_ACTIVE_TOPS : &quot;server/pronos/getActiveTops.php&quot;,
+		URL_PRONOS_VALIDATION : &quot;server/pronos/pronosvalidation.php&quot;,
+		URL_PRONOS_SCORES : &quot;server/pronos/pronosscores.php&quot;,
+		/* Rankings */
+		URL_CREATE_RANKING : &quot;server/ranking/createranking.php&quot;,
+		URL_SET_RANK : &quot;server/ranking/setrank.php&quot;,
+		URL_GET_RANKING : &quot;server/ranking/getranking.php&quot;,
+		URL_GET_RANKINGS_LIST : &quot;server/ranking/getrankingslist.php&quot;,
+		/* Get Common datas */
+		URL_GET_TEAMS : &quot;server/common/v2/getTeams.php&quot;,
+
+		/* External links */
+		EXT_BLOG : &#039;/lotofoot/blog&#039;,
+		API_WC14_CURRENT_GAMES : &#039;http://worldcup.sfg.io/matches/current&#039;
+	};
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ../js/nls/wordings.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>../js/nls/wordings.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">31.52</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">257</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">3.44</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.80</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define({
+	/* Please sort alphabetically */
+	&quot;root&quot; : {
+		alert : {
+			&quot;default_Title&quot; : &quot;Attention!&quot;,
+			&quot;info_Title&quot; : &quot;Information,&quot;,
+			&quot;success_Title&quot; : &quot;Succès,&quot;,
+	
+			/* Alert Error */
+			&quot;401&quot; : &quot;401 : Une authentification est nécessaire pour accéder à la ressource.&quot;,
+			&quot;403&quot; : &quot;403 : Cette ressource est interdite d&#039;accès.&quot;,
+			&quot;404&quot; : &quot;404 : Ressource non trouvée.&quot;,
+			&quot;422&quot; : &quot;422 : L’entité fournie avec la requête est incompréhensible ou incomplète.&quot;,
+			&quot;500&quot; : &quot;500 : Erreur interne du serveur&quot;,
+	
+			&quot;message_500&quot; : &quot;Si cette erreur persiste, n&#039;hésitez pas à contacter le webmaster&quot;,
+	
+			&quot;BD&quot; : &quot;La base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l&#039;erreur persiste n&#039;hésitez pas à contacter le webmaster.&quot;,
+			&quot;BDLogin&quot; : &quot;Une erreur s&#039;est produite lors de votre identification, la base de données est actuellement indisponible, veuillez nous excuser du désagrément. Réessayez ultérieurement, si l&#039;erreur persiste n&#039;hésitez pas à contacter le webmaster.&quot;,
+			&quot;JSON&quot; : &quot;Une erreur est survenue dans la lecture des données reçues depuis le serveur. Réessayez ultérieurement, si l&#039;erreur persiste n&#039;hésitez pas à contacter le webmaster.&quot;,
+			&quot;Wrong_User&quot; : &quot;Il semblerait que vous tenteriez d&#039;accéder à des informations qui ne sont pas liées à votre compte, recharger la page pour vous connecter.&quot;,
+			&quot;data_forbidden&quot; : &quot;Le temps imparti pour utiliser cette ressource a surement été dépassé. La modification n&#039;a pas été prise en compte.&quot;,
+			&quot;data_existence&quot; : &quot;Les informations que vous essayez d&#039;accéder ne semblent pas exister. La modification n&#039;a pas été prise en compte.&quot;
+		},
+		menu : {
+			&quot;admin&quot; : &quot;Admin&quot;,
+			&quot;blog&quot; : &quot;Blog&quot;,
+			&quot;home&quot; : &quot;Accueil&quot;,
+			&quot;new_game&quot; : &quot;Créer un match&quot;,
+			&quot;pronos&quot; : &quot;Pronostics&quot;,
+			&quot;ranking&quot; : &quot;Classement&quot;,
+			&quot;title&quot; : &quot;Lotofoot&quot;,
+			&quot;worldcup&quot; : &quot;CM 2014&quot;
+		},
+
+		homepage : {
+			currentGames_title : &quot;Match en cours&quot;,
+			loading_NewPronos : &quot;Nous recherchons les pronostics disponibles...&quot;,
+			
+			&quot;title&quot; : &quot;Pronostics en cours&quot;,
+			&quot;no_pronos&quot; : &quot;Aucun pronostic n&#039;est en cours.&quot;,
+			
+			/* Alert Success */
+			&quot;AddProno&quot; : &quot;Votre pronostic a été enregistré&quot;,
+			&quot;updateProno&quot; : &quot;Votre pronostic a été mis à jour&quot;,
+			
+			alertTopPronosMessage : &quot;Pour vous faire une idée de qui finira dans le dernier carré,&quot;
+		     + &quot; vous pouvez simuler la Coupe du Monde &quot;
+		     + &quot;&lt;a href=&#039;http://www.sports.fr/football/coupe-du-monde-2014/world-cup-simulator/&#039; target=&#039;_blank&#039;&gt;ici&lt;/a&gt;&quot;
+		     + &quot;&lt;br/&gt;Il est possible de parier jusqu&#039;au 17 juin 2014 23h59.&quot;,
+		  alertTopPronosTitle : &quot;Informations,&quot;,
+		  bet : &quot;Parier&quot;,
+		  first_txt : &quot;Vainqueur&quot;,
+		  fifth_txt : &quot;Cinquième&quot;,
+		  fourth_txt : &quot;Quatrième&quot;,
+		  getTopPronosIncoming : &quot;Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder.&quot;
+		   + &quot; Merci de votre patience.&quot;,
+		  LotofootStartingYear : 2012,
+		  player : &quot;Joueur&quot;,
+		  pronos : &quot;Pronostics&quot;,
+		  second_txt : &quot;Deuxième&quot;,
+		  success : &quot;Votre pari a été enregistré, il peut être modifié à tout moment jusqu&#039;au 17 juin.&quot;,
+		  third_txt : &quot;Troisième&quot;,
+			toppronos : &quot;Top Pronos&quot;,
+			topPronosMessage : &quot;Choissisez soigneusement les équipes de ce top.&quot;
+			    + &quot; Une bonne place vaudra 5 points, la sélection d&#039;une équipe présente dans le top mais à la mauvaise place vaudra 1 points.&quot;
+			    + &quot; Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.&quot;,
+			
+			/* Tops */
+			top : &quot;Top&quot;,
+			top_L1 : &quot;Ligue 1&quot;,
+			top_WC : &quot;Coupe du monde&quot;,
+			
+			/* Errors */
+			teamsBonus_errorMsg : &quot;Vous devez impérativement sélectionner pour chaque position. Si vous n&#039;avez aucune idée, choissisez au hasard peut être que la chance vous sourira&quot;,
+			timeBonus_errorMsg : &quot;Le temps imparti pour ce pari est passé. Les résultats arriveront à la fin de la compétition.&quot;
+		},
+		
+		authentication : {
+			&quot;alertTitle&quot; : &quot;Pas de compte ?&quot;,
+			&quot;email&quot; : &quot;Email&quot;,
+			&quot;login&quot; : &quot;Se connecter&quot;,
+			&quot;new_account_message&quot; : &quot;Il n&#039;y a pas de problème, créez-en un&quot;,
+			&quot;password&quot; : &quot;Mot de passe&quot;,
+			&quot;remember&quot; : &quot;Se souvenir de moi&quot;,
+			&quot;welcome_message&quot; : &quot;Félicitation d&#039;avoir rejoint la communauté des pronostiqueurs du Lotofoot. Ici un seul crédo : le sport. &quot;
+				+ &quot;Le principe du Lotofoot est de pronostiquer le score exact du match, c&#039;est un tout-pile. Après chaque match un classement est effectué en fonction des pronostics. &quot;
+				+ &quot;&lt;ul&gt;&lt;li&gt;Score exact : 3 points&lt;/li&gt;&lt;li&gt; Issue correct : 1 point, ex : vous avez pronostiqué un match nul mais le score n&#039;était pas correct&lt;/li&gt;&quot;
+				+ &quot;&lt;li&gt;Sinon 0 points&lt;/li&gt;&lt;li&gt;Un tout-pile en finale rapporte 5 points&lt;/li&gt;&lt;/ul&gt;&quot;
+				+ &quot;&lt;br/&gt;Pronostiquer, partager, vibrer !&quot;
+				+ &quot;&lt;br/&gt;Connectez vous et démarrez l&#039;expérience!&quot;,
+			&quot;welcomeTitle&quot; : &quot;Bienvenue&quot;,
+			
+			/* Alert Warning */
+			&quot;EmptyLogIn&quot; : &quot;L&#039;email et le mot de passe ne peuvent être vides, veuillez les compléter.&quot;,
+			&quot;IncorrectLogin&quot; : &quot;Vos identifiants sont incorrects, veuillez les corriger.&quot;,
+			&quot;NoSessionFound&quot; : &quot;Aucune session n&#039;a été trouvée, veuillez vous connecter.&quot;,
+			&quot;WebStorageLogin&quot; : &quot;Votre navigateur est obsolète et ne supporte par certaines fontionnalités pour vous connecter. Votre expérience utilisateur risque d&#039;être altérée.&lt;br/&gt;Vous pouvez tout de même vous connecter mais votre session ne pourra être enregistrée. Pour une meilleure expérience, mettez à jour votre navigateur.&quot;
+		},
+		
+		account : {
+			&quot;alertTitle&quot; : &quot;Informations&quot;,
+			&quot;email&quot; : &quot;Email&quot;,
+			&quot;firstname&quot; : &quot;Prénom&quot;,
+			&quot;lastname&quot; : &quot;Nom&quot;,
+			&quot;login&quot; : &quot;Se connecter&quot;,
+			&quot;password&quot; : &quot;Mot de passe&quot;,
+			&quot;pseudo&quot; : &quot;Pseudonyme&quot;,
+			&quot;remember&quot; : &quot;Se souvenir de moi&quot;,
+			&quot;signin&quot; : &quot;S&#039;inscrire&quot;,
+			
+			&quot;regexEmail&quot; : /^(([^&lt;&gt;()[\]\\.,;:\s@\&quot;]+(\.[^&lt;&gt;()[\]\\.,;:\s@\&quot;]+)*)|(\&quot;.+\&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+			
+			&quot;errors&quot; : {
+				&quot;email&quot; : &quot;Votre email doit être valide pour pouvoir vous inscrire. Exemple : lotofoot@mcomper.at.&quot;,
+				&quot;email_exists&quot; : &quot;Cet email est déjà utilisé, veuillez entrer un email différent.&quot;,
+				&quot;username&quot; : &quot;Pour avoir un identifiant sur le site, vous avez besoin soit d&#039;un pseudonyme ou de votre nom/prénom.&quot;,
+				&quot;username_exists&quot; : &quot;Ce pseudonyme est déjà utilisé, veuillez entrer un pseudonyme différent.&quot;
+			},
+			
+			/* Alert Infos */
+			&quot;message&quot; : &quot;A minima, il faut un email valide et un pseudonyme. Par sécurité, on vous conseille de mettre un mot de passe.&lt;br/&gt;&quot;
+			  + &quot;Vous pouvez ajouter votre nom et prénom, dans ce cas là le pseudonyme n&#039;est pas obligatoire. Par défaut votre pseudonyme sera votre nom public sur le site.&lt;br/&gt;&quot;
+			  + &quot;Le Lotofoot vous souhaite d&#039;agréables pronostics!&quot;,
+			/* Alert Warning */
+			&quot;EmptyLogIn&quot; : &quot;L&#039;email et le mot de passe ne peuvent être vides, veuillez les compléter.&quot;,
+			&quot;IncorrectLogin&quot; : &quot;Vos identifiants sont incorrects, veuillez les corriger.&quot;,
+			&quot;NoSessionFound&quot; : &quot;Aucune session n&#039;a été trouvée, veuillez vous connecter.&quot;,
+			&quot;WebStorageLogin&quot; : &quot;Votre navigateur est obsolète et ne supporte par certaines fontionnalités. &quot;
+				+ &quot;Votre expérience utilisateur risque d&#039;être altérée.&lt;br/&gt;&quot;
+				+ &quot;Vous pouvez tout de même vous inscrire. &quot;
+				+ &quot;Pour une meilleure expérience, mettez à jour votre navigateur.&quot;
+		},
+		pronos : {
+		  alertTopPronosMessage : &quot;Pour vous faire une idée de qui finira dans le dernier carré,&quot;
+		     + &quot; vous pouvez simuler la Coupe du Monde &quot;
+		     + &quot;&lt;a href=&#039;http://www.sports.fr/football/coupe-du-monde-2014/world-cup-simulator/&#039; target=&#039;_blank&#039;&gt;ici&lt;/a&gt;&quot;
+		     + &quot;&lt;br/&gt;Il est possible de parier jusqu&#039;au 17 juin 2014 23h59.&quot;,
+		  alertTopPronosTitle : &quot;Informations,&quot;,
+		  bet : &quot;Parier&quot;,
+		  fifth : &quot;Cinquième&quot;,
+		  first : &quot;Champion&quot;,
+		  fourth : &quot;Quatrième&quot;,
+		  getTopPronosIncoming : &quot;Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder.&quot;
+		   + &quot; Merci de votre patience.&quot;,
+		  LotofootStartingYear : 2012,
+		  player : &quot;Joueur&quot;,
+		  pronos : &quot;Pronostics&quot;,
+		  second : &quot;Deuxième&quot;,
+		  success : &quot;Votre pari a été enregistré, il peut être modifié à tout moment jusqu&#039;au 17 juin.&quot;,
+		  third : &quot;Troisième&quot;,
+			title : &quot;Derniers pronostics&quot;,
+			
+			// Top pronos
+			top : &quot;Top&quot;,
+			top_L1 : &quot;Ligue 1&quot;,
+			top_WC : &quot;Coupe du monde&quot;,
+			toppronos : &quot;Top Pronos&quot;,
+			topPronosMessage : &quot;Choissisez les équipes qui finiront aux quatre premières places.&quot;
+			    + &quot;Une bonne place vaudra 5 points, la sélection d&#039;une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points.&quot;
+			    + &quot; Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.&quot;,
+			
+			/* Errors */
+			teams_errorMsg : &quot;Vous devez impérativement choisir quatre équipes. Si vous n&#039;avez aucune idée, choissisez au hasard peut être que la chance vous sourira&quot;,
+			time_errorMsg : &quot;Le temps imparti pour ce pari est passé. Les résultats arriveront après la finale, le 13 juillet 2014.&quot;
+		},
+		rankings : {
+			bonus : &quot;B&quot;,
+		  captionTitle : &quot;Légende,&quot;,
+		  captionMsg : &quot;&lt;ul&gt;&quot;
+		   + &quot;&lt;li&gt; V : victoire, score exact pronostiqué - tout-pile. (3 points)&lt;/li&gt;&quot;
+		   + &quot;&lt;li&gt; N : issue du match correcte pronostiqué mais le score était inexact. (1 point)&lt;/li&gt;&quot;
+		   + &quot;&lt;li&gt; D : défaite, le pronostic est raté, mauvaise issue mauvais score. (0 point)&lt;/li&gt;&quot;
+		   + &quot;&lt;li&gt; B : points bonus&lt;/li&gt;&quot;
+		   + &quot;&lt;li&gt; Prédiction : pourcentage de pronostics corrects (V+N). &lt;/li&gt;&quot;
+		   + &quot;&lt;li&gt; Cocu Ratio : pourcentage de tout pile par rapport aux nombres d&#039;issues correctes trouvées.&quot;
+		   + &quot;&lt;/ul&gt;&quot;,
+		  CM2014 : &quot;Coupe du monde 2014 - Brésil&quot;,
+			draw : &quot;N&quot;,
+			infosTitle : &quot;Informations,&quot;,
+			infosMsg : &quot;Le classement pour la coupe du monde 2014 n&#039;est pas encore disponible. &quot;
+				+ &quot;Il apparaitra après le match d&#039;ouverture en fonction des différents pronostics. &quot;
+				+ &quot;Ce sera un nouveau classement, le tableau ci-dessous sera réinitialisé.&quot;,
+			last_update : &quot;Dernière mise à jour&quot;,
+			loss : &quot;D&quot;,
+			luckyRatio : &quot;Cocu Ratio&quot;,
+			no_update : &quot;Aucune&quot;,
+			player : &quot;Joueur&quot;,
+			prediction : &quot;Prédiction %&quot;,
+			score : &quot;Score&quot;,
+			season : &#039;Saison&#039;,
+			seasons : {
+				&quot;1&quot; : &quot;2012/2013&quot;,
+				&quot;2&quot; : &quot;2013/2014&quot;,
+				&quot;3&quot; : &quot;2014/2015&quot;,
+				&quot;4&quot; : &quot;2015/2016&quot;
+			},
+			title : &quot;Classement&quot;,
+			types : {
+				&quot;Overall&quot; : &quot;Overall&quot;,
+				&quot;French-L1&quot; : &quot;Ligue 1&quot;,
+				&quot;Europa&quot; : &quot;Matchs Européens&quot;,
+				&quot;International&quot; : &quot;Matchs Internationaux&quot;
+			},
+			total : &quot;Total&quot;,
+			win : &quot;V&quot;
+		},
+		worldcup : {
+		  &quot;alertMessage&quot; : &quot;Vous pouvez jusqu&#039;au 17 juin 2014 pronostiquer sur les quatre équipes &quot;
+		     + &quot;qui atteindront les demi-finales. Vous pourrez choisir le gagnant, le finaliste et le troisième. A vos paris à cette adresse :&quot;,
+		  &quot;alertTitle&quot; : &quot;Pronostiquez sur le dernier carré !&quot;,
+		  &quot;Final&quot; : &quot;Finale&quot;,
+			&quot;group&quot; : &quot;Groupe&quot;,
+			&quot;Last8&quot; : &quot;Quart de finale&quot;,
+			&quot;Last16&quot; : &quot;Huitième de finale&quot;,
+			&quot;nav_groups&quot; : &quot;Groupes&quot;,
+			&quot;nopronos&quot; : &quot;Il n&#039;y a aucun pronostic en cours pour ce groupe&quot;,
+			&quot;official_website&quot; : &quot;http://fr.fifa.com/worldcup/&quot;,
+			&quot;playoff&quot; : &quot;Phase finale&quot;, 
+			&quot;prono&quot; : &quot;Pronostics&quot;,
+			&quot;Semi&quot; : &quot;Demi-finales&quot;,
+			&quot;ThirdPlace&quot; : &quot;Petite Finale&quot;,
+			&quot;title&quot; : &quot;Coupe du monde 2014 - Brésil&quot;,
+			
+			/* Groups */
+			&quot;groups&quot; : [{
+				&quot;id&quot; : &quot;A&quot;,
+				&quot;idTeams&quot; : [&quot;29&quot;,&quot;114&quot;,&quot;121&quot;,&quot;122&quot;]
+			},{
+				&quot;id&quot; : &quot;B&quot;,
+				&quot;idTeams&quot; : [&quot;30&quot;,&quot;24&quot;,&quot;123&quot;,&quot;93&quot;]
+			},{
+				&quot;id&quot; : &quot;C&quot;,
+				&quot;idTeams&quot; : [&quot;124&quot;,&quot;125&quot;,&quot;126&quot;,&quot;127&quot;]
+			},{
+				&quot;id&quot; : &quot;D&quot;,
+				&quot;idTeams&quot; : [&quot;31&quot;,&quot;128&quot;,&quot;28&quot;,&quot;25&quot;]
+			},{
+				&quot;id&quot; : &quot;E&quot;,
+				&quot;idTeams&quot; : [&quot;78&quot;,&quot;102&quot;,&quot;22&quot;,&quot;129&quot;]
+			},{
+				&quot;id&quot; : &quot;F&quot;,
+				&quot;idTeams&quot; : [&quot;27&quot;,&quot;130&quot;,&quot;131&quot;,&quot;132&quot;]
+			},{
+				&quot;id&quot; : &quot;G&quot;,
+				&quot;idTeams&quot; : [&quot;23&quot;,&quot;101&quot;,&quot;133&quot;,&quot;134&quot;]
+			},{
+				&quot;id&quot; : &quot;H&quot;,
+				&quot;idTeams&quot; : [&quot;135&quot;,&quot;136&quot;,&quot;137&quot;,&quot;138&quot;]
+			}],
+			
+			/* Alert Success */
+	    &quot;AddProno&quot; : &quot;Votre pronostic a été enregistré&quot;,
+	    &quot;updateProno&quot; : &quot;Votre pronostic a été mis à jour&quot;
+		}
+	}
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

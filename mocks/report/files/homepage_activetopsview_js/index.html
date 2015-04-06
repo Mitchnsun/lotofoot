@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - homepage/activetopsview.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>homepage/activetopsview.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.23</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">125</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">26.76</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.44</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;, 
+				&#039;fmk/templateengine&#039;, &#039;fmk/lotofootapi&#039;,
+				&#039;i18n!nls/wordings&#039;, &#039;text!homepage/activetops.html&#039;],
+function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
+
+	var ClassView = Backbone.View.extend({
+		initialize : function(options) {
+			this.user = options.user;
+			this.el = options.el;
+			this.alertview = options.alertview;
+			this.teams = options.teams;
+			
+			// Bind functions to the view
+      // By default, they bind to the window because they are callback functions
+      this.successsuggestATopCallback = _.bind(this.topSuggested, this);
+		},
+		render : function() {
+			var self = this;
+			var params = {userid : this.user.get(&#039;userid&#039;)};
+			
+			LotofootApi.getActiveTops(params, function(msg){
+			  
+			  if(msg.bonus.length &gt; 0){
+			  	$(self.el).html(te.renderTemplate(tmpl, {
+		        i18n : i18n.homepage,
+		        user : self.user.toJSON(),
+		        bonus : self.getDatas(msg.bonus),
+		        time : msg.time,
+		        teams : {}
+		      }));
+					
+					self.selectedTops(msg.bonus);
+			  } else{
+			  	self.close();
+			  }
+			}, function(msg){
+			  console.log(msg); // TODO : handle errors
+			});
+		},
+		getDatas : function(bonus){
+			var self = this;
+			
+			_.each(bonus, function(item){
+				item.title = self.setTitle(item);
+				item.description = i18n.homepage[&#039;top_&#039; + item.type + &#039;_&#039; + item.season + &#039;_desc&#039;];
+				item.teams = self.teams.getTeamsForTops(item.type, item.table_link);
+			});
+			
+			return bonus;
+		},
+		// Fetch title for the bonus with his type and season
+    setTitle : function(bonus){
+    	var title = &quot;&quot;;
+    	
+    	title += i18n.homepage[&quot;top_&quot; + bonus.type];
+    	
+    	var year = i18n.homepage.LotofootStartingYear + parseInt(bonus.season);
+    	
+    	if(bonus.type == &quot;WC&quot;){
+    		title += &quot; &quot; + year;
+    	} else {
+    		title += &quot; &quot; + (year-1) + &#039;/&#039; + year;
+    	}
+    	
+    	title += &quot; - &quot; + i18n.homepage.top + &quot; &quot; + bonus.top;
+    	
+    	return title;
+    },
+		selectedTops : function(bonus){
+			var self = this;
+			
+			_.each(bonus, function(item){
+				if(item.prono){
+					self.$(&#039;#bonus&#039; + item.id_bonus + &quot; select.firstTeam&quot;).val(item.prono.first);
+					self.$(&#039;#bonus&#039; + item.id_bonus + &quot; select.secondTeam&quot;).val(item.prono.second);
+					self.$(&#039;#bonus&#039; + item.id_bonus + &quot; select.thirdTeam&quot;).val(item.prono.third);
+					self.$(&#039;#bonus&#039; + item.id_bonus + &quot; select.fourthTeam&quot;).val(item.prono.fourth);
+					self.$(&#039;#bonus&#039; + item.id_bonus + &quot; select.fifthTeam&quot;).val(item.prono.fifth);
+				}
+			});
+		},
+		/*
+		 * Events of the view
+		 */
+		events : {
+			&#039;submit form&#039; : &#039;suggestATop&#039;
+		},
+		suggestATop : function(e){
+			e.preventDefault();
+			
+			var self = this;
+			var params = {
+				id : this.$(e.currentTarget).attr(&#039;ref&#039;),
+				userid : this.user.get(&#039;userid&#039;),
+				choices : {}
+			};
+			
+			_.each(this.$(e.currentTarget).find(&#039;select&#039;), function(select){
+				params.choices[$(select).attr(&#039;name&#039;)] = $(select).val()?$(select).val():undefined;
+			});
+			
+			LotofootApi.betTop(params, this.successsuggestATopCallback, function(msg){ // errors
+				console.log(msg); // TODO : handle errors
+				self.alertview.displayError(msg.status, msg.errorCode);
+			});
+		},
+		topSuggested : function(msg){
+			if(msg.errorCode !== undefined){
+        this.alertview.displayAlert(&#039;warning&#039;, &#039;default&#039;, i18n.homepage[msg.errorCode]);
+      } else {
+      	this.alertview.displayAlert(&#039;success&#039;, &#039;success&#039;, i18n.homepage.AddProno);
+      }
+		},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function() {
+			$(&#039;#activetops&#039;).remove();
+			this.undelegateEvents();
+		}
+	});
+
+	// Our module now returns our view
+	return ClassView;
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

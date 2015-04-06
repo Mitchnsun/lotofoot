@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - ../js/fmk/alertview.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -13,9 +13,8 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,8 +25,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -37,37 +36,37 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>..\js\fmk\alertview.js</h1>
+    <h1>../js/fmk/alertview.js</h1>
   </div>
 </div>
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
-      <p class="stat">68.80</p>
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.86</p>
     </div>
-    <div class="span6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
-      <p class="stat">96</p>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">97</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
-      <p class="stat">21.24</p>
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">23.17</p>
     </div>
-    <div class="span6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
-      <p class="stat">0.53</p>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.64</p>
     </div>
   </div>
 </div>
@@ -77,12 +76,12 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,37 +89,38 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">define(['jquery', 'underscore', 'backbone',
-				'fmk/templateengine', 'i18n!tmpl/fmk/nls/alert', 'text!tmpl/fmk/alert.html'],
+    <textarea id="file-source" class="col-md-12">define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;,
+				&#039;fmk/templateengine&#039;, &#039;i18n!nls/wordings&#039;, &#039;text!fmk/alert.html&#039;],
 function($, _, Backbone, te, i18n, tmpl) {
 
 	var ClassView = Backbone.View.extend({
-		el : $('#container'),
+		el : $(&#039;#container&#039;),
 		render : function(type) {
 			this.dismissAlert();
 			$(this.el).prepend(te.renderTemplate(tmpl, {
 				type : type,
 				msg : this.msg
 			}));
+			$(&#039;body&#039;).animate({scrollTop : $(this.el).position().top}, &#039;slow&#039;);
 		},
 		/*
 		 * displayError : error messages are displayed with a status (ex: 500) and a code
 		 */
 		displayError : function(status, code) {
 			this.msg = {
-				"Title" : i18n.default_Title
+				&quot;Title&quot; : i18n.alert.default_Title
 			};
 
 			if (status) {
-				this.msg.status = i18n[status];
+				this.msg.status = i18n.alert[status];
 			}
 			if (code) {
-				this.msg.message = i18n[code];
+				this.msg.message = i18n.alert[code]?i18n.alert[code]:this.getMessage(status);
 			} else {
 				this.msg.message = this.getMessage(status);
 			}
 
-			var type = this.setType('error');
+			var type = this.setType(&#039;error&#039;);
 
 			this.render(type);
 		},
@@ -129,13 +129,13 @@ function($, _, Backbone, te, i18n, tmpl) {
 		 * code is for the message to display.
 		 */
 		displayAlert : function(type, title, msg) {
-			if (i18n[title + "_Title"] !== undefined) {
+			if (i18n.alert[title + &quot;_Title&quot;] !== undefined) {
 				this.msg = {
-					"Title" : i18n[title + "_Title"]
+					&quot;Title&quot; : i18n.alert[title + &quot;_Title&quot;]
 				};
 			} else {
 				this.msg = {
-					"Title" : title
+					&quot;Title&quot; : title
 				};
 			}
 
@@ -148,18 +148,18 @@ function($, _, Backbone, te, i18n, tmpl) {
 			this.render(type);
 		},
 		getMessage : function(status) {
-			return i18n['message_' + status];
+			return i18n.alert[&#039;message_&#039; + status];
 		},
 		setType : function(type) {// add the specific class to the alert bloc
 			switch(type) {
-				case 'error':
-					return 'alert-error';
-				case 'success':
-					return 'alert-success';
-				case 'info':
-					return 'alert-info';
+				case &#039;error&#039;:
+					return &#039;alert-danger&#039;;
+				case &#039;success&#039;:
+					return &#039;alert-success&#039;;
+				case &#039;info&#039;:
+					return &#039;alert-info&#039;;
 				default:
-					return '';
+					return &#039;alert-warning&#039;;
 			}
 		},
 		/*
@@ -167,13 +167,13 @@ function($, _, Backbone, te, i18n, tmpl) {
 		 * dismissAlert : function to remove the alert from DOM
 		 */
 		events : {
-			'click .close' : 'dismissAlert'
+			&#039;click .close&#039; : &#039;dismissAlert&#039;
 		},
 		dismissAlert : function(e) {
 			if (e !== undefined) {
 				e.preventDefault();
 			}
-			this.$('.AlertView').remove();
+			this.$(&#039;.AlertView&#039;).remove();
 		},
 		/*
 		 * Unbind : the view is removed from the DOM

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - router.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>router.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.45</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">172</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">35.03</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.97</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">// Filename: router.js
+define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;, &#039;fmk/urls&#039;, &#039;fmk/eventbus&#039;, &#039;fmk/alertview&#039;,
+				&#039;rankings/ranking&#039;, &#039;common/menuview&#039;, &#039;common/footerview&#039;],
+function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterView) {
+	
+	var AppRouter = Backbone.Router.extend({
+		initialize : function(){
+			var self = this;
+			
+			// Global event bus &amp; alert view
+			this.alertview = new AlertView();
+			this.eventBus = EventBus.create();
+			this.listenTo(this.eventBus, &#039;url:change&#039;, function(e) {
+				self.navigate(e.url, {trigger : true});
+			});
+		},
+		routes : _.object([
+		  [urls.ROOT.hash, &#039;dispatch&#039;],
+		  [urls.ADMIN.hash, &#039;dispatchAdmin&#039;],
+			[urls.CREATE_GAMES.hash, &#039;dispatchAdmin&#039;],
+			[urls.HOME.hash, &#039;dispatch&#039;],
+			[urls.LOGIN.hash + &#039;(/:action/:param)&#039;, &#039;login&#039;],
+			[urls.NEW_ACCOUNT.hash, &#039;newaccount&#039;],
+			[urls.PROFILE.hash, &#039;dispatch&#039;],
+			[urls.PRONOS.hash, &#039;dispatch&#039;],
+			[urls.RANKING.hash + &#039;(/:type/s:season)&#039;, &#039;ranking&#039;],
+			[urls.WORLDCUP.hash + &#039;(/:type)&#039;, &#039;worldcup&#039;],
+			[&#039;*action&#039;, &#039;defaultAction&#039;]
+		]),
+		/* Start Router */
+		start : function(options) {
+			// Models
+			this.user = options.user;
+			this.browserStorage = options.browserStorage;
+			this.teams = options.teams;
+			this.ranking = new Ranking();
+			this.ranking.load();
+
+			// Set menu and footer
+			this.menuView = new MenuView({
+				user : this.user,
+				ranking : this.ranking
+			});
+			this.footerView = new FooterView();
+			this.menuView.render();
+			this.footerView.render();
+
+			Backbone.history.start();
+		},
+		loadView : function(view) {
+			this.view &amp;&amp; (this.view.close ? this.view.close() : this.view.undelegateEvents());
+			this.view = view;
+		},
+		/* Retrieve the path of the view file for an hash */
+		pathForView : function(hash){
+			var path = &quot;&quot;;
+			if(hash == &quot;&quot;){
+				return urls.ROOT.path;
+			}
+			_.every(urls, function(item){
+				if(hash.match(item.hash)){
+					path = item.path;
+					return false;
+				}
+				return true;
+			});
+			return path;
+		},
+		/*
+		 * Set view for the routes, specific functions
+		 * see below for generic functions
+		 */
+		login : function(action, param) {
+			var self = this;
+			if (this.user.checkAuth()) {
+				this.eventBus.trigger(&#039;url:change&#039;, {url : &#039;#&#039; + this.user.get(&#039;urlFrom&#039;)});
+			} else {
+				require([urls.LOGIN.path], function(LoginView) {
+					self.loadView(new LoginView({
+						user : self.user,
+						alertview : self.alertview,
+						browserStorage : self.browserStorage,
+						eventBus : self.eventBus,
+						action : action,
+						param : param
+					}));
+					self.view.render();
+					self.menuView.menuChange(urls.LOGIN.hash);
+				});
+			}
+		},
+		newaccount : function() {
+			var self = this;
+			require([urls.NEW_ACCOUNT.path], function(CreateAccountView) {
+				self.loadView(new CreateAccountView({
+					user : self.user,
+					alertview : self.alertview,
+					browserStorage : self.browserStorage,
+					eventBus : self.eventBus
+				}));
+				self.view.render();
+				self.menuView.menuChange(urls.NEW_ACCOUNT.hash);
+			});
+		},
+		ranking : function(type, season) {
+			var params = {
+				type : type,
+				season : season
+			};
+			this.dispatch(params);
+		},
+		worldcup : function(type) {
+			var params = {type : type};
+			this.dispatch(params);
+		},
+		/* Generic function for routing the view */
+		dispatch : function(params){
+			var self = this;
+			var hash = window.location.hash.replace(&#039;#&#039;,&#039;&#039;);
+			
+			if (this.user.checkAuth()) {
+				require([this.pathForView(hash)], function(View) {
+					self.loadView(new View({
+						user : self.user,
+						alertview : self.alertview,
+						browserStorage : self.browserStorage,
+						eventBus : self.eventBus,
+						teams : self.teams,
+						ranking : self.ranking,
+						params : params
+					}));
+					self.view.render();
+					self.menuView.menuChange(hash);
+				});
+			} else {
+				var urlRedirect = hash;
+				if(params.type &amp;&amp; params.season){
+					urlRedirect += &#039;/&#039; + params.type + &#039;/s&#039; + params.season;
+				}
+				this.user.set(&#039;urlFrom&#039;, urlRedirect);
+				this.eventBus.trigger(&#039;url:change&#039;, {url : &#039;#&#039; + urls.LOGIN.hash});
+			}
+		},
+		dispatchAdmin : function() {
+			var self = this;
+			var hash = window.location.hash.replace(&#039;#&#039;,&#039;&#039;);
+			
+			if (this.user.checkAuth() &amp;&amp; this.user.get(&#039;accreditation&#039;) == &#039;Admin&#039;) {
+				require([this.pathForView(hash)], function(View) {
+					self.loadView(new View({
+						user : self.user,
+						alertview : self.alertview,
+						teams : self.teams
+					}));
+					self.view.render();
+					self.menuView.menuChange(hash);
+				});
+			} else if(this.user.checkAuth()){
+				this.eventBus.trigger(&#039;url:change&#039;, {url : &#039;#&#039; + urls.HOME.hash});
+			} else {
+				this.user.set(&#039;urlFrom&#039;, hash);
+				this.eventBus.trigger(&#039;url:change&#039;, {url : &#039;#&#039; + urls.LOGIN.hash});
+			}
+		},
+		/* Route by default */
+		defaultAction : function(actions) {
+			// We have no matching route, lets just log what the URL was
+			console.log(&#039;No route:&#039;, actions);
+		}
+	}); 
+
+  return AppRouter;
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

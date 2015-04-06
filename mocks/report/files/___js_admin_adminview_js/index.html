@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ../js/admin/adminview.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>../js/admin/adminview.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">78.15</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">85</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">14.56</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.70</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">/**
+ * @author Matthieu Comperat
+ */
+// Filename: adminview.js
+define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;, &#039;fmk/templateengine&#039;, &#039;fmk/lotofootapi&#039;,
+        &#039;fmk/urls&#039;, &#039;i18n!nls/admin&#039;, &#039;text!admin/adminpage.html&#039;],
+function($, _, Backbone, te, LotofootApi, urls, i18n, tmpl) {
+  
+	var ClassView = Backbone.View.extend({
+		el : $(&#039;#container&#039;),
+		initialize : function(options) {
+			this.user = options.user;
+			this.alertview = options.alertview;
+			this.params = {};
+		},
+		render : function() {
+			var self = this;
+			$(this.el).html(te.renderTemplate(tmpl, {
+				i18n : i18n,
+				urls : urls
+			}));
+		},
+		/*
+		 * Events of the view
+		 */
+		events : {
+			&quot;click #ranking .actions button&quot; : &quot;ranking&quot;,
+			&quot;change #ranking select&quot; : &quot;cleanRanking&quot;
+		},
+		ranking : function (e){
+			var self = this;
+			this.params = {};
+			
+			_.each(this.$(&#039;#ranking select&#039;), function(select){
+				self.params[$(select).attr(&#039;name&#039;)] = $(select).val();
+			});
+			
+			_.each(i18n.seasons, function(season){
+				if(season.id == self.params.season){
+					self.params.startDate = season.startDate;
+					self.params.endDate = season.endDate;
+				}
+			});
+			
+			this.pronosvalidation();
+		},
+		cleanRanking : function(){
+			this.$(&#039;#ranking i&#039;).addClass(&#039;hidden&#039;);
+		},
+		/* Ranking */
+		pronosvalidation : function(){
+			var self = this;
+			LotofootApi.pronosValidation(this.params, function(msg){
+				self.$(&#039;#pronosvalidation i&#039;).removeClass(&#039;hidden&#039;);
+				self.pronosscores();
+			});
+		},
+		pronosscores : function(){
+			var self = this;
+			LotofootApi.pronosScores(this.params, function(msg){
+				self.$(&#039;#pronosscores i&#039;).removeClass(&#039;hidden&#039;);
+				self.createranking();
+			});
+		},
+		createranking : function(){
+			var self = this;
+			LotofootApi.createRanking(this.params, function(msg){
+				self.$(&#039;#createranking i&#039;).removeClass(&#039;hidden&#039;);
+				self.setrank();
+			});
+		},
+		setrank : function(){
+			var self = this;
+			LotofootApi.setRank(this.params, function(msg){
+				self.$(&#039;#setrank i&#039;).removeClass(&#039;hidden&#039;);
+			});
+		},
+		/*
+		 * Clean views and objects delegated to this view
+		 */
+		close : function() {
+			//this.activePronosView &amp;&amp; (this.activePronosView.close ? this.activePronosView.close() : this.activePronosView.undelegateEvents());
+			this.undelegateEvents();
+		}
+	});
+
+	// Our module now returns our view
+	return ClassView;
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

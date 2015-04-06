@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - ../js/events/worldcupview.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>../js/events/worldcupview.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">67.77</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">283</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">37.47</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.65</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">define([&#039;jquery&#039;, &#039;underscore&#039;, &#039;backbone&#039;, &#039;fmk/templateengine&#039;, &#039;fmk/lotofootapi&#039;, &#039;fmk/urls&#039;,
+        &#039;games/games&#039;, &#039;games/game&#039;, &#039;i18n!nls/wordings&#039;,
+        &#039;text!events/worldcup.html&#039;, &#039;text!events/pronoworldcup.html&#039;],
+function($, _, Backbone, te, LotofootApi, urls, Games, Game, i18n, tmpl, tmplProno) {
+
+  var ClassView = Backbone.View.extend({
+    el : $(&#039;#container&#039;),
+    initialize : function(options) {
+      this.user = options.user;
+      this.alertview = options.alertview;
+      this.teams = options.teams;
+      this.ranking = options.ranking;
+      this.panelType = options.params.type;
+      
+      this.groupsGames = new Games(); // Collection with the games for groups stage
+      this.secondStageGames = new Games(); // Collection with the games after the groups
+    },
+    render : function() {
+      var self = this;
+
+      // Get teams infos
+      _.each(i18n.worldcup.groups, function(group) {
+        var teams = [];
+        _.each(group.idTeams, function(team) {
+          teams.push(self.teams.getTeams(team));
+        });
+        if (teams.length &gt; 0) {
+          group.teams = teams;
+        }
+      });
+      
+      $(this.el).html(te.renderTemplate(tmpl, {
+        i18n : i18n.worldcup,
+        urls : urls
+      }));
+      
+      if(this.panelType == &#039;playoff&#039;){
+      	this.$(&#039;.worldcuppanel&#039;).hide();
+      	this.$(&#039;#&#039; + this.panelType).show();
+      	this.$(&#039;ul li.active&#039;).removeClass(&#039;active&#039;);
+				this.$(&#039;#playoffNav&#039;).addClass(&#039;active&#039;);
+      }
+
+      this.getGames();
+    },
+    getGames : function() {
+      // Bind functions to the view
+      // By default, they bind to the window because they are callback functions
+      this.successGetGamesCallback = _.bind(this.succesGetGames, this);
+
+      return this.promise = LotofootApi.getPronosFromEvents({
+        &quot;events&quot; : &quot;CM2014&quot;,
+        &quot;userid&quot; : this.user.get(&#039;userid&#039;)
+      }, this.successGetGamesCallback, function(msg) {console.log(msg); /* TODO : manage errors */ });
+    },
+    succesGetGames : function(msg) {
+      var self = this;
+      this.groupsGames.reset();
+      this.secondStageGames.reset();
+      
+      _.each(msg.games, function(game){
+      	var game = new Game(game);
+      	game.set(&#039;teamA&#039;, self.teams.getTeams(game.get(&#039;id_teamA&#039;)));
+    		game.set(&#039;teamB&#039;, self.teams.getTeams(game.get(&#039;id_teamB&#039;)));
+      	if(game.get(&#039;stage&#039;) == &quot;Groups&quot;){
+      		var groupId = self.getGroupId(game.get(&#039;id_teamA&#039;), game.get(&#039;id_teamB&#039;));
+      		game.set(&#039;groupId&#039;,groupId);
+      		self.groupsGames.add(game);
+      	} else {
+      		self.secondStageGames.add(game);
+      	}
+      });
+      
+      this.setPlayoffGames();
+    },
+    getGroupId : function(id_teamA, id_teamB){
+      var id = 0;
+      
+      _.every(i18n.worldcup.groups, function(group){
+        if(_.indexOf(group.idTeams,id_teamA) != -1 &amp;&amp; _.indexOf(group.idTeams,id_teamB) != -1){
+          id = group.id;
+          return false;
+        }
+        return true;
+      });
+      return id;
+    },
+    setPlayoffGames : function(){
+    	var self = this;
+    	var stages = [&quot;Final&quot;, &quot;ThirdPlace&quot;, &quot;Semi&quot;, &quot;Last8&quot;, &quot;Last16&quot;];
+    	
+    	_.each(stages, function(stage){
+    		var tempArray = self.secondStageGames.where({&quot;stage&quot; : stage});
+	    	var games = [];
+	    	
+	    	_.each(tempArray, function(game){
+	    		games.push(game.toJSON());
+	    	});
+	    	
+	    	self.$(&#039;#playoff&#039;).append(te.renderTemplate(tmplProno, {
+	        i18n : i18n.worldcup,
+	        urls : urls,
+	        games : games,
+	        title : i18n.worldcup[stage],
+	        score : _.range(10)
+	      }));
+    	});
+    	this.delegateEvents();
+    },
+    /*
+     * Events of the view
+     */
+    events : {
+      &#039;click .panel-footer&#039; : &#039;enlargeGroup&#039;,
+      &#039;click button.scoreUpdate&#039; : &#039;betOnAGame&#039;,
+      &#039;click .nav a&#039; : &#039;worldcupnav&#039;,
+      &#039;change #playoff select.selectScore&#039; : &#039;enablePlayoffWinner&#039;,
+      &#039;click .teamsContainer.active label&#039; : &#039;selectWinner&#039;
+    },
+    enlargeGroup : function(e) {
+    	var self = this;
+      var $target = this.$(e.currentTarget);
+      this.$(&quot;#worldcup .group&quot;).removeClass(&#039;active&#039;);
+      $target.parent().parent().addClass(&#039;active&#039;);
+      $.when(this.promise).then(function(){
+      	var id = $target.attr(&#039;data-ref&#039;);
+      	self.displayGameFor(id);
+      });
+    },
+    betOnAGame : function(e) {
+      var ref = $(e.currentTarget).attr(&#039;data-ref&#039;);
+      var game = this.groupsGames.findWhere({&quot;id_game&quot; : ref});
+      if(game === undefined){
+      	game = this.secondStageGames.findWhere({&quot;id_game&quot; : ref});
+      }
+      
+      if (game.get(&#039;prono&#039;) === undefined) {// User suggests a score for the game
+        this.suggestScore(ref, game);
+      }else {// User decides to update his prono
+        this.updateProno(ref, game);
+      }
+    },
+    worldcupnav : function(e){
+			e.preventDefault();
+			this.$(&#039;ul li.active&#039;).removeClass(&#039;active&#039;);
+			this.$(e.currentTarget).parent().addClass(&#039;active&#039;);
+			this.$(&#039;.worldcuppanel&#039;).hide();
+			
+			var id = this.$(e.currentTarget).attr(&#039;ref&#039;);
+			this.$(id).show();
+		},
+		enablePlayoffWinner : function(e){
+			var self = this;
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var scoreA = &#039;A&#039;;
+			var scoreB = &#039;B&#039;;
+			
+			_.each(teamsContainer.find(&#039;select&#039;), function(select){
+				var $select = self.$(select);
+				if($select.attr(&#039;ref&#039;) == &#039;A&#039;){
+					scoreA = $select.val();
+				} else if ($select.attr(&#039;ref&#039;) == &#039;B&#039;){
+					scoreB = $select.val();
+				}
+			});
+			
+			if (scoreA != scoreB){
+				teamsContainer.removeClass(&#039;active&#039;);
+				var winner = teamsContainer.find(&#039;.winner&#039;);
+				this.$(winner).removeClass(&#039;winner&#039;);
+			} else {
+				// Same score, enable the choice for the winner
+				teamsContainer.addClass(&#039;active&#039;);
+			}
+		},
+		selectWinner : function(e){
+			e.preventDefault();
+			var teamsContainer = this.$(e.currentTarget).parent().parent();
+			var $parentElement = this.$(e.currentTarget).parent();
+			
+			if ($parentElement.hasClass(&#039;winner&#039;)){
+				$parentElement.removeClass(&#039;winner&#039;);
+			} else {
+				var span = this.$(teamsContainer).find(&#039;.span4&#039;);
+				this.$(span).removeClass(&#039;winner&#039;);
+				$parentElement.addClass(&#039;winner&#039;);
+			}
+		},
+    /*
+     * Handle pronos
+     */
+    displayGameFor : function(id){
+    	var self = this;
+    	var tempArray = this.groupsGames.where({&quot;groupId&quot; : id});
+    	var games = [];
+    	
+    	_.each(tempArray, function(game){
+    		games.push(game.toJSON());
+    	});
+    	
+    	this.$(&#039;.group.active .panel-body.games&#039;).html(te.renderTemplate(tmplProno, {
+        i18n : i18n.worldcup,
+        urls : urls,
+        games : games,
+        score : _.range(10)
+      }));
+      
+      this.delegateEvents();
+      $(&#039;html, body&#039;).animate({scrollTop:this.$(&#039;.group.active&#039;).position().top}, &#039;slow&#039;);
+    },
+    /*
+     * Action on the bet button
+     */
+    suggestScore : function(ref, game) {
+      var self = this;
+      var $rowGame = this.$(&#039;.rowGame[ref=&quot;&#039; + ref + &#039;&quot;]&#039;);
+      var scoreA = $rowGame.find(&#039;.teamA select&#039;).val();
+      var scoreB = $rowGame.find(&#039;.teamB select&#039;).val();
+      var prono = {
+        scoreA : scoreA,
+        scoreB : scoreB,
+        winner : this.getWinner($rowGame)
+      };
+      
+      $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, true);
+      
+      LotofootApi.addProno({
+        userid : this.user.get(&#039;userid&#039;),
+        id_game : ref,
+        scoreA : scoreA,
+        scoreB : scoreB,
+        winner : prono.winner
+      }, function(msg) {// success
+        self.alertview.displayAlert(&#039;success&#039;, &#039;success&#039;, i18n.worldcup.AddProno);
+        $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, false);
+        game.set(&#039;prono&#039;, prono);
+      }, function(msg) {// error
+        self.alertview.displayError(msg.status, msg.errorCode);
+        $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, false);
+      });
+    },
+    updateProno : function(ref, game){
+      var self = this;
+      var $rowGame = this.$(&#039;.rowGame[ref=&quot;&#039; + ref + &#039;&quot;]&#039;);
+      var scoreA = $rowGame.find(&#039;.teamA select&#039;).val();
+      var scoreB = $rowGame.find(&#039;.teamB select&#039;).val();
+      var prono = {
+        scoreA : scoreA,
+        scoreB : scoreB,
+        winner : this.getWinner($rowGame)
+      };
+      
+      $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, true);
+
+      LotofootApi.updateProno({
+        userid : this.user.get(&#039;userid&#039;),
+        id_game : ref,
+        scoreA : scoreA,
+        scoreB : scoreB,
+        winner : prono.winner
+      }, function(msg) {// success
+        self.alertview.displayAlert(&#039;success&#039;, &#039;success&#039;, i18n.worldcup.updateProno);
+        $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, false);
+        game.set(&#039;prono&#039;, prono);
+      }, function(msg) {// error
+        self.alertview.displayError(msg.status, msg.errorCode);
+        $rowGame.find(&#039;.buttons button&#039;).attr(&#039;disabled&#039;, false);
+      });
+    },
+    getWinner : function($rowGame){
+    	var winner = $rowGame.find(&#039;.winner&#039;);
+    	
+    	if(winner.length &gt; 0){
+    		return this.$(winner).attr(&#039;ref&#039;);
+    	} else {
+    		return &#039;&#039;;
+    	}
+    }
+  });
+
+  // Our module now returns our view
+  return ClassView;
+});</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

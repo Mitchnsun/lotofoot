@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>Plato - ../js/main.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -13,9 +13,8 @@
   <![endif]-->
 
   <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/bootstrap-3.0.0-wip.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
   <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
-  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
   <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
   <link href="../../assets/css/plato.css" rel="stylesheet">
   <link href="../../assets/css/plato-file.css" rel="stylesheet">
@@ -26,8 +25,8 @@
 
 <div class="navbar navbar-fixed-top">
   <div class="container">
-    <a class="brand" href="http://github.com/jsoverson/plato">Plato on Github</a>
-    <ul class="nav">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
       <li>
         <a href="../../index.html">Report Home</a>
       </li>
@@ -37,36 +36,36 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>..\js\main.js</h1>
+    <h1>../js/main.js</h1>
   </div>
 </div>
 
 <div class="container aggregate-stats">
   <div class="row">
-    <div class="span6">
-      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"></i></a></h2>
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
       <p class="stat">94.58</p>
     </div>
-    <div class="span6">
-      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h2>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
       <p class="stat">48</p>
     </div>
   </div>
   <div class="row historical">
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_maint" class="chart"></p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <p id="chart_historical_sloc" class="chart"></p>
     </div>
   </div>
   <div class="row">
-    <div class="span6">
-      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty"></i></a></h2>
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
       <p class="stat">6.87</p>
     </div>
-    <div class="span6">
-      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs"></i></a></h2>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
       <p class="stat">0.21</p>
     </div>
   </div>
@@ -77,12 +76,12 @@
     <h2 class="header">Function weight</h2>
   </div>
   <div class="row">
-    <div class="span6">
-      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity"></i></a></h3>
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
       <div id="fn-by-complexity" class="stat"></div>
     </div>
-    <div class="span6">
-      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC"></i></h3>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
       <div id="fn-by-sloc" class="stat"></div>
     </div>
   </div>
@@ -90,55 +89,55 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="span12">// Filename: main.js
+    <textarea id="file-source" class="col-md-12">// Filename: main.js
 
 // Require.js allows us to configure shortcut alias
 require.config({
 	paths : {
-		'jquery' : '../libs/jquery', /* v1.9.1 */
-		'jqueryUI' : '../libs/jquery-ui.min', /* v1.10.3 */
-		'underscore' : '../libs/underscore', /* v1.4.4 */
-		'backbone' : '../libs/backbone', /* v1.1.2 */
-		'bootstrap' : '../libs/bootstrap.min', /* v2.3.1 */
-		'text' : '../libs/text',
-		'i18n' : '../libs/i18n',
-		'dust' : '../libs/dust-full.min', /* v2.3.4 */
-		'dust-helpers' : '../libs/dust-helpers.min' /* v1.2.0 */
+		&#039;jquery&#039; : &#039;../libs/jquery&#039;, /* v1.9.1 */
+		&#039;jqueryUI&#039; : &#039;../libs/jquery-ui.min&#039;, /* v1.10.3 */
+		&#039;underscore&#039; : &#039;../libs/underscore&#039;, /* v1.4.4 */
+		&#039;backbone&#039; : &#039;../libs/backbone&#039;, /* v1.1.2 */
+		&#039;bootstrap&#039; : &#039;../libs/bootstrap.min&#039;, /* v2.3.1 */
+		&#039;text&#039; : &#039;../libs/text&#039;,
+		&#039;i18n&#039; : &#039;../libs/i18n&#039;,
+		&#039;dust&#039; : &#039;../libs/dust-full.min&#039;, /* v2.3.4 */
+		&#039;dust-helpers&#039; : &#039;../libs/dust-helpers.min&#039; /* v1.2.0 */
 	},
 	shim : {
-		'jquery' : {
-			exports : '$'
+		&#039;jquery&#039; : {
+			exports : &#039;$&#039;
 		},
-		'jqueryUI' : {
-			deps : ['jquery']
+		&#039;jqueryUI&#039; : {
+			deps : [&#039;jquery&#039;]
 		},
-		'underscore' : {
-			exports : '_'
+		&#039;underscore&#039; : {
+			exports : &#039;_&#039;
 		},
-		'backbone' : {
+		&#039;backbone&#039; : {
 			//These script dependencies should be loaded before loading
 			//backbone.js
-			deps : ['underscore', 'jquery'],
-			//Once loaded, use thes global 'Backbone' as the
+			deps : [&#039;underscore&#039;, &#039;jquery&#039;],
+			//Once loaded, use thes global &#039;Backbone&#039; as the
 			//module value.
-			exports : 'Backbone'
+			exports : &#039;Backbone&#039;
 		},
-		'dust' : {
-			exports : 'dust'
+		&#039;dust&#039; : {
+			exports : &#039;dust&#039;
 		},
-		'dust-helpers' : {
-			deps : ['dust'],
-			exports : 'dust-helpers'
+		&#039;dust-helpers&#039; : {
+			deps : [&#039;dust&#039;],
+			exports : &#039;dust-helpers&#039;
 		},
-		'bootstrap' : {
-			deps : ['jquery'],
-			exports : 'bootstrap'
+		&#039;bootstrap&#039; : {
+			deps : [&#039;jquery&#039;],
+			exports : &#039;bootstrap&#039;
 		}
 	}
 });
-require(['app'], // Load our app module and pass it to our definition function
+require([&#039;app&#039;], // Load our app module and pass it to our definition function
 function(App) {
-	// The "app" dependency is passed in as "App"
+	// The &quot;app&quot; dependency is passed in as &quot;App&quot;
 	App.initialize();
 });</textarea>
   </div>
