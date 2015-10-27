@@ -134,7 +134,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 				});
 			} else {
 				var urlRedirect = hash;
-				if(params.type && params.season){
+				if(params && params.type && params.season){
 					urlRedirect += '/' + params.type + '/s' + params.season;
 				}
 				this.user.set('urlFrom', urlRedirect);
