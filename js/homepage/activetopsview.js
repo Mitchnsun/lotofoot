@@ -9,24 +9,17 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			this.el = options.el;
 			this.alertview = options.alertview;
 			this.teams = options.teams;
-			
-			// Bind functions to the view
-      // By default, they bind to the window because they are callback functions
-      this.successsuggestATopCallback = _.bind(this.topSuggested, this);
 		},
 		render : function() {
 			var self = this;
-			var params = {userid : this.user.get('userid')};
 			
-			LotofootApi.getActiveTops(params, function(msg){
-			  
+			LotofootApi.getActiveTops({userid : this.user.get('userid')}, function(msg){
 			  if(msg.bonus.length > 0){
 			  	$(self.el).html(te.renderTemplate(tmpl, {
-		        i18n : i18n.homepage,
+		        i18n : i18n,
 		        user : self.user.toJSON(),
 		        bonus : self.getDatas(msg.bonus),
-		        time : msg.time,
-		        teams : {}
+		        time : msg.time
 		      }));
 					
 					self.selectedTops(msg.bonus);
@@ -39,11 +32,16 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 		},
 		getDatas : function(bonus){
 			var self = this;
+			var Teams = [];
+			
+			_.each(i18n.EURO.groups, function(group){
+			  Teams = _.union(Teams, group.idTeams);
+			});
 			
 			_.each(bonus, function(item){
 				item.title = self.setTitle(item);
 				item.description = i18n.homepage['top_' + item.type + '_' + item.season + '_desc'];
-				item.teams = self.teams.getTeamsForTops(item.type, item.table_link);
+				item.teams = self.teams.getTeamsForTops(Teams, item.table_link);
 			});
 			
 			return bonus;
@@ -52,17 +50,17 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
     setTitle : function(bonus){
     	var title = "";
     	
-    	title += i18n.homepage["top_" + bonus.type];
+    	title += i18n.tops["top_" + bonus.type];
     	
-    	var year = i18n.homepage.LotofootStartingYear + parseInt(bonus.season);
+    	var year = i18n.LotofootStartingYear + parseInt(bonus.season);
     	
-    	if(bonus.type == "WC"){
+    	if(bonus.table_link == "international"){
     		title += " " + year;
     	} else {
     		title += " " + (year-1) + '/' + year;
     	}
     	
-    	title += " - " + i18n.homepage.top + " " + bonus.top;
+    	title += " - " + i18n.tops.top + " " + bonus.top;
     	
     	return title;
     },
@@ -96,10 +94,10 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			};
 			
 			_.each(this.$(e.currentTarget).find('select'), function(select){
-				params.choices[$(select).attr('name')] = $(select).val()?$(select).val():undefined;
+				params.choices[$(select).attr('name')] = $(select).val()?$(select).val():0;
 			});
 			
-			LotofootApi.betTop(params, this.successsuggestATopCallback, function(msg){ // errors
+			LotofootApi.betTop(params, _.bind(this.topSuggested, this), function(msg){ // errors
 				console.log(msg); // TODO : handle errors
 				self.alertview.displayError(msg.status, msg.errorCode);
 			});

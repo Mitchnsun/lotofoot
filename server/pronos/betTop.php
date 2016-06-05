@@ -59,11 +59,11 @@
     $req -> execute(array(
       'id_bonus' => $id_bonus,
       'userid' => $userid,
-      'first' => $choices['first'],
-      'second' => $choices['second'],
-      'third' => $choices['third'],
-      'fourth' => $choices['fourth'],
-      'fifth' => $choices['fifth'],
+      'first' => isset($choices['first']) ? $choices['first'] : 0,
+      'second' => isset($choices['second']) ? $choices['second'] : 0,
+      'third' => isset($choices['third']) ? $choices['third'] : 0,
+      'fourth' => isset($choices['fourth']) ? $choices['fourth'] : 0,
+      'fifth' => isset($choices['fifth']) ? $choices['fifth'] : 0,
       'at' => $today
     ));
   } else{
@@ -72,11 +72,11 @@
     $req -> execute(array(
       'id_bonus' => $id_bonus,
       'userid' => $userid,
-      'first' => $choices['first'],
-      'second' => $choices['second'],
-      'third' => $choices['third'],
-      'fourth' => $choices['fourth'],
-      'fifth' => $choices['fifth'],
+      'first' => isset($choices['first']) ? $choices['first'] : 0,
+      'second' => isset($choices['second']) ? $choices['second'] : 0,
+      'third' => isset($choices['third']) ? $choices['third'] : 0,
+      'fourth' => isset($choices['fourth']) ? $choices['fourth'] : 0,
+      'fifth' => isset($choices['fifth']) ? $choices['fifth'] : 0,
       'at' => $today
     ));
   }

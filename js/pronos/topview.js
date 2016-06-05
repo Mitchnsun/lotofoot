@@ -21,7 +21,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl)
       	});
 
 	      $(self.el).html(te.renderTemplate(tmpl, {
-	        i18n : i18n.pronos,
+	        i18n : i18n,
 	        urls : urls,
 	        user : self.user.toJSON(),
 	        bonus : self.getTeamsForTopPronos(msg.bonus),
@@ -49,17 +49,17 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl)
     setTitle : function(bonus){
     	var title = "";
     	
-    	title += i18n.pronos["top_" + bonus.type];
+    	title += i18n.tops["top_" + bonus.type];
     	
-    	var year = i18n.pronos.LotofootStartingYear + parseInt(bonus.season);
+    	var year = i18n.LotofootStartingYear + parseInt(bonus.season);
     	
-    	if(bonus.type == "WC"){
+    	if(bonus.table_link == "international"){
     		title += " " + year;
     	} else {
     		title += " " + (year-1) + '/' + year;
     	}
     	
-    	title += " - " + i18n.pronos.top + " " + bonus.top;
+    	title += " - " + i18n.tops.top + " " + bonus.top;
     	
     	bonus.title = title;
     },

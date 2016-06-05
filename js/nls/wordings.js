@@ -1,6 +1,7 @@
 define({
 	/* Please sort alphabetically */
 	"root" : {
+	  LotofootStartingYear : 2012,
 		alert : {
 			"default_Title" : "Attention!",
 			"info_Title" : "Information,",
@@ -50,26 +51,10 @@ define({
 		     + "<br/>Il est possible de parier jusqu'au 17 juin 2014 23h59.",
 		  alertTopPronosTitle : "Informations,",
 		  bet : "Parier",
-		  first_txt : "Vainqueur",
-		  fifth_txt : "Cinquième",
-		  fourth_txt : "Quatrième",
 		  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
 		   + " Merci de votre patience.",
-		  LotofootStartingYear : 2012,
 		  player : "Joueur",
 		  pronos : "Pronostics",
-		  second_txt : "Deuxième",
-		  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
-		  third_txt : "Troisième",
-			toppronos : "Top Pronos",
-			topPronosMessage : "Choissisez soigneusement les équipes de ce top."
-			    + " Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le top mais à la mauvaise place vaudra 1 points."
-			    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
-			
-			/* Tops */
-			top : "Top",
-			top_L1 : "Ligue 1",
-			top_WC : "Coupe du monde",
 			
 			/* Errors */
 			teamsBonus_errorMsg : "Vous devez impérativement sélectionner pour chaque position. Si vous n'avez aucune idée, choissisez au hasard peut être que la chance vous sourira",
@@ -131,6 +116,7 @@ define({
 				+ "Vous pouvez tout de même vous inscrire. "
 				+ "Pour une meilleure expérience, mettez à jour votre navigateur."
 		},
+		
 		pronos : {
 		  alertTopPronosMessage : "Pour vous faire une idée de qui finira dans le dernier carré,"
 		     + " vous pouvez simuler la Coupe du Monde "
@@ -138,31 +124,33 @@ define({
 		     + "<br/>Il est possible de parier jusqu'au 17 juin 2014 23h59.",
 		  alertTopPronosTitle : "Informations,",
 		  bet : "Parier",
-		  fifth : "Cinquième",
-		  first : "Champion",
-		  fourth : "Quatrième",
 		  getTopPronosIncoming : "Le module de visualisation des pronostics des autres joueurs est encore en cours de construction. Il devrait arriver sans tarder."
 		   + " Merci de votre patience.",
-		  LotofootStartingYear : 2012,
 		  player : "Joueur",
 		  pronos : "Pronostics",
-		  second : "Deuxième",
 		  success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 17 juin.",
-		  third : "Troisième",
 			title : "Derniers pronostics",
-			
-			// Top pronos
-			top : "Top",
-			top_L1 : "Ligue 1",
-			top_WC : "Coupe du monde",
-			toppronos : "Top Pronos",
-			topPronosMessage : "Choissisez les équipes qui finiront aux quatre premières places."
-			    + "Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le dernier carré mais à la mauvaise place vaudra 1 points."
-			    + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
 			
 			/* Errors */
 			teams_errorMsg : "Vous devez impérativement choisir quatre équipes. Si vous n'avez aucune idée, choissisez au hasard peut être que la chance vous sourira",
 			time_errorMsg : "Le temps imparti pour ce pari est passé. Les résultats arriveront après la finale, le 13 juillet 2014."
+		},
+		// Top pronos
+		tops : {
+		  first_txt : "Vainqueur",
+      second_txt : "Dauphin",
+      third_txt : "Troisième",
+      fourth_txt : "Quatrième",
+      fifth_txt : "Cinquième",
+      top : "Top",
+      top_L1 : "Ligue 1",
+      top_WC : "Coupe du monde",
+      top_EURO : "Euro",
+      toppronos : "Top Pronos",
+      topPronosMessage : "Choissisez soigneusement les équipes de ce top."
+          + " Une bonne place vaudra 5 points, la sélection d'une équipe présente dans le top mais à la mauvaise place vaudra 1 points."
+          + " Si vous avez déjà parié, votre pari sera mis automatiquement à jour avec le nouveau.",
+      success : "Votre pari a été enregistré, il peut être modifié à tout moment jusqu'au 15 juin."
 		},
 		rankings : {
 			bonus : "B",
@@ -193,7 +181,8 @@ define({
 				"1" : "2012/2013",
 				"2" : "2013/2014",
 				"3" : "2014/2015",
-				"4" : "2015/2016"
+				"4" : "2015/2016",
+				"5" : "2016/2017"
 			},
 			title : "Classement",
 			types : {
@@ -222,36 +211,31 @@ define({
 			"ThirdPlace" : "Petite Finale",
 			"title" : "Coupe du monde 2014 - Brésil",
 			
-			/* Groups */
-			"groups" : [{
-				"id" : "A",
-				"idTeams" : ["29","114","121","122"]
-			},{
-				"id" : "B",
-				"idTeams" : ["30","24","123","93"]
-			},{
-				"id" : "C",
-				"idTeams" : ["124","125","126","127"]
-			},{
-				"id" : "D",
-				"idTeams" : ["31","128","28","25"]
-			},{
-				"id" : "E",
-				"idTeams" : ["78","102","22","129"]
-			},{
-				"id" : "F",
-				"idTeams" : ["27","130","131","132"]
-			},{
-				"id" : "G",
-				"idTeams" : ["23","101","133","134"]
-			},{
-				"id" : "H",
-				"idTeams" : ["135","136","137","138"]
-			}],
-			
 			/* Alert Success */
 	    "AddProno" : "Votre pronostic a été enregistré",
 	    "updateProno" : "Votre pronostic a été mis à jour"
+		},
+		EURO : {
+		  /* Groups */
+      "groups" : [{
+        "id" : "A",
+        "idTeams" : ["95","22","160","78"]
+      },{
+        "id" : "B",
+        "idTeams" : ["28","137","161","163"]
+      },{
+        "id" : "C",
+        "idTeams" : ["23","157","158","100"]
+      },{
+        "id" : "D",
+        "idTeams" : ["114","154","30","162"]
+      },{
+        "id" : "E",
+        "idTeams" : ["135","25","159","26"]
+      },{
+        "id" : "F",
+        "idTeams" : ["96","155","156","101"]
+      }],
 		}
 	}
 }); 

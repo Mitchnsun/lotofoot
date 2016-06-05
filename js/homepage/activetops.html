@@ -5,16 +5,15 @@
 <div class="container-fluid AlertView">
   <div class="alert alert-dismissable alert-info">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {i18n.topPronosMessage}
+    {i18n.tops.topPronosMessage}
   </div>
 </div>
 {#bonus:i18n time=time}
 	<h2 class="content-subhead">{title}</h2>
-	{?description}<p>{description}</p>{/description}
   <form id="bonus{id_bonus}" class="form-horizontal" ref="{id_bonus}">
   	{@if cond="{top} >= 1"}
 	    <div class="control-group">
-	      <label class="control-label" for="firstTeam">{first_txt}</label>
+	      <label class="control-label" for="firstTeam">{tops.first_txt}</label>
 	      <div class="controls">
 	        <select name="first" class="firstTeam">
 	          <option></option>
@@ -27,7 +26,7 @@
 	  {/if}
 	  {@if cond="{top} >= 2"}
 	    <div class="control-group">
-	      <label class="control-label" for="secondTeam">{second_txt}</label>
+	      <label class="control-label" for="secondTeam">{tops.second_txt}</label>
 	      <div class="controls">
 	        <select name="second" class="secondTeam">
 	          <option></option>
@@ -40,7 +39,7 @@
     {/if}
 	  {@if cond="{top} >= 3"}
 	    <div class="control-group">
-	      <label class="control-label" for="thirdTeam">{third_txt}</label>
+	      <label class="control-label" for="thirdTeam">{tops.third_txt}</label>
 	      <div class="controls">
 	        <select name="third" class="thirdTeam">
 	          <option></option>
@@ -53,7 +52,7 @@
     {/if}
 	  {@if cond="{top} >= 4"}
 	    <div class="control-group">
-	      <label class="control-label" for="fourthTeam">{fourth_txt}</label>
+	      <label class="control-label" for="fourthTeam">{tops.fourth_txt}</label>
 	      <div class="controls">
 	        <select name="fourth" class="fourthTeam">
 	          <option></option>
@@ -66,7 +65,7 @@
     {/if}
 	  {@if cond="{top} >= 5"}
 	    <div class="control-group">
-	      <label class="control-label" for="fifthTeam">{fifth_txt}</label>
+	      <label class="control-label" for="fifthTeam">{tops.fifth_txt}</label>
 	      <div class="controls">
 	        <select name="fifth" class="fifthTeam">
 	          <option></option>
@@ -80,7 +79,7 @@
     {@if cond="{dead_line} > {time}"}
 	    <div class="control-group">
 	      <div class="controls">
-	        <button type="submit" class="btn btn-success">{bet}</button>
+	        <button type="submit" class="btn btn-success">{homepage.bet}</button>
 	      </div>
 	    </div>
 	  {/if}

@@ -36,7 +36,7 @@ function($, $UI, _, Backbone,	te, LotofootApi, AlertView, urls, Games, Game, Top
 			});
 			
 			$(this.el).html(te.renderTemplate(tmpl, {
-				i18n : i18n.pronos,
+				i18n : i18n,
 				urls : urls,
 				user : this.user.toJSON(),
 				games : this.games.toJSON()
