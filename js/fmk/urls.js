@@ -9,10 +9,12 @@ define([], function() {
 		PROFILE : {hash : "profile", path : 'account/profileview'},
 		PRONOS : {hash : "pronos", path : 'pronos/pronosview'},
 		RANKING : {hash : "ranking", path : 'rankings/rankingview'},
-		ROOT : {hash : "", path : 'homepage/homepageview'},
 		/*TOP_PRONOS : {hash : "top/pronos", path : 'pronos/topview'},*/
+		EURO : {hash : "euro", path : 'events/euroview'},
+    EURO_PLAYOFF : {hash : "euro/playoff", path : 'events/euroview'},
 		WORLDCUP : {hash : "world-cup", path : 'events/worldcupview'},
 		WORLDCUP_PLAYOFF : {hash : "world-cup/playoff", path : 'events/worldcupview'},
+		ROOT : {hash : "", path : 'homepage/homepageview'},
 
 		/* Server */
 		/* Authentication */

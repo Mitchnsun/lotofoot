@@ -24,6 +24,7 @@ function($, _, Backbone, urls, EventBus, AlertView, Ranking, MenuView, FooterVie
 			[urls.PROFILE.hash, 'dispatch'],
 			[urls.PRONOS.hash, 'dispatch'],
 			[urls.RANKING.hash + '(/:type/s:season)', 'ranking'],
+			[urls.EURO.hash + '(/:type)', 'worldcup'],
 			[urls.WORLDCUP.hash + '(/:type)', 'worldcup'],
 			['*action', 'defaultAction']
 		]),
