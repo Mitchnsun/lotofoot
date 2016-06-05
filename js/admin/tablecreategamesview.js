@@ -1,10 +1,9 @@
 /**
  * @author Matthieu Compérat
  */
-define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi',
-        'i18n!nls/admin', 'text!admin/tablecreategames.html'],
+define(['jquery', 'jqueryUI', 'underscore', 'backbone', 'fmk/templateengine', 'fmk/lotofootapi', 'i18n!nls/admin', 'text!admin/tablecreategames.html'],
 function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
-  
+
   var ClassView = Backbone.View.extend({
     initialize : function(options) {
       this.el = options.el;
@@ -27,26 +26,24 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       this.games = params.games;
       this.selectedTeam = params.team;
     },
-    buildStage : function(id, competition, selectedStage) {
+    buildStage : function(id, competition) {
       var stages = i18n.create_games["stage_" + competition];
       var container = this.$('#' + id).find('.selectStage');
-
-    	var elts = "<select data-ref='" + id + "' class='input-small'>"
-      _.each(stages,function(stage, inc){
-        if(selectedStage === stage){
+      var input = $(container).find('select');
+      var elts = "<select data-ref='" + id + "' class='input-small'>";
+      var selectedStage = $(input).val() ? $(input).val() : undefined;
+      
+      _.each(stages, function(stage, inc) {
+        if (selectedStage === stage) {
           elts += '<option value="' + stage + '" selected="selected">' + stage + '</option>';
         } else {
           elts += '<option value="' + stage + '">' + stage + '</option>';
         }
-        
-        if (inc == 0){
-          selectedStage = stage;
-        }
       });
       elts += "</select>";
-      
+
       $(container).html(elts);
-      
+
       return selectedStage;
     },
     /*
@@ -68,9 +65,7 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
       game.set('hour', $(inputTime[0]).val());
       game.set('minute', $(inputTime[1]).val());
       game.set('competition', $(inputTime[2]).val());
-      
-      var selectedStage = $(inputTime[3]).val()?$(inputTime[3]).val():undefined;
-      game.set('stage', this.buildStage(id,$(inputTime[2]).val(),selectedStage));
+      game.set('stage', this.buildStage(id, $(inputTime[2]).val()));
       this.delegateEvents();
     },
     removeProno : function(e) {
@@ -120,4 +115,4 @@ function($, $UI, _, Backbone, te, LotofootApi, i18n, tmpl) {
 
   // Our module now returns our view
   return ClassView;
-});
+}); 
