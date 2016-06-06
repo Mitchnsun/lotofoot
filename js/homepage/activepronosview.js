@@ -25,7 +25,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
         } else {
           $(self.el).html(te.renderTemplate(tmpl, {
             i18n : i18n.homepage,
-            pronos : msg.games,
+            pronos : _.first(msg.games,5),
             score : _.range(10)
           }));
         }
