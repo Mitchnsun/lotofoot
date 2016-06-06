@@ -24,7 +24,7 @@
 	$password = crypt($_POST['password'],$email);
 	$pseudo = $_POST['pseudo'];
 	$firstname = $_POST['firstname'];
-	$lastname = $_POST['lastname'];
+	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : $_POST['pseudo'];
 	$accreditation = "Player";
 	unset($_POST); // The password no exists in clear anymore
 	
