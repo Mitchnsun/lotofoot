@@ -144,7 +144,7 @@ define({
       fourth_txt : "Quatrième",
       fifth_txt : "Cinquième",
       top : "Top",
-      top_L1 : "Ligue 1",
+      "top_French-L1" : "Ligue 1",
       top_WC : "Coupe du monde",
       top_EURO : "Euro",
       toppronos : "Top Pronos",

@@ -34,7 +34,7 @@ function($, _, Backbone, te, LotofootApi, i18n, tmpl) {
 			var self = this;
 			var Teams = [];
 			
-			_.each(i18n.EURO.groups, function(group){
+			_.each(i18n.euro.groups, function(group){
 			  Teams = _.union(Teams, group.idTeams);
 			});
 			
