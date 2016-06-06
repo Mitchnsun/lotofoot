@@ -32,9 +32,15 @@
 	$response['games'] = array();
 	$response['users'] = array();
 	
-	$querybonus = "SELECT id_bonus FROM bonus WHERE type=:type AND season=:season";
-	$req = $bdd -> prepare($querybonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
-	$req -> execute(array("type" => $type,"season" => $season));
+  if ($type == "Overall") {
+	  $querybonus = "SELECT id_bonus FROM bonus WHERE season=:season";
+    $req = $bdd -> prepare($querybonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+    $req -> execute(array("season" => $season));
+  } else {
+    $querybonus = "SELECT id_bonus FROM bonus WHERE type=:type AND season=:season";
+    $req = $bdd -> prepare($querybonus) or die(json_encode(array("status" => 500, "errorCode" => "BD", "message" => $bdd->errorInfo())));
+    $req -> execute(array("type" => $type,"season" => $season));
+  }
 	while($result = $req -> fetch()){
 		array_push($response['id_bonus'],$result['id_bonus']);
 	}
