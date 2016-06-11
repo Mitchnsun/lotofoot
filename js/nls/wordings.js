@@ -165,6 +165,7 @@ define({
 		   + "<li> Cocu Ratio : pourcentage de tout pile par rapport aux nombres d'issues correctes trouvées."
 		   + "</ul>",
 		  CM2014 : "Coupe du monde 2014 - Brésil",
+		  EURO2016 : "Euro 2016 - France",
 			draw : "N",
 			infosTitle : "Informations,",
 			infosMsg : "Le classement pour la coupe du monde 2014 n'est pas encore disponible. "
