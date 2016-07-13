@@ -17,7 +17,7 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl)
       LotofootApi.getTopPronos({},function(msg){ // success
       	
       	_.each(msg.bonus, function(bonus){
-      		self.setTitle(bonus);
+      		self.setWordings(bonus);
       	});
 
 	      $(self.el).html(te.renderTemplate(tmpl, {
@@ -46,7 +46,8 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl)
     	return toppronos;
     },
     // Fetch title for the bonus with his type and season
-    setTitle : function(bonus){
+    setWordings : function(bonus){
+      /* Set Title */
     	var title = "";
     	
     	title += i18n.tops["top_" + bonus.type];
@@ -62,6 +63,20 @@ function($, _, Backbone, te, LotofootApi, AlertView, urls, i18n, country, tmpl)
     	title += " - " + i18n.tops.top + " " + bonus.top;
     	
     	bonus.title = title;
+    	
+    	/* Set ranking name */
+    	bonus.first_txt = i18n.tops.first_txt;
+      bonus.second_txt = i18n.tops.second_txt;
+      
+      if (bonus.type === "EURO"){
+        bonus.third_txt = i18n.tops.semi_txt;
+        bonus.fourth_txt = i18n.tops.semi_txt;
+      } else {
+        bonus.third_txt = i18n.tops.third_txt;
+        bonus.fourth_txt = i18n.tops.fourth_txt;
+      }
+
+      bonus.fifth_txt = i18n.tops.fifth_txt;
     },
     /*
      * Events

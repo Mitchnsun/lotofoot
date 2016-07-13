@@ -143,6 +143,7 @@ define({
       third_txt : "Troisième",
       fourth_txt : "Quatrième",
       fifth_txt : "Cinquième",
+      semi_txt : "Demi-finaliste",
       top : "Top",
       "top_French-L1" : "Ligue 1",
       top_WC : "Coupe du monde",

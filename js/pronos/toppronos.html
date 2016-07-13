@@ -11,9 +11,9 @@
 				<thead>
 			    <tr>
 			      <th></th><th>{i18n.pronos.player}</th>
-			      <th>{i18n.tops.first_txt}</th><th>{i18n.tops.second_txt}</th><th>{i18n.tops.third_txt}</th>
-			      {@if cond="{top} > 3"}<th>{i18n.tops.fourth_txt}</th>{/if}
-			      {@if cond="{top} > 4"}<th>{i18n.tops.fifth_txt}</th>{/if}
+			      <th>{first_txt}</th><th>{second_txt}</th><th>{third_txt}</th>
+			      {@if cond="{top} > 3"}<th>{fourth_txt}</th>{/if}
+			      {@if cond="{top} > 4"}<th>{fifth_txt}</th>{/if}
 			      {@if cond="{ready} == 1"}<th>Points</th>{/if}
 			    </tr>
 			    {@if cond="{ready} == 1"}
