@@ -6,6 +6,7 @@
 			"id_bonus" => $result['id_bonus'],
 			"ready" => $result['ready'],
 			"top" => intval($result['top']),
+			"type" => $result['type'],
 			"first" => $result['first'],
 			"second" => $result['second'],
 			"third" => $result['third'],
@@ -92,13 +93,17 @@
 				$points += count($data['pos_third']);
 				if(array_search(2, $data['pos_third']) !== false){
 					$points += 4;
+				} else if($response['bonus'][$id]['type'] === "EURO" && array_search(3, $data['pos_third']) !== false){
+				  $points += 4;
 				}
 			}
 			if($response['bonus'][$id]['top'] >= 4 && count($data['pos_fourth']) > 0){
 				$points += count($data['pos_fourth']);
 				if(array_search(3, $data['pos_fourth']) !== false){
 					$points += 4;
-				}
+				} else if($response['bonus'][$id]['type'] === "EURO" && array_search(2, $data['pos_fourth']) !== false){
+          $points += 4;
+        }
 			}
 			if($response['bonus'][$id]['top'] >= 5 && count($data['pos_fifth']) > 0){
 				$points += count($data['pos_fifth']);
